@@ -4,7 +4,8 @@ class Users::CartsController < ApplicationController
 	end
 
 	def create
-
+		user = User.find(params[:id])
+		cart = user.carts
 
 	end
 users_user_carts GET    /users/users/:user_id/carts(.:format)
