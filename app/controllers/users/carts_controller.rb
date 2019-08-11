@@ -5,7 +5,7 @@ class Users::CartsController < ApplicationController
 
 	def create
 		
-users_user_cart GET    /users/users/:user_id/carts/:id(.:format)
+users_user_carts GET    /users/users/:user_id/carts(.:format)
 	end
 
 	def update
