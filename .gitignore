@@ -31,3 +31,7 @@
 /config/master.key
 
 .DS_Store
+
+# tori-remote-settiongs
+/views/users/items
+/controllers/users/*.items_controller.rb
