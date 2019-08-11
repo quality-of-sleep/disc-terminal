@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :users do
   	resources :users ,only:[:show, :edit, :update] do
   		resources :delivery_addresses, only:[:create, :update, :destroy]
-  		resources :carts, only:[:create,:show,:update]
+  		resources :carts, only:[:create,:index,:update, :destroy]
   		resources :orders, only:[:index, :new, :create, :show]
   	end
   	get '/users/:id/withdrawal', to: 'users#withdrawal'
