@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 	  		resources :reviews, except:[:index]
 	  	end
   end
-  namespace :adimins ,only:[:index, :show] do
+  namespace :admins ,only:[:index, :show] do
   	get '', to:'admins#home'
   	resources :users do
   		resources :admin_comments, only:[:create, :destroy]
