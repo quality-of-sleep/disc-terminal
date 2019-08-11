@@ -1,1 +1,5 @@
-index.html.erb
+<% @items.each |item| %>
+
+<%= link_to item.name, users_user_carts_path(current_user.id) %>
+
+<% end %>
