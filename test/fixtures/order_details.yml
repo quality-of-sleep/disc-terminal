@@ -6,6 +6,7 @@ one:
   item: MyString
   artist: MyString
   price: 1
+  amount: 1
 
 two:
   order: two
@@ -13,3 +14,4 @@ two:
   item: MyString
   artist: MyString
   price: 1
+  amount: 1

@@ -6,6 +6,7 @@ class CreateOrderDetails < ActiveRecord::Migration[5.2]
       t.string :item
       t.string :artist
       t.integer :price
+      t.integer :amount
 
       t.timestamps
     end
