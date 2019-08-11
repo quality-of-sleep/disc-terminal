@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   # 一人のユーザーは複数の商品をカートに入れられる
   has_many :carts, dependent: :destroy
+  # 一人のユーザーは複数の注文履歴を持てる
+  has_many :orders, dependent: :destroy
 end
