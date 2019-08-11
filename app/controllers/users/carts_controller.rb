@@ -4,14 +4,19 @@ class Users::CartsController < ApplicationController
 	end
 
 	def create
-		
-users_user_carts GET    /users/users/:user_id/carts(.:format)
-	end
 
+
+	end
+users_user_carts GET    /users/users/:user_id/carts(.:format)
 	def update
 	end
 
 	# 詳細設計の漏れ
 	def destroy
+	end
+
+	private
+	def cart_params
+		params.require(:cart).permit(:item_id, :user_id, :amount)
 	end
 end
