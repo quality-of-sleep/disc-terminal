@@ -1,6 +1,14 @@
 class Users::CartsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
+		# 式は後でモデルに移る予定です
+		price = 0
+		@tax = 0
+		@user.carts.each do |cart|
+			price += cart.item.price
+		end
+		@tax = price * 0.08
+		@total_price = price + @tax
 	end
 
 	def create
@@ -19,6 +27,7 @@ class Users::CartsController < ApplicationController
 
 	# 詳細設計の漏れ
 	def destroy
+		redirect_back(fallback_location: root_path)
 	end
 
 	private

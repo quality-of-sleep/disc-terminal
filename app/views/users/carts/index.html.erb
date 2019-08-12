@@ -17,11 +17,19 @@
 					<td>
 						<p><%= cart.item.name %></p>
 						<p><%= cart.item.artist.name %></p>
-						<p><%= cart.item.sales_status %></p>
+						<p>
+							<% if cart.item.sales_status == 1 %>
+								販売中止
+							<% elsif cart.item.sales_status == 2 %>
+								売り切れ
+							<% else %>
+								販売中
+							<% end %>
+						</p>
 					</td>
 					<td>
 						<p><%= cart.item.price %></p>
-						<p><%= link_to "取消", users_user_cart_path(@user.id, cart.id) %></p>
+						<p><%= link_to "取消", users_user_cart_path(@user.id, cart.id), method: :delete %></p>
 					</td>
 					<td><%= cart.amount %></td>
 				</tr>
@@ -31,4 +39,6 @@
 </div>
 <div class="col-md-3">
 	<p class="btn btn-warning">購入へ進む</p>
+	<p>小計<%=  %>点　　¥<%= @total_price %></p>
+	<p>(内消費税　　¥<%= @tax %>)</p>
 </div>
