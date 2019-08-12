@@ -23,6 +23,10 @@ class Users::CartsController < ApplicationController
 	end
 
 	def update
+		cart = Cart.find(params[:id])
+		cart.amount = params[:amount]
+		cart.save
+		redirect_to users_user_carts_path(current_user.id)
 	end
 
 	# 詳細設計の漏れ
