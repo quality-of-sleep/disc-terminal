@@ -11,10 +11,19 @@
 		<tbody>
 			<% @user.carts.each do |cart| %>
 				<tr>
-					<td><%= attachment_image_tag cart.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></td>
-					<td><%= cart.item.name %></td>
-					<td>data</td>
-					<td>data</td>
+					<td style="width: 200px;">
+						<%= attachment_image_tag cart.item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'150x150' %>
+					</td>
+					<td>
+						<p><%= cart.item.name %></p>
+						<p><%= cart.item.artist.name %></p>
+						<p><%= cart.item.sales_status %></p>
+					</td>
+					<td>
+						<p><%= cart.item.price %></p>
+						<p><%= link_to "取消", users_user_cart_path(@user.id, cart.id) %></p>
+					</td>
+					<td><%= cart.amount %></td>
 				</tr>
 			<% end %>
 		</tbody>

@@ -1,4 +1,49 @@
 class Users::ItemsController < ApplicationController
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	# tori_cart-test(カート機能試すときはコメントアウト外してください)
 	def index
 		@items = Item.all
 	end
