@@ -8,4 +8,6 @@ class Item < ApplicationRecord
 
   # 一つの商品は複数のカートに入れられる
   has_many :carts
+  # cart_test
+  attachment :image
 end
