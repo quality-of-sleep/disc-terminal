@@ -10,7 +10,11 @@
   </head>
 
   <body>
-    <%= render "/layouts/users_header" %>
+    <% if request.fullpath.match?(/^\/admins\/.*/) %>
+      <%= render "/layouts/admins_header" %>
+    <% else %>
+      <%= render "/layouts/users_header" %>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>

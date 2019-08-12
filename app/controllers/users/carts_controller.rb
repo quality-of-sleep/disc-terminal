@@ -3,12 +3,12 @@ class Users::CartsController < ApplicationController
 		@user = User.find(params[:user_id])
 		# 式は後でモデルに移る予定です
 		price = 0
-		@tax = 0
 		@user.carts.each do |cart|
 			price += cart.item.price
 		end
-		@tax = price * 0.08
-		@total_price = price + @tax
+		# BigDecimal=小数点計算, delimited=カンマ区切り
+		@tax = ((BigDecimal(price.to_s) * BigDecimal("0.08")).ceil).to_s(:delimited)
+		@total_price = ((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_s(:delimited)
 	end
 
 	def create

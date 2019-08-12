@@ -28,7 +28,7 @@
 						</p>
 					</td>
 					<td>
-						<p><%= cart.item.price %></p>
+						<p>¥ <%= cart.item.price.to_s(:delimited) %></p>
 						<p><%= link_to "取消", users_user_cart_path(@user.id, cart.id), method: :delete %></p>
 					</td>
 					<td><%= cart.amount %></td>

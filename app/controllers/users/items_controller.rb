@@ -63,4 +63,4 @@ class Users::ItemsController < ApplicationController
 # 			:sales_status,
 # 			:stock)
 # 	end
-# end
+end
