@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 ">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 ">
+  	<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>投稿ID</th>
+						<th>投稿日時</th>
+						<th>タイトル</th>
+						<th>内容</th>
+						<th>商品ID</th>
+						<th>商品名</th>
+						<th>ユーザID</th>
+						<th colspan="1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @reviews.each do |review| %>
+						<tr>
+							<th><%= review.id %></th>
+							<td><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+							<td><%= review.title %></td>
+							<td><%= review.body %></td>
+							<td><%= review.item.id %></td>
+							<td><%= review.item.name%></td>
+							<td><%= review.user.id %></td>
+							<td><%= link_to '削除', admins_review_path(review), method: :delete, data:{ confirm: "本当に削除しますか？"} %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+  </div>
+</div>
