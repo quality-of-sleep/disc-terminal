@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-9">
 	<table class="table">
 		<thead>
 			<tr>
@@ -9,15 +9,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>data</td>
-				<td>data</td>
-				<td>data</td>
-				<td>data</td>
-			</tr>
+			<% @user.carts.each do |cart| %>
+				<tr>
+					<td><%= attachment_image_tag cart.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></td>
+					<td><%= cart.item.name %></td>
+					<td>data</td>
+					<td>data</td>
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
 </div>
-<div class="col-md-4">
-	<p class="btn">購入へ進む</p>
+<div class="col-md-3">
+	<p class="btn btn-warning">購入へ進む</p>
 </div>
