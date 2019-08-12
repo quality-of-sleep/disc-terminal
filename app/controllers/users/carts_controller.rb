@@ -27,6 +27,9 @@ class Users::CartsController < ApplicationController
 
 	# 詳細設計の漏れ
 	def destroy
+		user = User.find(params[:user_id])
+		cart = Cart.find(params[:id])
+		cart.destroy
 		redirect_back(fallback_location: root_path)
 	end
 
