@@ -3,7 +3,9 @@ class Users::ItemsController < ApplicationController
 		@items = Item.all
 	end
 	def show
+		@user = current_user
 		@item = Item.find(params[:id])
+		@cart = Cart.new
 	end
 	private
 	def item_params

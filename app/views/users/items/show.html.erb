@@ -1,1 +1,1 @@
-<p><%= link_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id) %></p>
+<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>

@@ -1,14 +1,19 @@
 class Users::CartsController < ApplicationController
-	def show
-		user = User.find(params[:id])
+	def index
+		@user = User.find(params[:user_id])
 	end
 
 	def create
-		user = User.find(params[:id])
-		cart = user.carts
-
+		cart = Cart.new
+		item = Item.find(params[:item_id])
+		user = User.find(params[:user_id])
+		cart.user_id = user.id
+		cart.item_id = item.id
+		cart.amount = 1
+		cart.save
+		redirect_to users_user_carts_path(user.id)
 	end
-users_user_carts GET    /users/users/:user_id/carts(.:format)
+
 	def update
 	end
 
