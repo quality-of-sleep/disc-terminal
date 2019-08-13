@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "artist_id"
-    t.integer "genre_id"
-    t.integer "label_id"
+    t.integer "artist_id", default: 1
+    t.integer "genre_id", default: 1
+    t.integer "label_id", default: 1
     t.string "name"
     t.integer "price"
     t.integer "sales_status"
@@ -162,6 +162,15 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "telephone_number", null: false
+    t.string "postal_code", null: false
+    t.text "address", null: false
+    t.integer "payment", null: false
+    t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
