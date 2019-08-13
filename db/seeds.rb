@@ -54,7 +54,7 @@ end
 # テストReviewを生成
 26.times do |n|
 	title = "title-#{n+1}"
-	body = "body-#{n+1}"*9 # 文字数を6*9=54文字にする
+	body = "body-#{n+1}"+500
 	Review.create!( item_id: "#{n+1}",
 									user_id: "#{n+1}",
 									title: title,
