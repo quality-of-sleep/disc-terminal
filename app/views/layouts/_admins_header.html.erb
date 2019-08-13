@@ -1,0 +1,36 @@
+<div class="navbar navbar-default" style="width: 100%;">
+  <nav class="container">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand active" href="#" id="top">ディスクターミナル</a>
+      </div>
+      <% if admin_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to '注文ー一覧', admins_orders_path %>
+          </li>
+          <li>
+            <%= link_to '商品ー一覧', admins_items_path %>
+          </li>
+          <li>
+            <%= link_to '新規商品の登録', new_admins_item_path %>
+          </li>
+          <li>
+            <%= link_to 'ユーザ一覧', admins_users_path %>
+          </li>
+          <li>
+            <%= link_to 'レビュー一覧', admins_reviews_path %>
+          </li>
+          <li>
+             <%= link_to 'ログアウト', destroy_admin_session_path %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "ログイン", new_admin_session_path %></li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</div>
+
