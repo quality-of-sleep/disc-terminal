@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
   # 一人のユーザーは複数の商品をカートに入れられる
   has_many :carts, dependent: :destroy
   # 一人のユーザーは複数の注文履歴を持てる
