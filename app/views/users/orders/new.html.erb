@@ -96,10 +96,10 @@
 
 	<div class="col-md-3" style="border: 1px solid #bbb">
 		<p><%= f.submit "注文を確定する", class: "btn btn-warning" %></p>
-		<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price %></p>
-		<p>配送料　 　¥ <%= @carriage %></p>
-		<p>割引　 　-¥ <%= @discount %></p>
-		<p>合計　 　¥<%= @total_price %></p>
-		<p>(内消費税　 　¥<%= @tax %>)</p>
+		<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price.to_s(:delimited) %></p>
+		<p>配送料　 　¥ <%= @carriage.to_s(:delimited) %></p>
+		<p>割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
+		<p>合計　 　¥<%= @total_price.to_s(:delimited) %></p>
+		<p>(内消費税　 　¥<%= @tax.to_s(:delimited) %>)</p>
 	</div>
 <% end %>

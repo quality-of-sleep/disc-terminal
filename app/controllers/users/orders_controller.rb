@@ -1,6 +1,6 @@
 class Users::OrdersController < ApplicationController
 	# helper呼び出し
-	include Users::CartsHelper
+	# include Users::CartsHelper
 	include Users::OrdersHelper
 
 	def new
@@ -17,9 +17,9 @@ class Users::OrdersController < ApplicationController
 		@total_amount = total_amount(@user.carts) # 小計個数
 		@total_price = total_price(price,@carriage)
 		# インスタンス代入
-		@order.tax = @tax
-		@order.subtotal_price = @subtotal_price
-		@order.total_price = @total_price
+		@order.tax = tax(price)
+		@order.subtotal_price = on_tax_price(price)
+		@order.total_price = total_price(price,@carriage)
 	end
 
 	def create
@@ -32,7 +32,7 @@ class Users::OrdersController < ApplicationController
 		order.postal_code = delivery.postal_code
 		order.address = delivery.details
 		order.telephone_number = delivery.telephone_number
-
+		binding.pry
 		# パラメータを上手く渡せないので仮設
 		# 配送料, 割引
 		carriage = 500
