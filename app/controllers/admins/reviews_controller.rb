@@ -11,7 +11,10 @@ class Admins::ReviewsController < ApplicationController
 		end
 	end
 	def destroy
-
+		review = Review.find(params[:id])
+		review.destroy
+    flash[:success] = "Review deleted"
+    redirect_to request.referrer || admins_reviews_url
 	end
 end
 
