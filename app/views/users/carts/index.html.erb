@@ -41,7 +41,7 @@
 						<%= form_tag(url_for(users_user_cart_path(@user.id, cart.id)), method: :patch, :remote => true) do %>
 							<p><%= cart.amount %></p>
 							<div>
-								<%= select_tag 'amount', options_for_select([[cart.amount,cart.amount],[1,1], [2,2], [3,3], [4,4], [5,5]],:selected=>cart.amount), class: "btn btn-default dropdown-toggle" %>
+								<%= select_tag 'amount', options_for_select(stock_array(cart),:selected=>cart.amount), class: "btn btn-default dropdown-toggle" %>
 							</div>
 						<div>
 							<%= submit_tag "数量変更", class: "btn btn-primary col-md-4" %>
