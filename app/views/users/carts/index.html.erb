@@ -54,6 +54,6 @@
 </div>
 <div class="col-md-3" style="border: 1px solid #bbb">
 	<p><%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning" %></p>
-	<p>小計<%=  %>点　　¥<%= @total_price %></p>
-	<p>(内消費税　　¥<%= @tax %>)</p>
+	<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
+	<p>(内消費税　 　¥<%= @tax %>)</p>
 </div>

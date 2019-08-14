@@ -44,13 +44,21 @@ module Users::CartsHelper
 		end
 	end
 
-	# 小計計算
+	# 小計(金額)
 	def price_reckoning(carts)
 		price = 0
 		carts.each do |cart|
 			price += cart.item.price * cart.amount
 		end
 		price
+	end
+	# 小計(購入数量)
+	def total_amount(carts)
+		amount = 0
+		carts.each do |cart|
+			amount += cart.amount
+		end
+		amount
 	end
 
 	# 消費税計算　BigDecimal=小数点計算, delimited=カンマ区切り
