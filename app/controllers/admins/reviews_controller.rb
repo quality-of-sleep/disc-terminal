@@ -3,7 +3,12 @@ class Admins::ReviewsController < ApplicationController
 #before_action :authenticate_admin!
 
 	def index
-		@reviews = Review.page(params[:page]).search(target: params[:target], search: params[:search]).reorder("#{params[:key]} #{params[:direction]}")
+		@reviews = Review.page(params[:page])
+		if params[:target] != nil
+			@reviews = @reviews.search(target: params[:target], search: params[:search])
+		elsif params[:key] != nil
+			@reviews = @reviews.reorder("#{params[:key]} #{params[:direction]}")
+		end
 	end
 	def destroy
 
