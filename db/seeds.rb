@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+# ジャンルを生成
+Genre.create!(name: "未定")
+genres = %w[J-Pop ロック/ポップス HIP-HOP R&B/ソウル Jazz/ブルース K-Pop/ワールド
+					クラシック アニメ/ゲーム サウンドトラック 演歌 その他]
+genres.each do |n|
+	Genre.create!(name: "#{n}")
+
 # テストItemを生成
 Artist.create!(name: "未定")
-Genre.create!(name: "未定")
 Label.create!(name: "未定")
 26.times do |n|
 	name = "item-#{n+1}"
