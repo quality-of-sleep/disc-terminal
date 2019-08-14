@@ -43,4 +43,21 @@ module Users::CartsHelper
 			return [["在庫切れ",0]]
 		end
 	end
+
+	# 小計計算
+	def price_reckoning(carts)
+		price = 0
+		carts.each do |cart|
+			price += cart.item.price * cart.amount
+		end
+		price
+	end
+
+	# 消費税計算　BigDecimal=小数点計算, delimited=カンマ区切り
+	def tax(price)
+		((BigDecimal(price.to_s) * BigDecimal("0.08")).ceil).to_s(:delimited)
+	end
+	def on_tax_price(price)
+		((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_s(:delimited)
+	end
 end

@@ -1,14 +1,14 @@
 class Users::CartsController < ApplicationController
+	# carts_helper呼び出し
+	include Users::CartsHelper
+
 	def index
 		@user = User.find(params[:user_id])
-		# 式は後でモデルに移る予定です
-		price = 0
-		@user.carts.each do |cart|
-			price += cart.item.price * cart.amount
-		end
-		# BigDecimal=小数点計算, delimited=カンマ区切り
-		@tax = ((BigDecimal(price.to_s) * BigDecimal("0.08")).ceil).to_s(:delimited)
-		@total_price = ((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_s(:delimited)
+		# 小計Helper
+		price = price_reckoning(@user.carts)
+		# 小計消費税helper
+		@tax = tax(price)
+		@total_price = on_tax_price(price)
 	end
 
 	def create
