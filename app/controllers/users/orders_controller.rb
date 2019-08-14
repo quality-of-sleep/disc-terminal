@@ -1,21 +1,25 @@
 class Users::OrdersController < ApplicationController
-	# carts_helper呼び出し
+	# helper呼び出し
 	include Users::CartsHelper
+	include Users::OrdersHelper
 
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
 
+		# 配送料, 割引
+		@carriage = 500
+		@discount = 0
 		# 小計Helper
-		price = price_reckoning(@user.carts)
-		# 小計消費税helper
-		@tax = tax(price)
-		@total_price = on_tax_price(price)
-		# 小計個数helper
-		@total_amount = total_amount(@user.carts)
-
-		# テスト用コード
-		@cart = Cart.new
+		price = price_reckoning(@user.carts) #税別金額
+		@tax = tax(price) # 消費税helper
+		@subtotal_price = on_tax_price(price) #小計
+		@total_amount = total_amount(@user.carts) # 小計個数
+		@total_price = total_price(price,@carriage)
+		# インスタンス代入
+		@order.tax = @tax
+		@order.subtotal_price = @subtotal_price
+		@order.total_price = @total_price
 	end
 
 	def create
@@ -28,6 +32,16 @@ class Users::OrdersController < ApplicationController
 		order.postal_code = delivery.postal_code
 		order.address = delivery.details
 		order.telephone_number = delivery.telephone_number
+
+		# パラメータを上手く渡せないので仮設
+		# 配送料, 割引
+		carriage = 500
+		# 小計Helper
+		price = price_reckoning(user.carts) #税別金額
+		order.tax = tax(price) # 消費税helper
+		order.subtotal_price = on_tax_price(price) #小計
+		order.total_price = total_price(price,carriage)
+		order.carriage = carriage.to_s
 		binding.pry
 	end
 

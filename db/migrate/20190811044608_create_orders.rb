@@ -7,10 +7,10 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.text :address
       t.string :telephone_number
       t.integer :payment, default: 3, null: false
-      t.string :total_price
-      t.string :subtotal_price
-      t.string :carriage
-      t.string :tax
+      t.integer :total_price
+      t.integer :subtotal_price
+      t.integer :carriage
+      t.integer :tax
       t.integer :delivery_status
 
       t.timestamps

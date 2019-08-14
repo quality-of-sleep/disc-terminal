@@ -1,4 +1,4 @@
-<%= form_for([@user, @order], url: users_user_orders_path(@user), method: :post) do |f| %>
+<%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
 	<div class="col-md-9">
 		<div class="row">
 			<div>
@@ -96,10 +96,10 @@
 
 	<div class="col-md-3" style="border: 1px solid #bbb">
 		<p><%= f.submit "注文を確定する", class: "btn btn-warning" %></p>
-		<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
-		<p>配送料　 　¥<%=  %></p>
-		<p>割引　 　¥<%=  %></p>
-		<p>合計　 　¥<%=  %></p>
+		<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price %></p>
+		<p>配送料　 　¥ <%= @carriage %></p>
+		<p>割引　 　-¥ <%= @discount %></p>
+		<p>合計　 　¥<%= @total_price %></p>
 		<p>(内消費税　 　¥<%= @tax %>)</p>
 	</div>
 <% end %>
