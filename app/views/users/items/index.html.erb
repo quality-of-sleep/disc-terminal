@@ -1,0 +1,211 @@
+
+<div class="container">
+	<div class="row">
+		<h2 style="border: 1px; border-radius: 3px; text: center;">商品一覧</h2>
+		<div class="col-lg-3">
+			<table class="table-bordered" style="border-radius: 3px;">
+				<tr>j-Pop</tr>
+				<tr>ロック　/　ポップス</tr>
+				<tr>HIP-HOP</tr>
+				<tr>R&B　/　ソウル</tr>
+				<tr>Jazz / ブルース</tr>
+				<tr>K-Pop / ワールド</tr>
+				<tr>演歌</tr>
+				<tr>クラシック</tr>
+				<tr>アニメ / ゲーム</tr>
+				<tr>サウンドトラック</tr>
+				<tr>その他</tr>
+			</table>
+		</div>
+		<div class="col-lg-9">
+			<!-- 下記のデータは手打ちです。 -->
+		 <div class="item-list">
+			<div class="album" style="">
+				<div class="album-left">
+					<p>Rock</p>
+					<div>ジャケット画像</div>
+				</div>
+				<div class="album-left">
+				<table>
+					<tr>
+						<td>Stadium Arcadium</td>
+					</tr>
+					<tr>
+						<td>Red Hot Chil Peppers</td>
+					</tr>
+					<tr>
+						<td style="border:1px; border-radius: 5px;">販売中</td>
+						<td>￥1,565</td>
+					</tr>
+					<tr>
+						<td>
+							<%= link_to users_item_favorites_path do %>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+							<% end %>
+						</td>
+						<td>いいね90</td>
+						<td>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+						</td>
+						<td>レビュー70</td>
+					</tr>
+				</table>
+				</div>
+			</div>
+
+			<% user.items.each do |item| %>
+			<div class="album">
+				<div class="album-left">
+					<p class=""><%= item.genre.id %></p>
+					<div>
+						<%= link_to users_item_path(users.item.id) do %> 
+						<%= attachment_image_tag item.image_id, :_image, :fill, 50, 50, format: 'jpeg' %>
+						<% end %>
+					</div>
+				</div>
+				<div class="album-right">
+					<table>
+						<tr>
+							<td>
+								<%= link_to item.name, users_item_path(users.item.id) %>
+							<td>
+						</tr>
+						<tr>
+							<td><%= item.artist_id %></td>
+						</tr>
+						<tr>
+							<td style="border:1px; border-radius: 5px; "><%= item.sales_status %></td>
+							<td>￥<%= item.price %></td>
+						</tr>
+						<tr>
+							<td>
+								<%= link_to users_item_favorites_path do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+								<% end %>
+							</td>
+							<td>いいね数</td>
+							<td>
+								<% link_to users_item_review do %>
+								<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+								<% end %>
+							</td>
+							<td>レビュー数</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<% end %>
+			<%= paginate @items, class: "pagenate" %>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
+<%
+=begin
+%>
+<% @items.each do |item| %>
+<p><%= link_to item.name, users_item_path(item) %></p>
+<% end %>
+<%
+=end
+%>
