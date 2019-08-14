@@ -4,9 +4,9 @@ class Users::ItemsController < ApplicationController
 		items =Item.all
 	end
 
-	def show
+	# def show
 		
-	end
+	# end
 
 
 

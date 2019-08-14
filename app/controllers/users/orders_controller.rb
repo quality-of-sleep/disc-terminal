@@ -28,6 +28,24 @@ class Users::OrdersController < ApplicationController
 	end
 
 	def create
-		
+
+		@user = current_user
+		@order = Order.new(order_params)
+		binding.pry
+	end
+
+	private
+	def order_params
+		params.require(:order).permit(:user_id,
+																	:user_name,
+																	:postal_code,
+																	:address,
+																	:telephone_number,
+																	:payment,
+																	:total_price,
+																	:subtotal_price,
+																	:carriage,
+																	:tax,
+																	:delivery_status)
 	end
 end
