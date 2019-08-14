@@ -14,7 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       ## Rememberable
       t.datetime :remember_created_at
 
-      ## Trackable 
+      ## Trackable
       # feature-devise-1
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
@@ -32,6 +32,16 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
+
+      t.string :last_name,        null: false
+      t.string :first_name,       null: false
+      t.string :last_name_kana,   null: false
+      t.string :first_name_kana,  null: false
+      t.string :telephone_number, null: false
+      t.string :postal_code,      null: false
+      t.text :address,            null: false
+      t.integer :payment,         null: false
+      t.boolean :is_quit,         null: false, default: false
 
 
       t.timestamps null: false
