@@ -3,39 +3,45 @@
 		<div class="row">
 			<div>
 				<% @user.delivery_addresses.each do |d| %>
-				<table class="table">
-					<tbody>
-						<tr>
-							<td><label><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
-							<td>
-								<%= d.recipient %><br>
-								<%= d.postal_code %><br>
-								<%= d.details %><br>
-								<%= d.telephone_number %>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div class="radio">
-					
-					<p style=""></p>
-				</div>
-				
+					<table class="table">
+						<tbody>
+							<tr>
+								<td><label><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
+								<td>
+									<%= d.recipient %><br>
+									<%= d.postal_code %><br>
+									<%= d.details %><br>
+									<%= d.telephone_number %>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				<% end %>
+			</div>
+			<!-- form入るところ -->
+			<div>
+				
 			</div>
 		</div>
 
+		<!-- サンプルで２つ作ってます -->
+		<!-- テーブルVER -->
 		<div class="row">
-			<div>
-				<label><%= f.radio_button :payment, :クレジット支払 %> クレジット支払</label>
-			</div>
-			<div>
-				<label><%= f.radio_button :payment, :銀行振込 %> 銀行振込</label>
-			</div>
-			<div>
-				<label><%= f.radio_button :payment, :代金引換 %> 代金引換</label>
-			</div>
+			<table class="table">
+					<tbody>
+						<tr>
+							<tr><td><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払</label></td></tr>
+							<tr><td><label><%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込</label></td></tr>
+							<tr><td><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></td></tr>
+						</tr>
+					</tbody>
+				</table>
+				<!-- リストVER -->
+				<ul style="list-style: none; padding-left: 10px;">
+					<li><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払</label></li>
+					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込</label></li>
+					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></li>
+				</ul>
 		</div>
 
 		<div class="row">
@@ -91,6 +97,8 @@
 	<div class="col-md-3" style="border: 1px solid #bbb">
 		<p><%= f.submit "注文を確定する", class: "btn btn-warning" %></p>
 		<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
-		<p>(内消費税　 　¥<%= @tax %>)</p>
+		<p>配送料　 　¥<%=  %></p>
+		<p>割引　 　¥<%=  %></p>
+		<p>合計　 　¥<%=  %></p>
 	</div>
 <% end %>
