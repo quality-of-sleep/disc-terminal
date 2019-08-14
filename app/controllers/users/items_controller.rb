@@ -1,5 +1,14 @@
 class Users::ItemsController < ApplicationController
 
+	def index
+		items =Item.all
+	end
+
+	def show
+		
+	end
+
+
 
 
 
@@ -63,4 +72,5 @@ class Users::ItemsController < ApplicationController
 # 			:sales_status,
 # 			:stock)
 # 	end
+
 end
