@@ -16,21 +16,18 @@ class Users::OrdersController < ApplicationController
 
 		# テスト用コード
 		@cart = Cart.new
-		@postal_code = "1500041" # 現住所
-		@address = "東京都渋谷区神南1丁目19番11号パークウェースクエア2 4階"
-		@telephone_number = "0368694700"
-
-		@delivery_User_name = "海馬瀬人"# 配送先
-		@delivery_postal_code = "5420076"
-		@details = "大阪府大阪市中央区難波4丁目7-14難波フロントビル 4階"
-		@delivery_telephone_number = "0452224444"
-
 	end
 
 	def create
-
-		@user = current_user
-		@order = Order.new(order_params)
+		user = current_user
+		order = user.orders.new(order_params)
+		# 配送先登録
+		d_id = order.address.to_i - 1
+		delivery = user.delivery_addresses[d_id]
+		order.user_name = delivery.recipient
+		order.postal_code = delivery.postal_code
+		order.address = delivery.details
+		order.telephone_number = delivery.telephone_number
 		binding.pry
 	end
 
