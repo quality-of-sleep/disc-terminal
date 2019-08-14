@@ -39,7 +39,6 @@
 					</td>
 					<td>
 						<%= form_tag(url_for(users_user_cart_path(@user.id, cart.id)), method: :patch, :remote => true) do %>
-							<p><%= cart.amount %></p>
 							<div>
 								<%= select_tag 'amount', options_for_select(stock_array(cart),:selected=>cart.amount), class: "btn btn-default dropdown-toggle" %>
 							</div>
