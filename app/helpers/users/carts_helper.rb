@@ -40,7 +40,7 @@ module Users::CartsHelper
 		elsif stock.item.stock == 1
 			return [[1,1]]
 		else
-			return ["在庫切れ"]
+			return [["在庫切れ",0]]
 		end
 	end
 end
