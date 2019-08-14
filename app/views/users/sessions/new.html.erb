@@ -4,34 +4,29 @@
     <div class="col-sm-10">
       <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">ログイン</h2>
       <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
-
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス：", style: "width: 100%;"%>
-  </div><br>
-
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード：8文字以上必須", style: "width: 100%;"%>
-  </div>
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: "パスワード確認：", style: "width: 100%;" %>
-  </div>
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :ログインしたままにする, style: "font-weight: normal;"%>
-    </div><br>
-  <% end %>
-
-  <div class="actions" align="right">
-    <%= f.submit "ログイン",  style: "color: white; background-color: limegreen; border-radius: 3px; padding: 5px;"%>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
-
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス：", style: "width: 100%;"%>
+          </div><br>
+          <div class="field">
+            <%= f.label :password, "パスワード" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード：6文字以上必須", style: "width: 100%;"%>
+          </div>
+          <div class="field">
+            <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: "パスワード確認：", style: "width: 100%;" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "ログインしたままにする", style: "font-weight: normal;"%>
+          </div><br>
+          <% end %>
+          <div class="actions" align="right">
+            <%= f.submit "ログイン",  style: "color: white; background-color: limegreen; border-radius: 3px; padding: 5px;"%>
+          </div>
+        <% end %>
+        <%= render "users/shared/links" %>
       </div>
     </div>
     <div class="col-sm-1"></div>
