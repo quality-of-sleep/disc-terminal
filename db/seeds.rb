@@ -15,9 +15,15 @@ genres.each do |n|
 	Genre.create!(name: n)
 end
 
-# テストItemを生成
+# テストArtistを生成
 Artist.create!(name: "未定")
+26.times { |n| Artist.create!(name: "artist-#{n+1}") }
+
+# テストLabelを生成
 Label.create!(name: "未定")
+26.times { |n| Label.create!(name: "genre-#{n+1}") }
+
+# テストItemを生成
 26.times do |n|
 	name = "item-#{n+1}"
 	price = "#{(n+1)*100}"
