@@ -12,7 +12,8 @@ Genre.create!(name: "未定")
 genres = %w[J-Pop ロック/ポップス HIP-HOP R&B/ソウル Jazz/ブルース K-Pop/ワールド
 					クラシック アニメ/ゲーム サウンドトラック 演歌 その他]
 genres.each do |n|
-	Genre.create!(name: "#{n}")
+	Genre.create!(name: n)
+end
 
 # テストItemを生成
 Artist.create!(name: "未定")
@@ -61,7 +62,7 @@ end
 # テストReviewを生成
 26.times do |n|
 	title = "title-#{n+1}"
-	body = "body-#{n+1}"+500
+	body = "body-#{(n+1)+500}"
 	Review.create!( item_id: "#{n+1}",
 									user_id: "#{n+1}",
 									title: title,
