@@ -22,9 +22,9 @@
 							<%= order.order_details[0].item_name %>　他<%= order.order_details.count %>点
 						<% end %>
 					</td>
-					<td><%= order.total_price %></td>
+					<td>¥ <%= order.total_price.to_s(:delimited) %></td>
 					<td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-					<td><%= order.id %></td>
+					<td><%= link_to order.id, users_user_order_path(@user, order) %></td>
 				</tr>
 			<% end %>
 		</tbody>

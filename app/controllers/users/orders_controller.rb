@@ -50,7 +50,6 @@ class Users::OrdersController < ApplicationController
 			order_details.save
 			cart.destroy
 		end
-		binding.pry
 		redirect_to users_user_order_path(user, order)
 	end
 
