@@ -11,11 +11,11 @@ class Users::OrdersController < ApplicationController
 		@carriage = 500
 		@discount = 0
 		# 小計Helper
-		price = price_reckoning(@user.carts)        #税別金額
-		@tax = tax(price)                           #内税
-		@subtotal_price = on_tax_price(price)       #小計
-		@total_amount = total_amount(@user.carts)   #小計個数
-		@total_price = total_price(price,@carriage) #合計金額（税込）
+		price = price_reckoning(@user.carts)        # 税別金額
+		@tax = tax(price)                           # 内税
+		@subtotal_price = on_tax_price(price)       # 小計
+		@total_amount = total_amount(@user.carts)   # 小計個数
+		@total_price = total_price(price,@carriage) # 合計金額（税込）
 	end
 
 	def create
@@ -33,23 +33,28 @@ class Users::OrdersController < ApplicationController
 		# 配送料, 割引
 		carriage = 500
 		# 小計Helper
-		price = price_reckoning(user.carts) #税別金額
-		order.tax = tax(price) # 消費税helper
-		order.subtotal_price = on_tax_price(price) #小計
-		order.total_price = total_price(price,carriage)
-		order.carriage = carriage
+		price = price_reckoning(user.carts)             # 税別金額
+		order.tax = tax(price)                          # 消費税helper
+		order.subtotal_price = on_tax_price(price)      # 小計
+		order.total_price = total_price(price,carriage) # 合計金額（税込
+		order.carriage = carriage                       # 配送料
 		order.save
 
 		user.carts.each do |cart|
 			order_details = order.order_details.new
 			order_details.item_id = cart.item_id
-			order_details.item = cart.item.name
+			order_details.item_name = cart.item.name
 			order_details.artist = cart.item.artist.name
 			order_details.price = cart.item.price
 			order_details.amount = cart.amount
-			binding.pry
+			order_details.save
+			cart.destroy
 		end
 		binding.pry
+		redirect_to users_user_order_path(user, order)
+	end
+
+	def show
 	end
 
 	private
