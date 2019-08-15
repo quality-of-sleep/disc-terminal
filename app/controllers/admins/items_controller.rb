@@ -12,6 +12,10 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")
 	end
 	def new
+		@artist = Artist.new
+		@genre = Genre.new
+		@label = Label.new
+		@item = Item.new
 	end
 	def create
 	end
