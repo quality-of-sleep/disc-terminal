@@ -1,8 +1,32 @@
-<div class="row">
-  <div class="col-md-10 col-md-offset-1 ">
+<div class="row arrange-index">
+	<div class="col-md-4">
+  </div>
+  <div class="col-md-5 search-area clearfix">
+  	<!-- データは変更しないのでform_tagを使用 -->
+  	<%= form_tag admins_reviews_path, method: :get do %>
+  		<%= select_tag 'target',
+  		 options_for_select([
+  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id']
+  		 	]) %>
+  		<%= text_field_tag :search %> <!-- params[:search]に値が代入される -->
+  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
+  	<% end %>
+  </div>
+
+  <div class="col-md-3 sort-area clearfix">
+  	<%= form_tag admins_reviews_path, method: :get do %>
+  		<%= select_tag 'key',
+  		 options_for_select([
+				["投稿ID",'id'],["投稿日時",'created_at'],["タイトル",'title'],['商品ID','item_id'],['ユーザID','user_id']
+  		 	]) %>
+  		<%= select_tag 'direction',
+  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+  	<% end %>
+  </div>
   </div>
 </div>
-<div class="row">
+<div class="row review-index">
   <div class="col-md-10 col-md-offset-1 ">
   	<div class="table-responsive">
 			<table class="table">
@@ -21,18 +45,31 @@
 				<tbody>
 					<% @reviews.each do |review| %>
 						<tr>
-							<th><%= review.id %></th>
-							<td><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-							<td><%= review.title %></td>
-							<td><%= review.body %></td>
-							<td><%= review.item.id %></td>
-							<td><%= review.item.name%></td>
-							<td><%= review.user.id %></td>
-							<td><%= link_to '削除', admins_review_path(review), method: :delete, data:{ confirm: "本当に削除しますか？"} %></td>
+							<th style="width:10%;"><%= review.id %></th>
+							<td style="width:10%;"><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+							<td style="width:15%;"><%= review.title %></td>
+							<td class="show-content" style="width:25%;">
+								<%= review.body[0..139] %>
+								<div class="full-content">
+									<%= review.body %>
+								</div>
+							</td>
+							<td style="width:10%;"><%= review.item.id %></td>
+							<td style="width:15%;"><%= review.item.name %></td>
+							<td style="width:10%;"><%= review.user.id %></td>
+							<td style="width:5%;">
+								<%= link_to '削除', admins_review_path(review),
+							 		method: :delete,
+							 		data:{ confirm: "本当に削除しますか？"},
+									class:"btn btn-danger" %>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
+			<div class="text-center">
+				<%= paginate @reviews, class: "paginate" %>
+			</div>
 		</div>
   </div>
 </div>

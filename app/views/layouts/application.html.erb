@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <!--URLの先頭に'admin'があれば'true'-->
     <% if request.fullpath.match?(/^\/admins\/.*/) %>
       <%= render "/layouts/admins_header" %>
     <% else %>

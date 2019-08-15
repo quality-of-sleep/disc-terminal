@@ -1,32 +1,28 @@
-.row{
+.admin-session{
 	margin: 40px auto 60px 0;
 }
 
-h2{
-	font-size: 20px;
-}
-
-input{
+.admin-session input{
 	width: 100%;
 }
 
-input[type="checkbox"]{
+.admin-session input[type="checkbox"]{
 	width: auto;
 }
 
-.form_body{
+.admin-session .form_body{
 	width: 90%;
 	margin:0 auto;
 	position: relative;
 }
 
-.form_body .btn{
+.admin-session .form_body .btn{
 	position: absolute;
 	right: 0;
 	bottom: 0;
 	width:100px
 }
 
-.field{
+.admin-session .field{
 	margin-bottom: 20px;
 }
