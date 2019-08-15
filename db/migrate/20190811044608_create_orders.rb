@@ -11,7 +11,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :subtotal_price
       t.integer :carriage
       t.integer :tax
-      t.integer :delivery_status
+      t.integer :delivery_status, default: 1, null: false
 
       t.timestamps
     end
