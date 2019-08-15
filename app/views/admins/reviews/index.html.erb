@@ -45,24 +45,24 @@
 				<tbody>
 					<% @reviews.each do |review| %>
 						<tr>
-							<th><%= review.id %></th>
-							<td><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-							<td><%= review.title[0..9] %></td>
-							<td id="show-content-<%= @reviews.index(review) %>",
-									class="show-content">
-								<%= review.body[0..49] %>
-								<div id="full-content-<%= @reviews.index(review) %>",
-										 class="full-content">
-								<%= review.body %>
+							<th style="width:10%;"><%= review.id %></th>
+							<td style="width:10%;"><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+							<td style="width:15%;"><%= review.title %></td>
+							<td class="show-content" style="width:25%;">
+								<%= review.body[0..139] %>
+								<div class="full-content">
+									<%= review.body %>
 								</div>
 							</td>
-							<td><%= review.item.id %></td>
-							<td><%= review.item.name%></td>
-							<td><%= review.user.id %></td>
-							<td><%= link_to '削除', admins_review_path(review),
-							 method: :delete,
-							 data:{ confirm: "本当に削除しますか？"},
-							class:"btn btn-danger" %></td>
+							<td style="width:10%;"><%= review.item.id %></td>
+							<td style="width:15%;"><%= review.item.name %></td>
+							<td style="width:10%;"><%= review.user.id %></td>
+							<td style="width:5%;">
+								<%= link_to '削除', admins_review_path(review),
+							 		method: :delete,
+							 		data:{ confirm: "本当に削除しますか？"},
+									class:"btn btn-danger" %>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>
