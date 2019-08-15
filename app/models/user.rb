@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
   # 一人のユーザーは複数の注文履歴を持てる
   has_many :orders, dependent: :destroy
+  has_many :delivery_addresses, dependent: :destroy
 end

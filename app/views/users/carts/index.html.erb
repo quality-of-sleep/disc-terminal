@@ -38,7 +38,7 @@
 						<p><%= link_to "取消", users_user_cart_path(@user.id, cart.id), method: :delete, class: "btn btn-default" %></p>
 					</td>
 					<td>
-						<%= form_tag(url_for(users_user_cart_path(@user.id, cart.id)), method: :patch, :remote => true) do %>
+						<%= form_tag(url_for(users_user_cart_path(@user.id, cart.id)), method: :patch) do %>
 							<div>
 								<%= select_tag 'amount', options_for_select(stock_array(cart),:selected=>cart.amount), class: "btn btn-default dropdown-toggle" %>
 							</div>
