@@ -12,22 +12,8 @@
 
 ActiveRecord::Schema.define(version: 2019_08_11_050328) do
 
-  create_table "admin_admin_comments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "admin_order_details", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "admin_orders", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "admins", force: :cascade do |t|
+    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -94,9 +80,9 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "artist_id"
-    t.integer "genre_id"
-    t.integer "label_id"
+    t.integer "artist_id", default: 1
+    t.integer "genre_id", default: 1
+    t.integer "label_id", default: 1
     t.string "name"
     t.integer "price"
     t.integer "sales_status"
@@ -118,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
-    t.string "item"
+    t.string "item_name"
     t.string "artist"
     t.integer "price"
     t.integer "amount"
@@ -134,13 +120,12 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.string "postal_code"
     t.text "address"
     t.string "telephone_number"
-    t.string "string"
-    t.integer "payment"
+    t.integer "payment", default: 3, null: false
     t.integer "total_price"
     t.integer "subtotal_price"
     t.integer "carriage"
     t.integer "tax"
-    t.integer "delivery_status"
+    t.integer "delivery_status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
