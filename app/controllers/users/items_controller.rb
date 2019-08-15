@@ -1,6 +1,8 @@
 class Users::ItemsController < ApplicationController
 	def index
-		items =Item.all
+		@items =Item.all
+		@artists = Artist.all
+		@jenres = Jenre.all
 	end
 
 	def show
