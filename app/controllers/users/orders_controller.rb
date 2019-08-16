@@ -53,7 +53,15 @@ class Users::OrdersController < ApplicationController
 		redirect_to users_user_order_path(user, order)
 	end
 
+	def index
+		@user = User.find(params[:user_id])
+	end
+
 	def show
+		@user = User.find(params[:user_id])
+		@order = Order.find(params[:id])
+		@discount = 0
+		@total_amount = total_amount(@order.order_details)
 	end
 
 	private
