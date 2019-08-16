@@ -28,7 +28,6 @@ class Users::OrdersController < ApplicationController
 		order.postal_code = delivery.postal_code
 		order.address = delivery.details
 		order.telephone_number = delivery.telephone_number
-		
 		# 計算
 		# 配送料, 割引
 		carriage = 500

@@ -12,6 +12,11 @@ class Admins::OrdersController < ApplicationController
 	end
 
 	def update
-		
+		order = Order.find(params[:id])
+		order.update(order_params)
+		redirect_back(fallback_location: root_url)
+	end
+	def order_params
+		params.require(:order).permit(:delivery_status)
 	end
 end

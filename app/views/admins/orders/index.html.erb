@@ -27,7 +27,16 @@
 					</td>
 					<td><%= order.address %></td>
 					<td>¥ <%= order.total_price.to_s(:delimited) %></td>
-					<td><%= order.delivery_status %></td>
+					<td>
+						<%= form_with model: order, url: admins_order_path(order.id), method: :put, local: true do |form|%>
+						<div>
+							<%= form.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
+						</div>
+						<div>
+							<%=form.submit "変更", class: "btn btn-primary" %>
+						</div>
+					<% end %>
+					</td>
 					<td><%= order.user_name %></td>
 
 				</tr>
