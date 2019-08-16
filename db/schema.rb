@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.string "telephone_number", null: false
     t.string "postal_code", null: false
     t.text "address", null: false
-    t.integer "payment", null: false
+    t.integer "payment", default: 3, null: false
     t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

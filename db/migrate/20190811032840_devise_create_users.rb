@@ -40,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :telephone_number, null: false
       t.string :postal_code,      null: false
       t.text :address,            null: false
-      t.integer :payment,         null: false
+      t.integer :payment,         default: 3, null: false
       t.boolean :is_quit,         null: false, default: false
 
 

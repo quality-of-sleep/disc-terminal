@@ -1,6 +1,7 @@
 class Users::UsersController < ApplicationController
 
-
+  def withdrawal
+  end
 
 
 
