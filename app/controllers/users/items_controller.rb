@@ -2,7 +2,6 @@ class Users::ItemsController < ApplicationController
 
 	def index
 		@items =Item.all
-		@user = current_user
 	end
 
 	# def show
