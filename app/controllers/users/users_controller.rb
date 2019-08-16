@@ -1,8 +1,13 @@
 class Users::UsersController < ApplicationController
+
 	def show
 		
 	end
 
+  
+
+  def withdrawal
+  end
 
 
 
