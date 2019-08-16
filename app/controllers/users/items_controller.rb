@@ -2,18 +2,19 @@ class Users::ItemsController < ApplicationController
 	PER = 25
 
 	def index
-		@artists = Artist.all
-		@genres = Genre.all
 		@items = Item.page(params[:id]).per(PER)
 	end
 
 	def show
 		@item = Item.find(params[:id])
-		user = current_user
+		@user = current_user
 	end
 
-
-
+ 	private
+ 	def item_params
+ 		params.require(:item).permit(:artist_id, :genre_id,	:label_id,
+ 			:name, :price, :sales_status, :stock)
+ 	end
 
 
 
