@@ -1,113 +1,79 @@
-<h2>商品詳細</h2>
-<div class="container">
-	<div class="album">
-		<div class="album-left">
-			<div class="album_image">
-				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 100, 100, format: 'jpeg' %>
-			</div>
-		</div>
-		<div class="album-right">
-			<h3><%= link_to @item.name, %></h3>
-			<p><%= @item.artist_id %></p>
-			<p class=""><%= @item.genre_id %></p>
-			<p><%= @item.label_id %></p>
-			<p style="border:1px; border-radius: 5px; "><%= @item.sales_status %></p>
-			<p>残り<% @item.stock %>点</p>
-			<p>￥<%= @item.price %></p>
-			<p>カートに追加</p>
-				<table>
-					<tr>
-						<td>
-							<%= link_to users_item_favorites_path do %>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<% end %>
-						</td>
-						<td><%= @item.favorites.count %></td>
-						<td>
-							<% link_to users_item_review do %>
-							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-							<% end %>
-						</td>
-						<td><%= @item.reviews.count %></td>
-					</tr>
-				</table>
-			<div class="item-detail">
-				<h2>収録曲</h2>
-				<% discs.each do |disc| %>
-				<div class="disc">
-					<p>disc<%= disc.number %></p>
-						<ul class="song-list">
-							<% songs.each do |song| %>
-							<li><%= song.number %>.<%= song.name %></li>
-							<% end %>
-						</ul>
-					<% end %>
-				</div>
-			</div>
-		</div>
-	</div>
+ <h2>商品詳細</h2>
+<div class="container">
+	<div class="album">
+		<div class="album-left">
+			<div class="album_image">
+				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 100, 100, format: 'jpeg' %>
+			</div>
+		</div>
+		<div class="album-right">
+			<h3><%= link_to @item.name, %></h3>
+			<p><%= @item.artist_id %></p>
+			<p class=""><%= @item.genre_id %></p>
+			<p><%= @item.label_id %></p>
+			<p style="border:1px; border-radius: 5px; "><%= @item.sales_status %></p>
+			<p>残り<% @item.stock %>点</p>
+			<p>￥<%= @item.price %></p>
+			<p>カートに追加</p>
+				<table>
+					<tr>
+						<td>
+							<%= link_to users_item_favorites_path do %>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+							<% end %>
+						</td>
+						<td><%= @item.favorites.count %></td>
+						<td>
+							<% link_to users_item_review do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+							<% end %>
+						</td>
+						<td><%= @item.reviews.count %></td>
+					</tr>
+				</table>
+			<div class="item-detail">
+				<h2>収録曲</h2>
+				<% discs.each do |disc| %>
+				<div class="disc">
+					<p>disc<%= disc.number %></p>
+						<ul class="song-list">
+							<% songs.each do |song| %>
+							<li><%= song.number %>.<%= song.name %></li>
+							<% end %>
+						</ul>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	<div class="album-reviews">
-		<div class="">
-			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-			<h3>レビュー</h3>
-			<ul>
-				<li><%= link_to '一覧ページへ', new_users_item_review_path(@item) %></li>
-				<li><%= link_to '新規投稿する', users_item_reviews_path(@item) %></li>
-			</ul>
-		</div>
-		<div class="review-list">
-			<% @item.reviews.each do |review| %>
-			<div class="review">
-				<h4><%= review.title %></h4>
-				<p><%= review.body %></p>
-			</div>
-			<% end %>
-		</div>
-	</div>
-</div>
-
-
+	<div class="album-reviews">
+		<div class="">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+			<h3>レビュー</h3>
+			<ul>
+				<li><%= link_to '一覧ページへ', new_users_item_review_path(@item) %></li>
+				<li><%= link_to '新規投稿する', users_item_reviews_path(@item) %></li>
+			</ul>
+		</div>
+		<div class="review-list">
+			<% @item.reviews.each do |review| %>
+			<div class="review">
+				<h4><%= review.title %></h4>
+				<p><%= review.body %></p>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-<%
-=begin
-%>
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-<%
-=end
-%>
+<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
+<%
+=begin
+%>
+<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
+<%
+=end
+%>

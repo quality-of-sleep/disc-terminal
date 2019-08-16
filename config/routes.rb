@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   namespace :users do
   	resources :users ,only:[:show, :edit, :update] do
   		resources :delivery_addresses, only:[:create, :update, :destroy]
-  		resources :carts, only:[:create,:show,:update]
-  		resources :orders, only:[:index, :new, :create, :show]
+  		resources :carts, only:[:create,:index,:update, :destroy]
+      get '/orders/buy' => 'orders#new', as: 'orders_new'
+  		resources :orders, only:[:index, :create, :show]
   	end
   	get '/users/:id/withdrawal', to: 'users#withdrawal'
   	patch '/users/:id', to: 'users#quit'
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 	  		resources :reviews, except:[:index]
 	  	end
   end
-  namespace :adimins ,only:[:index, :show] do
+  namespace :admins ,only:[:index, :show] do
   	get '', to:'admins#home'
   	resources :users do
   		resources :admin_comments, only:[:create, :destroy]

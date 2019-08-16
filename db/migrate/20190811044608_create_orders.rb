@@ -6,13 +6,12 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :postal_code
       t.text :address
       t.string :telephone_number
-      t.string :string
-      t.integer :payment
+      t.integer :payment, default: 3, null: false
       t.integer :total_price
       t.integer :subtotal_price
       t.integer :carriage
       t.integer :tax
-      t.integer :delivery_status
+      t.integer :delivery_status, default: 1, null: false
 
       t.timestamps
     end
