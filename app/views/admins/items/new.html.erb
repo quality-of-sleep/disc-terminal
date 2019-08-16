@@ -1,0 +1,31 @@
+<div class="row new-item">
+	<div class="col-md-8 col-md-offset-2">
+		<%= form_for @item, url: admins_items_path do |f| %> <!--prams[:item][:x]に-->
+			<%= f.label :name, "商品名" %>
+			<%= f.text_field :name %>
+			<%= f.label :artist, 'アーティスト' %>
+			<%= f.select 'artist',
+				 options_from_collection_for_select(Artist.all, :id, :name),
+				 nclude_blank: "アーティスト" %><!--prams[:item][:x]に?-->
+			<%= f.label :genre, 'ジャンル' %>
+			<%= f.select 'genre',
+				 options_from_collection_for_select(Genre.all, :id, :name),
+				 nclude_blank: "ジャンル" %>
+			<%= f.label :label, 'レーベル' %>
+			<%= f.select 'label',
+				 options_from_collection_for_select(Label.all, :id, :name),
+				 nclude_blank: "レーベル" %>
+
+			<%= f.label :price, '税込価格' %>
+			<%= f.text_field :price, placeholder:'半角数字' %>
+			<%= f.label :stock, '在庫数' %>
+			<%= f.text_field :stock, placeholder:'半角数字' %>
+			<%= f.label :image, 'ジャケット画像' %>
+			<%= f.attachment_field :image %>
+
+			<%= f.submit "登録", class:"btn btn-info" %>
+			<%= link_to 'キャンセル', request.referrer || admins_items_url,class:"btn btn-danger" %>
+		<% end %>
+
+	</div>
+</div>

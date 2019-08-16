@@ -1,0 +1,28 @@
+.admin-session{
+	margin: 40px auto 60px 0;
+}
+
+.admin-session input{
+	width: 100%;
+}
+
+.admin-session input[type="checkbox"]{
+	width: auto;
+}
+
+.admin-session .form_body{
+	width: 90%;
+	margin:0 auto;
+	position: relative;
+}
+
+.admin-session .form_body .btn{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width:100px
+}
+
+.admin-session .field{
+	margin-bottom: 20px;
+}
