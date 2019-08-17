@@ -5,10 +5,36 @@
         <a class="navbar-brand active" href="#" id="top">ディスクターミナル</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">商品一覧</a></li>
-        <li><a href="#">カート</a></li>
-        <li><%= link_to "新規登録", new_user_registration_path %></li>
-        <li><%= link_to "ログイン", new_user_session_path %></li>
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to '商品一覧', root_path %>
+          </li>
+          <li>
+            <%= link_to "カート", users_user_carts_path(current_user) %>
+          </li>
+          <li>
+            <%= link_to 'マイページ', users_user_path(current_user) %>
+          </li>
+          <li>
+            <%= link_to '購入履歴', users_user_orders_path(current_user) %>
+          </li>
+          <li>
+             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to '商品一覧', root_path %>
+          </li>
+          <li>
+            <%= link_to "カート", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="row">

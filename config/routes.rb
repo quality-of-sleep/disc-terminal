@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   	resources :users ,only:[:show, :edit, :update] do
   		resources :delivery_addresses, only:[:create, :update, :destroy]
   		resources :carts, only:[:create,:index,:update, :destroy]
-  		resources :orders, only:[:index, :new, :create, :show]
+      get '/orders/buy' => 'orders#new', as: 'orders_new'
+  		resources :orders, only:[:index, :create, :show]
   	end
   	get '/users/:id/withdrawal', to: 'users#withdrawal'
   	patch '/users/:id', to: 'users#quit'

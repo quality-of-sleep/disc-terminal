@@ -1,156 +1,104 @@
-
+<h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%; margin: 0 auto;">商品一覧</h2>
 <div class="container">
 	<div class="row">
-		<h2 style="border: 1px; border-radius: 3px; text: center;">商品一覧</h2>
 		<div class="col-lg-3">
-			<table class="table-bordered" style="border-radius: 3px;">
-				<tr>j-Pop</tr>
-				<tr>ロック　/　ポップス</tr>
-				<tr>HIP-HOP</tr>
-				<tr>R&B　/　ソウル</tr>
-				<tr>Jazz / ブルース</tr>
-				<tr>K-Pop / ワールド</tr>
-				<tr>演歌</tr>
-				<tr>クラシック</tr>
-				<tr>アニメ / ゲーム</tr>
-				<tr>サウンドトラック</tr>
-				<tr>その他</tr>
+			<table class="table" style="border: solid 1px; border-radius: 5px; text-align: center;">
+				<tr><th>j-Pop</th></tr>
+				<tr><th>ロック/ポップス</th></tr>
+				<tr><th>HIP-HOP</th></tr>
+				<tr><th>R&B/ソウル</th></tr>
+				<tr><th>Jazz/ブルース</th></tr>
+				<tr><th>K-Pop/ワールド</th></tr>
+				<tr><th>演歌</th></tr>
+				<tr><th>クラシック</th></tr>
+				<tr><th>アニメ/ゲーム</th></tr>
+				<tr><th>サウンドトラック</th></tr>
+				<tr><th>その他</th></tr>
 			</table>
 		</div>
+
 		<div class="col-lg-9">
-			<!-- 下記のデータは手打ちです。 -->
-		 <div class="item-list">
-			<div class="album" style="">
-				<div class="album-left">
-					<p>Rock</p>
-					<div>ジャケット画像</div>
+			<div class="album" style="width: 40%; display: inline-block; border: solid 1px; margin: 10px 20px;">
+				<div class="album-left" style="float: left; margin-right: 5px;">
+					<p class="genre" style="border: solid 1px; text-align: center;">genre</p>
+					<div class="item-img" style="width:100px; height: 100px; background-color: red; margin: 10px;"> 
+						item.image_id
+					</div>
 				</div>
-				<div class="album-left">
-				<table>
-					<tr>
-						<td>Stadium Arcadium</td>
-					</tr>
-					<tr>
-						<td>Red Hot Chil Peppers</td>
-					</tr>
-					<tr>
-						<td style="border:1px; border-radius: 5px;">販売中</td>
-						<td>￥1,565</td>
-					</tr>
-					<tr>
-						<td>
-							<%= link_to users_item_favorites_path do %>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<% end %>
-						</td>
-						<td>いいね90</td>
-						<td>
-							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-						</td>
-						<td>レビュー70</td>
-					</tr>
-				</table>
+
+				<div class="album-right" style="float: left; padding-left: 10px">
+					<p style="text-align: center;">item.artist</p>
+					<div>
+						<p style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;">status</p>
+						<p style="display: inline-block;">￥item.price</p>
+					</div>
+					<div>
+						<div class="favorites" style="display: inline-block; margin-right: 13px">
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
+							<p style="display: inline-block;">favo数</p>
+						</div>
+						<div class="reviews" style="display: inline-block;">
+							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
+							<p style="display: inline-block;">reviews数</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<% user.items.each do |item| %>
-			<div class="album">
-				<div class="album-left">
-					<p class=""><%= item.genre.id %></p>
+		
+			<% @items.each do |item| %>
+			<div class="album" style="width: 40%; display: inline-block; border: solid 1px; margin: 10px 20px;">
+				<div class="album-left" style="float: left; margin-right: 5px;">
+					<p class="genre" style="border: solid 1px; text-align: center;">
+						<%= item.genre_id %>
+					</p>
 					<div>
 						<%= link_to users_item_path(users.item.id) do %> 
-						<%= attachment_image_tag item.image_id, :_image, :fill, 50, 50, format: 'jpeg' %>
+						<%= attachment_image_tag item.image_id, :item_image, :fill, 50, 50, format: 'jpeg' %>
 						<% end %>
 					</div>
 				</div>
 				<div class="album-right">
-					<table>
-						<tr>
-							<td>
-								<%= link_to item.name, users_item_path(users.item.id) %>
-							<td>
-						</tr>
-						<tr>
-							<td><%= item.artist_id %></td>
-						</tr>
-						<tr>
-							<td style="border:1px; border-radius: 5px; "><%= item.sales_status %></td>
-							<td>￥<%= item.price %></td>
-						</tr>
-						<tr>
-							<td>
-								<%= link_to users_item_favorites_path do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+					<h4><%= link_to item.name, users_item_path(users.item.id) %></h4>
+					<p style="text-align: center;"><%= item.artist_id %></p>
+					<div>
+						<p style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;"><%= item.sales_status %></p>
+						<p style="display: inline-block;">￥<%= item.price %></p>
+					</div>
+					<div>
+						<div class="favorites" style="display: inline-block; margin-right: 13px">
+							<% if @item.favorited_by?(current_user) %>
+							<li>
+								<%= link_to users_item_favorites_path(@item), method: :delete do %>
+								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:red;"></i>
 								<% end %>
-							</td>
-							<td>いいね数</td>
-							<td>
-								<% link_to users_item_review do %>
-								<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+								<p style="display: inline-block;"><%= item.favorites.count %></p>
+							</li>
+							<% else %>
+							<li>
+								<%= link_to users_item_favorites_path(@item), method: :post do %>
+								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:white;"></i>
 								<% end %>
-							</td>
-							<td>レビュー数</td>
-						</tr>
-					</table>
+								<p style="display: inline-block;"><%= item.favorites.count %></p>
+							</li>
+							<% end %>
+						</div>
+						<div class="reviews" style="display: inline-block;">
+							<% link_to users_item_review do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
+							<p style="display: inline-block;">
+							<% end %>
+							<p style="display: inline-block;"><%= item.reviews.count %></p>
+						</div>
+					</div>
 				</div>
 			</div>
 			<% end %>
-			<%= paginate @items, class: "pagenate" %>
+<!--		<%= paginate @items, class: "pagenate" %>
+-->
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -203,9 +151,13 @@
 <%
 =begin
 %>
+
 <% @items.each do |item| %>
 <p><%= link_to item.name, users_item_path(item) %></p>
 <% end %>
+
+
+
 <%
 =end
 %>

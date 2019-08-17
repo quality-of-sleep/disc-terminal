@@ -6,12 +6,16 @@ class Admins::ItemsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@items = Item.page(params[:page])
-		@items = @items.search(key: 'name', value: params[:search]) if params[:search] != nil # == !p.nil?
+		if !params[:search].nil? && params[:search].present?
+			@items = @items.search(key: 'name', value: params[:search])
+		end
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
-		@items = @items.reorder(["?", "#{params[:key]} #{params[:direction]}"])
+		@items = @items.reorder("?", "#{params[:key]} #{params[:direction]}")
+		# @items = @items.reorder("#{params[:key]} #{params[:direction]}")
+  end
 
-	end
+
 	def new
 		@artist = Artist.new
 		@genre = Genre.new
@@ -19,7 +23,6 @@ class Admins::ItemsController < ApplicationController
 		@item = Item.new
 		@disc = @item.discs.build
 		@songs = @disc.songs.build
-
 	end
 	def create
 		@artist = Artist.new(artist_params)
@@ -32,7 +35,7 @@ class Admins::ItemsController < ApplicationController
 		@item.label = @label if params[:label?] && params[:label][:name]
 		if @item.save
 			render 'show'
-			debugger
+
 		else
 			redirect_to new_admins_item_url
 		end
