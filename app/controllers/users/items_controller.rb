@@ -1,8 +1,8 @@
 class Users::ItemsController < ApplicationController
 	PER = 25
 	def index
-		@items = Item.page(params[:id]).per(PER)
-		@items =Item.all
+		@items = Item.page(params[:page]).per(PER)
+#		@items =Item.all
 	end
 
 	def show
