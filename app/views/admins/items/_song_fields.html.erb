@@ -1,10 +1,12 @@
 
 <div class='nested-fields'>
   <div class="fields">
+    <div class="song">
       <li>
-        <%= f.hidden_field :number, value: '1' %>
+        <%= f.text_field :number,placeholder: '曲順', class: "song-number" %>
         <%= f.text_field :name %>
         <%= link_to_remove_association "x", f %>
       </li>
+    </div>
   </div>
 </div>
