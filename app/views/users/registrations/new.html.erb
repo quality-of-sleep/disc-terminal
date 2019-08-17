@@ -3,66 +3,69 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
       <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">アカウントの作成</h2>
-      <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="form-name">
-      <h4>名前</h4>
-          <form class="form-inline">
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+
+        <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field">
+          <h4>名前</h4>
+          <div class="form-inline">
             <%= f.label "(姓)", class: "col-sm-2 control-label"%>
-            <%= f.email_field :email, autofocus: true, class: "col-sm-4" %>
+            <%= f.text_field :last_name, autofocus: true, class: "col-sm-4" %>
             <%= f.label  "(名)", class: "col-sm-2 control-label" %>
-            <%= f.email_field :email, class: "col-sm-4"%>
-          </form>
+            <%= f.text_field :first_name, class: "col-sm-4"%>
+          </div>
 
 
-          <form class="form-inline">
+          <div class="form-inline">
             <%= f.label "(セイ)", class: "col-sm-2 control-label"%>
-            <%= f.email_field :email, autofocus: true, class: "col-sm-4" %>
+            <%= f.text_field :last_name_kana, class: "col-sm-4" %>
             <%= f.label  "(メイ)", class: "col-sm-2 control-label" %>
-            <%= f.email_field :email, class: "col-sm-4"%>
-          </form>
+            <%= f.text_field :first_name_kana, class: "col-sm-4"%>
+          </div>
         </div>
 
+        <div class="field">
+          <h4>現住所</h4>
+          <%= f.label "〒" %>
+          <%= f.text_field :postal_code, placeholder: "ハイフン無し：", style: "width: 30%;"%>
+        </div>
 
-          <div class="field">
-            <h4>現住所</h4>
-            <%= f.label "〒" %>
-            <%= f.email_field :email, placeholder: "ハイフン無し：", style: "width: 30%;"%>
+        <div class="field">
+          <%= f.text_area :address, placeholder: "住所：", style: "width: 100%;"%>
+        </div>
+
+        <div class="field">
+          <h4>電話番号</h4>
+          <%= f.text_field :telephone_number, placeholder: "電話番号：", style: "width: 30%;"%>
+        </div>
+
+        <div class="field">
+          <h4>メールアドレス</h4>
+          <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス：", style: "width: 100%;"%>
+        </div>
+
+        <div class="field">
+          <h4>パスワード</h4>
+          <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード：6文字以上必須", style: "width: 100%;"%>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "パスワード確認：", style: "width: 100%;" %>
+        </div>
+
+        <div class="actions" align="right">
+          <%= f.submit "登録",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
           </div>
-          <div class="field">
-            <%= f.text_area :email, placeholder: "住所：", style: "width: 100%;"%>
-          </div>
-
-          <div class="field">
-            <h4>電話番号</h4>
-            <%= f.email_field :email, placeholder: "電話番号：", style: "width: 30%;"%>
-          </div>
+        </div>
+        <% end %>
+        <%= render "users/shared/links" %>
 
 
 
-          <div class="field">
-            <h4>メールアドレス</h4>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス：", style: "width: 100%;"%>
-          </div>
-
-  <div class="field">
-    <h4>パスワード</h4>
-            <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード：6文字以上必須", style: "width: 100%;"%>
-  </div>
-
-          <div class="field">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード確認：", style: "width: 100%;" %>
-          </div>
-          <div class="actions" align="right">
-            <%= f.submit "登録",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
-            </div>
-<% end %>
-
-<%= render "users/shared/links" %>
-
-      </div>
     </div>
     <div class="col-sm-1"></div>
   </div>

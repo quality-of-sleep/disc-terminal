@@ -1,3 +1,4 @@
+
 <h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%; margin: 0 auto;">商品一覧</h2>
 <div class="container">
 	<div class="row">
@@ -113,13 +114,42 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
 <%
 =begin
 %>
+
 <% @items.each do |item| %>
 <p><%= link_to item.name, users_item_path(item) %></p>
 <% end %>
+
+
+
 <%
 =end
 %>

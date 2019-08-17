@@ -1,4 +1,4 @@
- <h2>商品詳細</h2>
+<h2>商品詳細</h2>
 <div class="container">
 	<div class="album">
 		<div class="album-left">
@@ -74,6 +74,73 @@
 =begin
 %>
 <p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
+<%
+=end
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
+<%
+=begin
+%>
+
+
+<% if user_signed_in? %>
+<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
+<% end %>
+
+
 <%
 =end
 %>

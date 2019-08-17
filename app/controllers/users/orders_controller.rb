@@ -28,7 +28,6 @@ class Users::OrdersController < ApplicationController
 		order.postal_code = delivery.postal_code
 		order.address = delivery.details
 		order.telephone_number = delivery.telephone_number
-		
 		# 計算
 		# 配送料, 割引
 		carriage = 500
@@ -53,7 +52,15 @@ class Users::OrdersController < ApplicationController
 		redirect_to users_user_order_path(user, order)
 	end
 
+	def index
+		@user = User.find(params[:user_id])
+	end
+
 	def show
+		@user = User.find(params[:user_id])
+		@order = Order.find(params[:id])
+		@discount = 0
+		@total_amount = total_amount(@order.order_details)
 	end
 
 	private
