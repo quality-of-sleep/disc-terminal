@@ -4,6 +4,8 @@
   </div>
   <div class="col-md-7 search-area clearfix">
   	<%= form_tag admins_items_path, method: :get do %>
+  		<!--options_from_collection_for_select
+  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
 			<%= select_tag 'artist',
 			 options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト",style:"width: 45%" %>
 		 	<%= select_tag 'genre',
