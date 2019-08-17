@@ -29,26 +29,18 @@ module Users::OrdersHelper
 end
 
 # indexソートhelper
-def sortTh(a,contName)
+def sortTh(sort_key,contName)
 	if request.fullpath.include?('desc')
 		if params[:delivery_status].present?
-			link_to a, sort: contName, delivery_status: @select
+			link_to sort_key, sort: contName, delivery_status: @sort_key
 		else
-			link_to a, sort: contName
+			link_to sort_key, sort: contName
 		end
 	else
 		if params[:delivery_status].present?
-			link_to a, sort: "#{contName} desc", delivery_status: @select
+			link_to sort_key, sort: "#{contName} desc", delivery_status: @sort_key
 		else
-			link_to a, sort: "#{contName} desc"
+			link_to sort_key, sort: "#{contName} desc"
 		end
 	end
 end
-
-# def sortTh(a,contName)
-# 	if request.fullpath.include?('desc')
-# 		link_to a, sort: contName
-# 	else
-# 		link_to a, sort: "#{contName} desc"
-# 	end
-# end

@@ -3,8 +3,10 @@
 
 <%= form_tag admins_orders_path, method: :get do %>
 	<%= select_tag 'delivery_status', options_for_select([["配送準備中",'1'],["配送中",'2'],["配送済",'3'],['キャンセル','4']]), class: "btn btn-default dropdown-toggle" %>
-  <%= submit_tag '絞り込む', name: nil, class: "btn btn-primary" %>
+  <%= submit_tag '絞り込む', class: "btn btn-primary" %>
  <% end %>
+
+ <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
 
 <div class="col">
 	<table class="table">
@@ -13,10 +15,10 @@
 				<th><%= sortTh('注文日時','created_at') %></th>
 				<th><%= sortTh('注文ID','id') %></th>
 				<th>商品</th>
-				<th>配送先</th>
-				<th>合計金額(税込)</th>
+				<th><%= sortTh('配送先', 'address') %></th>
+				<th><%= sortTh('合計金額(税込)', 'total_price') %></th>
 				<th><%= sortTh('配送状況', 'delivery_status') %></th>
-				<th>購入者</th>
+				<th><%= sortTh('購入者', 'user_name') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,26 +46,10 @@
 					<% end %>
 					</td>
 					<td><%= order.user_name %></td>
-
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 </div>
 
-<%
-=begin
-%>
 <%= paginate @orders, class: "paginate" %>
-
-<%= form_with model: Order, url: admins_orders_path, method: :get, local: true do |f|%>
-
-<%= form_with model: Order, url: admins_orders_path, method: :get do |f|%>
-	<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
-	<%= f.submit "絞り込む", class: "btn btn-primary" %>
-<% end %>
-
-
-<%
-=end
-%>
