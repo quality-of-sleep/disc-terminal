@@ -1,6 +1,6 @@
 <div class="row new-item">
 	<div class="col-md-8 col-md-offset-2 form-group">
-		<%= form_for [:admins, @item] do |item| %> <!--params[:item][:x]に-->
+		<%= form_for [:admins, @item] do |item| %>
 			<div class="field">
 				<%= item.label :name, "商品名" %>
 				<%= item.text_field :name %>
@@ -27,15 +27,14 @@
 				<%= text_field_tag "label[name]", "" %>
 			</div>
 
-
-			<% @item.discs.each do |discs| %>
+			<% @item.discs.each do |disc| %>
 				<div class="field">
-	      	<%= item.fields_for discs do |disc_form| %>
+	      	<%= fields_for 'item[discs]',disc, index: disc.id do |disc_form| %>
 	        	<%= disc_form.label :number, 'Disc' %>
 	        	<%= disc_form.hidden_field :number, value: 1 %>
-	        	<% discs.songs.each do |songs| %>
+	        	<% disc.songs.each do |song| %>
 		        	<div class="field">
-			          <%= disc_form.fields_for songs, index: songs.id do |song_form| %>
+			          <%= item.fields_for song, index: song.id do |song_form| %>
 			          	<ol><%= song_form.label :name, '曲目' %>
 			          		<%= song_form.hidden_field :number, value: 1 %>
 				            <li><%= song_form.text_field :name %></li>
@@ -48,9 +47,6 @@
 	      	<% end %>
 	    	</div>
 	    <% end %>
-
-<!--<ActionController::Parameters {"name"=>"", "artist"=>"", "genre"=>"", "label"=>"", "discs"=>{"songs"=>{"name"=>""}}, "price"=>"", "stock"=>"", "sales_status"=>"編集中", "image"=>"{}"} permitted: false>-->
-
 
 			<div class="field">
 				<%= item.label :price, '税込価格' %>

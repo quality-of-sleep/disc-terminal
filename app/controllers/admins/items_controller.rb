@@ -10,6 +10,7 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(artist_id: params[:artist]) if params[:artist].present?
 		@items = @items.where(genre_id: params[:genre]) if params[:genre].present?
 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")
+	#injection
 	end
 	def new
 		@artist = Artist.new
@@ -17,7 +18,7 @@ class Admins::ItemsController < ApplicationController
 		@label = Label.new
 		@item = Item.new
 			@disc = @item.discs.build # number
-				@song = @disc.songs.build # number name
+				@songs = @disc.songs.build # number name
 
 	end
 	def create
@@ -31,6 +32,10 @@ class Admins::ItemsController < ApplicationController
 		@item.save
 		render 'new'
 		 debugger
+	# 	 @discs.each {|disc| disc.item = @item}
+	# params[].keys.count.times do |song,params[:num]|
+	# 	 song.create(number:i,name:x)
+
 		# artist = artist.create()
 		# genre = genre.create()
 		# label = label.create()
@@ -59,9 +64,12 @@ class Admins::ItemsController < ApplicationController
 		end
 	  def item_params
 	    params.require(:item).permit(:name, :price, :stock, :sales_status, :image,
-	    			discs_attributes: [:id, :number],
-	    			songs_attributes: [:id, :name, :number]
+
+	    			discs_attributes: [:id, :number, :_destroy],
+	    			songs_attributes: [:id, :name, :number, :_destroy]
 	    			)
 	  end
+
 end
+
 

@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :artist
   belongs_to :genre
   belongs_to :label
-  has_many :discs
+  has_many :discs, inverse_of: :item
   accepts_nested_attributes_for :discs # discs_attributesハッシュを生成
 
 
