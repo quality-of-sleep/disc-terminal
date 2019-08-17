@@ -29,16 +29,16 @@
 				<div class="album-right" style="float: left; padding-left: 10px">
 					<p style="text-align: center;">item.artist</p>
 					<div>
-						<p style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;">status</p>
+						<p style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px;">status</p>
 						<p style="display: inline-block;">￥item.price</p>
 					</div>
 					<div>
 						<div class="favorites" style="display: inline-block; margin-right: 13px">
-							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block;"></span>
 							<p style="display: inline-block;">favo数</p>
 						</div>
 						<div class="reviews" style="display: inline-block;">
-							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 							<p style="display: inline-block;">reviews数</p>
 						</div>
 					</div>
@@ -94,8 +94,7 @@
 				</div>
 			</div>
 			<% end %>
-<!--		<%= paginate @items, class: "pagenate" %>
--->
+		<%= paginate @items, class: "pagenate" %>
 		</div>
 	</div>
 </div>

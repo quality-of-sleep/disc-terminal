@@ -1,6 +1,6 @@
 <h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%;">商品詳細</h2>
 <div class="container">
-	<div class="album" style="width: 90%; padding: 20px; border: solid 1px;">
+	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
 			<div class="album_image">
 				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 350, 350, format: 'jpeg' %>
@@ -16,7 +16,7 @@
 			</p>
 			<p><%= @item.label_id %></p>
 			<div class="status" style="display: inline-block;">
-				<p class="sales_status" style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;">
+				<p class="sales_status" style="border:solid 1px; border-radius: 5px; display: inline-block;">
 					<%= @item.sales_status %>
 				</p>
 				<p>残り<% @item.stock %>点</p>
@@ -24,7 +24,7 @@
 			<p style="display: inline-block;">
 				￥<%= @item.price %>
 			</p>
-			<p style="border: solid 1px; text-align: center;">カートに追加</p>
+			<p style="border: solid 1px;"><%= link_to 'カートに追加', users_user_carts_path %></p>
 				<div class="favorites" style="display: inline-block; margin-right: 13px">
 					<% if @item.favorited_by?(current_user) %>
 						<li>
@@ -36,7 +36,7 @@
 					<% else %>
 						<li>
 							<%= link_to users_item_favorites_path(@item), method: :post do %>
-								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:white;"></i>
+								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; color:white;"></i>
 							<% end %>
 							<p style="display: inline-block;"><%= item.favorites.count %></p>
 						</li>
@@ -67,7 +67,7 @@
 
 	<div class="album-reviews" style="border: solid 1px; width: 90%; margin-top: 30px; padding: 30px;">
 		<div class="review-top">
-			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="font-size: 30px; display: inline-block;"></span>
+			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 			<h3 style="display: inline-block;">レビュー</h3>
 			<ul style="display: inline-block; list-style: none;">
 				<li style="float: left; margin-right: 
@@ -124,12 +124,6 @@
 
 
 
-
-
-
-
-
-
 <!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
 <%
 =begin
@@ -164,9 +158,6 @@
 =end
 
 %>
-
-
-
 
 
 
