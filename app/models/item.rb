@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :genre
   belongs_to :label
   has_many :discs, inverse_of: :item
-  accepts_nested_attributes_for :discs # discs_attributesハッシュを生成
+  accepts_nested_attributes_for :discs, allow_destroy: true
 
 
 

@@ -6,10 +6,10 @@ class Admins::ItemsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@items = Item.page(params[:page])
-			@items = @items.search(key: 'name', value: params[:search]) if params[:search] != nil
-		@items = @items.where(artist_id: params[:artist]) if params[:artist].present?
-		@items = @items.where(genre_id: params[:genre]) if params[:genre].present?
-		@items = @items.reorder("#{params[:key]} #{params[:direction]}")
+		@items = @items.search(key: 'name', value: params[:search]) if params[:search] != nil
+		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
+		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
+		@items = @items.reorder(["?", "#{params[:key]} #{params[:direction]}"])
 	#injection
 	end
 	def new
@@ -31,19 +31,7 @@ class Admins::ItemsController < ApplicationController
 		@item.label = @label
 		@item.save
 		render 'new'
-		 debugger
-	# 	 @discs.each {|disc| disc.item = @item}
-	# params[].keys.count.times do |song,params[:num]|
-	# 	 song.create(number:i,name:x)
 
-		# artist = artist.create()
-		# genre = genre.create()
-		# label = label.create()
-
-		# item = Item.create(artist: artist, genre_id: genre.id ...)
-		# disc = Disc.new()
-		# disc.item = item
-		# disc.save
 	end
 	def show
 	end
