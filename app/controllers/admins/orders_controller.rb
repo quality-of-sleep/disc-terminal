@@ -3,6 +3,11 @@ class Admins::OrdersController < ApplicationController
 
 	def index
 		@orders = Order.page.order(params[:sort]).reverse_order
+		# @orders = Order.all
+		if params[:delivery_status].present?
+			@orders = @orders.get_by_delivery_status(params[:delivery_status])
+			binding.pry
+		end
 	end
 
 	def show
