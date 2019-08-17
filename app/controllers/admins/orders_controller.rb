@@ -2,7 +2,7 @@ class Admins::OrdersController < ApplicationController
 	include Users::OrdersHelper
 
 	def index
-		@orders = Order.all.order(params[:sort])
+		@orders = Order.page.order(params[:sort]).reverse_order
 	end
 
 	def show

@@ -1,5 +1,9 @@
 <h1>注文一覧</h1>
 
+<%= form_with model: Order, url: admins_orders_path, method: :get, local: true do |f|%>
+	<%=  %>
+<% end %>
+
 <div class="col">
 	<table class="table">
 		<thead>
@@ -12,24 +16,12 @@
 					<% end %>
 				<% end %>
 
-				<% def sor(a,contName) %>
-					<% if contName == 1 %>
-						<% link_to a, sort: 2 %>
-					<% elsif contName ==2 %>
-						<% link_to a, sort: 3 %>
-					<% elsif contName ==3 %>
-						<% link_to a, sort: 4 %>
-					<% else %>
-						<% link_to a, sort: 1 %>
-					<% end %>
-				<% end %>
-
 				<th><%= sortTh('注文日時','created_at') %></th>
 				<th><%= sortTh('注文ID','id') %></th>
 				<th>商品</th>
 				<th>配送先</th>
 				<th>合計金額(税込)</th>
-				<th><%= sor('配送状況', 'delivery_status') %></th>
+				<th><%= sortTh('配送状況', 'delivery_status') %></th>
 				<th>購入者</th>
 			</tr>
 		</thead>
@@ -65,3 +57,4 @@
 	</table>
 </div>
 
+<%= paginate @orders, class: "paginate" %>
