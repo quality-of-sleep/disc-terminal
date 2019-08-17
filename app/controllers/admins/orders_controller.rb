@@ -2,10 +2,14 @@ class Admins::OrdersController < ApplicationController
 	include Users::OrdersHelper
 
 	def index
+		# binding.pry
 		@orders = Order.page.order(params[:sort]).reverse_order
 		if params[:delivery_status].present?
 			@orders = @orders.get_by_delivery_status params[:delivery_status]
+			order = @orders.first
+			@select = order.delivery_status
 		end
+		# binding.pry
 	end
 
 	def show
