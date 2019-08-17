@@ -10,14 +10,6 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<% def sortTh(a,contName) %>
-					<% if request.fullpath.include?('desc') %>
-						<% link_to a, sort: contName %>
-					<% else %>
-						<% link_to a, sort: "#{contName} desc" %>
-					<% end %>
-				<% end %>
-
 				<th><%= sortTh('注文日時','created_at') %></th>
 				<th><%= sortTh('注文ID','id') %></th>
 				<th>商品</th>
