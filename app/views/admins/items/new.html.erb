@@ -27,26 +27,7 @@
 				<%= text_field_tag "label[name]", "" %>
 			</div>
 
-			<% @item.discs.each do |disc| %>
-				<div class="field">
-	      	<%= fields_for 'item[discs]',disc, index: disc.id do |disc_form| %>
-	        	<%= disc_form.label :number, 'Disc' %>
-	        	<%= disc_form.hidden_field :number, value: 1 %>
-	        	<% disc.songs.each do |song| %>
-		        	<div class="field">
-			          <%= item.fields_for song, index: song.id do |song_form| %>
-			          	<ol><%= song_form.label :name, '曲目' %>
-			          		<%= song_form.hidden_field :number, value: 1 %>
-				            <li><%= song_form.text_field :name %></li>
-				            <%= song_form.hidden_field :number, value: 2 %>
-				            <li><%= song_form.text_field :name %></li>
-				          </ol>
-			          <% end %>
-			        </div>
-			    	<% end %>
-	      	<% end %>
-	    	</div>
-	    <% end %>
+			<%= render 'form',:f => item %>
 
 			<div class="field">
 				<%= item.label :price, '税込価格' %>

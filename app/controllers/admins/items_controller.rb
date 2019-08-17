@@ -31,6 +31,7 @@ class Admins::ItemsController < ApplicationController
 		@item.label = @label
 		@item.save
 		render 'new'
+		debugger
 
 	end
 	def show
@@ -53,9 +54,11 @@ class Admins::ItemsController < ApplicationController
 	  def item_params
 	    params.require(:item).permit(:name, :price, :stock, :sales_status, :image,
 
-	    			discs_attributes: [:id, :number, :_destroy],
-	    			songs_attributes: [:id, :name, :number, :_destroy]
-	    			)
+	    			discs_attributes: [:id, :number, :_destroy,
+	    				songs_attributes: [:id, :name, :number, :_destroy]
+	    			],
+
+	   	)
 	  end
 
 end

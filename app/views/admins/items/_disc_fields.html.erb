@@ -1,0 +1,16 @@
+ <div class='nested-fields'>
+    <div class="field">
+      <%= f.label :number %>
+      <%= f.hidden_field :number, value: '1' %>
+        <ol>
+        <%= f.fields_for :songs do |song| %>
+          <%= render 'song_fields', :f => song%>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association '追加', f, :songs %>
+        </div>
+      </ol>
+    <div>
+    <%= link_to_remove_association "ディスクを消去", f %>
+  </div>
+</div>
