@@ -9,13 +9,17 @@ class Users::UsersController < ApplicationController
   end
 
   def update
+  	user = User.find(params[:id])
+  	user.update(user_params)
+  	redirect_to users_user_path(user.id)
   end
 
 
   def withdrawal
   end
 
-
+  def quit
+  end
 
 	# tori_cart-test(カート機能試すときはコメントアウト外してください)
  	private

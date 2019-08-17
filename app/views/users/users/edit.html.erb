@@ -5,7 +5,7 @@
       <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">登録情報の変更</h2>
 
 
-        <%= form_for(@user), url: users_user_path do |f| %>
+        <%= form_for @user, url: users_user_path(@user) do |f| %>
 
 
         <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
@@ -29,16 +29,6 @@
         </div>
 
         <div class="field">
-          <h4>現住所</h4>
-          <%= f.label "〒" %>
-          <%= f.text_field :postal_code, placeholder: "ハイフン無し：", style: "width: 30%;"%>
-        </div>
-
-        <div class="field">
-          <%= f.text_area :address, placeholder: "住所：", style: "width: 100%;"%>
-        </div>
-
-        <div class="field">
           <h4>電話番号</h4>
           <%= f.text_field :telephone_number, placeholder: "電話番号：", style: "width: 30%;"%>
         </div>
@@ -50,16 +40,33 @@
 
         <div class="field">
           <h4>パスワード</h4>
-          <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード：6文字以上必須", style: "width: 100%;"%>
+          <%= f.password_field :password, autocomplete: "current_password", placeholder: "パスワード：6文字以上必須だけど何も入力しなくても他の情報は更新できるっぽいです", style: "width: 100%;"%>
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "パスワード確認：", style: "width: 100%;" %>
+          <%= f.password_field :password_confirmation, autocomplete: "current_password", placeholder: "パスワード確認：現在登録されているパスワードが自動的にここに黒丸で表示されるようにしたいっすね", style: "width: 100%;" %>
         </div>
 
-        <div class="actions" align="right">
-          <%= f.submit "登録",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
-          </div>
+
+        <div class="field">
+          <h4>現住所</h4>
+          <%= f.label "〒" %>
+          <%= f.text_field :postal_code, placeholder: "ハイフン無し：", style: "width: 30%;"%>
+        </div>
+
+        <div class="field">
+          <%= f.text_area :address, placeholder: "住所：", style: "width: 100%;"%>
+        </div>
+
+
+
+        <span class="actions">
+          <%= f.submit "変更を確定",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
+        </span>
+        <span class="label label-default">
+          <%= link_to "戻る", users_user_path(@user) %>
+        </span>
+
         </div>
         <% end %>
 

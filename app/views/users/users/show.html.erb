@@ -17,7 +17,7 @@
       	  <li>カード番号：</li><!---ここは一旦スルーする〜--->
       	</ul>
       	<span class="label label-success">
-      	<%= link_to "プロフィールを編集する", edit_users_user_path(current_user.id)%>
+      	<%= link_to "プロフィールを編集する", edit_users_user_path(@user)%>
       	</span>
 
 
@@ -25,7 +25,7 @@
       </div>
 
       	<span class="label label-danger">
-      	<%= link_to "退会する", users_path(current_user.id)%>
+      	<%= link_to "退会する", users_path(@user)%>
       	</span>
 
     </div>
