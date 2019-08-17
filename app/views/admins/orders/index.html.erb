@@ -4,12 +4,32 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>注文日時</th>
-				<th>注文ID</th>
+				<% def sortTh(a,contName) %>
+					<% if request.fullpath.include?('desc') %>
+						<% link_to a, sort: contName %>
+					<% else %>
+						<% link_to a, sort: "#{contName} desc" %>
+					<% end %>
+				<% end %>
+
+				<% def sor(a,contName) %>
+					<% if contName == 1 %>
+						<% link_to a, sort: 2 %>
+					<% elsif contName ==2 %>
+						<% link_to a, sort: 3 %>
+					<% elsif contName ==3 %>
+						<% link_to a, sort: 4 %>
+					<% else %>
+						<% link_to a, sort: 1 %>
+					<% end %>
+				<% end %>
+
+				<th><%= sortTh('注文日時','created_at') %></th>
+				<th><%= sortTh('注文ID','id') %></th>
 				<th>商品</th>
 				<th>配送先</th>
 				<th>合計金額(税込)</th>
-				<th>配送状況</th>
+				<th><%= sor('配送状況', 'delivery_status') %></th>
 				<th>購入者</th>
 			</tr>
 		</thead>
@@ -28,7 +48,7 @@
 					<td><%= order.address %></td>
 					<td>¥ <%= order.total_price.to_s(:delimited) %></td>
 					<td>
-						<%= form_with model: order, url: admins_order_path(order.id), method: :put, local: true do |form|%>
+						<%= form_with model: order, url: admins_order_path(order.id), method: :patch, local: true do |form|%>
 						<div>
 							<%= form.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
 						</div>
@@ -45,4 +65,3 @@
 	</table>
 </div>
 
-<%= paginate @orders, class: "paginate" %>
