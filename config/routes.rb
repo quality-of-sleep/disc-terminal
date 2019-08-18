@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   	patch '/users/:id/withdrawal', to: 'users#quit'
   		resources :items, only:[:show] do
 	  		resources :favorites, only:[:create, :destroy]
-	  		resources :reviews, except:[:index]
+	  		resources :reviews, except:[:show]
 	  	end
   end
   namespace :admins ,only:[:index, :show] do
