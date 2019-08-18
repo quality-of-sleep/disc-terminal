@@ -4,9 +4,9 @@ class Admins::ReviewsController < ApplicationController
 
 	def index
 		@reviews = Review.page(params[:page])
-		if params[:target] != nil
+		if !params[:target].nil?
 			@reviews = @reviews.search(key: params[:target], value: params[:search])
-		elsif params[:key] != nil
+		elsif !params[:key].nil?
 			@reviews = @reviews.reorder("#{params[:key]} #{params[:direction]}")
 		end
 	end

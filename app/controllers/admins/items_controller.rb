@@ -12,8 +12,8 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.reorder("?", "#{params[:key]} #{params[:direction]}")
-		# @items = @items.reorder("#{params[:key]} #{params[:direction]}")
-  end
+ 		# @items = @items.reorder("#{params[:key]} #{params[:direction]}")
+	end
 
 
 	def new
