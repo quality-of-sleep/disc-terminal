@@ -1,3 +1,3 @@
 class Song < ApplicationRecord
-	belong_to :disc
+	belongs_to :disc
 end
