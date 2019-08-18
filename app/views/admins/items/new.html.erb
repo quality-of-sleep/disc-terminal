@@ -1,7 +1,7 @@
 <div class="row new-item">
 	<div class="col-md-8 col-md-offset-2 form-group">
 		<h1>新規商品追加フォーム</h1>
-		<p>アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、チェックを入れてください。</p>
+		<p class="alert alert-danger">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、新規登録にチェックを入れてください。</p>
 		<%= form_for [:admins, @item] do |item| %>
 			<div class="field">
 				<%= item.label :name, "商品名" %>
@@ -9,37 +9,37 @@
 			</div>
 			<div class="field">
 				<!-- selectから選んだ場合は params[:item][:artist_id]に値を渡す -->
-				<%= item.label :artist, 'アーティスト' %>
+				<div><%= item.label :artist, 'アーティスト' %></div>
 				<%= item.select 'artist_id',
 					 options_from_collection_for_select(Artist.all, :id, :name),
 					 include_blank: 'アーティスト' %>
 				<!-- テキストボックスに入力した場合は params[:artist][:name]に値を渡す -->
-				<%= text_field_tag "artist[name]", "" %>
 				<%= check_box_tag :artist? %>
-				<%= label_tag :artist?, "新しく登録する" %>
+				<%= label_tag :artist?, "新規登録" %>
+				<%= text_field_tag "artist[name]", "#{@item.artist.name}" %>
 			</div>
 			<div class="field">
-				<%= item.label :genre, 'ジャンル' %>
+				<div><%= item.label :genre, 'ジャンル' %></div>
 				<%= item.select 'genre_id',
 					 options_from_collection_for_select(Genre.all, :id, :name),
 					 include_blank: "ジャンル" %>
-				<%= text_field_tag "genre[name]", "" %>
 				<%= check_box_tag :genre? %>
-				<%= label_tag :genre?, "新しく登録する" %>
+				<%= label_tag :genre?, "新規登録" %>
+				<%= text_field_tag "genre[name]", "#{@item.genre.name}" %>
 			</div>
 			<div class="field">
-				<%= item.label :label, 'レーベル' %>
+				<div><%= item.label :label, 'レーベル' %></div>
 				<%= item.select 'label_id',
 					 options_from_collection_for_select(Label.all, :id, :name),
 					 include_blank: "レーベル" %>
-				<%= text_field_tag "label[name]", "" %>
 				<%= check_box_tag :label? %>
-				<%= label_tag :label?, "新しく登録する" %>
+				<%= label_tag :label?, "新規登録" %>
+				<%= text_field_tag "label[name]","#{@item.label.name}" %>
 			</div>
 
 			<%= render 'form',:f => item %>
 
-			<div class="field">
+			<div class="field under-nested-form">
 				<%= item.label :price, '税込価格' %>
 				<%= item.text_field :price, placeholder:'半角数字' %>
 			</div>

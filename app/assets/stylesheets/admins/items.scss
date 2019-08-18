@@ -3,14 +3,83 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.search-area:col-md-7{
-	
+.new-item h1{
+	margin-bottom: 30px;
+	margin-top: 40px;
 }
 
-tr .item-name{
-	width: 30%;
+.new-item p{
+	margin-bottom: 20px;
 }
 
 .new-item .field{
 	margin-bottom: 30px;
 }
+
+.field select{
+	margin-right: 5%;
+}
+
+.new-artist{
+	margin: 0 0 0 auto;
+}
+
+#item_name{
+	width: 100%;
+}
+
+#item_artist_id{
+	width: 30%;
+}
+
+#artist_name{
+	width: 50%;
+}
+
+#item_genre_id{
+	width: 30%;
+}
+
+#genre_name{
+	width: 50%;
+}
+
+#item_label_id{
+	width: 30%;
+}
+
+#label_name{
+	width: 50%;
+}
+
+li input[type=text]{
+	width: 90%;
+}
+
+.under-nested-form{
+	margin-top: 30px;
+}
+
+#item_price{
+	width: 20%;
+}
+
+#item_stock{
+	width: 20%;
+}
+
+#item_sales_status{
+	width: 20%;
+}
+
+.actions .btn{
+	width: 40%;
+	margin-bottom: 40px;
+}
+
+.actions .btn:last-child{
+	margin-left: 15%;
+}
+
+
+
