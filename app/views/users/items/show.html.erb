@@ -1,4 +1,4 @@
-<h2 style="border: solid 1px; border-radius: 3px; width: 20%;">商品詳細</h2>
+<h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
 <div class="container">
 	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
@@ -25,7 +25,15 @@
 				￥<%= @item.price %>
 			</p>
 			<p style="border: solid 1px;">
-			<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
+				<% if user_signed_in? %>
+					<p>
+						<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+					</p>
+				<% else %>
+					<p>
+						<%= button_to "カートに入れる", new_user_session_path %>
+					</p>
+				<% end %>
 			</p>
 			<div>
 				<div class="favorites" style="display: inline-block; ">
@@ -46,9 +54,11 @@
 					<% end %>
 				</div>
 				<div class="reviews" style="display: inline-block;">
-						<%= link_to users_item_reviews_path(@item.id) do %>
+<!-- エラー中にて保留　
+	<%= link_to users_item_reviews_path(@item.id) do %>
 							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 						<% end %>
+-->
 						<p style="display: inline-block;"><%= @item.reviews.count %></p>
 				</div>
 			</div>
@@ -74,12 +84,14 @@
 			<h3 style="display: inline-block;">レビュー</h3>
 			<ul style="display: inline-block;">
 				<li style="float: left;">
-					　<!--保留 -->
-					<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
+<!-- エラー中にて保留 
+	<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
+-->
 				</li>
 				<li style="float: left;">
-					<!--保留 -->
-					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>		
+<!--　エラー中にて保留 
+	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+-->
 				</li>
 			</ul>
 		</div>
@@ -107,7 +119,7 @@
 
 
 <% if user_signed_in? %>
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
+<p><%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
 <% end %>
 
 

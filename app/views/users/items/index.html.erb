@@ -20,6 +20,7 @@
 		</div>
 
 		<div class="col-lg-9">
+			<!-- これはハリボテ -->
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
 				<div class="album-left" style="float: left; margin-right: 5px;">
 					<p class="genre" style="border: solid 1px; text-align: center;">genre</p>
@@ -47,8 +48,9 @@
 					</div>
 				</div>
 			</div>
+			<!-- 上記はハリボテ -->
 
-		
+			<!-- 下記は本番用 -->
 			<% @items.each do |item| %>
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
 				<div class="album-left" style="float: left;">
@@ -87,9 +89,11 @@
 							<% end %>
 						</div>
 						<div class="reviews" style="display: inline-block;">
-							<%= link_to users_item_reviews_path(item) do %>
+	<!-- エラー中にて保留 
+			<%= link_to users_item_reviews_path(item) do %>
 							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 							<% end %>
+	-->
 							<p style="display: inline-block;"><%= item.reviews.count %></p>
 						</div>
 					</div>
