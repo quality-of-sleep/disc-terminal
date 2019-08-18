@@ -53,13 +53,13 @@
 						<%= item.genre_id %>
 					</p>
 					<div>
-						<%= link_to users_item_path(users.item.id) do %> 
-						<%= attachment_image_tag item.image_id, :item_image, :fill, 50, 50, format: 'jpeg' %>
+						<%= link_to users_item_path(item.id) do %> 
+						<%= attachment_image_tag item, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
 						<% end %>
 					</div>
 				</div>
 				<div class="album-right">
-					<h4><%= link_to item.name, users_item_path(users.item.id) %></h4>
+					<h4><%= link_to item.name, users_item_path(item.id) %></h4>
 					<p style="text-align: center;"><%= item.artist_id %></p>
 					<div>
 						<p style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;"><%= item.sales_status %></p>
@@ -67,16 +67,16 @@
 					</div>
 					<div>
 						<div class="favorites" style="display: inline-block; margin-right: 13px">
-							<% if @item.favorited_by?(current_user) %>
+							<% if item.favorited_by?(current_user) %>
 							<li>
-								<%= link_to users_item_favorites_path(@item), method: :delete do %>
+								<%= link_to users_item_favorites_path(item), method: :delete do %>
 								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:red;"></i>
 								<% end %>
 								<p style="display: inline-block;"><%= item.favorites.count %></p>
 							</li>
 							<% else %>
 							<li>
-								<%= link_to users_item_favorites_path(@item), method: :post do %>
+								<%= link_to users_item_favorites_path(item), method: :post do %>
 								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:white;"></i>
 								<% end %>
 								<p style="display: inline-block;"><%= item.favorites.count %></p>
@@ -84,7 +84,7 @@
 							<% end %>
 						</div>
 						<div class="reviews" style="display: inline-block;">
-							<% link_to users_item_review do %>
+							<% link_to users_item_review_path(item.id) do %>
 							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
 							<p style="display: inline-block;">
 							<% end %>
@@ -98,21 +98,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

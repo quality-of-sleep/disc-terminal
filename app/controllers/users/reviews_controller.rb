@@ -23,7 +23,7 @@ class Users::ReviewsController < ApplicationController
 		@item = Item.find(params[:id])
 		@user = current.user
 		#特定のitemのreviewすべてを出したい。下記は間違いであると考えられる。
-		@reviews = Review.all		
+		@reviews = @item.review.all		
 	end
 
 	private

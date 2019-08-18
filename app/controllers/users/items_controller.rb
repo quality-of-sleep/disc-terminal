@@ -2,6 +2,7 @@ class Users::ItemsController < ApplicationController
 	PER = 25
 	def index
 		@items = Item.page(params[:page]).per(PER)
+		@user = current_user
 #		@items =Item.all
 	end
 
