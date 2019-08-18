@@ -2,7 +2,14 @@ class Admins::OrdersController < ApplicationController
 	include Users::OrdersHelper
 
 	def index
-		@orders = Order.page(params[:page]).reverse_order
+		# ページング＋ソート＋デフォルト降順
+		@orders = Order.page.order(params[:sort]).reverse_order
+		# 絞り込み分岐
+		if params[:delivery_status].present?
+			@orders = @orders.get_by_delivery_status params[:delivery_status]
+			# 絞り込みパラメータ保持
+			@sort_key = @orders.first.delivery_status
+		end
 	end
 
 	def show
