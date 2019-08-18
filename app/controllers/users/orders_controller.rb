@@ -1,6 +1,5 @@
 class Users::OrdersController < ApplicationController
 	# helper呼び出し
-	# include Users::CartsHelper
 	include Users::OrdersHelper
 
 	def new
@@ -54,6 +53,7 @@ class Users::OrdersController < ApplicationController
 
 	def index
 		@user = User.find(params[:user_id])
+		@orders = @user.orders.page(params[:page]).reverse_order
 	end
 
 	def show
