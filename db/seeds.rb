@@ -17,13 +17,26 @@ end
 
 # テストArtistを生成
 Artist.create!(name: "未定")
+Artist.create!(name: "Amy")
 26.times { |n| Artist.create!(name: "artist-#{n+1}") }
+
 
 # テストLabelを生成
 Label.create!(name: "未定")
+Label.create!(name: "A-music")
 26.times { |n| Label.create!(name: "genre-#{n+1}") }
 
 # テストItemを生成
+Item.create!( genre_id: 7,
+							artist_id: 2,
+							label_id: 3,
+							name: 'Artistic!',
+							price: 2020,
+							sales_status: 0,
+							stock: 99,
+							image_id: 'no_image.jpg'
+						  )
+
 26.times do |n|
 	name = "item-#{n+1}"
 	price = "#{(n+1)*100}"
@@ -68,7 +81,7 @@ end
 # テストReviewを生成
 26.times do |n|
 	title = "title-#{n+1}"
-	body = "body-#{(n+1)+500}"
+	body = "body-#{(n+1)}"*100
 	Review.create!( item_id: "#{n+1}",
 									user_id: "#{n+1}",
 									title: title,
