@@ -49,14 +49,7 @@
 								<p><%= cart.item.artist.name %></p>
 							</div>
 							<div class="text-center" >
-								<!-- 後でenum -->
-								<% if cart.item.sales_status == 1 %>
-									<p class="btn btn-default">売り切れ</p>
-								<% elsif cart.item.sales_status == 2 %>
-									<p class="btn btn-default">準備中</p>
-								<% else %>
-									<p class="btn btn-default">販売中</p>
-								<% end %>
+									<p class="btn btn-default"><%= cart.item.sales_status %></p>
 							</div>
 						</td>
 						<td style="width: 20%;">

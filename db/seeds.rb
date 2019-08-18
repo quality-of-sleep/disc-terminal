@@ -34,7 +34,7 @@ Item.create!( genre_id: 7,
 							price: 2020,
 							sales_status: 0,
 							stock: 99,
-							image_id: 'no_image.jpg'
+							# image_id: 'no_image.jpg'
 						  )
 
 26.times do |n|
