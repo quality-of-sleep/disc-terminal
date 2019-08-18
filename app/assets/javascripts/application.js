@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function() {
 	    heroBottom;
 
 	_window.on('scroll',function(){
-	    heroBottom = $('.hero').height();
+	    heroBottom = $('.hero').outerHeight(true);
 	    if(_window.scrollTop() > heroBottom){
 	        _praiceBox.addClass('fixed');
 	    }
