@@ -1,16 +1,24 @@
 <h1>注文一覧</h1>
 
+
+<%= form_tag admins_orders_path, method: :get do %>
+	<%= select_tag 'delivery_status', options_for_select([["配送準備中",'1'],["配送中",'2'],["配送済",'3'],['キャンセル','4']]), class: "btn btn-default dropdown-toggle" %>
+  <%= submit_tag '絞り込む', class: "btn btn-primary" %>
+ <% end %>
+
+ <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
+
 <div class="col">
 	<table class="table">
 		<thead>
 			<tr>
-				<th>注文日時</th>
-				<th>注文ID</th>
+				<th><%= sortTh('注文日時','created_at') %></th>
+				<th><%= sortTh('注文ID','id') %></th>
 				<th>商品</th>
-				<th>配送先</th>
-				<th>合計金額(税込)</th>
-				<th>配送状況</th>
-				<th>購入者</th>
+				<th><%= sortTh('配送先', 'address') %></th>
+				<th><%= sortTh('合計金額(税込)', 'total_price') %></th>
+				<th><%= sortTh('配送状況', 'delivery_status') %></th>
+				<th><%= sortTh('購入者', 'user_name') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,17 +36,16 @@
 					<td><%= order.address %></td>
 					<td>¥ <%= order.total_price.to_s(:delimited) %></td>
 					<td>
-						<%= form_with model: order, url: admins_order_path(order.id), method: :put, local: true do |form|%>
+						<%= form_with model: order, url: admins_order_path(order.id), method: :patch, local: true do |f|%>
 						<div>
-							<%= form.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
+							<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
 						</div>
 						<div>
-							<%=form.submit "変更", class: "btn btn-primary" %>
+							<%= f.submit "変更", class: "btn btn-primary" %>
 						</div>
 					<% end %>
 					</td>
 					<td><%= order.user_name %></td>
-
 				</tr>
 			<% end %>
 		</tbody>
