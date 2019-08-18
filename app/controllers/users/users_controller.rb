@@ -21,13 +21,13 @@ class Users::UsersController < ApplicationController
   def quit
   	user = User.find(params[:id])
   	user.is_quit = true
-  	user.update(user_params)
+  	user.save
   	redirect_to root_path
   end
 
 	# tori_cart-test(カート機能試すときはコメントアウト外してください)
  	private
  	def user_params
- 		params.require(:user).permit(:email, :last_name, :first_name, :last_name_kana, :first_name_kana, :telephone_number, :postal_code, :address, :payment, :is_quit)
+ 		params.require(:user).permit(:email, :last_name, :first_name, :last_name_kana, :first_name_kana, :telephone_number, :postal_code, :address, :payment, :is_quit, delivery_address: [:recipient, :postal_code, :details])
  	end
 end

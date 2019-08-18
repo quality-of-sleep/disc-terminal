@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   		resources :orders, only:[:index, :create, :show]
   	end
   	get '/users/:id/withdrawal', to: 'users#withdrawal'
-  	patch '/users/:id', to: 'users#quit'
+  	patch '/users/:id/withdrawal', to: 'users#quit'
   		resources :items, only:[:show] do
 	  		resources :favorites, only:[:create, :destroy]
 	  		resources :reviews, except:[:index]
