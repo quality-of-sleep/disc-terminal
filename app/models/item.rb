@@ -2,9 +2,12 @@ class Item < ApplicationRecord
   belongs_to :artist
   belongs_to :genre
   belongs_to :label
-	def favorited_by?(user)
-          favorites.where(user_id: user.id).exists?
+  has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  def favorited_by?(user)
+          favorites.where(user_id: user).exists?
   end
+
   has_many :discs, inverse_of: :item
   accepts_nested_attributes_for :discs, allow_destroy: true
 
