@@ -8,7 +8,7 @@ class Item < ApplicationRecord
           favorites.where(user_id: user).exists?
   end
 
-
+  has_many :discs
 
   # 一つの商品は複数のカートに入れられる
   has_many :carts

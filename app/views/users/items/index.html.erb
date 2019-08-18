@@ -29,6 +29,7 @@
 				</div>
 
 				<div class="album-right" style="float: left;">
+					<p>item.name</p>
 					<p style="text-align: center;">item.artist</p>
 					<div>
 						<p style="border:solid 1px; border-radius: 5px; display: inline-block;">status</p>
@@ -86,7 +87,7 @@
 							<% end %>
 						</div>
 						<div class="reviews" style="display: inline-block;">
-							<%= link_to users_item_reviews_path(item.id) do %>
+							<%= link_to users_item_reviews_path(item) do %>
 							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 							<% end %>
 							<p style="display: inline-block;"><%= item.reviews.count %></p>
@@ -99,26 +100,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
