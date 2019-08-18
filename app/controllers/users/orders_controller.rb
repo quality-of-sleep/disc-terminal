@@ -5,6 +5,7 @@ class Users::OrdersController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
+		@delivery_address = DeliveryAddress.new
 
 		# 配送料, 割引
 		@carriage = 500
@@ -18,6 +19,7 @@ class Users::OrdersController < ApplicationController
 	end
 
 	def create
+		binding.pry
 		user = current_user
 		order = user.orders.new(order_params)
 		# 配送先登録
