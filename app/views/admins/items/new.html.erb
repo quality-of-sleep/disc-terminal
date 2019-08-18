@@ -1,30 +1,65 @@
 <div class="row new-item">
-	<div class="col-md-8 col-md-offset-2">
-		<%= form_for @item, url: admins_items_path do |f| %> <!--prams[:item][:x]に-->
-			<%= f.label :name, "商品名" %>
-			<%= f.text_field :name %>
-			<%= f.label :artist, 'アーティスト' %>
-			<%= f.select 'artist',
-				 options_from_collection_for_select(Artist.all, :id, :name),
-				 nclude_blank: "アーティスト" %><!--prams[:item][:x]に?-->
-			<%= f.label :genre, 'ジャンル' %>
-			<%= f.select 'genre',
-				 options_from_collection_for_select(Genre.all, :id, :name),
-				 nclude_blank: "ジャンル" %>
-			<%= f.label :label, 'レーベル' %>
-			<%= f.select 'label',
-				 options_from_collection_for_select(Label.all, :id, :name),
-				 nclude_blank: "レーベル" %>
+	<div class="col-md-8 col-md-offset-2 form-group">
+		<h1>新規商品追加フォーム</h1>
+		<p class="alert alert-danger">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、新規登録にチェックを入れてください。</p>
+		<%= form_for [:admins, @item] do |item| %>
+			<div class="field">
+				<%= item.label :name, "商品名" %>
+				<%= item.text_field :name %>
+			</div>
+			<div class="field">
+				<!-- selectから選んだ場合は params[:item][:artist_id]に値を渡す -->
+				<div><%= item.label :artist, 'アーティスト' %></div>
+				<%= item.select 'artist_id',
+					 options_from_collection_for_select(Artist.all, :id, :name),
+					 include_blank: 'アーティスト' %>
+				<!-- テキストボックスに入力した場合は params[:artist][:name]に値を渡す -->
+				<%= check_box_tag :artist? %>
+				<%= label_tag :artist?, "新規登録" %>
+				<%= text_field_tag "artist[name]", "#{@item.artist.name}" %>
+			</div>
+			<div class="field">
+				<div><%= item.label :genre, 'ジャンル' %></div>
+				<%= item.select 'genre_id',
+					 options_from_collection_for_select(Genre.all, :id, :name),
+					 include_blank: "ジャンル" %>
+				<%= check_box_tag :genre? %>
+				<%= label_tag :genre?, "新規登録" %>
+				<%= text_field_tag "genre[name]", "#{@item.genre.name}" %>
+			</div>
+			<div class="field">
+				<div><%= item.label :label, 'レーベル' %></div>
+				<%= item.select 'label_id',
+					 options_from_collection_for_select(Label.all, :id, :name),
+					 include_blank: "レーベル" %>
+				<%= check_box_tag :label? %>
+				<%= label_tag :label?, "新規登録" %>
+				<%= text_field_tag "label[name]","#{@item.label.name}" %>
+			</div>
 
-			<%= f.label :price, '税込価格' %>
-			<%= f.text_field :price, placeholder:'半角数字' %>
-			<%= f.label :stock, '在庫数' %>
-			<%= f.text_field :stock, placeholder:'半角数字' %>
-			<%= f.label :image, 'ジャケット画像' %>
-			<%= f.attachment_field :image %>
+			<%= render 'form',:f => item %>
 
-			<%= f.submit "登録", class:"btn btn-info" %>
-			<%= link_to 'キャンセル', request.referrer || admins_items_url,class:"btn btn-danger" %>
+			<div class="field under-nested-form">
+				<%= item.label :price, '税込価格' %>
+				<%= item.text_field :price, placeholder:'半角数字' %>
+			</div>
+			<div class="field">
+				<%= item.label :stock, '在庫数' %>
+				<%= item.text_field :stock, placeholder:'半角数字' %>
+			</div>
+			<div class="field">
+			  <%= item.label :sales_status, '販売ステータス' %>
+			  <!--item.rbのenumを使用, 第２引数は(複数形.keys)-->
+			  <%= item.select :sales_status, Item.sales_statuses.keys %>
+			</div>
+			<div class="field">
+				<%= item.label :image, 'ジャケット画像' %>
+				<%= item.attachment_field :image %>
+			</div>
+			<div class="actions">
+				<%= item.submit "登録", data: { confirm: '保存します' }, class:"btn btn-info" %>
+				<%= link_to 'キャンセル', request.referrer || admins_items_url, data: { confirm: '編集内容は破棄されます' }, class:"btn btn-danger" %>
+			</div>
 		<% end %>
 
 	</div>

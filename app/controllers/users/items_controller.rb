@@ -2,7 +2,7 @@ class Users::ItemsController < ApplicationController
 	PER = 25
 	def index
 		@items = Item.page(params[:page]).per(PER)
-#		@items =Item.all
+		@user = current_user
 	end
 
 	def show
@@ -16,4 +16,5 @@ class Users::ItemsController < ApplicationController
  		params.require(:item).permit(:artist_id, :genre_id,	:label_id,
  			:name, :price, :sales_status, :stock)
  	end
+
 end

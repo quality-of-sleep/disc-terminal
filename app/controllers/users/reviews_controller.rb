@@ -1,6 +1,6 @@
 class Users::ReviewsController < ApplicationController
 	def new
-		
+		#p.8.5 新規投稿ページの表示
 	end
 
 	def create
@@ -8,7 +8,7 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def edit
-		
+		#p.9
 	end
 
 	def update
@@ -19,8 +19,15 @@ class Users::ReviewsController < ApplicationController
 		
 	end
 
-	def show
-		
+	def index
+		@item = Item.find(params[:id])
+		@user = current.user
+		#下記で、特定のitemのreviewすべてを出したい。
+		@reviews = @item.review.all		
 	end
 
+	private
+	def review_params
+		params.require(:review).permit(:item_id, :user_id, :title, :body)
+	end
 end
