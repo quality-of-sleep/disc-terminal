@@ -54,11 +54,11 @@
 					<% end %>
 				</div>
 				<div class="reviews" style="display: inline-block;">
-<!-- エラー中にて保留　
+
 	<%= link_to users_item_reviews_path(@item.id) do %>
 							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 						<% end %>
--->
+
 						<p style="display: inline-block;"><%= @item.reviews.count %></p>
 				</div>
 			</div>
@@ -84,14 +84,13 @@
 			<h3 style="display: inline-block;">レビュー</h3>
 			<ul style="display: inline-block;">
 				<li style="float: left;">
-<!-- エラー中にて保留 
+
 	<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
--->
+
 				</li>
 				<li style="float: left;">
-<!--　エラー中にて保留 
+
 	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
--->
 				</li>
 			</ul>
 		</div>

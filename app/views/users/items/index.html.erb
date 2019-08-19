@@ -89,11 +89,9 @@
 							<% end %>
 						</div>
 						<div class="reviews" style="display: inline-block;">
-	<!-- エラー中にて保留 
-			<%= link_to users_item_reviews_path(item) do %>
-							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
+							<%= link_to users_item_reviews_path(item) do %>
+								<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 							<% end %>
-	-->
 							<p style="display: inline-block;"><%= item.reviews.count %></p>
 						</div>
 					</div>
