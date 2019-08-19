@@ -1,5 +1,5 @@
-
-  <div id='discs'>
+<div class='nested-fields'>
+  <div class="fields">
     <%= f.fields_for :discs do |disc| %>
       <%= render 'disc_fields', :f => disc %>
     <% end %>
@@ -7,3 +7,4 @@
       <%= link_to_add_association 'ディスクを追加', f, :discs %>
     </div>
   </div>
+</div>
