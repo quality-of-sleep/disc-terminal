@@ -2,6 +2,14 @@ class Users::OrdersController < ApplicationController
 	# helper呼び出し
 	include Users::OrdersHelper
 
+	def address
+		
+		@delivery_address = DeliveryAddress.new
+	end
+	def add
+		binding.pry
+	end
+
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
@@ -20,8 +28,11 @@ class Users::OrdersController < ApplicationController
 
 	def create
 		binding.pry
+		if params[:address] == "address"
+			@delivery_address = DeliveryAddress.new
+		else
 		user = current_user
-		order = user.orders.new(order_params)
+		order = user.orders.new
 		# 配送先登録
 		d_id = order.address.to_i - 1
 		delivery = user.delivery_addresses[d_id]
@@ -51,6 +62,7 @@ class Users::OrdersController < ApplicationController
 			cart.destroy
 		end
 		redirect_to users_user_order_path(user, order)
+	end
 	end
 
 	def index

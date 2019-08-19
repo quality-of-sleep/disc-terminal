@@ -37,4 +37,3 @@ $(document).on('turbolinks:load', function() {
 
 	_window.trigger('scroll');
 });
-

@@ -5,10 +5,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :users do
   	resources :users ,only:[:show, :edit, :update] do
-  		resources :delivery_addresses, only:[:create, :update, :destroy]
+  		resources :delivery_addresses, only:[:create, :update, :destroy, :new]
   		resources :carts, only:[:create,:index,:update, :destroy]
       get '/orders/buy' => 'orders#new', as: 'orders_new'
-  		resources :orders, only:[:index, :create, :show]
+      # ajax-test
+      # get '/orders/delivery_addresses' => 'orders#address', as: 'orders_address'
+      # post '/orders/delivery_addresses' => 'orders#add', as: 'orders_add'
+  		resources :orders, only:[:index, :create, :show, ]
   	end
   	get '/users/:id/withdrawal', to: 'users#withdrawal'
   	patch '/users/:id', to: 'users#quit'

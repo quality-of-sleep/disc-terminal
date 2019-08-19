@@ -27,14 +27,11 @@
 			</div>
 			<!-- form入るところ -->
 			<div>
-				<%= fields_for(@delivery_address, url: users_user_orders_path(@user), params: 'cart') do |form| %>
-				<%= form.text_field :recipient, class: "col-sm-4" %>
-				<%= form.text_field :postal_code, class: "col-sm-4" %>
-				<%= form.text_field :details, class: "col-sm-4" %>
-				<%= form.text_field :telephone_number, class: "col-sm-4" %>
-				<%= hidden_field_tag params: 'cart' %>
-				<%= f.submit "登録", params: 'cart' %>
-				<% end %>
+				<%= link_to 'address', new_users_user_delivery_address_path, method: :get, name: "address", remote: true %>
+			<div id="add">
+
+			</div>
+
 			</div>
 		</div>
 
