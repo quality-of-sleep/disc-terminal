@@ -1,6 +1,6 @@
 		<p class="alert alert-danger">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、新規登録にチェックを入れてください。</p>
 		<%= form_for [:admins, @item] do |item| %>
-			<%= render "devise/shared/error_messages", resource: @item %>
+			<%= render "error_messages" %>
 
 			<div class="field">
 				<%= item.label :name, "商品名" %>
