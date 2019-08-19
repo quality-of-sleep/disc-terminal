@@ -24,7 +24,9 @@
 						</tbody>
 					<% end %>
 				</table>
-				<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
+				<div class="new_address">
+					<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
+				</div>
 			</div>
 
 			<div class="col-md-12">
@@ -91,10 +93,23 @@
 		</div>
 		</div>
 	</div>
+
 	<div class="col-md-3 price-box">
+
 			<div class="text-center" style="margin-top: 5%; margin-bottom: 15%;">
-				<%= submit_tag "注文を確定する", class: "btn btn-warning", style: "padding: 7px 30%;" %>
+				<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn", style: "padding: 7px 30%;" %>
+				<div class="order_confirmation_container">
+						<p class="btn btn-danger address_writing" style="padding: 7px 16%; display: none">配送先を入力してください</p>
+					<div class="no_link">
+						<p style="text-align: left;">
+							配送先を入力してください。<br>
+							既存の配送先へお届けする場合は<br>
+							キャンセルボタンを押してください。
+						</p>
+					</div>
+				</div>
 			</div>
+
 			<div class="text-center" style="margin-bottom: 10%;">
 				<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price.to_s(:delimited) %></p>
 			</div>

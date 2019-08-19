@@ -2,13 +2,6 @@ class Users::OrdersController < ApplicationController
 	# helper呼び出し
 	include Users::OrdersHelper
 
-	# def address
-	# 	@delivery_address = DeliveryAddress.new
-	# end
-	# def add
-	# 	binding.pry
-	# end
-
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
