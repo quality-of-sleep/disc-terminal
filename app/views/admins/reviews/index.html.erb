@@ -6,7 +6,7 @@
   	<%= form_tag admins_reviews_path, method: :get do %>
   		<%= select_tag 'target',
   		 options_for_select([
-  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id']
+  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id'],['内容','body']
   		 	]) %>
   		<%= text_field_tag :search %> <!-- params[:search]に値が代入される -->
   		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
@@ -39,13 +39,13 @@
 						<th>商品ID</th>
 						<th>商品名</th>
 						<th>ユーザID</th>
-						<th colspan="1"></th>
+						<th colspan="2"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<% @reviews.each do |review| %>
 						<tr>
-							<th style="width:10%;"><%= review.id %></th>
+							<th style="width:8%;"><%= review.id %></th>
 							<td style="width:10%;"><%= review.created_at.strftime('%Y/%m/%d %H:%M') %></td>
 							<td style="width:15%;"><%= review.title %></td>
 							<td class="show-content" style="width:25%;">
@@ -54,10 +54,16 @@
 									<%= review.body %>
 								</div>
 							</td>
-							<td style="width:10%;"><%= review.item.id %></td>
+							<td style="width:8%;"><%= review.item.id %></td>
 							<td style="width:15%;"><%= review.item.name %></td>
-							<td style="width:10%;"><%= review.user.id %></td>
+							<td style="width:8%;"><%= review.user.id %></td>
 							<td style="width:5%;">
+								<%= link_to '編集', admins_review_path(review),
+							 		method: :patch,
+							 		data:{ confirm: "内容を全て削除し、「管理者により削除されました」に変更します"},
+									class:"btn btn-warning" %>
+							</td>
+							<td style="width:6%;">
 								<%= link_to '削除', admins_review_path(review),
 							 		method: :delete,
 							 		data:{ confirm: "本当に削除しますか？"},

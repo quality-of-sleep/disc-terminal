@@ -33,14 +33,14 @@
 
 .edit-item .field{
 	margin-bottom: 30px;
+	position: relative;
 }
 
-.field select{
-	margin-right: 5%;
+.new-item input[type="checkbox"]{
+	margin-left: 9%;
 }
-
-.new-artist{
-	margin: 0 0 0 auto;
+.edit-item input[type="checkbox"]{
+	margin-left: 9%;
 }
 
 #item_name{
@@ -53,6 +53,8 @@
 
 #artist_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 #item_genre_id{
@@ -61,6 +63,8 @@
 
 #genre_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 #item_label_id{
@@ -69,6 +73,8 @@
 
 #label_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 li input[type=text]{
@@ -77,6 +83,15 @@ li input[type=text]{
 
 .under-nested-form{
 	margin-top: 30px;
+	text-align: right;
+	position: relative;
+}
+
+.img{
+	position: absolute;
+	text-align: left;
+	left: 0;
+	top: 0;
 }
 
 #item_price{
@@ -91,14 +106,22 @@ li input[type=text]{
 	width: 20%;
 }
 
+.actions {
+	margin: 100px auto;
+	position: relative;
+	height: fit-content;
+}
+
 .actions .btn{
 	width: 40%;
-	margin-bottom: 40px;
 }
 
-.actions .btn:last-child{
-	margin-left: 15%;
+.actions .btn-info{
+	position: absolute;
+	left: 5%;
 }
 
-
-
+.actions .btn-danger{
+	position: absolute;
+	right: 5%;
+}
