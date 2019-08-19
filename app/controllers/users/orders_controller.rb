@@ -2,18 +2,16 @@ class Users::OrdersController < ApplicationController
 	# helper呼び出し
 	include Users::OrdersHelper
 
-	def address
-		
-		@delivery_address = DeliveryAddress.new
-	end
-	def add
-		binding.pry
-	end
+	# def address
+	# 	@delivery_address = DeliveryAddress.new
+	# end
+	# def add
+	# 	binding.pry
+	# end
 
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
-		@delivery_address = DeliveryAddress.new
 
 		# 配送料, 割引
 		@carriage = 500
@@ -27,42 +25,48 @@ class Users::OrdersController < ApplicationController
 	end
 
 	def create
-		binding.pry
-		if params[:address] == "address"
-			@delivery_address = DeliveryAddress.new
+		if params[:commit] == "登録"
+			user = current_user
+			new_addresses = user.delivery_addresses.new(delivery_address_params)
+			new_addresses.recipient = params[:order][:user_name]
+			new_addresses.postal_code = params[:order][:postal_code]
+			new_addresses.details = params[:order][:address]
+			new_addresses.telephone_number = params[:order][:telephone_number]
+			new_addresses.save
+			redirect_back(fallback_location: root_url)
 		else
-		user = current_user
-		order = user.orders.new
-		# 配送先登録
-		d_id = order.address.to_i - 1
-		delivery = user.delivery_addresses[d_id]
-		order.user_name = delivery.recipient
-		order.postal_code = delivery.postal_code
-		order.address = delivery.details
-		order.telephone_number = delivery.telephone_number
-		# 計算
-		# 配送料, 割引
-		carriage = 500
-		# 小計Helper
-		price = price_reckoning(user.carts)             # 税別金額
-		order.tax = tax(price)                          # 消費税helper
-		order.subtotal_price = on_tax_price(price)      # 小計
-		order.total_price = total_price(price,carriage) # 合計金額（税込
-		order.carriage = carriage                       # 配送料
-		order.save
+			user = current_user
+			order = user.orders.new
+			# 配送先登録
+			d_id = order.address.to_i - 1
+			delivery = user.delivery_addresses[d_id]
+			order.user_name = delivery.recipient
+			order.postal_code = delivery.postal_code
+			order.address = delivery.details
+			order.telephone_number = delivery.telephone_number
+			# 計算
+			# 配送料, 割引
+			carriage = 500
+			# 小計Helper
+			price = price_reckoning(user.carts)             # 税別金額
+			order.tax = tax(price)                          # 消費税helper
+			order.subtotal_price = on_tax_price(price)      # 小計
+			order.total_price = total_price(price,carriage) # 合計金額（税込
+			order.carriage = carriage                       # 配送料
+			order.save
 
-		user.carts.each do |cart|
-			order_details = order.order_details.new
-			order_details.item_id = cart.item_id
-			order_details.item_name = cart.item.name
-			order_details.artist = cart.item.artist.name
-			order_details.price = cart.item.price
-			order_details.amount = cart.amount
-			order_details.save
-			cart.destroy
-		end
+			user.carts.each do |cart|
+				order_details = order.order_details.new
+				order_details.item_id = cart.item_id
+				order_details.item_name = cart.item.name
+				order_details.artist = cart.item.artist.name
+				order_details.price = cart.item.price
+				order_details.amount = cart.amount
+				order_details.save
+				cart.destroy
+			end
 		redirect_to users_user_order_path(user, order)
-	end
+		end
 	end
 
 	def index

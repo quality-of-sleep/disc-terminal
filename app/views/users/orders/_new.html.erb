@@ -1,0 +1,38 @@
+<%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
+	<div class="col-md-12">
+
+		<div class="row">
+			<div class="col-md-3">
+				<%= f.label "受取人" %>
+				<%= f.text_field :user_name, placeholder: "フルネーム：", class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-2">
+				<%= f.label "〒郵便番号" %>
+				<%= f.text_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-6">
+				<%= f.label "配送先住所" %>
+				<%= f.text_area :address, placeholder: "都道府県から：", class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-3">
+				<%= f.label "配送先電話番号" %>
+				<%= f.text_field :telephone_number, placeholder: "ハイフン無し：", class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<%= submit_tag "登録", class: "btn btn-primary btn-block" %>
+			</div>
+		</div>
+	</div>
+<% end %>

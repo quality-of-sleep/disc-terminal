@@ -7,13 +7,13 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th></th>
+							<th style="width: 80%;"></th>
 						</tr>
 					</thead>
 					<% @user.delivery_addresses.each do |d| %>
 						<tbody class="hero">
 							<tr>
-								<td class="text-center" ><label style="margin-top: 45%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
+								<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
 								<td>
 									<p><%= d.recipient %></p>
 									<p><%= d.postal_code %></p>
@@ -24,14 +24,11 @@
 						</tbody>
 					<% end %>
 				</table>
-			</div>
-			<!-- form入るところ -->
-			<div>
-				<%= link_to 'address', new_users_user_delivery_address_path, method: :get, name: "address", remote: true %>
-			<div id="add">
-
+				<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
 			</div>
 
+			<div class="col-md-12">
+				<div id="add"></div>
 			</div>
 		</div>
 
@@ -45,7 +42,7 @@
 				</ul>
 			</div>
 			<div class="col-md-4">
-				<p class="btn btn-info active disabled" >カード情報登録</p>
+				<p class="btn btn-info disabled" >カード情報登録</p>
 			</div>
 		</div>
 
@@ -96,7 +93,7 @@
 	</div>
 	<div class="col-md-3 price-box">
 			<div class="text-center" style="margin-top: 5%; margin-bottom: 15%;">
-				<%= f.submit "注文を確定する", class: "btn btn-warning", style: "padding: 7px 30%;" %>
+				<%= submit_tag "注文を確定する", class: "btn btn-warning", style: "padding: 7px 30%;" %>
 			</div>
 			<div class="text-center" style="margin-bottom: 10%;">
 				<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price.to_s(:delimited) %></p>
