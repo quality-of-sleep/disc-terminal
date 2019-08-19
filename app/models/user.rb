@@ -18,7 +18,8 @@ class User < ApplicationRecord
   # 一人のユーザーは複数の注文履歴を持てる
   has_many :orders, dependent: :destroy
   has_many :delivery_addresses, dependent: :destroy
-
+  accepts_nested_attributes_for :delivery_addresses
   has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+
 end
