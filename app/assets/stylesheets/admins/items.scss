@@ -9,37 +9,21 @@
   clear: both;
 }
 
-.new-item h1{
+.item-page h1{
 	margin-bottom: 30px;
 	margin-top: 40px;
 }
 
-.edit-item h1{
-	margin-bottom: 30px;
-	margin-top: 40px;
-}
-
-.new-item p{
+.item-page p{
 	margin-bottom: 20px;
 }
 
-.edit-item p{
-	margin-bottom: 20px;
-}
-
-.new-item .field{
-	margin-bottom: 30px;
-}
-
-.edit-item .field{
+.item-page .field{
 	margin-bottom: 30px;
 	position: relative;
 }
 
-.new-item input[type="checkbox"]{
-	margin-left: 9%;
-}
-.edit-item input[type="checkbox"]{
+.item-page input[type="checkbox"]{
 	margin-left: 9%;
 }
 
@@ -112,16 +96,16 @@ li input[type=text]{
 	height: fit-content;
 }
 
-.actions .btn{
+.item-page .actions .btn{
 	width: 40%;
 }
 
-.actions .btn-info{
+.item-page .actions .btn-info{
 	position: absolute;
 	left: 5%;
 }
 
-.actions .btn-danger{
+.item-page .actions .btn-danger{
 	position: absolute;
 	right: 5%;
 }

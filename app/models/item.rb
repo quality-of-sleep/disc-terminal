@@ -17,4 +17,15 @@ class Item < ApplicationRecord
   attachment :image
 
   enum sales_status:{ 編集中: 0, 在庫なし: 1, 販売停止中: 2, 販売中: 3 }
+
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :sales_status, presence: true
+  validates :name, presence: true
+  validates :name, presence: true
+  validates :stock, presence: true
 end
+
+# before action 
+  #css new-item 
+# flash.now
