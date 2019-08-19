@@ -3,7 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .new-item h1{
+	margin-bottom: 30px;
+	margin-top: 40px;
+}
+
+.edit-item h1{
 	margin-bottom: 30px;
 	margin-top: 40px;
 }
@@ -12,7 +23,15 @@
 	margin-bottom: 20px;
 }
 
+.edit-item p{
+	margin-bottom: 20px;
+}
+
 .new-item .field{
+	margin-bottom: 30px;
+}
+
+.edit-item .field{
 	margin-bottom: 30px;
 }
 
