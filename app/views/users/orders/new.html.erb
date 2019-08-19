@@ -10,8 +10,17 @@
 							<th style="width: 80%;"></th>
 						</tr>
 					</thead>
-					<% @user.delivery_addresses.each do |d| %>
-						<tbody class="hero">
+					<tbody class="hero">
+						<tr>
+							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, flag: 'current_address' , class: "radio_button" %> </label></td>
+							<td>
+								<p><%= current_user.last_name + current_user.first_name %></p>
+								<p><%= current_user.postal_code %></p>
+								<p><%= current_user.address %></p>
+								<p><%= current_user.telephone_number %></p>
+							</td>
+						</tr>
+						<% @user.delivery_addresses.each do |d| %>
 							<tr>
 								<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
 								<td>
@@ -21,8 +30,8 @@
 									<p><%= d.telephone_number %></p>
 								</td>
 							</tr>
-						</tbody>
-					<% end %>
+						<% end %>
+					</tbody>
 				</table>
 				<div class="new_address">
 					<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>

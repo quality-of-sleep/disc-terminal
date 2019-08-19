@@ -20,7 +20,7 @@ class Users::OrdersController < ApplicationController
 	def create
 		if params[:commit] == "登録"
 			user = current_user
-			new_addresses = user.delivery_addresses.new(delivery_address_params)
+			new_addresses = user.delivery_addresses.new
 			new_addresses.recipient = params[:order][:user_name]
 			new_addresses.postal_code = params[:order][:postal_code]
 			new_addresses.details = params[:order][:address]
@@ -30,13 +30,22 @@ class Users::OrdersController < ApplicationController
 		else
 			user = current_user
 			order = user.orders.new
-			# 配送先登録
-			d_id = order.address.to_i - 1
-			delivery = user.delivery_addresses[d_id]
-			order.user_name = delivery.recipient
-			order.postal_code = delivery.postal_code
-			order.address = delivery.details
-			order.telephone_number = delivery.telephone_number
+			# 現住所はflagを持ってくるのでその有無で配送先を分岐
+			if params[:order][:address][2..5] != "flag"
+				# 配送先登録
+				d_id = params[:order][:address].to_i
+				d_id -= 1
+				delivery = user.delivery_addresses[d_id]
+				order.user_name = delivery.recipient
+				order.postal_code = delivery.postal_code
+				order.address = delivery.details
+				order.telephone_number = delivery.telephone_number
+			else
+				order.user_name  = user.last_name + user.first_name
+				order.postal_code = user.postal_code
+				order.address = user.address
+				order.telephone_number = user.telephone_number
+			end
 			# 計算
 			# 配送料, 割引
 			carriage = 500
@@ -59,6 +68,7 @@ class Users::OrdersController < ApplicationController
 				cart.destroy
 			end
 		redirect_to users_user_order_path(user, order)
+		# redirect_back(fallback_location: root_url)
 		end
 	end
 
