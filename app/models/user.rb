@@ -22,4 +22,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :delivery_addresses, allow_destroy: true
   has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :admin_comments, dependent: :destroy
+  accepts_nested_attributes_for :admin_comments, allow_destroy: true
 end
