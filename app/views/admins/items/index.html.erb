@@ -1,37 +1,40 @@
-<div class="row arrange-index">
-	<div class="col-md-2">
-		<%= link_to '新規商品の追加', new_admins_item_path, class:"btn btn-success "%>
-  </div>
-  <div class="col-md-7 search-area clearfix">
-  	<%= form_tag admins_items_path, method: :get do %>
-  		<!--options_from_collection_for_select
-  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
-			<%= select_tag 'artist',
-			 options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト",style:"width: 45%" %>
-		 	<%= select_tag 'genre',
-			 options_from_collection_for_select(@genres, :id, :name), include_blank: "ジャンル" ,style:"width: 45%" %>
+<div class="row arrange-index item-page">
+	<div class="item-header">
+		<div class="col-md-2">
+			<h1 class="page-title">商品一覧</h1>
+	  </div>
+	  <div class="col-md-6 search-area clearfix">
+	  	<%= form_tag admins_items_path, method: :get do %>
+	  		<!--options_from_collection_for_select
+	  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
+				<%= select_tag 'artist',
+				 options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト",style:"width: 45%" %>
+			 	<%= select_tag 'genre',
+				 options_from_collection_for_select(@genres, :id, :name), include_blank: "ジャンル" ,style:"width: 45%" %>
 
-  		<%= text_field_tag :search,"",placeholder: '商品名で検索' %>
-  		<%= submit_tag '検索', name: nil, class:"btn btn-info",
-  		style:"width: 20%" %>
-  	<% end %>
-  </div>
-
-  <div class="col-md-3 sort-area clearfix">
-  	<%= form_tag admins_items_path, method: :get do %>
-  		<%= select_tag 'key',
-  		 options_for_select([
-				["商品ID",'id'],["商品名",'name'],['在庫数','stock']
-  		 	]) %>
-  		<%= select_tag 'direction',
-  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
-  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
-  	<% end %>
-  </div>
+	  		<%= text_field_tag :search,"",placeholder: '商品名で検索' %>
+	  		<%= submit_tag '検索', name: nil, class:"btn btn-info",
+	  		style:"width: 20%" %>
+	  	<% end %>
+	  </div>
+	  <div class="col-md-4">
+	  	<div  class="sort-area clearfix">
+		  	<%= form_tag admins_items_path, method: :get do %>
+		  		<%= select_tag 'key',
+		  		 options_for_select([
+						["商品ID",'id'],["商品名",'name'],['在庫数','stock']
+		  		 	]) %>
+		  		<%= select_tag 'direction',
+		  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+		  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+		  	<% end %>
+		  </div>
+	  	<%= link_to '新規商品の追加', new_admins_item_path, class:"btn btn-success "%>
+	  </div>
   </div>
 </div>
 <div class="row review-index">
-  <div class="col-md-10 col-md-offset-1 ">
+  <div class="col-md-12">
   	<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -46,7 +49,7 @@
 				<tbody>
 					<% @items.each do |item| %>
 						<tr>
-							<th style="width:10%;">
+							<th style="width:7%;">
 								<%= link_to item.id, admins_item_path(item) %>
 							</th>
 							<td style="width:45%;">
@@ -54,7 +57,7 @@
 							</td>
 							<td style="width:20%;"><%= item.artist.name %></td>
 							<td style="width:20%;"><%= item.genre.name%></td>
-							<td style="width:5%;"><%= item.stock %></td>
+							<td style="width:8%;"><%= item.stock %></td>
 						</tr>
 					<% end %>
 				</tbody>

@@ -1,33 +1,35 @@
-<div class="row arrange-index">
-	<div class="col-md-4">
-  </div>
-  <div class="col-md-5 search-area clearfix">
-  	<!-- データは変更しないのでform_tagを使用 -->
-  	<%= form_tag admins_reviews_path, method: :get do %>
-  		<%= select_tag 'target',
-  		 options_for_select([
-  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id'],['内容','body']
-  		 	]) %>
-  		<%= text_field_tag :search %> <!-- params[:search]に値が代入される -->
-  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
-  	<% end %>
-  </div>
+<div class="row arrange-index review-page">
+	<div class="review-header">
+		<div class="col-md-3">
+			<h1 class="page-title">レビュー一覧</h1>
+	  </div>
+	  <div class="col-md-6 search-area clearfix">
+	  	<!-- データは変更しないのでform_tagを使用 -->
+	  	<%= form_tag admins_reviews_path, method: :get do %>
+	  		<%= select_tag 'target',
+	  		 options_for_select([
+	  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id'],['内容','body']
+	  		 	]) %>
+	  		<%= text_field_tag :search %> <!-- params[:search]に値が代入される -->
+	  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
+	  	<% end %>
+	  </div>
 
-  <div class="col-md-3 sort-area clearfix">
-  	<%= form_tag admins_reviews_path, method: :get do %>
-  		<%= select_tag 'key',
-  		 options_for_select([
-				["投稿ID",'id'],["投稿日時",'created_at'],["タイトル",'title'],['商品ID','item_id'],['ユーザID','user_id']
-  		 	]) %>
-  		<%= select_tag 'direction',
-  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
-  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
-  	<% end %>
-  </div>
-  </div>
+	  <div class="col-md-3 sort-area clearfix">
+	  	<%= form_tag admins_reviews_path, method: :get do %>
+	  		<%= select_tag 'key',
+	  		 options_for_select([
+					["投稿ID",'id'],["投稿日時",'created_at'],["タイトル",'title'],['商品ID','item_id'],['ユーザID','user_id']
+	  		 	]) %>
+	  		<%= select_tag 'direction',
+	  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+	  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+	  	<% end %>
+	  </div>
+	 </div>
 </div>
 <div class="row review-index">
-  <div class="col-md-10 col-md-offset-1 ">
+  <div class="col-md-12">
   	<div class="table-responsive">
 			<table class="table">
 				<thead>

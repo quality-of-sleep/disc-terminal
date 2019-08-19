@@ -1,9 +1,12 @@
 $(document).ready(function () {
   // 全ての子孫要素から取得する.find()
-  $($('.new-item').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
-  $($('.new-item').find('select')).addClass('btn btn-default dropdown-toggle')
-  $($('.edit-item').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
-  $($('.edit-item').find('select')).addClass('btn btn-default dropdown-toggle')
+  $($('.item-page').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
+  $($('.item-page').find('select')).addClass('btn btn-default dropdown-toggle');
+  $($('.review-page').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
+  $($('.review-page').find('select')).addClass('btn btn-default dropdown-toggle');
+
+  // for index-page
+	$('.btn-info').css({'padding':'6px'});
 
 	// 一番目のディスク削除ボタンを隠す(divの直下のclassのみ適用)
 	$("div>.remove_fields").hide();

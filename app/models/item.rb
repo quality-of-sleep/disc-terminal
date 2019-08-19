@@ -27,5 +27,4 @@ class Item < ApplicationRecord
 end
 
 # before action 
-  #css new-item 
 # flash.now
