@@ -26,5 +26,3 @@ class Item < ApplicationRecord
   validates :stock, presence: true
 end
 
-# before action 
-# flash.now
