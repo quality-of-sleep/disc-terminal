@@ -12,7 +12,17 @@
       	  <li>現住所：<%= @user.postal_code %><br><%= @user.address %></li>
 
 
-      	  <li>配送先：</li>
+<!---配送先--->
+<% @user.delivery_addresses.each do |delivery_address|%>
+<li>配送先名：
+  <%= delivery_address.recipient %><br>
+  <%= delivery_address.postal_code %><br>
+  <%= delivery_address.details %><br>
+</li>
+<% end %>
+<!---以上--->
+
+
 
       	  <li>電話番号：<%= @user.telephone_number %></li>
       	  <li>e-mail：<%= @user.email %></li>
