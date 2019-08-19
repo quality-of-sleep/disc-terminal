@@ -10,10 +10,16 @@ class Admins::ReviewsController < ApplicationController
 			@reviews = @reviews.reorder("#{params[:key]} #{params[:direction]}")
 		end
 	end
+	def update
+		review = Review.find(params[:id])
+		review.body = '管理者により削除されました'
+    flash[:warning] = "Review's content changed"
+    redirect_to request.referrer || admins_reviews_url
+	end
 	def destroy
 		review = Review.find(params[:id])
 		review.destroy
-    flash[:success] = "Review deleted"
+    flash[:danger] = "Review deleted"
     redirect_to request.referrer || admins_reviews_url
 	end
 end

@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
-    t.string "item_name"
+    t.string "item"
     t.string "artist"
     t.integer "price"
     t.integer "amount"
@@ -120,12 +120,13 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.string "postal_code"
     t.text "address"
     t.string "telephone_number"
-    t.integer "payment", default: 3, null: false
+    t.string "string"
+    t.integer "payment"
     t.integer "total_price"
     t.integer "subtotal_price"
     t.integer "carriage"
     t.integer "tax"
-    t.integer "delivery_status", default: 1, null: false
+    t.integer "delivery_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -168,7 +169,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.string "telephone_number", null: false
     t.string "postal_code", null: false
     t.text "address", null: false
-    t.integer "payment", default: 3, null: false
+    t.integer "payment", null: false
     t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
