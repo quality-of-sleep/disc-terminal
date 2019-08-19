@@ -33,8 +33,8 @@ class Admins::ItemsController < ApplicationController
 		@item.genre = @genre if params[:genre?] && params[:genre][:name]
 		@item.label = @label if params[:label?] && params[:label][:name]
 		if @item.save
-			render 'show'
-
+			flash[:success] = '商品を追加しました'
+			render 'new'
 		else
 			redirect_to new_admins_item_url
 		end
@@ -42,8 +42,29 @@ class Admins::ItemsController < ApplicationController
 	def show
 	end
 	def edit
+		@artist = Artist.new
+		@genre = Genre.new
+		@label = Label.new
+		@item = Item.find(params[:id])
+		@discs = @item.discs do|disc|
+			@songs = disc.songs {|song|}
+		end
 	end
 	def update
+		@artist = Artist.new(artist_params)
+		@genre = Genre.new(genre_params)
+		@label = Label.new(label_params)
+		@item = Item.find(params[:id])
+		@item.update(item_params)
+		@item.artist = @artist if params[:artist?] && params[:artist][:name]
+		@item.genre = @genre if params[:genre?] && params[:genre][:name]
+		@item.label = @label if params[:label?] && params[:label][:name]
+		if @item.save
+			flash[:success] = '商品を編集しました'
+			redirect_to [:admins, @item]
+		else
+			render 'edit'
+		end
 	end
 
 	private

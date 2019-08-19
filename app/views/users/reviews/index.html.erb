@@ -1,8 +1,8 @@
 <h2 style="display: inline-block;">
-	<%= @item.name %>へのレビュー
+	"<%= @item.name %>"へのレビュー
 </h2>
 <p style="display: inline-block;">
-	新規投稿する（リンク付き）
+	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
 </p>
 
 <div class="reviews" style="border: solid 1px;">

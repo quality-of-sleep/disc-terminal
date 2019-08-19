@@ -1,6 +1,8 @@
 class Users::ReviewsController < ApplicationController
 	def new
 		#p.8.5 新規投稿ページの表示
+		@item = Item.find(params[:item_id])
+		@review = Review.new
 	end
 
 	def create
