@@ -4,7 +4,8 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #validates :name,
-    	#presence: true,
-    	#length: { minimum: 2,maximum:20}
+  validates :name, presence: true
+  # case_sensitive: false -> Ignore case
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+
 end

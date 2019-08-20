@@ -36,7 +36,7 @@ class Admins::ItemsController < ApplicationController
 			flash[:success] = '商品を追加しました'
 			render 'new'
 		else
-			redirect_to new_admins_item_url
+			render 'new'
 		end
 	end
 	def show
