@@ -1,4 +1,9 @@
 module Users::OrdersHelper
+	# フルネーム
+	def full_name(user)
+		user.last_name + user.first_name
+	end
+
 		# 小計(金額)
 	def price_reckoning(carts)
 		price = 0

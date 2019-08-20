@@ -41,7 +41,7 @@ class Users::OrdersController < ApplicationController
 				order.address = delivery.details
 				order.telephone_number = delivery.telephone_number
 			else
-				order.user_name  = user.last_name + user.first_name
+				order.user_name  = full_name(user)
 				order.postal_code = user.postal_code
 				order.address = user.address
 				order.telephone_number = user.telephone_number
