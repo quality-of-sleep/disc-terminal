@@ -4,15 +4,16 @@ class Admins::ItemsController < ApplicationController
 	def index
 		@artists = Artist.all
 		@genres = Genre.all
-		@items = Item.page(params[:page])
-		if !params[:search].nil? && params[:search].present?
-			@items = @items.search(key: 'name', value: params[:search])
-		end
+ 		@items = Item.page(params[:page])
+		if params[:key].present?
+	 		items = sorted( @items, params[:key],params[:direction] )
+	 		@items = Kaminari.paginate_array(items).page(params[:page]).per(25)
+ 		end
+
+		@items = @items.search(key: 'name', value: params[:search]) if params[:search].present?
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
- 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")
 	end
-
 
 	def new
 		@artist = Artist.new
