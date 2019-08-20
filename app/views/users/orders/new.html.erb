@@ -1,51 +1,65 @@
 <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
 	<div class="col-md-9">
 		<div class="row">
-			<div>
-				<% @user.delivery_addresses.each do |d| %>
-					<table class="table">
-						<tbody>
+			<h4><strong>配送先</strong></h4>
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th style="width: 80%;"></th>
+						</tr>
+					</thead>
+					<tbody class="hero">
+						<tr>
+							<!-- CSSが効きません -->
+							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, flag: 'current_address' %> </label></td>
+							<td>
+								<p><%= current_user.last_name + current_user.first_name %></p>
+								<p><%= current_user.postal_code %></p>
+								<p><%= current_user.address %></p>
+								<p><%= current_user.telephone_number %></p>
+							</td>
+						</tr>
+						<% @user.delivery_addresses.each do |d| %>
 							<tr>
-								<td><label><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
+								<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
 								<td>
-									<%= d.recipient %><br>
-									<%= d.postal_code %><br>
-									<%= d.details %><br>
-									<%= d.telephone_number %>
+									<p><%= d.recipient %></p>
+									<p><%= d.postal_code %></p>
+									<p><%= d.details %></p>
+									<p><%= d.telephone_number %></p>
 								</td>
 							</tr>
-						</tbody>
-					</table>
-				<% end %>
+						<% end %>
+					</tbody>
+				</table>
+				<div class="new_address">
+					<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
+				</div>
 			</div>
-			<!-- form入るところ -->
-			<div>
-				
+
+			<div class="col-md-12">
+				<div id="add"></div>
 			</div>
 		</div>
 
-		<!-- サンプルで２つ作ってます -->
-		<!-- テーブルVER -->
 		<div class="row">
-			<table class="table">
-					<tbody>
-						<tr>
-							<tr><td><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払</label></td></tr>
-							<tr><td><label><%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込</label></td></tr>
-							<tr><td><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></td></tr>
-						</tr>
-					</tbody>
-				</table>
-				<!-- リストVER -->
+			<h4 style="margin-bottom: 20px;"><strong>支払方法</strong></h4>
+			<div class="col-md-4">
 				<ul style="list-style: none; padding-left: 10px;">
 					<li><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払</label></li>
 					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込</label></li>
 					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></li>
 				</ul>
+			</div>
+			<div class="col-md-4">
+				<p class="btn btn-info disabled" >カード情報登録</p>
+			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<tr>
@@ -58,33 +72,29 @@
 				<tbody>
 					<% @user.carts.each do |cart| %>
 						<tr>
-							<td style="width: 200px;">
+							<td style="width: 30%;">
 								<%= link_to users_item_path(cart.item_id) do %>
 									<%= attachment_image_tag cart.item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'150x150' %>
 								<% end %>
 							</td>
-							<td>
-								<p>
+							<td style="width: 35%;">
+								<div class="text-center" style="margin-bottom: 10%;">
 									<%= link_to users_item_path(cart.item_id) do %>
 										<%= cart.item.name %>
 									<% end %>
-								</p>
-								<p><%= cart.item.artist.name %></p>
-								<p class="btn btn-default">
-									<% if cart.item.sales_status == 1 %>
-										販売中止
-									<% elsif cart.item.sales_status == 2 %>
-										売り切れ
-									<% else %>
-										販売中
-									<% end %>
-								</p>
+								</div>
+								<div class="text-center" style="margin-bottom: 10%;">
+									<p><%= cart.item.artist.name %></p>
+								</div>
+								<div class="text-center" >
+									<p class="btn btn-default"><%= cart.item.sales_status %></p>
+								</div>
+							</td>
+							<td style="width: 20%;">
+									<p>¥ <%= cart.item.price.to_s(:delimited) %></p>
 							</td>
 							<td>
-								<p>¥ <%= cart.item.price.to_s(:delimited) %></p>
-							</td>
-							<td>
-									<div><%= cart.amount %> 点</div>
+									<p><%= cart.amount %> 点</p>
 							</td>
 						</tr>
 					<% end %>
@@ -94,12 +104,37 @@
 		</div>
 	</div>
 
-	<div class="col-md-3" style="border: 1px solid #bbb">
-		<p><%= f.submit "注文を確定する", class: "btn btn-warning" %></p>
-		<p>小計 (<%= @total_amount %>点)　　¥<%= @subtotal_price.to_s(:delimited) %></p>
-		<p>配送料　 　¥ <%= @carriage.to_s(:delimited) %></p>
-		<p>割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
-		<p>合計　 　¥<%= @total_price.to_s(:delimited) %></p>
-		<p>(内消費税　 　¥<%= @tax.to_s(:delimited) %>)</p>
-	</div>
+	<div class="col-md-3 price-box">
+
+			<div class="text-center" style="margin-top: 5%; margin-bottom: 15%;">
+				<!-- 販売中以外の商品を持って次に進めない機能　未実装 -->
+				<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn", style: "padding: 7px 30%;" %>
+				<div class="order_confirmation_container">
+						<p class="btn btn-danger address_writing" style="padding: 7px 16%; display: none">配送先を入力してください</p>
+					<div class="no_link">
+						<p style="text-align: left;">
+							配送先を入力してください。<br>
+							既存の配送先へお届けする場合は<br>
+							キャンセルボタンを押してください。
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center" style="margin-bottom: 10%;">
+				<p>小計 (<%= @total_amount %>点)　　¥ <%= @subtotal_price.to_s(:delimited) %></p>
+			</div>
+			<div class="text-center" style="margin-bottom: 10%;">
+				<p>配送料　 　¥ <%= @carriage.to_s(:delimited) %></p>
+			</div>
+			<div class="text-center" style="margin-bottom: 10%;">
+				<p>割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
+			</div>
+			<div class="text-center" style="margin-bottom: 10%;">
+				<p>合計　 　¥ <%= @total_price.to_s(:delimited) %></p>
+			</div>
+			<div class="text-center" style="margin-bottom: 10%;">
+				<p>(内消費税　 　¥ <%= @tax.to_s(:delimited) %>)</p>
+			</div>
+		</div>
 <% end %>
