@@ -8,7 +8,7 @@ class Users::ReviewsController < ApplicationController
 
 	def create
 		review = Review.new(review_params)
-		review.user = current_user
+		review.user_id = current_user.id
 		review.item = Item.find(params[:item_id])
 		review.save
 		@item = Item.find(params[:item_id])
@@ -22,10 +22,10 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def update
-		@review = Review.find(params[:id])
-		@review.user = current_user
-		@review.item = Item.find(params[:item_id])
-		@review.update(params[:id])
+		review = Review.find(params[:id])
+		review.user = current_user
+		review.item = Item.find(params[:item_id])
+		review.update(review_params)
 		@item = Item.find(params[:item_id])
 		render :index
 	end
