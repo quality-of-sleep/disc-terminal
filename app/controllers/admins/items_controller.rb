@@ -42,6 +42,7 @@ class Admins::ItemsController < ApplicationController
 		end
 	end
 	def show
+		
 	end
 	def edit
 		@artist = Artist.new

@@ -38,6 +38,8 @@
 			</div>
 			<div class="under-nested-form">
 				<div class="field">
+					<%= item.label :price, '税込価格' %>
+
 					<%= item.label :price, '税別価格' %>
 					<%= item.text_field :price, placeholder:'半角数字' %>
 				</div>
