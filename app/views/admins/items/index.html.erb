@@ -2,19 +2,23 @@
 	<div class="item-header">
 		<div class="col-md-2">
 			<h1 class="page-title">商品一覧</h1>
+			<%= link_to '新規商品の追加', new_admins_item_path, class:"btn btn-success "%>
 	  </div>
 	  <div class="col-md-6 search-area clearfix">
 	  	<%= form_tag admins_items_path, method: :get do %>
 	  		<!--options_from_collection_for_select
 	  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
 				<%= select_tag 'artist',
-				 options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト",style:"width: 45%" %>
+				 options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト" %>
 			 	<%= select_tag 'genre',
-				 options_from_collection_for_select(@genres, :id, :name), include_blank: "ジャンル" ,style:"width: 45%" %>
+				 options_from_collection_for_select(@genres, :id, :name), include_blank: "ジャンル" %>
+				<%= select_tag 'sales_status',
+		  		 options_for_select([
+						["編集中",'0'],["在庫なし",'1'],['販売停止中','2'],["販売中",'3']
+		  		 	]),include_blank: "ステータス"%>
 
 	  		<%= text_field_tag :search,"",placeholder: '商品名で検索' %>
-	  		<%= submit_tag '検索', name: nil, class:"btn btn-info",
-	  		style:"width: 20%" %>
+	  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %>
 	  	<% end %>
 	  </div>
 	  <div class="col-md-4">
@@ -29,7 +33,6 @@
 		  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
 		  	<% end %>
 		  </div>
-	  	<%= link_to '新規商品の追加', new_admins_item_path, class:"btn btn-success "%>
 	  </div>
   </div>
 </div>
@@ -44,6 +47,7 @@
 						<th>アーティスト</th>
 						<th>ジャンル</th>
 						<th>在庫数</th>
+						<th>ステータス</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,15 +58,17 @@
 							<th style="width:7%;">
 								<%= link_to item.id, admins_item_path(item) %>
 							</th>
-							<td style="width:45%;">
-								<%= link_to item.name, admins_item_path(item) %>
+							<td style="width:40%;">
 								<% if item.sales_status == '編集中' %>
-								<%= 'Stop' %>
+									<%= link_to item.name, admins_item_path(item),style: 'color: red;' %>
+								<% else %>
+									<%= link_to item.name, admins_item_path(item) %>
 								<%end%>
 							</td>
-							<td style="width:20%;"><%= item.artist.name %></td>
-							<td style="width:20%;"><%= item.genre.name%></td>
-							<td style="width:8%;"><%= item.stock %></td>
+							<td style="width:18%;"><%= item.artist.name %></td>
+							<td style="width:18%;"><%= item.genre.name%></td>
+							<td style="width:7%;"><%= item.stock %></td>
+							<td style="width:10%;"><%= item.sales_status %></td>
 						</tr>
 					<% end %>
 				</tbody>

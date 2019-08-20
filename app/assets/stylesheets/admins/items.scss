@@ -11,7 +11,7 @@
 
 .item-page h1{
 	margin-bottom: 30px;
-	margin-top: 40px;
+	margin-top: -0px;
 }
 
 .item-page p{
@@ -44,18 +44,18 @@
 
 .search-area select{
 	float:left;
-	width:15%
+	width:33%
 }
 
 .search-area input[type="text"]{
 	float:left;
-	width:70%;
+	width:80%;
 	margin-top: 5px;
 }
 
 .search-area input[type="submit"]{
 	float:left;
-	width:15%;
+	width:20%;
 	padding: 0;
 	margin-top: 5px;
 }
@@ -66,13 +66,13 @@
 
 .item-header .sort-area select{
 	float:left;
-	width:33%;
+	width:50%;
 }
 
 .item-header .btn-info{
 	float:left;
-	width:33%;
-	padding: 0;
+	width:100%;
+	margin-top: 5px;
 }
 
 .item-header .btn-success{
