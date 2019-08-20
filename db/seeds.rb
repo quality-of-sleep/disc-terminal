@@ -109,3 +109,14 @@ end
 									body: body,
 							  )
 end
+
+# テストOrderを生成
+User.all.each do |user|
+	Order.create!( user_id: rand(1..User.all.length),
+								 user_name: user.delivery_addresses.recipient,
+								 postal_code: user.delivery_addresses.recipient,
+							 	 address: user.delivery_addresses.details,
+							 	 telephone_number: user.delivery_addresses.telephone_number,
+							 	 subtotal_price: 
+							  )
+end
