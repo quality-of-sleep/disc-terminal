@@ -35,10 +35,9 @@
 				<thead>
 					<tr>
 						<th>ユーザID</th>
-						<th>ユーザ姓</th>
-						<th>ユーザ名</th>
-						<th>ユーザ姓カナ</th>
-						<th>ユーザ名カナ</th>
+						<th>ステータス</th>
+						<th>ユーザ</th>
+						<th>ユーザ(カナ)</th>
 						<th>電話番号</th>
 						<th>メールアドレス</th>
 					</tr>
@@ -49,13 +48,10 @@
 							<th style="width:10%;">
 								<%= link_to user.id, admins_user_path(user) %>
 							</th>
+							<td style="width:10%;"><%= user.is_quit %></td>
 							<td style="width:10%;">
-								<%= link_to user.last_name, admins_user_path(user) %></td>
-
-							<td style="width:10%;"><%= user.first_name %></td>
-							<td style="width:10%;"><%= user.last_name_kana %></td>
-							<td style="width:10%;"><%= user.first_name_kana %></td>
-
+								<%= link_to user.last_name, admins_user_path(user) %><%= link_to user.first_name, admins_user_path(user) %></td>
+							<td style="width:10%;"><%= link_to user.last_name_kana, admins_user_path(user) %><%= link_to user.first_name_kana, admins_user_path(user) %></td>
 							<td style="width:10%;"><%= user.telephone_number %></td>
 							<td style="width:10%;"><%= user.email %></td>
 						</tr>
