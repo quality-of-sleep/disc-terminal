@@ -15,7 +15,12 @@
 				<p style="display: inline-block;">day</p> 
 			</div>
 			<p><%= review.body %></p>
-
+			<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+				<%= link_to '編集', edit_users_item_review_path(@item, review) %> 
+			</span>
+			<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+				<%= link_to '削除', users_item_reviews_path(@item) %> 
+			</span>
 		</div>
 	<% end %>
 

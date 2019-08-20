@@ -17,10 +17,17 @@ class Users::ReviewsController < ApplicationController
 
 	def edit
 		#p.9
+		@review = Review.find(params[:id])
+		@item = Item.find(params[:item_id])
 	end
 
 	def update
-		
+		@review = Review.find(params[:id])
+		@review.user = current_user
+		@review.item = Item.find(params[:item_id])
+		@review.update(params[:id])
+		@item = Item.find(params[:item_id])
+		render :index
 	end
 
 	def destroy
@@ -38,9 +45,9 @@ class Users::ReviewsController < ApplicationController
 	def review_params
 		params.require(:review).permit(
 			:item_id,
-		#	:user_id
-			 :title, 
-			 :body
-			 )
+		#	:user_id,
+			:title, 
+			:body
+			)
 	end
 end

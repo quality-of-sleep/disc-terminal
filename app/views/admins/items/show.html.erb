@@ -1,1 +1,82 @@
-show.html.erb
+<!-- リンクと変数は未編集 -->
+
+<h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
+<div class="container">
+	<div class="album" style="width: 90%; border: solid 1px;">
+		<div class="album-left" style="display: inline-block;">
+			<div class="album_image">
+				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 350, 350, format: 'jpeg' %>
+			</div>
+		</div>
+		<div class="album-right" style="display: inline-block;padding: 30px;">
+			<h3><%= @item.name %></h3>
+			<p style="display: inline-block;">
+				<%= @item.artist_id %>	
+			</p>
+			<p style="display: inline-block; border: solid 1px;">
+				<%= @item.genre_id %>
+			</p>
+			<p><%= @item.label_id %></p>
+			<div class="status" style="display: inline-block;">
+				<p class="sales_status" style="border:solid 1px; display: inline-block;">
+					<%= @item.sales_status %>
+				</p>
+				<p>残り<% @item.stock %>点</p>
+			</div>
+			<p style="display: inline-block;">
+				￥<%= @item.price %>
+			</p>
+			<div>
+				<div class="favorites" style="display: inline-block; ">
+					<% if @item.favorited_by?(current_user) %>
+						<li>
+							<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
+							<% end %>
+							<p style="display: inline-block;"><%= @item.favorites.count %></p>
+						</li>
+					<% else %>
+						<li>
+							<%= link_to users_item_favorites_path(@item), method: :post do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+							<% end %>
+							<p style="display: inline-block;"><%= @item.favorites.count %></p>
+						</li>
+					<% end %>
+				</div>
+				<div class="reviews" style="display: inline-block;">
+						<%= link_to users_item_reviews_path(@item.id) do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
+						<% end %>
+						<p style="display: inline-block;"><%= @item.reviews.count %></p>
+				</div>
+			</div>
+			<div class="item-detail">
+				<h2>収録曲</h2>
+				<% @item.discs.each do |disc| %>
+					<div class="disc" style="display: inline-block;">
+						<p>disc<%= disc.number %></p>
+						<ul class="song-list">
+							<% disc.songs.each do |song| %>
+								<li><%= song.number %>. <%= song.name %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="album-reviews" style="border: solid 1px; width: 90%;">
+		<div class="review-top">
+			<ul style="display: inline-block;">
+				<li style="float: left;">
+					<%= link_to 'レビュー一覧', users_item_reviews_path(@item) %>
+				</li>
+				<li style="float: left;">
+					<%= link_to '編集', new_users_item_review_path(@item) %>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
