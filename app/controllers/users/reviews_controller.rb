@@ -22,10 +22,10 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def index
-		@item = Item.find(params[:id])
-		@user = current.user
-		#下記で、特定のitemのreviewすべてを出したい。
-		@reviews = @item.review.all		
+		@item = Item.find(params[:item_id])
+		@user = current_user
+		#下記で、@item.review.allと何が違う？
+		@reviews = @item.reviews
 	end
 
 	private
