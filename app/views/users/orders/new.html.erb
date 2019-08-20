@@ -12,8 +12,7 @@
 					</thead>
 					<tbody class="hero">
 						<tr>
-							<!-- CSSが効きません -->
-							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, flag: 'current_address' %> </label></td>
+							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, "current_address", checked: "checked", class: "radio_button" %> </label></td>
 							<td>
 								<p><%= current_user.last_name + current_user.first_name %></p>
 								<p><%= current_user.postal_code %></p>
