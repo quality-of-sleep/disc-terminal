@@ -28,11 +28,3 @@ class Item < ApplicationRecord
 
 end
 
-
-
-
-end
-
-# before action 
-# flash.now
-
