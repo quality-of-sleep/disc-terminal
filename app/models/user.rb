@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
+  enum is_quit:{利用中: false, 退会済み: true}
   enum payment:{クレジット支払: 1, 銀行振込: 2, 代金引換: 3}
 
   # 一人のユーザーは複数の商品をカートに入れられる
@@ -21,4 +22,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :delivery_addresses, allow_destroy: true
   has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :admin_comments, dependent: :destroy
+  accepts_nested_attributes_for :admin_comments, allow_destroy: true
 end

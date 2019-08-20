@@ -1,6 +1,14 @@
 class Users::CartsController < ApplicationController
 	# carts_helper呼び出し
 	include Users::CartsHelper
+	before_action :authenticate_user!
+	# URL直入力弾く
+	before_action :ensure_correct_user
+	def ensure_correct_user
+		if current_user.id != params[:id].to_i
+			redirect_to root_path
+		end
+	end
 
 	def index
 		@user = User.find(params[:user_id])
@@ -31,7 +39,6 @@ class Users::CartsController < ApplicationController
 		redirect_to users_user_carts_path(current_user.id)
 	end
 
-	# 詳細設計の漏れ
 	def destroy
 		cart = Cart.find(params[:id])
 		cart.destroy

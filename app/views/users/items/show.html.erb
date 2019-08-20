@@ -1,9 +1,12 @@
+<h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%;">商品詳細</h2>
+
 <h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
+
 <div class="container">
 	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
 			<div class="album_image">
-				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 350, 350, format: 'jpeg' %>
+				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 			</div>
 		</div>
 		<div class="album-right" style="display: inline-block; padding: 30px;">
@@ -112,24 +115,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-<%
-=begin
-%>
-
-
-<% if user_signed_in? %>
-<p><%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-<% end %>
-
-
-<%
-=end
-%>

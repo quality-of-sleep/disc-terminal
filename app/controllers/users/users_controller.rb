@@ -1,4 +1,5 @@
 class Users::UsersController < ApplicationController
+  #before_action :authenticate_user!
 
   def show
   	@user = User.find(params[:id])
@@ -23,7 +24,7 @@ class Users::UsersController < ApplicationController
   	user = User.find(params[:id])
   	user.is_quit = true
   	user.save
-  	redirect_to root_path
+    redirect_to users_logout_path
   end
 
 	# tori_cart-test(カート機能試すときはコメントアウト外してください)

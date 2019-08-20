@@ -1,3 +1,16 @@
 // Place all the styles related to the admins::orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.order_confirmation_container {
+  position: relative;
+}
+.no_link{
+  display: none;
+  background-color: #fff;
+  padding: 1%;
+  border: 1px solid #000;
+  position: absolute;
+  top: 36px;
+  z-index: 100;
+}

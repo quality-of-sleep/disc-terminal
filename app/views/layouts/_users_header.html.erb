@@ -1,47 +1,46 @@
-<div class="navbar navbar-default" style="width: 100%;">
+<div class="navbar navbar-default hero" style="width: 100%;">
   <nav class="container">
-    <div class="container-fluid row">
+    <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand active" href="#" id="top">ディスクターミナル</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li>
-            <%= link_to '商品一覧', root_path %>
-          </li>
-          <li>
-            <%= link_to "カート", users_user_carts_path(current_user) %>
-          </li>
-          <li>
-            <%= link_to 'マイページ', users_user_path(current_user) %>
-          </li>
-          <li>
-            <%= link_to '購入履歴', users_user_orders_path(current_user) %>
-          </li>
-          <li>
-             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          </li>
+            <li>
+              <%= link_to '商品一覧', root_path %>
+            </li>
+            <li>
+              <%= link_to "カート", users_user_carts_path(current_user) %>
+            </li>
+            <li>
+              <%= link_to 'マイページ', users_user_path(current_user) %>
+            </li>
+            <li>
+              <%= link_to '購入履歴', users_user_orders_path(current_user) %>
+            </li>
+            <li>
+               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            </li> 
         <% else %>
-          <li>
-            <%= link_to '商品一覧', root_path %>
-          </li>
-          <li>
-            <%= link_to "カート", new_user_session_path %>
-          </li>
-          <li>
-            <%= link_to "新規登録", new_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_user_session_path %>
-          </li>
+            <li>
+              <%= link_to '商品一覧', root_path %>
+            </li>
+            <li>
+              <%= link_to "カート", new_user_session_path %>
+            </li>
+            <li>
+              <%= link_to "新規登録", new_user_registration_path %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path %>
+            </li>
         <% end %>
       </ul>
-    </div>
-    <div class="row">
-      <div class="col-sm-11"></div>
-      <div class="col-sm-1">
-        <a href="#">search</a>
-      </div>
-    </div>
+        <%= form_tag root_path, method: :get, class: "navbar-form navbar-left" do %>
+          <div class="form-group">
+            <%= text_field_tag "q","", placeholder: "商品名で検索", class: "form-control" %>
+          </div>
+          <%= submit_tag "検索", class: "btn btn-default" %>
+        <% end %>
   </nav>
 </div>
