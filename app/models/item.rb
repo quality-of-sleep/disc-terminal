@@ -21,6 +21,7 @@ class Item < ApplicationRecord
   validates :stock, presence: true
 
 
+
   def favorited_by?(user)
           favorites.where(user_id: user).exists?
   end
@@ -28,4 +29,10 @@ class Item < ApplicationRecord
 end
 
 
+
+
+end
+
+# before action 
+# flash.now
 
