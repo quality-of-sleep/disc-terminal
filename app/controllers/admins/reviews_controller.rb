@@ -12,15 +12,18 @@ class Admins::ReviewsController < ApplicationController
 	end
 	def update
 		review = Review.find(params[:id])
-		review.body = '管理者により削除されました'
-    flash[:warning] = "Review's content changed"
-    redirect_to request.referrer || admins_reviews_url
+		review.title = review.body = '管理者により削除されました'
+		if review.save
+    	flash[:warning] = "レビュー内容を削除しました"
+    	redirect_to request.referrer || admins_reviews_url
+    end
 	end
 	def destroy
 		review = Review.find(params[:id])
-		review.destroy
-    flash[:danger] = "Review deleted"
-    redirect_to request.referrer || admins_reviews_url
+		if review.destroy
+	    flash[:danger] = "レビューを削除しました"
+	    redirect_to request.referrer || admins_reviews_url
+	  end
 	end
 end
 
