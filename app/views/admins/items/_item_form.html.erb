@@ -1,6 +1,6 @@
 		<p class="alert alert-danger">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、新規登録にチェックを入れてください。</p>
 		<%= form_for [:admins, @item] do |item| %>
-			<%= render "devise/shared/error_messages", resource: @item %>
+			<%= render "error_messages" %>
 
 			<div class="field">
 				<%= item.label :name, "商品名" %>
@@ -33,25 +33,30 @@
 				<%= label_tag :label?, "新規登録" %>
 				<%= text_field_tag "label[name]","" %>
 			</div>
-
-			<%= render 'form',:f => item %>
-
-			<div class="field under-nested-form">
-				<%= item.label :price, '税込価格' %>
-				<%= item.text_field :price, placeholder:'半角数字' %>
+			<div>
+				<%= render 'form',:f => item %>
 			</div>
-			<div class="field">
-				<%= item.label :stock, '在庫数' %>
-				<%= item.text_field :stock, placeholder:'半角数字' %>
-			</div>
-			<div class="field">
-			  <%= item.label :sales_status, '販売ステータス' %>
-			  <!--item.rbのenumを使用, 第２引数は(複数形.keys)-->
-			  <%= item.select :sales_status, Item.sales_statuses.keys %>
-			</div>
-			<div class="field">
-				<%= item.label :image, 'ジャケット画像' %>
-				<%= item.attachment_field :image %>
+			<div class="under-nested-form">
+				<div class="field">
+					<%= item.label :price, '税別価格' %>
+					<%= item.text_field :price, placeholder:'半角数字' %>
+				</div>
+				<div class="field">
+					<%= item.label :stock, '在庫数' %>
+					<%= item.text_field :stock, placeholder:'半角数字' %>
+				</div>
+				<div class="field">
+				  <%= item.label :sales_status, '販売ステータス' %>
+				  <!--item.rbのenumを使用, 第２引数は(複数形.keys)-->
+				  <%= item.select :sales_status, Item.sales_statuses.keys %>
+				</div>
+				<div class="img">
+					<div class="field">
+						<%= item.label :image, 'ジャケット画像' %>
+						<%= item.attachment_field :image %>
+						<%= attachment_image_tag @item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'150x150' %>
+					</div>
+				</div>
 			</div>
 			<div class="actions">
 				<%= item.submit "登録", data: { confirm: '保存します' }, class:"btn btn-info" %>
