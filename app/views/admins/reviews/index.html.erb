@@ -1,3 +1,18 @@
+<div class="row arrange-index">
+	<div class="col-md-4">
+  </div>
+  <div class="col-md-5 search-area clearfix">
+  	<!-- データは変更しないのでform_tagを使用 -->
+  	<%= form_tag admins_reviews_path, method: :get do %>
+  		<%= select_tag 'target',
+  		 options_for_select([
+  		 	["投稿ID",'id'],['商品ID','item_id'],['ユーザID','user_id'],['内容','body']
+  		 	]) %>
+  		<%= text_field_tag :search %> <!-- params[:search]に値が代入される -->
+  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
+  	<% end %>
+  </div>
+
 <div class="row arrange-index review-page">
 	<div class="review-header">
 		<div class="col-md-3">
@@ -14,6 +29,7 @@
 	  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %><!-- nil -> URLに表示させない-->
 	  	<% end %>
 	  </div>
+
 
 	  <div class="col-md-3 sort-area clearfix">
 	  	<%= form_tag admins_reviews_path, method: :get do %>
@@ -62,7 +78,11 @@
 							<td style="width:5%;">
 								<%= link_to '編集', admins_review_path(review),
 							 		method: :patch,
+
+							 		data:{ confirm: "内容を全て削除し、「管理者により削除されました」に変更します"},
+
 							 		data:{ confirm: "投稿を全て削除し、「管理者により削除されました」に変更します"},
+
 									class:"btn btn-warning" %>
 							</td>
 							<td style="width:6%;">

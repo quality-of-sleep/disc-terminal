@@ -9,7 +9,7 @@
 				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 			</div>
 		</div>
-		<div class="album-right" style="display: inline-block;padding: 30px;">
+		<div class="album-right" style="display: inline-block; padding: 30px;">
 			<h3><%= @item.name %></h3>
 			<p style="display: inline-block;">
 				<%= @item.artist_id %>	
@@ -40,18 +40,25 @@
 			</p>
 			<div>
 				<div class="favorites" style="display: inline-block; ">
-					<% if @item.favorited_by?(current_user) %>
-						<li>
-							<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
-							<% end %>
-							<p style="display: inline-block;"><%= @item.favorites.count %></p>
-						</li>
+					<% if user_signed_in? %>
+						<% if @item.favorited_by?(current_user) %>
+							<li>
+								<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
+								<% end %>
+								<p style="display: inline-block;"><%= @item.favorites.count %></p>
+							</li>
+						<% else %>
+							<li>
+								<%= link_to users_item_favorites_path(@item), method: :post do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+								<% end %>
+								<p style="display: inline-block;"><%= @item.favorites.count %></p>
+							</li>
+						<% end %>
 					<% else %>
 						<li>
-							<%= link_to users_item_favorites_path(@item), method: :post do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
-							<% end %>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
 							<p style="display: inline-block;"><%= @item.favorites.count %></p>
 						</li>
 					<% end %>
@@ -78,7 +85,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="album-reviews" style="border: solid 1px; width: 90%;">
 		<div class="review-top">
 			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
@@ -87,9 +93,16 @@
 				<li style="float: left;">
 					<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
 				</li>
-				<li style="float: left;">
-					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
-				</li>
+
+				<% if user_signed_in? %>
+					<li style="float: left;">
+						<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+					</li>
+				<% else %>
+					<li style="float: left;">
+						<%= link_to '新規投稿する', new_user_session_path %>
+					</li>
+				<% end %>
 			</ul>
 		</div>
 		<div class="review-list">

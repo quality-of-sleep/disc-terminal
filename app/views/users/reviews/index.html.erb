@@ -1,8 +1,17 @@
+
 <h2 style="display: inline-block;">
 	"<%= @item.name %>"へのレビュー
 </h2>
 <p style="display: inline-block;">
-	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+	<% if user_signed_in? %>
+		<p>
+			<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+		</p>
+	<% else %>
+		<p>
+			<%= link_to '新規投稿する', new_user_session_path %>
+		</p>
+	<% end %>
 </p>
 
 <div class="reviews" style="border: solid 1px;">
@@ -10,25 +19,20 @@
 		<div class="review" style="border-bottom: solid 1px;">
 			<div class="review-top">
 				<h3 style="display: inline-block;"><%= review.title %></h3>
-
 				<!-- 投稿日どう指定しようか？ -->
 				<p style="display: inline-block;">day</p> 
 			</div>
 			<p><%= review.body %></p>
-
+			<% if user_signed_in? %>
+				<p>
+					<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+						<%= link_to '編集', edit_users_item_review_path(@item, review) %> 
+					</span>
+					<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+						<%= link_to '削除', users_item_review_path(@item, review), method: :delete %>
+					</span>
+				</p>
+			<% end %>
 		</div>
 	<% end %>
-
-	<div class="review" style="border-bottom: solid 1px;">
-		<div class="review-top">
-			<h3 style="display: inline-block;"><%%>text.title</h3>
-			<p style="display: inline-block;"><%%>day</p>
-		</div>
-		<p><%%>text.body</p>
-
-		<div class="review-button">
-			<p style="display: inline-block;">編集</p>
-			<p style="display: inline-block;">削除</p>
-		</div>
-	</div>
 </div>
