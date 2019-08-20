@@ -78,8 +78,11 @@
 	<div class="col-md-3 price-box">
 		<ul class="list-group" style="max-width: 400px;">
 			<li class="list-group-item" style="border-bottom: none;">
-				<!-- 販売中以外の商品を持って次に進めない機能　未実装 -->
-				<%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning btn-block" %>
+				<% if sales_status?(@user.carts) == false %>
+					<p class="btn btn-danger btn-block">購入できない商品があります</p>
+				<% else %>
+					<%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning btn-block" %>
+				<% end %>
 			</li>
 			<li class="list-group-item" style="border-top: none; border-bottom: none;">
 				<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
