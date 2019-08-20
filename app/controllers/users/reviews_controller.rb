@@ -31,7 +31,10 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def destroy
-		
+		review = Review.find(params[:id])
+		review.destroy
+		@item = Item.find(params[:item_id]) 
+		redirect_to users_item_reviews_path(@item.id)
 	end
 
 	def index
