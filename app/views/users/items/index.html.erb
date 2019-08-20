@@ -3,6 +3,7 @@
 </h2>
 <div class="container">
 	<div class="row">
+		<!-- 絞り込み機能　まだ -->
 		<div class="col-lg-3">
 			<table class="table" style="border: solid 1px; text-align: center;">
 				<tr><th>j-Pop</th></tr>
@@ -20,6 +21,7 @@
 		</div>
 
 		<div class="col-lg-9">
+			<!-- これはハリボテ -->
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
 				<div class="album-left" style="float: left; margin-right: 5px;">
 					<p class="genre" style="border: solid 1px; text-align: center;">genre</p>
@@ -47,8 +49,9 @@
 					</div>
 				</div>
 			</div>
+			<!-- 上記はハリボテ -->
 
-		
+			<!-- 下記は本番用 -->
 			<% @items.each do |item| %>
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
 				<div class="album-left" style="float: left;">
@@ -70,25 +73,33 @@
 					</div>
 					<div>
 						<div class="favorites" style="display: inline-block; ">
-							<% if item.favorited_by?(current_user) %>
-							<li>
-								<%= link_to users_item_favorite_path(item, item.favorites), method: :delete do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
+							<% if user_signed_in? %>
+								<% if item.favorited_by?(current_user) %>
+								<li>
+									<%= link_to users_item_favorite_path(item, item.favorites), method: :delete do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
+									<% end %>
+									<p style="display: inline-block;"><%= item.favorites.count %></p>
+								</li>
+								<% else %>
+								<li>
+									<%= link_to users_item_favorites_path(item,), method: :post do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+									<% end %>
+									<p style="display: inline-block;"><%= item.favorites.count %></p>
+								</li>
 								<% end %>
-								<p style="display: inline-block;"><%= item.favorites.count %></p>
-							</li>
 							<% else %>
-							<li>
-								<%= link_to users_item_favorites_path(item), method: :post do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
-								<% end %>
-								<p style="display: inline-block;"><%= item.favorites.count %></p>
-							</li>
+								<!--　ログインしないといいねできない -->
+								<li>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+									<p style="display: inline-block;"><%= item.favorites.count %></p>
+								</li>
 							<% end %>
 						</div>
 						<div class="reviews" style="display: inline-block;">
 							<%= link_to users_item_reviews_path(item) do %>
-							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
+								<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 							<% end %>
 							<p style="display: inline-block;"><%= item.reviews.count %></p>
 						</div>

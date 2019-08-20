@@ -1,6 +1,7 @@
 class Users::CartsController < ApplicationController
 	# carts_helper呼び出し
 	include Users::CartsHelper
+	#before_action :authenticate_user!
 
 	def index
 		@user = User.find(params[:user_id])

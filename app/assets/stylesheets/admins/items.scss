@@ -9,38 +9,91 @@
   clear: both;
 }
 
-.new-item h1{
+.item-page h1{
 	margin-bottom: 30px;
 	margin-top: 40px;
 }
 
-.edit-item h1{
+.item-page p{
+	margin-bottom: 20px;
+}
+
+.item-page .field{
 	margin-bottom: 30px;
+	position: relative;
+}
+
+.item-page input[type="checkbox"]{
+	margin-left: 9%;
+}
+
+.item-header{
+	margin-bottom: 150px;
 	margin-top: 40px;
 }
+.item-header .page-title{
+ 	line-height: 0;
+ }
 
-.new-item p{
-	margin-bottom: 20px;
+//検索部分
+
+.search-area{
+	width: 100%;
+	height: 3em;
 }
 
-.edit-item p{
-	margin-bottom: 20px;
+.search-area select{
+	float:left;
+	width:15%
 }
 
-.new-item .field{
-	margin-bottom: 30px;
+.search-area input[type="text"]{
+	float:left;
+	width:70%;
+	margin-top: 5px;
 }
 
-.edit-item .field{
-	margin-bottom: 30px;
+.search-area input[type="submit"]{
+	float:left;
+	width:15%;
+	padding: 0;
+	margin-top: 5px;
 }
 
-.field select{
-	margin-right: 5%;
+.sort-area{
+	width: 100%;
 }
 
-.new-artist{
-	margin: 0 0 0 auto;
+.item-header .sort-area select{
+	float:left;
+	width:33%;
+}
+
+.item-header .btn-info{
+	float:left;
+	width:33%;
+	padding: 0;
+}
+
+.item-header .btn-success{
+	width:100%;
+	margin-top: 5px;
+}
+
+//全文表示
+
+.show-content{
+  position: relative;
+}
+.full-content{
+  display: none;
+  background-color: #fff;
+  width: 300px;
+  padding: 0.5%;
+  border: 1px solid #000;
+  position: absolute;
+  top: 0;
+  Z-index: 100;
 }
 
 #item_name{
@@ -53,6 +106,8 @@
 
 #artist_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 #item_genre_id{
@@ -61,6 +116,8 @@
 
 #genre_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 #item_label_id{
@@ -69,6 +126,8 @@
 
 #label_name{
 	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 li input[type=text]{
@@ -77,6 +136,15 @@ li input[type=text]{
 
 .under-nested-form{
 	margin-top: 30px;
+	text-align: right;
+	position: relative;
+}
+
+.img{
+	position: absolute;
+	text-align: left;
+	left: 0;
+	top: 0;
 }
 
 #item_price{
@@ -91,14 +159,22 @@ li input[type=text]{
 	width: 20%;
 }
 
-.actions .btn{
+.actions {
+	margin: 100px auto;
+	position: relative;
+	height: fit-content;
+}
+
+.item-page .actions .btn{
 	width: 40%;
-	margin-bottom: 40px;
 }
 
-.actions .btn:last-child{
-	margin-left: 15%;
+.item-page .actions .btn-info{
+	position: absolute;
+	left: 5%;
 }
 
-
-
+.item-page .actions .btn-danger{
+	position: absolute;
+	right: 5%;
+}

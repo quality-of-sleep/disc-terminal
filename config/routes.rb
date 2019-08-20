@@ -26,6 +26,7 @@ end
 	  		resources :reviews, except:[:show]
 	  	end
   end
+
   namespace :admins ,only:[:index, :show] do
   	get '', to:'admins#home'
   	resources :users do
@@ -33,7 +34,7 @@ end
   	end
   	patch '/users/:id', to: 'users#quit'
   	resources :orders, only:[:index, :show, :update]
-  	resources :reviews, only:[:index, :destroy]
+  	resources :reviews, only:[:index, :update, :destroy]
   	resources :items, except:[:destroy]
   	resources :artists, only:[:create]
   	resources :genres, only:[:create]
