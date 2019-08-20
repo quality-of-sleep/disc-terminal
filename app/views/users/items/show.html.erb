@@ -82,21 +82,19 @@
 			<h3 style="display: inline-block;">レビュー</h3>
 			<ul style="display: inline-block;">
 				<li style="float: left;">
-				<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
+					<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
 				</li>
 				<li style="float: left;">
-
-	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
-
+					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
 				</li>
 			</ul>
 		</div>
 		<div class="review-list">
 			<% @item.reviews.each do |review| %>
-			<div class="review">
-				<h4><%= review.title %></h4>
-				<p><%= review.body %></p>
-			</div>
+				<div class="review">
+					<h4><%= review.title %></h4>
+					<p><%= review.body %></p>
+				</div>
 			<% end %>
 		</div>
 	</div>
