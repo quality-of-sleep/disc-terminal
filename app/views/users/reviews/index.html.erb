@@ -1,0 +1,35 @@
+<h2 style="display: inline-block;">
+	<%= @item.name %>へのレビュー
+</h2>
+<p style="display: inline-block;">
+	新規投稿する（リンク付き）
+</p>
+
+<div class="reviews" style="border: solid 1px;">
+	<% @item.reviews.each do |review| %>
+		<div class="review" style="border-bottom: solid 1px;">
+			<div class="review-top">
+				<h3 style="display: inline-block;"><%= review.title %></h3>
+
+				<!-- 投稿日どう指定しようか？ -->
+				<p style="display: inline-block;">day</p> 
+			</div>
+			<p><%= review.body %></p>
+
+		</div>
+	<% end %>
+
+	<div class="review" style="border-bottom: solid 1px;">
+		<div class="review-top">
+			<h3 style="display: inline-block;"><%%>text.title</h3>
+			<p style="display: inline-block;"><%%>day</p>
+		</div>
+		<p><%%>text.body</p>
+
+		<!-- 投稿したレビューのみ表示する -->
+		<div class="review-button">
+			<p style="display: inline-block;">編集</p>
+			<p style="display: inline-block;">削除</p>
+		</div>
+	</div>
+</div>

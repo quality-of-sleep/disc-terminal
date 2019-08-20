@@ -1,17 +1,16 @@
-<%
-=begin
-%>
-
 <h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%;">商品詳細</h2>
+
+<h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
+
 <div class="container">
-	<div class="album" style="width: 90%; padding: 20px; border: solid 1px;">
+	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
 			<div class="album_image">
 				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 350, 350, format: 'jpeg' %>
 			</div>
 		</div>
 		<div class="album-right" style="display: inline-block;padding: 30px;">
-			<h3><%= link_to @item.name, %></h3>
+			<h3><%= @item.name %></h3>
 			<p style="display: inline-block;">
 				<%= @item.artist_id %>	
 			</p>
@@ -20,7 +19,7 @@
 			</p>
 			<p><%= @item.label_id %></p>
 			<div class="status" style="display: inline-block;">
-				<p class="sales_status" style="border:solid 1px; border-radius: 5px; display: inline-block; padding: 1px 3px; margin-right: 10px;">
+				<p class="sales_status" style="border:solid 1px; display: inline-block;">
 					<%= @item.sales_status %>
 				</p>
 				<p>残り<% @item.stock %>点</p>
@@ -28,60 +27,70 @@
 			<p style="display: inline-block;">
 				￥<%= @item.price %>
 			</p>
-			<p style="border: solid 1px; text-align: center;">カートに追加</p>
-				<div class="favorites" style="display: inline-block; margin-right: 13px">
+			<p style="border: solid 1px;">
+				<% if user_signed_in? %>
+					<p>
+						<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+					</p>
+				<% else %>
+					<p>
+						<%= button_to "カートに入れる", new_user_session_path %>
+					</p>
+				<% end %>
+			</p>
+			<div>
+				<div class="favorites" style="display: inline-block; ">
 					<% if @item.favorited_by?(current_user) %>
 						<li>
-							<%= link_to users_item_favorites_path(@item), method: :delete do %>
-								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:red;"></i>
+							<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
 							<% end %>
-							<p style="display: inline-block;"><%= item.favorites.count %></p>
+							<p style="display: inline-block;"><%= @item.favorites.count %></p>
 						</li>
 					<% else %>
 						<li>
 							<%= link_to users_item_favorites_path(@item), method: :post do %>
-								<i class="fa fa-heart" aria-hidden="true" style="display: inline-block; font-size: 18px; color:white;"></i>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
 							<% end %>
-							<p style="display: inline-block;"><%= item.favorites.count %></p>
+							<p style="display: inline-block;"><%= @item.favorites.count %></p>
 						</li>
 					<% end %>
 				</div>
 				<div class="reviews" style="display: inline-block;">
-					<% link_to users_item_review do %>
-						<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block; font-size: 18px;"></span>
-						<p style="display: inline-block;">
-					<% end %>
-					<p style="display: inline-block;"><%= item.reviews.count %></p>
+						<%= link_to users_item_reviews_path(@item.id) do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
+						<% end %>
+						<p style="display: inline-block;"><%= @item.reviews.count %></p>
 				</div>
+			</div>
 			<div class="item-detail">
 				<h2>収録曲</h2>
-				<% discs.each do |disc| %>
-				<div class="disc" style="display: inline-block;">
-					<p>disc<%= disc.number %></p>
-						<ul class="song-list" style="list-style: none; margin-right: 30px;">
-							<% songs.each do |song| %>
-							<li><%= song.number %>.<%= song.name %></li>
+				<% @item.discs.each do |disc| %>
+					<div class="disc" style="display: inline-block;">
+						<p>disc<%= disc.number %></p>
+						<ul class="song-list">
+							<% disc.songs.each do |song| %>
+								<li><%= song.number %>. <%= song.name %></li>
 							<% end %>
 						</ul>
-					<% end %>
-				</div>
+					</div>
+				<% end %>
 			</div>
 		</div>
 	</div>
 
-	<div class="album-reviews" style="border: solid 1px; width: 90%; margin-top: 30px; padding: 30px;">
+	<div class="album-reviews" style="border: solid 1px; width: 90%;">
 		<div class="review-top">
-			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="font-size: 30px; display: inline-block;"></span>
+			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 			<h3 style="display: inline-block;">レビュー</h3>
-			<ul style="display: inline-block; list-style: none;">
-				<li style="float: left; margin-right: 
-				25px;">
-					<%= link_to '一覧ページへ', new_users_item_review_path(@item) %>
-						
+			<ul style="display: inline-block;">
+				<li style="float: left;">
+				<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
 				</li>
-				<li style="float: left; margin-right: 
-				25px;">
-					<%= link_to '新規投稿する', users_item_reviews_path(@item) %>		
+				<li style="float: left;">
+
+	<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+
 				</li>
 			</ul>
 		</div>
@@ -95,109 +104,3 @@
 		</div>
 	</div>
 </div>
-
-<%
-=end
-%>
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-<%
-=begin
-%>
-
-
-<% if user_signed_in? %>
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-<% end %>
-
-
-<%
-=end
-%>
-
-
-
-
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-
-<%
-
-=begin
-
-%>
-
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-
-<%
-
-=end
-
-%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- tori_cart-test(カート機能試すときはコメントアウト外してください) -->
-<%
-=begin
-%>
-
-
-<% if user_signed_in? %>
-<p><%= button_to "#{@item.name}をカートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %></p>
-<% end %>
-
-
-<%
-=end
-%>

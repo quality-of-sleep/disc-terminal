@@ -1,0 +1,65 @@
+		<p class="alert alert-info">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力、新規登録にチェックを入れてください。</p>
+		<%= form_for [:admins, @item] do |item| %>
+			<%= render "error_messages" %>
+
+			<div class="field">
+				<%= item.label :name, "商品名" %>
+				<%= item.text_field :name %>
+			</div>
+			<div class="field">
+				<!-- selectから選んだ場合は params[:item][:artist_id]に値を渡す -->
+				<div><%= item.label :artist, 'アーティスト' %></div>
+				<%= item.select 'artist_id',
+					 options_from_collection_for_select(Artist.all, :id, :name,
+					 "#{@item.artist.id}") %>
+				<!-- テキストボックスに入力した場合は params[:artist][:name]に値を渡す -->
+				<%= check_box_tag :artist? %>
+				<%= label_tag :artist?, "新規登録" %>
+				<%= text_field_tag "artist[name]", "" %>
+			</div>
+			<div class="field">
+				<div><%= item.label :genre, 'ジャンル' %></div>
+				<%= item.select 'genre_id',
+					 options_from_collection_for_select(Genre.all,:id,:name,"#{@item.genre.id}") %>
+				<%= check_box_tag :genre? %>
+				<%= label_tag :genre?, "新規登録" %>
+				<%= text_field_tag "genre[name]", "" %>
+			</div>
+			<div class="field">
+				<div><%= item.label :label, 'レーベル' %></div>
+				<%= item.select 'label_id',
+					 options_from_collection_for_select(Label.all,:id,:name,"#{@item.label.id}") %>
+				<%= check_box_tag :label? %>
+				<%= label_tag :label?, "新規登録" %>
+				<%= text_field_tag "label[name]","" %>
+			</div>
+			<div>
+				<%= render 'form',:f => item %>
+			</div>
+			<div class="under-nested-form">
+				<div class="field">
+					<%= item.label :price, '税別価格' %>
+					<%= item.text_field :price, placeholder:'半角数字' %>
+				</div>
+				<div class="field">
+					<%= item.label :stock, '在庫数' %>
+					<%= item.text_field :stock, placeholder:'半角数字' %>
+				</div>
+				<div class="field">
+				  <%= item.label :sales_status, '販売ステータス' %>
+				  <!--item.rbのenumを使用, 第２引数は(複数形.keys)-->
+				  <%= item.select :sales_status, Item.sales_statuses.keys %>
+				</div>
+				<div class="img">
+					<div class="field">
+						<%= item.label :image, 'ジャケット画像' %>
+						<%= item.attachment_field :image %>
+						<%= attachment_image_tag @item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'150x150' %>
+					</div>
+				</div>
+			</div>
+			<div class="actions">
+				<%= item.submit "登録", data: { confirm: '保存します' }, class:"btn btn-info" %>
+				<%= link_to 'キャンセル', request.referrer || admins_items_url, data: { confirm: '編集内容は破棄されます' }, class:"btn btn-danger" %>
+			</div>
+		<% end %>

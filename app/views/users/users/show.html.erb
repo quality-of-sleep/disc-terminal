@@ -1,1 +1,47 @@
-show.html.erb
+<div class="container">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">マイページ</h2>
+      <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
+      	<h3>ユーザー情報</h3>
+
+      	<ul>
+      	  <li>名前：<%= @user.last_name %><%= @user.first_name %></li>
+      	  <li>カナ：<%= @user.last_name_kana %><%= @user.first_name_kana %></li>
+      	  <li>現住所：<%= @user.postal_code %><br><%= @user.address %></li>
+
+
+<!---配送先--->
+<% @user.delivery_addresses.each do |delivery_address|%>
+<li>配送先名：
+  <%= delivery_address.recipient %><br>
+  <%= delivery_address.postal_code %><br>
+  <%= delivery_address.details %><br>
+</li>
+<% end %>
+<!---以上--->
+
+
+
+      	  <li>電話番号：<%= @user.telephone_number %></li>
+      	  <li>e-mail：<%= @user.email %></li>
+      	  <li>支払い方法：<%= @user.payment %></li>
+      	  <li>カード番号：</li><!---ここは一旦スルーする〜--->
+      	</ul>
+      	<span class="label label-success">
+      	<%= link_to "プロフィールを編集する", edit_users_user_path(@user)%>
+      	</span>
+
+
+
+      </div>
+
+      	<span class="label label-danger">
+      	<%= link_to "退会する", users_path(@user)%>
+      	</span>
+
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>

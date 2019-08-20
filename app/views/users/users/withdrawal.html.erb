@@ -19,15 +19,13 @@
       	<div class="button-row" style="margin: 50px auto; width: 50%;">
 
 
-          <span class="left-button">
-      	  <a style="color: white; background-color: red; border-radius: 3px; padding: 20px 40px;" %>退会する
-      	  </a>
+          <span class="label label-danger">
+          <%= link_to "退会する", users_path(@user), method: :patch %>
       	  </span>
 
 
-      	  <span class="right-button">
-      	  <a style="color: white; background-color: #3399FF; border-radius: 3px; padding: 20px 40px; margin-right: 0;" %>戻る
-          </a>
+      	  <span class="label label-info">
+            <%= link_to "戻る", users_user_path(@user)%>
           </span>
 
         </div>

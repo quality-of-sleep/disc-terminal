@@ -1,19 +1,19 @@
 class Admins::ItemsController < ApplicationController
-	# 実装中は便宜上コメントアウトしておく
-#before_action :authenticate_admin!
+	before_action :authenticate_admin!
 
 	def index
 		@artists = Artist.all
 		@genres = Genre.all
-		@items = Item.page(params[:page])
-		if !params[:search].nil? && params[:search].present?
-			@items = @items.search(key: 'name', value: params[:search])
-		end
+ 		@items = Item.page(params[:page])
+		if params[:key].present?
+	 		items = sorted( @items, params[:key],params[:direction] )
+	 		@items = Kaminari.paginate_array(items).page(params[:page]).per(25)
+ 		end
+
+		@items = @items.search(key: 'name', value: params[:search]) if params[:search].present?
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
- 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")
 	end
-
 
 	def new
 		@artist = Artist.new
@@ -33,17 +33,38 @@ class Admins::ItemsController < ApplicationController
 		@item.genre = @genre if params[:genre?] && params[:genre][:name]
 		@item.label = @label if params[:label?] && params[:label][:name]
 		if @item.save
-			render 'show'
-
+			flash[:success] = '商品を追加しました'
+			render 'new'
 		else
-			redirect_to new_admins_item_url
+			render 'new'
 		end
 	end
 	def show
 	end
 	def edit
+		@artist = Artist.new
+		@genre = Genre.new
+		@label = Label.new
+		@item = Item.find(params[:id])
+		@discs = @item.discs do|disc|
+			@songs = disc.songs {|song|}
+		end
 	end
 	def update
+		@artist = Artist.new(artist_params)
+		@genre = Genre.new(genre_params)
+		@label = Label.new(label_params)
+		@item = Item.find(params[:id])
+		@item.update(item_params)
+		@item.artist = @artist if params[:artist?] && params[:artist][:name]
+		@item.genre = @genre if params[:genre?] && params[:genre][:name]
+		@item.label = @label if params[:label?] && params[:label][:name]
+		if @item.save
+			flash[:success] = '商品を編集しました'
+			redirect_to [:admins, @item]
+		else
+			render 'edit'
+		end
 	end
 
 	private
