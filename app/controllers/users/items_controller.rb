@@ -16,5 +16,4 @@ class Users::ItemsController < ApplicationController
  		params.require(:item).permit(:artist_id, :genre_id,	:label_id,
  			:name, :price, :sales_status, :stock)
  	end
-
 end
