@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
   // 全ての子孫要素から取得する.find()
   $($('.item-page').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
   $($('.item-page').find('select')).addClass('btn btn-default dropdown-toggle');

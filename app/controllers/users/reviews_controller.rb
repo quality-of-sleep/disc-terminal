@@ -1,4 +1,6 @@
 class Users::ReviewsController < ApplicationController
+	#before_action :authenticate_user!, except: [:index]
+
 	def new
 		#p.8.5 新規投稿ページの表示
 	end

@@ -87,7 +87,7 @@ end
 	User.create!( last_name: last_name.sample,
 								first_name: first_name.sample,
 								last_name_kana: last_name_kana.sample,
-								first_name_kana: last_name_kana.sample,
+								first_name_kana: first_name_kana.sample,
 								telephone_number: telephone_number,
 							  email:email,
 							  postal_code: postal_code,
