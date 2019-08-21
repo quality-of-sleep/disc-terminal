@@ -13,7 +13,6 @@ class Users::OrdersController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
-
 		# 配送料, 割引
 		@carriage = 500
 		@discount = 0
@@ -27,14 +26,30 @@ class Users::OrdersController < ApplicationController
 
 	def create
 		if params[:commit] == "登録"
-			user = current_user
-			new_addresses = user.delivery_addresses.new
-			new_addresses.recipient = params[:order][:user_name]
-			new_addresses.postal_code = params[:order][:postal_code]
-			new_addresses.details = params[:order][:address]
-			new_addresses.telephone_number = params[:order][:telephone_number]
-			new_addresses.save
-			redirect_back(fallback_location: root_url)
+			@user = current_user
+			if params[:order][:user_name] != "" && params[:order][:postal_code] != "" && params[:order][:address] != "" && params[:order][:telephone_number] != ""
+				new_addresses = @user.delivery_addresses.new
+				new_addresses.recipient = params[:order][:user_name]
+				new_addresses.postal_code = params[:order][:postal_code]
+				new_addresses.details = params[:order][:address]
+				new_addresses.telephone_number = params[:order][:telephone_number]
+				new_addresses.save
+				flash[:success] = '新しい配送先を追加しました'
+				redirect_to users_user_orders_new_path(@user)
+			else
+				@order = Order.new
+				# 配送料, 割引
+				@carriage = 500
+				@discount = 0
+				# 小計Helper
+				price = price_reckoning(@user.carts)        # 税別金額
+				@tax = tax(price)                           # 内税
+				@subtotal_price = on_tax_price(price)       # 小計
+				@total_amount = total_amount(@user.carts)   # 小計個数
+				@total_price = total_price(price,@carriage) # 合計金額（税込）
+				flash[:danger] = '配送先の登録に失敗しました、情報は全て入力してください'
+				render :action => 'new', :controller => 'users/orders', :user_id => @user.id
+			end
 		else
 			user = current_user
 			order = user.orders.new(order_params)
@@ -74,7 +89,8 @@ class Users::OrdersController < ApplicationController
 				order_details.save
 				cart.destroy
 			end
-		redirect_to users_user_order_path(user, order)
+			flash[:success] = "注文を確定しました、ご購入ありがとうございます"
+			redirect_to users_user_order_path(user, order)
 		end
 	end
 
