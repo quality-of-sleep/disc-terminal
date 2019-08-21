@@ -3,6 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    li {
+    margin-left: 30px;
+    }
+  }
+}
+
 .clearfix:after {
   content: "";
   display: block;
@@ -21,6 +34,7 @@
 
 .item-page p{
 	margin-bottom: 20px;
+	font-size: 12px;
 }
 
 .item-page .field{
@@ -161,6 +175,10 @@
 	position: absolute;
 	right: 0;
 	margin-bottom: 2px;
+}
+
+div>.remove_fields{
+	margin-bottom: 15px;
 }
 
 .under-nested-form{

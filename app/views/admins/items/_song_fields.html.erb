@@ -3,8 +3,8 @@
   <div class="fields">
     <div class="song">
       <li>
-        <%= f.text_field :number,placeholder: '曲順', class: "song-number" %>
-        <%= f.text_field :name %>
+        <%= f.number_field :number,placeholder: '曲順', class: "song-number" %>
+        <%= f.text_field :name,placeholder: '曲名' %>
         <%= link_to_remove_association "曲を削除", f %>
       </li>
     </div>
