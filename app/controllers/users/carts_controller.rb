@@ -1,7 +1,9 @@
 class Users::CartsController < ApplicationController
-	# carts_helper呼び出し
-	include Users::CartsHelper
+	# helper呼び出し
+	include Users::OrdersHelper
+
 	before_action :authenticate_user!
+
 	# URL直入力弾く
 	before_action :ensure_correct_user
 	def ensure_correct_user
@@ -13,12 +15,7 @@ class Users::CartsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
 		# 小計Helper
-		price = price_reckoning(@user.carts)
-		# 小計消費税helper
-		@tax = tax(price)
-		@total_price = on_tax_price(price)
-		# 小計個数helper
-		@total_amount = total_amount(@user.carts)
+		@price = price_reckoning(@user.carts)
 	end
 
 	def create

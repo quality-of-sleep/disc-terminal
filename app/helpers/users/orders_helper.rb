@@ -25,12 +25,21 @@ module Users::OrdersHelper
 	def tax(price)
 		((BigDecimal(price.to_s) * BigDecimal("0.08")).ceil).to_i
 	end
-	def on_tax_price(price)
+	def subtotal_price(price)
 		((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_i
 	end
 	def total_price(price,carriage)
 		((BigDecimal(price.to_s) * BigDecimal("1.08") + BigDecimal(carriage.to_s)).ceil).to_i
 	end
+end
+
+
+# 新規配送先登録
+def new_address_create(address, params)
+	address.recipient = params[:user_name]
+	address.postal_code = params[:postal_code]
+	address.details = params[:address]
+	address.telephone_number = params[:telephone_number]
 end
 
 # indexソートhelper

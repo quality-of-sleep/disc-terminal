@@ -91,10 +91,10 @@
 				<% end %>
 			</li>
 			<li class="list-group-item" style="border-top: none; border-bottom: none;">
-				<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
+				<p>小計 (<%= total_amount(@user.carts) %>点)　　¥ <%= subtotal_price(@price).to_s(:delimited) %></p>
 			</li>
 			<li class="list-group-item" style="border-top: none;">
-				<p>(内消費税　 　¥<%= @tax %>)</p>
+				<p>(内消費税　 　¥ <%= tax(@price).to_s(:delimited) %>)</p>
 			</li>
 	</div>
 <% end %>

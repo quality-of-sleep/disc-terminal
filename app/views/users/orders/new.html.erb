@@ -132,7 +132,7 @@
 			</li>
 
 			<li class="list-group-item" style="border-top: none; border-bottom: none;">
-				<p>小計 (<%= @total_amount %>点)　　¥ <%= @subtotal_price.to_s(:delimited) %></p>
+				<p>小計 (<%= total_amount(@user.carts) %>点)　　¥ <%= subtotal_price(@price).to_s(:delimited) %></p>
 			</li>
 			<li class="list-group-item" style="border-top: none; border-bottom: none;">
 				<p>配送料　 　¥ <%= @carriage.to_s(:delimited) %></p>
@@ -141,10 +141,10 @@
 				<p>割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
 			</li>
 			<li class="list-group-item" style="border-top: none; border-bottom: none;">
-				<p>合計　 　¥ <%= @total_price.to_s(:delimited) %></p>
+				<p>合計　 　¥ <%= total_price(@price,@carriage).to_s(:delimited) %></p>
 			</li>
 			<li class="list-group-item" style="border-top: none;">
-				<p>(内消費税　 　¥ <%= @tax.to_s(:delimited) %>)</p>
+				<p>(内消費税　 　¥ <%= tax(@price).to_s(:delimited) %>)</p>
 			</li>
 		</ul>
 	</div>
