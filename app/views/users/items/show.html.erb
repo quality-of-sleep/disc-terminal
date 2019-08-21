@@ -28,14 +28,16 @@
 				￥<%= @item.price %>
 			</p>
 			<p style="border: solid 1px;">
-				<% if user_signed_in? %>
-					<p>
-						<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
-					</p>
-				<% else %>
-					<p>
-						<%= button_to "カートに入れる", new_user_session_path %>
-					</p>
+				<% if @item.sales_status == "販売中" %>
+					<% if user_signed_in? %>
+						<p>
+							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+						</p>
+					<% else %>
+						<p>
+							<%= button_to "カートに入れる", new_user_session_path %>
+						</p>
+					<% end %>
 				<% end %>
 			</p>
 			<div>
