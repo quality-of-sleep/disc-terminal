@@ -26,19 +26,6 @@ $(document).on('turbolinks:load', function() {
 		}
 		disc_number() // 実行
 
-// 要素を追加したときの関数
-// $('a').on('click', function(){} という記述法では追加要素に適用されない
-	$(document).on('click','.nested-fields a',function(){
-
-		// 追加要素にもbootstrapを適用させるためclassを付与
-		var add_form_control = function(){
-			$('.disc input[type=text]').addClass('form-control').css({'width':'90%' ,'display':'inline'});
-		}
-		// 追加要素のdisc番号と曲順を隠す
-		var hide_text = function(){
-			$('.song-number, .disc-number').hide();
-		}
-
 		// disc番号毎の曲順を生成
 		var song_number = function(){
 			j = 1
@@ -51,22 +38,55 @@ $(document).on('turbolinks:load', function() {
 				j ++
 			});
 		}
+		song_number() // 実行
+
+		// 追加ボタン装飾
+		var add_add_btn = function(){
+			$('.add_fields').addClass('btn btn-success btn-block');
+		}
+		add_add_btn() // 実行
+
+		// 削除ボタン装飾
+		var add_remove_btn = function(){
+			$('.remove_fields').addClass('btn btn-danger');
+		}
+		add_remove_btn() // 実行
+
+	// 要素を追加したときの関数
+	// $('a').on('click', function(){} という記述法では追加要素に適用されない
+	$(document).on('click','.nested-fields a',function(){
+
+		// 追加要素にもbootstrapを適用させるためclassを付与
+		var add_form_control = function(){
+			$('.disc input[type=text]').addClass('form-control').css({'width':'90%' ,'display':'inline'});
+		}
+		// 追加要素のdisc番号と曲順を隠す
+		var hide_text = function(){
+			$('.song-number, .disc-number').hide();
+		}
+
+		var disc_remove_margin = function(){
+			$("div>.remove_fields").css({'margin-bottom':'15px'});
+		}
+
 
 		// フォーム生成と同じタイミングでは動かないのでずらす
-		setTimeout(add_form_control,1);
-		setTimeout(hide_text,3);
-		setTimeout(disc_number,5);
-		setTimeout(song_number,10);
+		setTimeout(add_add_btn,3);
+		setTimeout(add_remove_btn,5);
+		setTimeout(disc_remove_margin,7);
+		setTimeout(add_form_control,9);
+		setTimeout(hide_text,10);
+		setTimeout(disc_number,15);
+		setTimeout(song_number,20);
 	  });
 
 	// ディスクを追加したとき自動で曲入力欄を生成
 	$(document).on('click','a[data-associations=discs]',function(){
-
+	// 自動で曲入力欄を生成
 		var add_song = function(){
-			$('a[data-associations=songs]').last().trigger('click');
+			$($('a[data-associations=songs]').last()).trigger('click');
 		};
-		setTimeout(add_song,5);
-
+		setTimeout(add_song,30);
 	});
 
 	// ディスクを削除したとき

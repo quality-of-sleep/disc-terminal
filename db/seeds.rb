@@ -83,7 +83,7 @@ end
 	address = "東京都渋谷区神南1丁目19番11号パークウェースクエア#{rand(100)}-#{rand(100)}"
 	payment = [1,2,3]
 	password = "password"
-	is_quit = [false, true]
+	is_quit = [false,true]
 	User.create!( last_name: last_name.sample,
 								first_name: first_name.sample,
 								last_name_kana: last_name_kana.sample,
@@ -95,7 +95,7 @@ end
 							  payment: payment.sample,
 							  password:password,
 							  password_confirmation:password,
-							  is_quit: is_quit.sample
+							  is_quit: true 
 							  )
 end
 
@@ -111,12 +111,13 @@ end
 end
 
 # テストOrderを生成
-User.all.each do |user|
-	Order.create!( user_id: rand(1..User.all.length),
-								 user_name: user.delivery_addresses.recipient,
-								 postal_code: user.delivery_addresses.recipient,
-							 	 address: user.delivery_addresses.details,
-							 	 telephone_number: user.delivery_addresses.telephone_number,
-							 	 subtotal_price:
-							  )
-end
+# User.all.each do |user|
+# 	Order.create!( user_id: rand(1..User.all.length),
+# 								 user_name: user.delivery_addresses.recipient,
+# 								 postal_code: user.delivery_addresses.recipient,
+# 							 	 address: user.delivery_addresses.details,
+# 							 	 telephone_number: user.delivery_addresses.telephone_number,
+# 							 	 subtotal_price: 
+# 							  )
+# end
+

@@ -1,5 +1,8 @@
 <% if @user.carts.count == 0 %>
 	<div class="col-md-9" style="padding-bottom: 300px;">
+		<div class="row" style="margin-bottom: 25px;">
+			<h2>カート内商品</h2>
+		</div>
 		<table class="table">
 			<thead>
 				<tr>
@@ -21,6 +24,9 @@
 <% else %>
 
 	<div class="col-md-9">
+		<div class="row" style="margin-bottom: 25px;">
+			<h2>カート内商品</h2>
+		</div>
 		<table class="table">
 			<thead>
 				<tr>
@@ -74,16 +80,21 @@
 			</tbody>
 		</table>
 	</div>
+
 	<div class="col-md-3 price-box">
-		<div class="text-center" style="margin-top: 5%; margin-bottom: 15%;">
-			<!-- 販売中以外の商品を持って次に進めない機能　未実装 -->
-			<%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning", style: "padding: 7px 30%;" %>
-		</div>
-		<div class="text-center" style="margin-bottom: 10%;">
-			<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
-		</div>
-		<div class="text-center" style="margin-bottom: 10%;">
-			<p>(内消費税　 　¥<%= @tax %>)</p>
-		</div>
+		<ul class="list-group" style="max-width: 400px;">
+			<li class="list-group-item" style="border-bottom: none;">
+				<% if sales_status?(@user.carts) == false %>
+					<p class="btn btn-danger btn-block">購入できない商品があります</p>
+				<% else %>
+					<%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning btn-block" %>
+				<% end %>
+			</li>
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
+				<p>小計 (<%= @total_amount %>点)　　¥<%= @total_price %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none;">
+				<p>(内消費税　 　¥<%= @tax %>)</p>
+			</li>
 	</div>
 <% end %>

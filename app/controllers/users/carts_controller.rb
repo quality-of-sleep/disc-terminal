@@ -3,12 +3,12 @@ class Users::CartsController < ApplicationController
 	include Users::CartsHelper
 	before_action :authenticate_user!
 	# URL直入力弾く
-	# before_action :ensure_correct_user
-	# def ensure_correct_user
-	# 	if current_user.id != params[:id].to_i
-	# 		redirect_to root_path
-	# 	end
-	# end
+	before_action :ensure_correct_user
+	def ensure_correct_user
+		if current_user.id != params[:user_id].to_i
+			redirect_to root_path
+		end
+	end
 
 	def index
 		@user = User.find(params[:user_id])
@@ -29,6 +29,7 @@ class Users::CartsController < ApplicationController
 		cart.item_id = item.id
 		cart.amount = 1
 		cart.save
+		flash[:success] = "商品をカートに追加しました"
 		redirect_to users_user_carts_path(user.id)
 	end
 
@@ -36,12 +37,14 @@ class Users::CartsController < ApplicationController
 		cart = Cart.find(params[:id])
 		cart.amount = params[:amount]
 		cart.save
+		flash[:success] = "購入数量を変更しました"
 		redirect_to users_user_carts_path(current_user.id)
 	end
 
 	def destroy
 		cart = Cart.find(params[:id])
 		cart.destroy
+		flash[:danger] = "商品をカートから削除しました"
 		redirect_back(fallback_location: root_path)
 	end
 
