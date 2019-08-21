@@ -60,6 +60,7 @@
 					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button not_credit_card" %> 代金引換</label></li>
 				</ul>
 			</div>
+			<!-- 新規住所フォームのキャンセルボタンで戻ると表示がされないBugがあります -->
 			<div class="col-md-4 hidden credit_card_button">
           <%= form_tag(action: :create, method: :post) do %>
 					   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
