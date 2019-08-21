@@ -9,26 +9,48 @@
   clear: both;
 }
 
-.new-item h1{
+.item-page h1{
 	margin-bottom: 30px;
-	margin-top: 40px;
+	margin-top: -0px;
 }
 
-.edit-item h1{
-	margin-bottom: 30px;
-	margin-top: 40px;
-}
-
-.new-item p{
+.item-page p{
 	margin-bottom: 20px;
 }
 
-.edit-item p{
-	margin-bottom: 20px;
+.item-page .field{
+	margin-bottom: 30px;
+	position: relative;
 }
 
-.new-item .field{
-	margin-bottom: 30px;
+.item-page input[type="checkbox"]{
+	margin-left: 9%;
+}
+
+.item-header{
+	margin-bottom: 150px;
+	margin-top: 40px;
+}
+.item-header .page-title{
+ 	line-height: 0;
+ }
+
+//検索部分
+
+.search-area{
+	width: 100%;
+	height: 3em;
+}
+
+.search-area select{
+	float:left;
+	width:33%
+}
+
+.search-area input[type="text"]{
+	float:left;
+	width:80%;
+	margin-top: 5px;
 }
 
 .edit-item .field{
@@ -41,6 +63,48 @@
 }
 .edit-item input[type="checkbox"]{
 	margin-left: 9%;
+}
+.search-area input[type="submit"]{
+	float:left;
+	width:20%;
+	padding: 0;
+	margin-top: 5px;
+}
+
+.sort-area{
+	width: 100%;
+}
+
+.item-header .sort-area select{
+	float:left;
+	width:50%;
+}
+
+.item-header .btn-info{
+	float:left;
+	width:100%;
+	margin-top: 5px;
+}
+
+.item-header .btn-success{
+	width:100%;
+	margin-top: 5px;
+}
+
+//全文表示
+
+.show-content{
+  position: relative;
+}
+.full-content{
+  display: none;
+  background-color: #fff;
+  width: 300px;
+  padding: 0.5%;
+  border: 1px solid #000;
+  position: absolute;
+  top: 0;
+  Z-index: 100;
 }
 
 #item_name{
@@ -122,6 +186,18 @@ li input[type=text]{
 }
 
 .actions .btn-danger{
+}
+
+.item-page .actions .btn{
+	width: 40%;
+}
+
+.item-page .actions .btn-info{
+	position: absolute;
+	left: 5%;
+}
+
+.item-page .actions .btn-danger{
 	position: absolute;
 	right: 5%;
 }

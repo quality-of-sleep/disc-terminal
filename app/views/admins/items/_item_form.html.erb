@@ -1,6 +1,6 @@
-		<p class="alert alert-danger">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力の上、新規登録にチェックを入れてください。</p>
+		<p class="alert alert-info">アーティスト、ジャンル、レーベルを新たに追加する場合はフォームに入力、新規登録にチェックを入れてください。</p>
 		<%= form_for [:admins, @item] do |item| %>
-			<%= render "devise/shared/error_messages", resource: @item %>
+			<%= render "error_messages" %>
 
 			<div class="field">
 				<%= item.label :name, "商品名" %>
@@ -39,6 +39,8 @@
 			<div class="under-nested-form">
 				<div class="field">
 					<%= item.label :price, '税込価格' %>
+
+					<%= item.label :price, '税別価格' %>
 					<%= item.text_field :price, placeholder:'半角数字' %>
 				</div>
 				<div class="field">

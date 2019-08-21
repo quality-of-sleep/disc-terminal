@@ -1,6 +1,5 @@
 class Admins::ReviewsController < ApplicationController
-# 実装中は便宜上コメントアウトしておく
-#before_action :authenticate_admin!
+	before_action :authenticate_admin!
 
 	def index
 		@reviews = Review.page(params[:page])
@@ -21,6 +20,18 @@ class Admins::ReviewsController < ApplicationController
 		review.destroy
     flash[:danger] = "Review deleted"
     redirect_to request.referrer || admins_reviews_url
+		review.title = review.body = '管理者により削除されました'
+		if review.save
+    	flash[:warning] = "レビュー内容を削除しました"
+    	redirect_to request.referrer || admins_reviews_url
+    end
+	end
+	def destroy
+		review = Review.find(params[:id])
+		if review.destroy
+	    flash[:danger] = "レビューを削除しました"
+	    redirect_to request.referrer || admins_reviews_url
+	  end
 	end
 end
 

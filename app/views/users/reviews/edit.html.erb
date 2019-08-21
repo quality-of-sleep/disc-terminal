@@ -5,7 +5,11 @@
 
 <div class="review-post" style="border: solid 1px;">
 	<!-- 時間設定 -->
-	<p>day</p>
+	<% if @review.created_at != @review.updated_at %>
+		<p style="display: inline-block;">このレビューの最近の更新日：<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+	<% else %>
+		<p style="display: inline-block;">このレビューの投稿日：<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+	<% end %>
 	<%= form_for(@review, url: {controller: 'reviews', action: 'update'}) do |f| %>
 			<p>題名</p>
 			<%= f.text_field :title %>

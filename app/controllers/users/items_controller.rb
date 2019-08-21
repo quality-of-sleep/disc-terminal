@@ -1,7 +1,8 @@
 class Users::ItemsController < ApplicationController
-	PER = 25
+	PER = 20
 	def index	
 		@items = Item.page(params[:page]).per(PER)
+		@items = @items.search(key: 'name', value: params[:q]) if params[:q].present?
 		@user = current_user
 	end
 
