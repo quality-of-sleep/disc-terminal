@@ -1,6 +1,6 @@
 class Users::ItemsController < ApplicationController
-	PER = 25
-	def index
+	PER = 20
+	def index	
 		@items = Item.page(params[:page]).per(PER)
 		@items = @items.search(key: 'name', value: params[:q]) if params[:q].present?
 		@user = current_user
@@ -15,6 +15,6 @@ class Users::ItemsController < ApplicationController
  	private
  	def item_params
  		params.require(:item).permit(:artist_id, :genre_id,	:label_id,
- 			:name, :price, :sales_status, :stock)
+ 			:name, :price, :sales_status, :stock, :image_id)
  	end
 end

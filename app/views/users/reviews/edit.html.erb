@@ -1,10 +1,13 @@
-<!-- 編集画面 -->
 <h2 style="display: inline-block;">
 	"<%= @item.name %>"へのレビュー
 </h2>
 
 <div class="review-post" style="border: solid 1px;">
-	<p>day</p>
+	<% if @review.created_at != @review.updated_at %>
+		<p style="display: inline-block;">このレビューの最近の更新日：<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+	<% else %>
+		<p style="display: inline-block;">このレビューの投稿日：<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+	<% end %>
 	<%= form_for(@review, url: {controller: 'reviews', action: 'update'}) do |f| %>
 			<p>題名</p>
 			<%= f.text_field :title %>
@@ -13,6 +16,9 @@
 			<%= f.submit '確定' %>
 	<% end %>
 	<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
-		<%= link_to '削除', users_item_review_path(@item, review), method: :delete %>
+		<%= link_to '削除', users_item_review_path(@item, @review), method: :delete, "data-confirm" => "本当に消しますか？"  %>
+	</span>
+	<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+		<%= link_to '戻る', users_item_reviews_path(@item) %> 
 	</span>
 </div>
