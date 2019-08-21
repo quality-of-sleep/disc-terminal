@@ -67,7 +67,7 @@ class Users::OrdersController < ApplicationController
 			# 小計Helper
 			price = price_reckoning(user.carts)             # 税別金額
 			order.tax = tax(price)                          # 消費税helper
-			order.subtotal_price = on_tax_price(price)      # 小計
+			order.subtotal_price = subtotal_price(price)      # 小計
 			order.total_price = total_price(price,carriage) # 合計金額（税込
 			order.carriage = carriage                       # 配送料
 			order.save

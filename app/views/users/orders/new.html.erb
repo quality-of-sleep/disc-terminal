@@ -23,9 +23,9 @@
 							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, "current_address", checked: "checked", class: "radio_button" %> </label></td>
 							<td>
 								<p><%= full_name(current_user) %></p>
-								<p><%= current_user.postal_code %></p>
+								<p>〒 <%= current_user.postal_code.insert(3, '-') %></p>
 								<p><%= current_user.address %></p>
-								<p><%= current_user.telephone_number %></p>
+								<p>TEL: <%= current_user.telephone_number %></p>
 							</td>
 						</tr>
 						<% @user.delivery_addresses.each do |d| %>
@@ -33,9 +33,9 @@
 								<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
 								<td>
 									<p><%= d.recipient %></p>
-									<p><%= d.postal_code %></p>
+									<p>〒 <%= d.postal_code.insert(3, '-') %></p>
 									<p><%= d.details %></p>
-									<p><%= d.telephone_number %></p>
+									<p>TEL: <%= d.telephone_number %></p>
 								</td>
 							</tr>
 						<% end %>

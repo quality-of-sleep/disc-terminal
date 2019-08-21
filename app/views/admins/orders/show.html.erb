@@ -23,13 +23,13 @@
 			  	<strong><%= @order.user_name %></strong>
 			  </li>
 			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	〒<%= @order.postal_code %>
+			  	〒<%= @order.postal_code.insert(3, '-') %>
 			  </li>
 			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
 			  	<%= @order.address %>
 			  </li>
 			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @order.telephone_number %>
+			  	TEL: <%= @order.telephone_number %>
 			  </li>
 			</ul>
 		</div>
