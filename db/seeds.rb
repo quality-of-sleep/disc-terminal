@@ -95,7 +95,7 @@ end
 							  payment: payment.sample,
 							  password:password,
 							  password_confirmation:password,
-							  # is_quit: false
+	#						   is_quit: false
 							  )
 end
 
@@ -118,4 +118,4 @@ end
 #							 	 telephone_number: user.delivery_addresses.telephone_number,
 #							 	 subtotal_price: 
 #							  )
-#end
+end
