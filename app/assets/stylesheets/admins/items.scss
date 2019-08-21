@@ -21,6 +21,7 @@
 
 .item-page p{
 	margin-bottom: 20px;
+	font-size: 12px;
 }
 
 .item-page .field{
@@ -161,6 +162,10 @@
 	position: absolute;
 	right: 0;
 	margin-bottom: 2px;
+}
+
+div>.remove_fields{
+	margin-bottom: 15px;
 }
 
 .under-nested-form{
