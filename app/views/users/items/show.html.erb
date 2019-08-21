@@ -1,5 +1,3 @@
-<h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%;">商品詳細</h2>
-
 <h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
 
 <div class="container">
@@ -8,16 +6,16 @@
 			<div class="album_image">
 				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 			</div>
-		</div>
+		</div> 
 		<div class="album-right" style="display: inline-block; padding: 30px;">
 			<h3><%= @item.name %></h3>
 			<p style="display: inline-block;">
-				<%= @item.artist_id %>	
+				<%= @item.artist.name %>	
 			</p>
 			<p style="display: inline-block; border: solid 1px;">
-				<%= @item.genre_id %>
+				<%= @item.genre.name %>
 			</p>
-			<p><%= @item.label_id %></p>
+			<p><%= @item.label.name %></p>
 			<div class="status" style="display: inline-block;">
 				<p class="sales_status" style="border:solid 1px; display: inline-block;">
 					<%= @item.sales_status %>
@@ -72,19 +70,19 @@
 						<p style="display: inline-block;"><%= @item.reviews.count %></p>
 				</div>
 			</div>
-			<div class="item-detail">
-				<h2>収録曲</h2>
-				<% @item.discs.each do |disc| %>
-					<div class="disc" style="display: inline-block;">
-						<p>disc<%= disc.number %></p>
-						<ul class="song-list">
-							<% disc.songs.each do |song| %>
-								<li><%= song.number %>. <%= song.name %></li>
-							<% end %>
-						</ul>
-					</div>
-				<% end %>
-			</div>
+		</div>
+		<div class="item-detail">
+			<h2>収録曲</h2>
+			<% @item.discs.each do |disc| %>
+				<div class="disc" style="display: inline-block;">
+					<p>disc<%= disc.number %></p>
+					<ul class="song-list">
+						<% disc.songs.each do |song| %>
+							<li><%= song.number %>. <%= song.name %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
 		</div>
 	</div>
 	<div class="album-reviews" style="border: solid 1px; width: 90%;">

@@ -1,18 +1,21 @@
 $(document).on('turbolinks:load', function() {
   // 全ての子孫要素から取得する.find()
-  $($('.item-page').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
+  $($('.item-page').find('select, input[type=text], input[type=number]')).addClass('form-control').css({'display':'inline'});
   $($('.item-page').find('select')).addClass('btn btn-default dropdown-toggle');
-  $($('.review-page').find('select, input[type=text]')).addClass('form-control').css({'display':'inline'});
+  $($('.review-page').find('select, input[type=text], input[type=number]')).addClass('form-control').css({'display':'inline'});
   $($('.review-page').find('select')).addClass('btn btn-default dropdown-toggle');
 
   // for index-page
 	$('.btn-info').css({'padding':'6px'});
 
 	// 一番目のディスク削除ボタンを隠す(divの直下のclassのみ適用)
-	$("div>.remove_fields").hide();
+	// $("div>.remove_fields").hide();
 
-	// disc番号と曲順は隠しておく
-	$('.song-number, .disc-number').hide();
+	// disc番号と曲順を隠す
+		var hide_text = function(){
+			$('.song-number, .disc-number').hide();
+		}
+		hide_text() // 実行
 
 	// disc番号を生成。既にディスク複数ある場合にも対応
 		var disc_number = function(){
@@ -60,15 +63,10 @@ $(document).on('turbolinks:load', function() {
 		var add_form_control = function(){
 			$('.disc input[type=text]').addClass('form-control').css({'width':'90%' ,'display':'inline'});
 		}
-		// 追加要素のdisc番号と曲順を隠す
-		var hide_text = function(){
-			$('.song-number, .disc-number').hide();
-		}
 
 		var disc_remove_margin = function(){
 			$("div>.remove_fields").css({'margin-bottom':'15px'});
 		}
-
 
 		// フォーム生成と同じタイミングでは動かないのでずらす
 		setTimeout(add_add_btn,3);
@@ -80,23 +78,23 @@ $(document).on('turbolinks:load', function() {
 		setTimeout(song_number,20);
 	  });
 
-	// ディスクを追加したとき自動で曲入力欄を生成
+});
+
+	// ディスクを追加したとき自動で曲入力欄を生成 {$(document).on(~}); の下に記述}
 	$(document).on('click','a[data-associations=discs]',function(){
+
 	// 自動で曲入力欄を生成
 		var add_song = function(){
 			$($('a[data-associations=songs]').last()).trigger('click');
 		};
-		setTimeout(add_song,30);
+		setTimeout(add_song,20);
 	});
 
+
 	// ディスクを削除したとき
-	// $(document).on('click','div>.remove_fields',function(){
+// $(document).on('click','div>.remove_fields',function(){
 
 	// });
-
-});
-
-
 
 
 
