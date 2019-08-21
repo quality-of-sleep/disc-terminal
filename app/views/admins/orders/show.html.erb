@@ -35,26 +35,6 @@
 		</div>
 
 		<div class="row">
-			<li class="list-group-item" style="max-width: 100px;">
-					<h4 style="text-align: center;">請求先</h4>
-			</li>
-			<ul class="list-group" style="max-width: 500px;">
-			  <li class="list-group-item" style="border-bottom: none;">
-			  	<strong><%= full_name(@order.user) %></strong>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	〒<%= @order.user.postal_code %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	<%= @order.user.address %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @order.user.telephone_number %>
-			  </li>
-			</ul>
-		</div>
-
-		<div class="row">
 			<div class="col-md-12">
 				<table class="table">
 					<thead>
