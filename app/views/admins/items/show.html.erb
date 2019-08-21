@@ -3,7 +3,7 @@
 	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
 			<div class="album_image">
-				<%= attachment_image_tag @item.image, :image, :fill, 350, 350, format: 'jpeg' %>
+				<%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 			</div>
 		</div>
 		<div class="album-right" style="display: inline-block;padding: 30px;">
@@ -52,7 +52,7 @@
 			<div class="item-detail">
 				<h2>収録曲</h2>
 				<% @item.discs.each do |disc| %> -->
-					<div class="disc" style="display: inline-block;">
+					<div class="disc-box" style="display: inline-block;">
 						<p>disc<%= disc.number %></p>
 						<ul class="song-list">
 							<% disc.songs.each do |song| %>

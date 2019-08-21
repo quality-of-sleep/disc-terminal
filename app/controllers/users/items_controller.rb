@@ -4,6 +4,7 @@ class Users::ItemsController < ApplicationController
 		@items = Item.page(params[:page]).per(PER)
 		@items = @items.search(key: 'name', value: params[:q]) if params[:q].present?
 		@user = current_user
+		@genres = Genre.all
 	end
 
 	def show

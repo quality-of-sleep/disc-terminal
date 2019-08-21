@@ -1,5 +1,12 @@
 class Users::ReviewsController < ApplicationController
-	#before_action :authenticate_user!, except: [:index]
+	before_action :ensure_correct_user, only: [:edit, :update]
+	def ensure_correct_user
+		review = Review.find(params[:id])
+    	if current_user.id != review.user.id
+    		@item = Item.find(params[:item_id])
+			redirect_to users_item_reviews_path(@item.id)
+    	end 
+	end
 
 	def new
 		#p.8.5 新規投稿ページの表示
@@ -40,6 +47,7 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def index
+		#p.8
 		@item = Item.find(params[:item_id])
 		@user = current_user
 		#下記で、@item.review.allと何が違う？
@@ -50,7 +58,7 @@ class Users::ReviewsController < ApplicationController
 	def review_params
 		params.require(:review).permit(
 			:item_id,
-		#	:user_id,
+			:user_id,
 			:title, 
 			:body
 			)

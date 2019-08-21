@@ -21,7 +21,7 @@
 				<p style="display: inline-block;"><%= review.updated_at.strftime('%Y/%m/%d') %></p>	
 			</div>
 			<p><%= review.body %></p>
-			<% if user_signed_in? %>
+			<% if current_user == review.user %>
 				<p>
 					<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
 						<%= link_to '編集', edit_users_item_review_path(@item, review) %> 
@@ -34,3 +34,4 @@
 		</div>
 	<% end %>
 </div>
+
