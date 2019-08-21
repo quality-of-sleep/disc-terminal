@@ -1,8 +1,8 @@
 <div class="navbar navbar-default hero" style="width: 100%;">
-  <nav class="container" id="top">
+  <nav class="container" >
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to "ディスクターミナル", root_path, class: "navbar-brand active" %>
+        <%= link_to 'ディスクターミナル', root_path, class: "navbar-brand active",id: "top" %>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
