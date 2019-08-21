@@ -2,7 +2,7 @@
   <nav class="container">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand active" href="#" id="top">ディスクターミナル</a>
+        <%= link_to 'ディスクターミナル', admins_path, class: "navbar-brand active",id: "top" %>
       </div>
       <% if admin_signed_in? %>
         <ul class="nav navbar-nav navbar-right">

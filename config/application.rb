@@ -18,5 +18,10 @@ module DiscTerminal
 
     # 東京時間設定
     config.time_zone = 'Tokyo'
+
+    # バリデーション時レイアウト崩れを防ぐ
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      %Q(#{html_tag}).html_safe
+    end
   end
 end
