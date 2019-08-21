@@ -39,9 +39,11 @@ class Admins::ItemsController < ApplicationController
 			redirect_to new_admins_item_url
 		end
 	end
+
 	def show
-		
+		@item = Item.find(params[:id])
 	end
+
 	def edit
 		@artist = Artist.new
 		@genre = Genre.new

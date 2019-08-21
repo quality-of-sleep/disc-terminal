@@ -1,20 +1,20 @@
 <h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
 <div class="container">
 	<div class="album" style="width: 90%; border: solid 1px;">
-		<div class="album-left" style="display: inline-block;">
-			<div class="album_image">
-				 <%= attachment_image_tag @item.image_id, :item_image, :fill, 350, 350, format: 'jpeg' %>
+		<div class="album-left" style="display: inline-block; padding: 30px;"> 
+			<div class="album_image" style="display: inline-block; padding: 30px;">
+				 <%= attachment_image_tag @item.image, :image, :fill, 50, 50, format: 'jpeg', fallback: "/no_image.jpg", size: '150x150' %>
 			</div>
-		</div>
+		</div> 
 		<div class="album-right" style="display: inline-block; padding: 30px;">
 			<h3><%= @item.name %></h3>
 			<p style="display: inline-block;">
-				<%= @item.artist_id %>	
+				<%= @item.artist.name %>	
 			</p>
 			<p style="display: inline-block; border: solid 1px;">
-				<%= @item.genre_id %>
+				<%= @item.genre.name %>
 			</p>
-			<p><%= @item.label_id %></p>
+			<p><%= @item.label.name %></p>
 			<div class="status" style="display: inline-block;">
 				<p class="sales_status" style="border:solid 1px; display: inline-block;">
 					<%= @item.sales_status %>

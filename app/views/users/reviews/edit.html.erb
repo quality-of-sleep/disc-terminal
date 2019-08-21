@@ -4,6 +4,7 @@
 </h2>
 
 <div class="review-post" style="border: solid 1px;">
+	<!-- 時間設定 -->
 	<p>day</p>
 	<%= form_for(@review, url: {controller: 'reviews', action: 'update'}) do |f| %>
 			<p>題名</p>
@@ -13,6 +14,9 @@
 			<%= f.submit '確定' %>
 	<% end %>
 	<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
-		<%= link_to '削除', users_item_review_path(@item, @review), method: :delete %>
+		<%= link_to '削除', users_item_review_path(@item, @review), method: :delete, "data-confirm" => "本当に消しますか？"  %>
+	</span>
+	<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
+		<%= link_to '戻る', users_item_reviews_path(@item) %> 
 	</span>
 </div>
