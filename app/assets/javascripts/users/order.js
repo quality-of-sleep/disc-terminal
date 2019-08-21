@@ -13,5 +13,12 @@ $(document).on('turbolinks:load', function() {
 		    $('.no_link').hide();
 		        return false;
 	     });
-    });
+		  });
+
+		  $('.credit_card').on('click', function(){
+	    	$('.credit_card_button').removeClass('hidden');
+	    });
+	    $('.not_credit_card').on('click', function(){
+	    	$('.credit_card_button').addClass('hidden');
+	    });
 });

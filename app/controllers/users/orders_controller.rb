@@ -67,10 +67,14 @@ class Users::OrdersController < ApplicationController
 			# 小計Helper
 			price = price_reckoning(user.carts)             # 税別金額
 			order.tax = tax(price)                          # 消費税helper
-			order.subtotal_price = subtotal_price(price)      # 小計
+			order.subtotal_price = subtotal_price(price)    # 小計
 			order.total_price = total_price(price,carriage) # 合計金額（税込
 			order.carriage = carriage                       # 配送料
 			order.save
+			if params[:order][:payment] == "クレジット支払"
+				Payjp.api_key = 'sk_test_b44f7f7725239fd573d01f8d'
+			  Payjp::Charge.create(currency: 'jpy', amount: order.total_price, card: params['payjp-token'])
+			end
 
 			user.carts.each do |cart|
 				order_details = order.order_details.new
