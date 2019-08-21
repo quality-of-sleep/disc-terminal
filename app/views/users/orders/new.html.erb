@@ -18,7 +18,7 @@
 							<th style="width: 80%;"></th>
 						</tr>
 					</thead>
-					<tbody class="hero">
+					<tbody>
 						<tr>
 							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, "current_address", checked: "checked", class: "radio_button" %> </label></td>
 							<td>
@@ -46,8 +46,17 @@
 				</div>
 			</div>
 
-			<div class="col-md-12">
-				<div id="add"></div>
+			<div class="col-md-12 price-box" id="form-area">
+				<div class="row" style="margin-top: 100px;">
+					<div class="col-md-4"></div>
+					<div id="add" class="col-md-8"></div>
+				</div>
+				<div class="row" >
+					<div class="col-md-4"></div>
+					<div class="col-md-4 cancel_button" style="display: none; margin-left: 1%; margin-top: 20px;">
+				 <%= render "users/orders/form" %>
+				</div>
+				</div>
 			</div>
 		</div>
 
@@ -59,12 +68,6 @@
 					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button not_credit_card" %> 銀行振込</label></li>
 					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button not_credit_card" %> 代金引換</label></li>
 				</ul>
-			</div>
-			<!-- 新規住所フォームのキャンセルボタンで戻ると表示がされないBugがあります -->
-			<div class="col-md-4 hidden credit_card_button">
-          <%= form_tag(action: :create, method: :post) do %>
-					   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
-					<% end %>
 			</div>
 		</div>
 
@@ -121,15 +124,13 @@
 					<p class="btn btn-danger btn-block">購入できない商品があります</p>
 				<% else %>
 					<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn btn-block" %>
+					<div class="hidden credit_card_button text-center" >
+          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
+					   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
+					<% end %>
+			</div>
 					<div class="order_confirmation_container">
 							<p class="btn btn-danger address_writing btn-block hidden">配送先を入力してください</p>
-						<div class="no_link">
-							<p style="text-align: left;">
-								配送先を入力してください。<br>
-								既存の配送先へお届けする場合は<br>
-								キャンセルボタンを押してください。
-							</p>
-						</div>
 					</div>
 				<% end %>
 			</li>
