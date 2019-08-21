@@ -68,4 +68,12 @@ module Users::CartsHelper
 	def on_tax_price(price)
 		((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_s(:delimited)
 	end
+
+	def sales_status?(carts)
+		carts.each do |cart|
+			if cart.item.sales_status != "販売中"
+				return false
+			end
+		end
+	end
 end

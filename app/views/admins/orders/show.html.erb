@@ -127,8 +127,17 @@
 		<li class="list-group-item" >
 			<h5><strong>支払方法</strong></h5>
 		</li>
-		<li class="list-group-item">
-			<p class="text-indent"><%= @order.payment %></p>
-		</li>
+		<% if @order.payment == "クレジット支払" %>
+			<li class="list-group-item" style="border-bottom: none;">
+				<p class="text-indent"><%= @order.payment %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none;">
+				<p class="text-indent">xxxx-xxxx-xxxx-1234</p>
+			</li>
+		<% else %>
+			<li class="list-group-item" >
+				<p class="text-indent"><%= @order.payment %></p>
+			</li>
+		<% end %>
 	</ul>
 </div>
