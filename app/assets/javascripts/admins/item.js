@@ -61,7 +61,7 @@ $(document).on('turbolinks:load', function() {
 
 		// 追加要素にもbootstrapを適用させるためclassを付与
 		var add_form_control = function(){
-			$('.disc input[type=text]').addClass('form-control').css({'width':'90%' ,'display':'inline'});
+			$('.disc input[type=text]').addClass('form-control').css({'width':'88.5%' ,'display':'inline'});
 		}
 
 		var disc_remove_margin = function(){
