@@ -46,6 +46,7 @@ class Users::OrdersController < ApplicationController
 		else
 			user = current_user
 			order = user.orders.new(order_params)
+			user.payment = order.payment
 			# 現住所を選択するとaddressにcurrent_addressが入る様になっているのでそこで分岐
 			if params[:order][:address] == "current_address"
 				# 現住所選択
@@ -100,11 +101,6 @@ class Users::OrdersController < ApplicationController
 		@user = User.find(params[:user_id])
 		@order = Order.find(params[:id])
 		@discount = 0
-	end
-
-	def form
-	end
-	def update
 	end
 
 	private
