@@ -23,33 +23,13 @@
 			  	<strong><%= @order.user_name %></strong>
 			  </li>
 			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	〒<%= @order.postal_code %>
+			  	〒<%= @order.postal_code.insert(3, '-') %>
 			  </li>
 			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
 			  	<%= @order.address %>
 			  </li>
 			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @order.telephone_number %>
-			  </li>
-			</ul>
-		</div>
-
-		<div class="row">
-			<li class="list-group-item" style="max-width: 100px;">
-					<h4 style="text-align: center;">請求先</h4>
-			</li>
-			<ul class="list-group" style="max-width: 500px;">
-			  <li class="list-group-item" style="border-bottom: none;">
-			  	<strong><%= full_name(@order.user) %></strong>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	〒<%= @order.user.postal_code %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	<%= @order.user.address %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @order.user.telephone_number %>
+			  	TEL: <%= @order.telephone_number %>
 			  </li>
 			</ul>
 		</div>
@@ -127,8 +107,17 @@
 		<li class="list-group-item" >
 			<h5><strong>支払方法</strong></h5>
 		</li>
-		<li class="list-group-item">
-			<p class="text-indent"><%= @order.payment %></p>
-		</li>
+		<% if @order.payment == "クレジット支払" %>
+			<li class="list-group-item" style="border-bottom: none;">
+				<p class="text-indent"><%= @order.payment %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none;">
+				<p class="text-indent">xxxx-xxxx-xxxx-1234</p>
+			</li>
+		<% else %>
+			<li class="list-group-item" >
+				<p class="text-indent"><%= @order.payment %></p>
+			</li>
+		<% end %>
 	</ul>
 </div>

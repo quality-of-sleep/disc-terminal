@@ -38,9 +38,11 @@ class Admins::ItemsController < ApplicationController
 			render 'new'
 		end
 	end
+
 	def show
-		
+		@item = Item.find(params[:id])
 	end
+
 	def edit
 		@artist = Artist.new
 		@genre = Genre.new
