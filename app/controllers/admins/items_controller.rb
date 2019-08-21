@@ -32,8 +32,9 @@ class Admins::ItemsController < ApplicationController
 		@item.label = @label if params[:label?] && params[:label][:name]
 		if @item.save
 			flash[:success] = '商品を追加しました'
-			redirect_to @item
+			redirect_to [:admins, @item]
 		else
+			# debugger
 			render 'new'
 		end
 	end

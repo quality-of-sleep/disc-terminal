@@ -13,12 +13,12 @@ class Item < ApplicationRecord
 
   enum sales_status:{ 編集中: 0, 在庫なし: 1, 販売停止中: 2, 販売中: 3 }
 
-  validates :name, presence: true
-  validates :price, presence: true
+  validates :name,
+      presence: { message: "商品名を入力してください" },
+      uniqueness: { case_sensitive: false, message: "この商品名は登録済みです" }
+  validates :price, presence: { message: "価格を入力してください" }
   validates :sales_status, presence: true
-  validates :name, presence: true
-  validates :name, presence: true
-  validates :stock, presence: true
+  validates :stock, presence: { message: "在庫数を入力してください" }
 
 
 
