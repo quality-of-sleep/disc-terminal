@@ -29,27 +29,7 @@
 			  	<%= @order.address %>
 			  </li>
 			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @order.telephone_number %>
-			  </li>
-			</ul>
-		</div>
-
-		<div class="row">
-			<li class="list-group-item" style="max-width: 100px;">
-					<h4 style="text-align: center;">請求先</h4>
-			</li>
-			<ul class="list-group" style="max-width: 500px;">
-			  <li class="list-group-item" style="border-bottom: none;">
-			  	<strong><%= full_name(@user) %></strong>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	〒<%= @user.postal_code %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none; border-bottom: none;">
-			  	<%= @user.address %>
-			  </li>
-			  <li class="list-group-item" style="border-top: none;">
-			  	<%= @user.telephone_number %>
+			  	TEL: <%= @order.telephone_number %>
 			  </li>
 			</ul>
 		</div>
@@ -110,7 +90,7 @@
 			<h5><strong>支払金額</strong></h5>
 		</li>
 		<li class="list-group-item" style="border-bottom: none;">
-			<p class="text-indent">小計 (<%= @total_amount %>点)　　¥ <%= @order.subtotal_price.to_s(:delimited) %></p>
+			<p class="text-indent">小計 (<%= total_amount(@order.order_details) %>点)　　¥ <%= @order.subtotal_price.to_s(:delimited) %></p>
 		</li>
 		<li class="list-group-item" style="border-top: none; border-bottom: none;">
 			<p class="text-indent">配送料　 　¥ <%= @order.carriage.to_s(:delimited) %></p>

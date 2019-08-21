@@ -1,7 +1,9 @@
 class Users::OrdersController < ApplicationController
 	# helper呼び出し
 	include Users::OrdersHelper
+
 	before_action :authenticate_user!
+
 	# URL直入力弾く
 	before_action :ensure_correct_user
 	def ensure_correct_user
@@ -13,28 +15,34 @@ class Users::OrdersController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@order = Order.new
-
 		# 配送料, 割引
 		@carriage = 500
 		@discount = 0
 		# 小計Helper
-		price = price_reckoning(@user.carts)        # 税別金額
-		@tax = tax(price)                           # 内税
-		@subtotal_price = on_tax_price(price)       # 小計
-		@total_amount = total_amount(@user.carts)   # 小計個数
-		@total_price = total_price(price,@carriage) # 合計金額（税込）
+		@price = price_reckoning(@user.carts)
 	end
 
 	def create
 		if params[:commit] == "登録"
-			user = current_user
-			new_addresses = user.delivery_addresses.new
-			new_addresses.recipient = params[:order][:user_name]
-			new_addresses.postal_code = params[:order][:postal_code]
-			new_addresses.details = params[:order][:address]
-			new_addresses.telephone_number = params[:order][:telephone_number]
-			new_addresses.save
-			redirect_back(fallback_location: root_url)
+			@user = current_user
+			# 手動バリデーション分岐
+			if params[:order][:user_name] != "" && params[:order][:postal_code] != "" && params[:order][:address] != "" && params[:order][:telephone_number] != ""
+				new_address = @user.delivery_addresses.new
+				# 住所登録ヘルパー
+				new_address_create(new_address, params[:order])
+				new_address.save
+				flash[:success] = '新しい配送先を追加しました'
+				redirect_to users_user_orders_new_path(@user)
+			else
+				@order = Order.new
+				# 配送料, 割引
+				@carriage = 500
+				@discount = 0
+				# 小計Helper
+				@price = price_reckoning(@user.carts)
+				flash[:danger] = '配送先の登録に失敗しました、情報は全て入力してください'
+				render :action => 'new', :controller => 'users/orders', :user_id => @user.id
+			end
 		else
 			user = current_user
 			order = user.orders.new(order_params)
@@ -59,7 +67,7 @@ class Users::OrdersController < ApplicationController
 			# 小計Helper
 			price = price_reckoning(user.carts)             # 税別金額
 			order.tax = tax(price)                          # 消費税helper
-			order.subtotal_price = on_tax_price(price)      # 小計
+			order.subtotal_price = subtotal_price(price)      # 小計
 			order.total_price = total_price(price,carriage) # 合計金額（税込
 			order.carriage = carriage                       # 配送料
 			order.save
@@ -74,7 +82,8 @@ class Users::OrdersController < ApplicationController
 				order_details.save
 				cart.destroy
 			end
-		redirect_to users_user_order_path(user, order)
+			flash[:success] = "注文を確定しました、ご購入ありがとうございます"
+			redirect_to users_user_order_path(user, order)
 		end
 	end
 
@@ -87,7 +96,6 @@ class Users::OrdersController < ApplicationController
 		@user = User.find(params[:user_id])
 		@order = Order.find(params[:id])
 		@discount = 0
-		@total_amount = total_amount(@order.order_details)
 	end
 
 	private
