@@ -9,6 +9,11 @@
   clear: both;
 }
 
+.item-page{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	}
+
 .item-page h1{
 	margin-bottom: 30px;
 	margin-top: -0px;
@@ -64,6 +69,7 @@
 .edit-item input[type="checkbox"]{
 	margin-left: 9%;
 }
+
 .search-area input[type="submit"]{
 	float:left;
 	width:20%;
@@ -141,8 +147,20 @@
 	right: 0;
 }
 
-li input[type=text]{
-	width: 90%;
+.item-page li{
+	position: relative;
+}
+
+.item-page li input[type=text]{
+	width: 89.5%;
+	margin-bottom: 2px;
+}
+
+.item-page li .btn-danger {
+	width: 10%;
+	position: absolute;
+	right: 0;
+	margin-bottom: 2px;
 }
 
 .under-nested-form{
