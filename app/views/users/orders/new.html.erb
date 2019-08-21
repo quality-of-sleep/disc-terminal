@@ -1,3 +1,8 @@
+<p class="alert alert-info">
+	注文内容をご確認の上、 "配送先" と "支払方法" を選択してください。<br>
+	<br>
+	配送先を新しく追加する場合は、 "配送先を追加する" ボタンを押してください。
+</p>
 <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
 	<div class="col-md-9">
 		<div class="row" style="margin-bottom: 25px;">
@@ -37,7 +42,7 @@
 					</tbody>
 				</table>
 				<div class="new_address">
-					<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
+					<%= link_to '配送先を追加する', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
 				</div>
 			</div>
 
