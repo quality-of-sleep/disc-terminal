@@ -119,5 +119,5 @@ end
 # 							 	 telephone_number: user.delivery_addresses.telephone_number,
 # 							 	 subtotal_price: 
 # 							  )
-# end
+#end
 
