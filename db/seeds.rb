@@ -83,7 +83,7 @@ end
 	address = "東京都渋谷区神南1丁目19番11号パークウェースクエア#{rand(100)}-#{rand(100)}"
 	payment = [1,2,3]
 	password = "password"
-	is_quit = [false,true].sample
+	# is_quit = [false, true]
 	User.create!( last_name: last_name.sample,
 								first_name: first_name.sample,
 								last_name_kana: last_name_kana.sample,
@@ -164,3 +164,4 @@ end
 									body: body,
 							  )
 end
+

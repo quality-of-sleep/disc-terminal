@@ -1,4 +1,3 @@
-<h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%; margin: 0 auto;">商品一覧</h2>
 <h2 style="border: solid 1px; text-align: center; width: 20%;">
 	商品一覧
 </h2>
@@ -7,20 +6,11 @@
 		<!-- 絞り込み機能　まだ -->
 		<div class="col-lg-3">
 			<table class="table" style="border: solid 1px; text-align: center;">
-				<tr><th>j-Pop</th></tr>
-				<tr><th>ロック/ポップス</th></tr>
-				<tr><th>HIP-HOP</th></tr>
-				<tr><th>R&B/ソウル</th></tr>
-				<tr><th>Jazz/ブルース</th></tr>
-				<tr><th>K-Pop/ワールド</th></tr>
-				<tr><th>演歌</th></tr>
-				<tr><th>クラシック</th></tr>
-				<tr><th>アニメ/ゲーム</th></tr>
-				<tr><th>サウンドトラック</th></tr>
-				<tr><th>その他</th></tr>
+				<% @genres.each do |genre| %>
+				<tr><th><%= genre.name %></th></tr>
+				<% end %>
 			</table>
 		</div>
-
 		<div class="col-lg-9">
 			<% @items.each do |item| %>
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
