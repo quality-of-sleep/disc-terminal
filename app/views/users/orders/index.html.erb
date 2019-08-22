@@ -16,7 +16,6 @@
 				<tr>
 					<td style="padding: 2% 1%;"><%= order.delivery_status %></td>
 					<td style="padding: 2% 1%;">
-						<!-- 後ほどenum化 -->
 						<% if order.order_details.count == 1 %>
 							<%= order.order_details[0].item_name %>
 						<% else %>

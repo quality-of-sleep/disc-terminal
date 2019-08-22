@@ -1,6 +1,5 @@
 <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
 	<div class="col-md-12">
-
 		<div class="row">
 			<div class="col-md-3">
 				<%= f.label "受取人" %>
@@ -32,9 +31,6 @@
 		<div class="row">
 			<div class="col-md-2">
 				<%= submit_tag "登録", class: "btn btn-primary btn-block" %>
-			</div>
-			<div class="col-md-2">
-				<%= link_to "キャンセル", users_user_orders_new_path(@user), class: "btn btn-default" %>
 			</div>
 		</div>
 	</div>

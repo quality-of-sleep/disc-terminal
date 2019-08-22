@@ -5,7 +5,7 @@ class Users::OrdersController < ApplicationController
 	before_action :authenticate_user!
 
 	# URL直入力弾く
-	before_action :ensure_correct_user
+	before_action :ensure_correct_user, {only:[:new, :create, :index, :show]}
 	def ensure_correct_user
 		if current_user.id != params[:user_id].to_i
 			redirect_to root_path
@@ -46,6 +46,7 @@ class Users::OrdersController < ApplicationController
 		else
 			user = current_user
 			order = user.orders.new(order_params)
+			user.payment = order.payment
 			# 現住所を選択するとaddressにcurrent_addressが入る様になっているのでそこで分岐
 			if params[:order][:address] == "current_address"
 				# 現住所選択

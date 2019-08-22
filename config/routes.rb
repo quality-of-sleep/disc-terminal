@@ -15,6 +15,8 @@ namespace :users do
   end
 end
 
+# 新規住所フォームキャンセル時のルーティング
+delete "delete_form" => "users/orders#destroy"
 
 
   namespace :users do
