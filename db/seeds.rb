@@ -83,20 +83,75 @@ end
 	address = "東京都渋谷区神南1丁目19番11号パークウェースクエア#{rand(100)}-#{rand(100)}"
 	payment = [1,2,3]
 	password = "password"
-	is_quit = [false,true]
+	is_quit = [false,true].sample
 	User.create!( last_name: last_name.sample,
 								first_name: first_name.sample,
 								last_name_kana: last_name_kana.sample,
 								first_name_kana: first_name_kana.sample,
 								telephone_number: telephone_number,
-							  email:email,
+							  email: email,
 							  postal_code: postal_code,
 							  address: address,
 							  payment: payment.sample,
-							  password:password,
-							  password_confirmation:password,
-							  is_quit: true 
+							  password: password,
+							  password_confirmation: password,
+							  # is_quit: is_quit
 							  )
+end
+
+# テストCartを生成
+User.all.each do |user|
+	Item.all.each do |item|
+		Cart.create!( user_id: user.id,
+									item_id: item.id,
+									amount: rand(0..3)
+							  )
+	end
+end
+
+# テストDeliveryAddressを生成
+User.all.each do |user|
+	rand(1..2).times do |i|
+		DeliveryAddress.create!(
+			user_id: user.id,
+			recipient: [user.last_name,"受取人"][i],
+			postal_code: [user.postal_code,"受取郵便番号"][i],
+			details: [user.address,"受取住所"][i],
+			telephone_number: [user.telephone_number,"受取電話番号"][i]
+		)
+	end
+end
+
+# テストOrderを生成
+User.all.each do |user|
+	person = user.delivery_addresses[[0].sample]
+	subtotal_price = rand(2..6)*rand(2..6)*100
+	carriage = 500
+	Order.create!(
+		user_id: user.id,
+		user_name: person.recipient,
+		postal_code: person.postal_code,
+		address: person.details,
+		telephone_number: person.telephone_number,
+		payment: [1,2,3].sample,
+		subtotal_price: subtotal_price,
+		carriage: carriage,
+		tax: subtotal_price*0.08,
+		total_price: subtotal_price*1.08 + carriage,
+		delivery_status: [1,2,3,4].sample
+		)
+end
+
+Order.all.length.times do |n|
+	item = Item.find(n+1)
+	OrderDetail.create!(
+		order_id: n+1,
+		item_id: item.id,
+		item_name: item.name,
+		artist: item.artist,
+		price: item.price,
+		amount: 2
+	)
 end
 
 # テストReviewを生成
@@ -109,15 +164,3 @@ end
 									body: body,
 							  )
 end
-
-# テストOrderを生成
-# User.all.each do |user|
-# 	Order.create!( user_id: rand(1..User.all.length),
-# 								 user_name: user.delivery_addresses.recipient,
-# 								 postal_code: user.delivery_addresses.recipient,
-# 							 	 address: user.delivery_addresses.details,
-# 							 	 telephone_number: user.delivery_addresses.telephone_number,
-# 							 	 subtotal_price: 
-# 							  )
-#end
-
