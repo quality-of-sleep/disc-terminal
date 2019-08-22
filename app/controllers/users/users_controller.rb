@@ -8,7 +8,7 @@ class Users::UsersController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
-    @delivery_address = @user.delivery_addresses.build
+    @delivery_addresses = @user.delivery_addresses.build
   end
 
   def update
@@ -43,4 +43,5 @@ class Users::UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
 end

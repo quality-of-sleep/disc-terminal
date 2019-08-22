@@ -4,7 +4,6 @@ class Admins::UsersController < ApplicationController
 		@users = User.all
 	end
 
-
 	def show
 	  	@user = User.find(params[:id])
 	    @admin_comment = AdminComment.new
