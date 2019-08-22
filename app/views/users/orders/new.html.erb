@@ -51,9 +51,9 @@
 			<h4 style="margin-bottom: 20px;"><strong>支払方法</strong></h4>
 			<div class="col-md-4">
 				<ul style="list-style: none; padding-left: 10px;">
-					<li><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button credit_card" %> クレジット支払</label></li>
-					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button not_credit_card" %> 銀行振込</label></li>
-					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button not_credit_card" %> 代金引換</label></li>
+					<li><label><%= f.radio_button :payment, :クレジット支払, checked: @card, class: "radio_button credit_card" %> クレジット支払</label></li>
+					<li><label><%= f.radio_button :payment, :銀行振込, checked: @bank, class: "radio_button not_credit_card" %> 銀行振込</label></li>
+					<li><label><%= f.radio_button :payment, :代金引換, checked: @cache, class: "radio_button not_credit_card" %> 代金引換</label></li>
 				</ul>
 			</div>
 		</div>
@@ -110,10 +110,18 @@
 				<% if sales_status?(@user.carts) == false %>
 					<p class="btn btn-danger btn-block">購入できない商品があります</p>
 				<% else %>
-					<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn btn-block" %>
-					<div class="hidden credit_card_button text-center" >
-          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
-					   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
+					<% if @card == true %>
+						<%= submit_tag "注文を確定する", class: "hidden btn btn-warning confirmation_btn btn-block" %>
+						<div class="credit_card_button text-center" >
+	          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
+						   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
+						<% end %>
+					<% else %>
+						<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn btn-block" %>
+						<div class="hidden credit_card_button text-center" >
+	          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
+						   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
+						<% end %>
 					<% end %>
 			</div>
 					<div class="order_confirmation_container">
