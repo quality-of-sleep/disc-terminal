@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', function() {
 		$('.new_address').on('click', function(){
 				$('#form-area').fadeToggle(2000);
 				$('.cancel_button').show(4000);
+				$('.form_title').show(4000);
     		$('.new_address').addClass('hidden');
     		$('.confirmation_btn').addClass('hidden');
     		$('.credit_card_button').addClass('hidden');

@@ -45,19 +45,6 @@
 					<%= link_to '配送先を追加する', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
 				</div>
 			</div>
-
-			<div class="col-md-12 price-box" id="form-area">
-				<div class="row" style="margin-top: 100px;">
-					<div class="col-md-4"></div>
-					<div id="add" class="col-md-8"></div>
-				</div>
-				<div class="row" >
-					<div class="col-md-4"></div>
-					<div class="col-md-4 cancel_button" style="display: none; margin-left: 1%; margin-top: 20px;">
-				 <%= render "users/orders/form" %>
-				</div>
-				</div>
-			</div>
 		</div>
 
 		<div class="row">
@@ -152,4 +139,23 @@
 			</li>
 		</ul>
 	</div>
+
+	<div class="col-md-12" id="form-area">
+				<div class="row" style="margin-top: 100px;">
+					<div class="col-md-4"></div>
+					<div class="col-md-8">
+						<h3 class="form_title" style="display: none; margin-bottom: 20px;">新規配送先登録</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div id="add" class="col-md-8"></div>
+				</div>
+				<div class="row" >
+					<div class="col-md-4"></div>
+					<div class="col-md-4 cancel_button" style="display: none; margin-left: 1%; margin-top: 20px;">
+				 <%= render "users/orders/form" %>
+				</div>
+				</div>
+			</div>
 <% end %>
