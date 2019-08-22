@@ -65,10 +65,6 @@ class Users::OrdersController < ApplicationController
 		else
 			user = current_user
 			order = user.orders.new(order_params)
-			# user.payment = order.payment
-			# binding.pry
-			# user.save
-			# logger.debug user.errors.inspect
 			# 現住所を選択するとaddressにcurrent_addressが入る様になっているのでそこで分岐
 			if params[:order][:address] == "current_address"
 				# 現住所選択
@@ -114,11 +110,9 @@ class Users::OrdersController < ApplicationController
 				end
 				item.save
 				cart.destroy
-				logger.debug item.errors.inspect
 			end
 			user.payment = order.payment
 			user.save
-			logger.debug user.errors.inspect
 			flash[:success] = "注文を確定しました、ご購入ありがとうございます"
 			redirect_to users_user_order_path(user, order)
 		end

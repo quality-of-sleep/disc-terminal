@@ -112,21 +112,18 @@
 				<% else %>
 					<% if @card == true %>
 						<%= submit_tag "注文を確定する", class: "hidden btn btn-warning confirmation_btn btn-block" %>
-						<div class="credit_card_button text-center" >
+						<div class="credit_card_button text-center" id="card-first" >
 	          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
 						   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
 						<% end %>
 					<% else %>
 						<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn btn-block" %>
-						<div class="hidden credit_card_button text-center" >
+						<div class="hidden credit_card_button text-center" id="card-second" >
 	          <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do %>
 						   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
-						<% end %>
 					<% end %>
+				<% end %>
 			</div>
-					<div class="order_confirmation_container">
-							<p class="btn btn-danger address_writing btn-block hidden">配送先を入力してください</p>
-					</div>
 				<% end %>
 			</li>
 
