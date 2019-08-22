@@ -4,7 +4,7 @@
 
 			<div class="field">
 				<%= item.label :name, "商品名" %>
-				<%= item.text_field :name %>
+				<%= item.text_field :name, placeholder: '商品名' %>
 			</div>
 			<div class="field">
 				<!-- selectから選んだ場合は params[:item][:artist_id]に値を渡す -->
@@ -15,7 +15,7 @@
 				<!-- テキストボックスに入力した場合は params[:artist][:name]に値を渡す -->
 				<%= check_box_tag :artist? %>
 				<%= label_tag :artist?, "新規登録" %>
-				<%= text_field_tag "artist[name]", "" %>
+				<%= text_field_tag "artist[name]", "",placeholder: 'アーティスト名'%>
 			</div>
 			<div class="field">
 				<div><%= item.label :genre, 'ジャンル' %></div>
@@ -23,7 +23,7 @@
 					 options_from_collection_for_select(Genre.all,:id,:name,"#{@item.genre.id}") %>
 				<%= check_box_tag :genre? %>
 				<%= label_tag :genre?, "新規登録" %>
-				<%= text_field_tag "genre[name]", "" %>
+				<%= text_field_tag "genre[name]", "",placeholder: 'ジャンル名' %>
 			</div>
 			<div class="field">
 				<div><%= item.label :label, 'レーベル' %></div>
@@ -31,21 +31,19 @@
 					 options_from_collection_for_select(Label.all,:id,:name,"#{@item.label.id}") %>
 				<%= check_box_tag :label? %>
 				<%= label_tag :label?, "新規登録" %>
-				<%= text_field_tag "label[name]","" %>
+				<%= text_field_tag "label[name]","",placeholder: 'レーベル名' %>
 			</div>
 			<div>
 				<%= render 'form',:f => item %>
 			</div>
 			<div class="under-nested-form">
 				<div class="field">
-					<%= item.label :price, '税込価格' %>
-
 					<%= item.label :price, '税別価格' %>
-					<%= item.text_field :price, placeholder:'半角数字' %>
+					<%= item.number_field :price, placeholder:'半角数字' %>
 				</div>
 				<div class="field">
 					<%= item.label :stock, '在庫数' %>
-					<%= item.text_field :stock, placeholder:'半角数字' %>
+					<%= item.number_field :stock, placeholder:'半角数字' %>
 				</div>
 				<div class="field">
 				  <%= item.label :sales_status, '販売ステータス' %>

@@ -10,11 +10,7 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
-		if params[:key].present?
-			items = sorted( @items, params[:key],params[:direction] )
- 			@items = Kaminari.paginate_array(items).page(params[:page]).per(25)
- 		end
-
+		@items = @items.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
 	end
 
 	def new
@@ -36,8 +32,9 @@ class Admins::ItemsController < ApplicationController
 		@item.label = @label if params[:label?] && params[:label][:name]
 		if @item.save
 			flash[:success] = '商品を追加しました'
-			render 'new'
+			redirect_to [:admins, @item]
 		else
+			# debugger
 			render 'new'
 		end
 	end

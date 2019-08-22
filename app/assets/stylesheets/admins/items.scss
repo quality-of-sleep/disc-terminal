@@ -3,11 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    li {
+    margin-left: 30px;
+    }
+  }
+}
+
 .clearfix:after {
   content: "";
   display: block;
   clear: both;
 }
+
+.item-page{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	}
 
 .item-page h1{
 	margin-bottom: 30px;
@@ -16,6 +34,7 @@
 
 .item-page p{
 	margin-bottom: 20px;
+	font-size: 12px;
 }
 
 .item-page .field{
@@ -64,6 +83,7 @@
 .edit-item input[type="checkbox"]{
 	margin-left: 9%;
 }
+
 .search-area input[type="submit"]{
 	float:left;
 	width:20%;
@@ -141,8 +161,24 @@
 	right: 0;
 }
 
-li input[type=text]{
-	width: 90%;
+.item-page li{
+	position: relative;
+}
+
+.item-page li input[type=text]{
+	width: 88.5%;
+	margin-bottom: 2px;
+}
+
+.item-page li .btn-danger {
+	width: 11%;
+	position: absolute;
+	right: 0;
+	margin-bottom: 2px;
+}
+
+div>.remove_fields{
+	margin-bottom: 15px;
 }
 
 .under-nested-form{

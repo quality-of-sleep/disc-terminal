@@ -8,10 +8,15 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+   # POST /resource/sign_in
+   def create
+    user = User.find_by(email: params[:user][:email])
+    if user.is_quit == "退会済み"
+      flash[:alert] = "退会済みアカウントです"
+      redirect_to root_path and return
+    end
+    super
+   end
 
   # DELETE /resource/sign_out
   # def destroy

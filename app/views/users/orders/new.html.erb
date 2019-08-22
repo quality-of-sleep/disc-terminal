@@ -1,5 +1,13 @@
+<p class="alert alert-info">
+	注文内容をご確認の上、 "配送先" と "支払方法" を選択してください。<br>
+	<br>
+	配送先を新しく追加する場合は、 "配送先を追加する" ボタンを押してください。
+</p>
 <%= form_for(@order, url: users_user_orders_path(@user), method: :post) do |f| %>
 	<div class="col-md-9">
+		<div class="row" style="margin-bottom: 25px;">
+			<h2>注文確認</h2>
+		</div>
 		<div class="row">
 			<h4><strong>配送先</strong></h4>
 			<div class="col-md-12">
@@ -12,13 +20,12 @@
 					</thead>
 					<tbody class="hero">
 						<tr>
-							<!-- CSSが効きません -->
-							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, flag: 'current_address' %> </label></td>
+							<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, "current_address", checked: "checked", class: "radio_button" %> </label></td>
 							<td>
-								<p><%= current_user.last_name + current_user.first_name %></p>
-								<p><%= current_user.postal_code %></p>
+								<p><%= full_name(current_user) %></p>
+								<p>〒 <%= current_user.postal_code.insert(3, '-') %></p>
 								<p><%= current_user.address %></p>
-								<p><%= current_user.telephone_number %></p>
+								<p>TEL: <%= current_user.telephone_number %></p>
 							</td>
 						</tr>
 						<% @user.delivery_addresses.each do |d| %>
@@ -26,16 +33,16 @@
 								<td class="text-center" ><label style="margin-top: 35%;"><%= f.radio_button :address, d.id, class: "radio_button" %> </label></td>
 								<td>
 									<p><%= d.recipient %></p>
-									<p><%= d.postal_code %></p>
+									<p>〒 <%= d.postal_code.insert(3, '-') %></p>
 									<p><%= d.details %></p>
-									<p><%= d.telephone_number %></p>
+									<p>TEL: <%= d.telephone_number %></p>
 								</td>
 							</tr>
 						<% end %>
 					</tbody>
 				</table>
 				<div class="new_address">
-					<%= link_to '配送先を追加', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
+					<%= link_to '配送先を追加する', users_user_orders_new_path, method: :get, remote: true, class: "btn btn-default" %>
 				</div>
 			</div>
 
@@ -48,13 +55,16 @@
 			<h4 style="margin-bottom: 20px;"><strong>支払方法</strong></h4>
 			<div class="col-md-4">
 				<ul style="list-style: none; padding-left: 10px;">
-					<li><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払</label></li>
-					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込</label></li>
-					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></li>
+					<li><label><%= f.radio_button :payment, :クレジット支払, class: "radio_button credit_card" %> クレジット支払</label></li>
+					<li><label><%= f.radio_button :payment, :銀行振込, class: "radio_button not_credit_card" %> 銀行振込</label></li>
+					<li><label><%= f.radio_button :payment, :代金引換, class: "radio_button not_credit_card" %> 代金引換</label></li>
 				</ul>
 			</div>
-			<div class="col-md-4">
-				<p class="btn btn-info disabled" >カード情報登録</p>
+			<!-- 新規住所フォームのキャンセルボタンで戻ると表示がされないBugがあります -->
+			<div class="col-md-4 hidden credit_card_button">
+          <%= form_tag(action: :create, method: :post) do %>
+					   <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_e4c88c23326912aec0c55890"></script>
+					<% end %>
 			</div>
 		</div>
 
@@ -105,36 +115,40 @@
 	</div>
 
 	<div class="col-md-3 price-box">
-
-			<div class="text-center" style="margin-top: 5%; margin-bottom: 15%;">
-				<!-- 販売中以外の商品を持って次に進めない機能　未実装 -->
-				<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn", style: "padding: 7px 30%;" %>
-				<div class="order_confirmation_container">
-						<p class="btn btn-danger address_writing" style="padding: 7px 16%; display: none">配送先を入力してください</p>
-					<div class="no_link">
-						<p style="text-align: left;">
-							配送先を入力してください。<br>
-							既存の配送先へお届けする場合は<br>
-							キャンセルボタンを押してください。
-						</p>
+		<ul class="list-group" style="max-width: 400px;">
+			<li class="list-group-item" style="border-bottom: none;">
+				<% if sales_status?(@user.carts) == false %>
+					<p class="btn btn-danger btn-block">購入できない商品があります</p>
+				<% else %>
+					<%= submit_tag "注文を確定する", class: "btn btn-warning confirmation_btn btn-block" %>
+					<div class="order_confirmation_container">
+							<p class="btn btn-danger address_writing btn-block hidden">配送先を入力してください</p>
+						<div class="no_link">
+							<p style="text-align: left;">
+								配送先を入力してください。<br>
+								既存の配送先へお届けする場合は<br>
+								キャンセルボタンを押してください。
+							</p>
+						</div>
 					</div>
-				</div>
-			</div>
+				<% end %>
+			</li>
 
-			<div class="text-center" style="margin-bottom: 10%;">
-				<p>小計 (<%= @total_amount %>点)　　¥ <%= @subtotal_price.to_s(:delimited) %></p>
-			</div>
-			<div class="text-center" style="margin-bottom: 10%;">
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
+				<p>小計 (<%= total_amount(@user.carts) %>点)　　¥ <%= subtotal_price(@price).to_s(:delimited) %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
 				<p>配送料　 　¥ <%= @carriage.to_s(:delimited) %></p>
-			</div>
-			<div class="text-center" style="margin-bottom: 10%;">
+			</li>
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
 				<p>割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
-			</div>
-			<div class="text-center" style="margin-bottom: 10%;">
-				<p>合計　 　¥ <%= @total_price.to_s(:delimited) %></p>
-			</div>
-			<div class="text-center" style="margin-bottom: 10%;">
-				<p>(内消費税　 　¥ <%= @tax.to_s(:delimited) %>)</p>
-			</div>
-		</div>
+			</li>
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
+				<p>合計　 　¥ <%= total_price(@price,@carriage).to_s(:delimited) %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none;">
+				<p>(内消費税　 　¥ <%= tax(@price).to_s(:delimited) %>)</p>
+			</li>
+		</ul>
+	</div>
 <% end %>

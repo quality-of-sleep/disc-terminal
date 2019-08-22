@@ -23,12 +23,10 @@
 	  </div>
 	  <div class="col-md-4">
 	  	<div  class="sort-area clearfix">
-     
 		  	<%= form_tag admins_items_path, method: :get do %>
-
 		  		<%= select_tag 'key',
 		  		 options_for_select([
-						["商品ID",'id'],["商品名",'name'],['在庫数','stock']
+						["商品ID",'id'],['在庫数','stock']
 		  		 	]) %>
 		  		<%= select_tag 'direction',
 		  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>

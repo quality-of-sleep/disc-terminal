@@ -44,28 +44,12 @@ module Users::CartsHelper
 		end
 	end
 
-	# 小計(金額)
-	def price_reckoning(carts)
-		price = 0
+	def sales_status?(carts)
 		carts.each do |cart|
-			price += cart.item.price * cart.amount
+			if cart.item.sales_status != "販売中"
+				return false
+			end
 		end
-		price
-	end
-	# 小計(購入数量)
-	def total_amount(carts)
-		amount = 0
-		carts.each do |cart|
-			amount += cart.amount
-		end
-		amount
 	end
 
-	# 消費税計算　BigDecimal=小数点計算, delimited=カンマ区切り
-	def tax(price)
-		((BigDecimal(price.to_s) * BigDecimal("0.08")).ceil).to_s(:delimited)
-	end
-	def on_tax_price(price)
-		((BigDecimal(price.to_s) * BigDecimal("1.08")).ceil).to_s(:delimited)
-	end
 end
