@@ -19,13 +19,21 @@ class Users::SessionsController < Devise::SessionsController
    end
 
   # DELETE /resource/sign_out
+  #退会処理後に"Sign out successfully"とは別のメッセージを表示するためには
+  #通常ログアウトと退会処理後自動ログアウトの分岐を行う必要がある
    def destroy
+  #この時点では通常ログアウトか退会処理後自動ログアウトか区別できない
     if current_user.is_quit == "退会済み"
       reset_session
+  #現ログインユーザの退会ステータスが"退会済み"であれば、
+  #セッション(現ログインユーザを特定するために一時的に保持している情報)をリセットする
+  #その後下記のメッセージを表示する
       flash[:alert] = "退会手続きが完了しました"
       redirect_to root_path and return
     else
      super
+  #現ログインユーザの退会ステータスが"利用中"であれば、
+  #通常ログアウトする->"Sign out successfully"を表示する
     end
    end
 
