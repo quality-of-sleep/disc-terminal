@@ -68,7 +68,6 @@ $(document).on('turbolinks:load', function() {
 			$("div>.remove_fields").css({'margin-bottom':'15px'});
 		}
 
-
 		// フォーム生成と同じタイミングでは動かないのでずらす
 		setTimeout(add_add_btn,3);
 		setTimeout(add_remove_btn,5);

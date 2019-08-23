@@ -1,4 +1,3 @@
-<h2 style="border: solid 1px; border-radius: 3px; text-align: center; width: 20%; margin: 0 auto;">商品一覧</h2>
 <h2 style="border: solid 1px; text-align: center; width: 20%;">
 	商品一覧
 </h2>
@@ -7,36 +6,27 @@
 		<!-- 絞り込み機能　まだ -->
 		<div class="col-lg-3">
 			<table class="table" style="border: solid 1px; text-align: center;">
-				<tr><th>j-Pop</th></tr>
-				<tr><th>ロック/ポップス</th></tr>
-				<tr><th>HIP-HOP</th></tr>
-				<tr><th>R&B/ソウル</th></tr>
-				<tr><th>Jazz/ブルース</th></tr>
-				<tr><th>K-Pop/ワールド</th></tr>
-				<tr><th>演歌</th></tr>
-				<tr><th>クラシック</th></tr>
-				<tr><th>アニメ/ゲーム</th></tr>
-				<tr><th>サウンドトラック</th></tr>
-				<tr><th>その他</th></tr>
+				<% @genres.each do |genre| %>
+				<tr><th><%= genre.name %></th></tr>
+				<% end %>
 			</table>
 		</div>
-
 		<div class="col-lg-9">
 			<% @items.each do |item| %>
 			<div class="album" style="width: 40%; display: inline-block; border: solid 1px;">
 				<div class="album-left" style="float: left;">
 					<p class="genre" style="border: solid 1px; text-align: center;">
-						<%= item.genre_id %>
+						<%= item.genre.name %>
 					</p>
 					<div>
 						<%= link_to users_item_path(item.id) do %> 
-						<%= attachment_image_tag item, :image, :fill, 50, 50, format: 'png', fallback: "/no_image.jpg", size: '150x150' %>
+						<%= attachment_image_tag item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size: '150x150' %>
 						<% end %>
 					</div>
 				</div>
 				<div class="album-right">
 					<h4><%= link_to item.name, users_item_path(item.id) %></h4>
-					<p style="text-align: center;"><%= item.artist_id %></p>
+					<p style="text-align: center;"><%= item.artist.name %></p>
 					<div>
 						<p style="border:solid 1px; display: inline-block; "><%= item.sales_status %></p>
 						<p style="display: inline-block;">￥<%= item.price %></p>

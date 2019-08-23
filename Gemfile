@@ -75,3 +75,5 @@ gem 'kaminari','~> 1.1.1'
 
 # for nested form
 gem "cocoon"
+
+gem 'payjp'
