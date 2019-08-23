@@ -1,11 +1,12 @@
 class Users::ReviewsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :ensure_correct_user, only: [:edit, :update]
 	def ensure_correct_user
 		review = Review.find(params[:id])
     	if current_user.id != review.user.id
     		@item = Item.find(params[:item_id])
 			redirect_to users_item_reviews_path(@item.id)
-    	end 
+    	end
 	end
 
 	def new
