@@ -19,9 +19,15 @@ class Users::SessionsController < Devise::SessionsController
    end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+   def destroy
+    if current_user.is_quit == "退会済み"
+      reset_session
+      flash[:alert] = "退会手続きが完了しました"
+      redirect_to root_path and return
+    else
+     super
+    end
+   end
 
   # protected
 
