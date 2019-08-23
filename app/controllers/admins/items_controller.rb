@@ -22,14 +22,19 @@ class Admins::ItemsController < ApplicationController
 		@songs = @disc.songs.build
 	end
 	def create
-		@artist = Artist.new(artist_params)
-		@genre = Genre.new(genre_params)
-		@label = Label.new(label_params)
 		@item = Item.new(item_params)
 		# チェックボックスをチェックしフォームを入力した場合のみ代入する
-		@item.artist = @artist if params[:artist?] && params[:artist][:name]
-		@item.genre = @genre if params[:genre?] && params[:genre][:name]
-		@item.label = @label if params[:label?] && params[:label][:name]
+		if params[:artist?] && params[:artist][:name].present?
+			@item.artist = Artist.new(artist_params)
+		end
+		if params[:genre?] && params[:genre][:name].present?
+			@genre = Genre.new(genre_params)
+			@item.genre = @genre
+		end
+		if params[:label?] && params[:label][:name].present?
+			@label = Label.new(label_params)
+			@item.label = @label 
+		end
 		if @item.save
 			flash[:success] = '商品を追加しました'
 			redirect_to [:admins, @item]
@@ -51,14 +56,20 @@ class Admins::ItemsController < ApplicationController
 		end
 	end
 	def update
-		@artist = Artist.new(artist_params)
-		@genre = Genre.new(genre_params)
-		@label = Label.new(label_params)
 		@item = Item.find(params[:id])
 		@item.update(item_params)
-		@item.artist = @artist if params[:artist?] && params[:artist][:name]
-		@item.genre = @genre if params[:genre?] && params[:genre][:name]
-		@item.label = @label if params[:label?] && params[:label][:name]
+		if params[:artist?] && params[:artist][:name].present?
+			@artist = Artist.new(artist_params)
+			@item.artist = @artist
+		end
+		if params[:genre?] && params[:genre][:name].present?
+			@genre = Genre.new(genre_params)
+			@item.genre = @genre
+		end
+		if params[:label?] && params[:label][:name].present?
+			@label = Label.new(label_params)
+			@item.label = @label 
+		end
 		if @item.save
 			flash[:success] = '商品を編集しました'
 			redirect_to [:admins, @item]
@@ -83,10 +94,12 @@ class Admins::ItemsController < ApplicationController
 	    params.require(:item).permit(
 	    	:name, :price, :stock, :sales_status, :image,
 	    	:artist_id, :genre_id, :label_id,
-				discs_attributes: [:id, :number, :_destroy,
-	    		songs_attributes: [:id, :name, :number, :_destroy]
+				discs_attributes: [
+					:id, :number, :_destroy,
+	    		songs_attributes: [
+						:id, :name, :number, :_destroy
+					]
 	    	]
-
 	   	)
 	  end
 
