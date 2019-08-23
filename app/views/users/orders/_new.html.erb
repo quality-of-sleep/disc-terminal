@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="form-group col-md-2">
 				<%= f.label "〒郵便番号" %>
-				<%= f.text_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
+				<%= f.number_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
 			</div>
 		</div>
 
@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="form-group col-md-3">
 				<%= f.label "電話番号" %>
-				<%= f.text_field :telephone_number, placeholder: "ハイフン無し：", class: "form-control" %>
+				<%= f.number_field :telephone_number, placeholder: "ハイフン無し：", class: "form-control" %>
 			</div>
 		</div>
 
