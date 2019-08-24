@@ -2,7 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 #error_explanation {
   color: red;
@@ -11,112 +21,106 @@
     margin-top: 30px;
     margin-bottom: 30px;
     li {
-    margin-left: 30px;
+      margin-left: 30px;
     }
   }
 }
 
-.clearfix:after {
-  content: "";
-  display: block;
-  clear: both;
+.item-page {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.item-page{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	}
-
-.item-page h1{
-	margin-bottom: 30px;
-	margin-top: -0px;
+.item-page h1 {
+  margin-bottom: 30px;
+  margin-top: -0px;
 }
 
-.item-page p{
-	margin-bottom: 20px;
-	font-size: 12px;
+.item-page p {
+  margin-bottom: 20px;
+  font-size: 12px;
 }
 
-.item-page .field{
-	margin-bottom: 30px;
-	position: relative;
+.item-page .field {
+  margin-bottom: 30px;
+  position: relative;
 }
 
-.item-page input[type="checkbox"]{
-	margin-left: 9%;
+.item-page input[type="checkbox"] {
+  margin-left: 9%;
 }
 
-.item-header{
-	margin-bottom: 150px;
-	margin-top: 40px;
+.item-header {
+  margin-bottom: 150px;
+  margin-top: 40px;
 }
-.item-header .page-title{
- 	line-height: 0;
- }
+.item-header .page-title {
+  line-height: 0;
+}
 
 //検索部分
 
-.search-area{
-	width: 100%;
-	height: 3em;
+.search-area {
+  width: 100%;
+  height: 3em;
 }
 
-.search-area select{
-	float:left;
-	width:33%
+.search-area select {
+  float: left;
+  width: 33%;
 }
 
-.search-area input[type="text"]{
-	float:left;
-	width:80%;
-	margin-top: 5px;
+.search-area input[type="text"] {
+  float: left;
+  width: 80%;
+  margin-top: 5px;
 }
 
-.edit-item .field{
-	margin-bottom: 30px;
-	position: relative;
+.edit-item .field {
+  margin-bottom: 30px;
+  position: relative;
 }
 
-.new-item input[type="checkbox"]{
-	margin-left: 9%;
+.new-item input[type="checkbox"] {
+  margin-left: 9%;
 }
-.edit-item input[type="checkbox"]{
-	margin-left: 9%;
-}
-
-.search-area input[type="submit"]{
-	float:left;
-	width:20%;
-	padding: 0;
-	margin-top: 5px;
+.edit-item input[type="checkbox"] {
+  margin-left: 9%;
 }
 
-.sort-area{
-	width: 100%;
+.search-area input[type="submit"] {
+  float: left;
+  width: 20%;
+  padding: 0;
+  margin-top: 5px;
 }
 
-.item-header .sort-area select{
-	float:left;
-	width:50%;
+.sort-area {
+  width: 100%;
 }
 
-.item-header .btn-info{
-	float:left;
-	width:100%;
-	margin-top: 5px;
+.item-header .sort-area select {
+  float: left;
+  width: 50%;
 }
 
-.item-header .btn-success{
-	width:100%;
-	margin-top: 5px;
+.item-header .btn-info {
+  float: left;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.item-header .btn-success {
+  width: 100%;
+  margin-top: 5px;
 }
 
 //全文表示
 
-.show-content{
+.show-content {
   position: relative;
 }
-.full-content{
+.full-content {
   display: none;
   background-color: #fff;
   width: 300px;
@@ -124,116 +128,116 @@
   border: 1px solid #000;
   position: absolute;
   top: 0;
-  Z-index: 100;
+  z-index: 100;
 }
 
-#item_name{
-	width: 100%;
+#item_name {
+  width: 100%;
 }
 
-#item_artist_id{
-	width: 30%;
+#item_artist_id {
+  width: 30%;
 }
 
-#artist_name{
-	width: 50%;
-	position: absolute;
-	right: 0;
+#artist_name {
+  width: 50%;
+  position: absolute;
+  right: 0;
 }
 
-#item_genre_id{
-	width: 30%;
+#item_genre_id {
+  width: 30%;
 }
 
-#genre_name{
-	width: 50%;
-	position: absolute;
-	right: 0;
+#genre_name {
+  width: 50%;
+  position: absolute;
+  right: 0;
 }
 
-#item_label_id{
-	width: 30%;
+#item_label_id {
+  width: 30%;
 }
 
-#label_name{
-	width: 50%;
-	position: absolute;
-	right: 0;
+#label_name {
+  width: 50%;
+  position: absolute;
+  right: 0;
 }
 
-.item-page li{
-	position: relative;
+.item-page li {
+  position: relative;
 }
 
-.item-page li input[type=text]{
-	width: 88.5%;
-	margin-bottom: 2px;
+.item-page li input[type="text"] {
+  width: 88.5%;
+  margin-bottom: 2px;
 }
 
 .item-page li .btn-danger {
-	width: 11%;
-	position: absolute;
-	right: 0;
-	margin-bottom: 2px;
+  width: 11%;
+  position: absolute;
+  right: 0;
+  margin-bottom: 2px;
 }
 
-div>.remove_fields{
-	margin-bottom: 15px;
+div > .remove_fields {
+  margin-bottom: 15px;
 }
 
-.under-nested-form{
-	margin-top: 30px;
-	text-align: right;
-	position: relative;
+.under-nested-form {
+  margin-top: 30px;
+  text-align: right;
+  position: relative;
 }
 
-.img{
-	position: absolute;
-	text-align: left;
-	left: 0;
-	top: 0;
+.img {
+  position: absolute;
+  text-align: left;
+  left: 0;
+  top: 0;
 }
 
-#item_price{
-	width: 20%;
+#item_price {
+  width: 20%;
 }
 
-#item_stock{
-	width: 20%;
+#item_stock {
+  width: 20%;
 }
 
-#item_sales_status{
-	width: 20%;
+#item_sales_status {
+  width: 20%;
 }
 
 .actions {
-	margin: 100px auto;
-	position: relative;
-	height: fit-content;
+  margin: 100px auto;
+  position: relative;
+  height: fit-content;
 }
 
-.actions .btn{
-	width: 40%;
+.actions .btn {
+  width: 40%;
 }
 
-.actions .btn-info{
-	position: absolute;
-	left: 5%;
+.actions .btn-info {
+  position: absolute;
+  left: 5%;
 }
 
-.actions .btn-danger{
+.actions .btn-danger {
 }
 
-.item-page .actions .btn{
-	width: 40%;
+.item-page .actions .btn {
+  width: 40%;
 }
 
-.item-page .actions .btn-info{
-	position: absolute;
-	left: 5%;
+.item-page .actions .btn-info {
+  position: absolute;
+  left: 5%;
 }
 
-.item-page .actions .btn-danger{
-	position: absolute;
-	right: 5%;
+.item-page .actions .btn-danger {
+  position: absolute;
+  right: 5%;
 }

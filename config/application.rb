@@ -22,5 +22,10 @@ module DiscTerminal
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(#{html_tag}).html_safe
     end
+
+    # JavaScriptが無効の場合の設定 認証トークンをremoteフォームに埋め込む
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
+    
   end
 end
