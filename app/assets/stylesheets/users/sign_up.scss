@@ -1,0 +1,51 @@
+// Place all the styles related to the admins::items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// .half-field input[type="text"] {
+//   width: 40%;
+// }
+
+.item-page h2 {
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.half-content .field,
+.set-content .field,
+.dup-content .field {
+  height: 40px;
+}
+.half-content .half1 {
+  width: 45%;
+  position: absolute;
+  left: 3%;
+}
+.half-content .half2 {
+  width: 45%;
+  position: absolute;
+  right: 3%;
+}
+
+.set-content .subject {
+  width: 25%;
+  position: absolute;
+  left: 3%;
+}
+
+.set-content .content {
+  width: 65%;
+  position: absolute;
+  right: 3%;
+}
+
+.dup-content .dup-top {
+  position: absolute;
+  right: 3%;
+  left: 3%;
+}
+.dup-content .dup-bottom {
+  position: absolute;
+  right: 3%;
+  left: 3%;
+}
