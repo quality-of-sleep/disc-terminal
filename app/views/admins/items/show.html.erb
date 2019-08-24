@@ -45,31 +45,28 @@
 				</div>
 			</div>
 		</div>
-			<div class="item-detail">
-				<h2>収録曲</h2>
-				<% @item.discs.each do |disc| %>
-					<div class="disc-box" style="display: inline-block;">
-						<p>disc<%= disc.number %></p>
-						<ul class="song-list">
-							<% disc.songs.each do |song| %>
-								<li>
-									<%= song.number %>.<%= song.name %>
-								</li>
-							<% end %>
-						</ul>
-					</div>
-				<% end %>
-			</div>
-			<div class="">
-				<ul style="display: inline-block;">
-					<li style="float: left;">
-						<%= link_to 'この商品のレビュー一覧', admins_reviews_path(genre: @item.genre.id) %>
-					</li>
-					<li style="float: left;">
-						<%= link_to '編集', edit_admins_item_path(@item) %>
-					</li>
-				</ul>
-			</div>
-		
+		<div class="item-detail">
+			<h2>収録曲</h2>
+			<% @item.discs.each do |disc| %>
+				<div class="disc-box" style="display: inline-block;">
+					<p>disc<%= disc.number %></p>
+					<ul class="song-list">
+						<% disc.songs.each do |song| %>
+							<li>
+								<%= song.number %>.<%= song.name %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+		</div>
+		<ul style="display: inline-block;">
+			<li style="float: left;">
+				<%= link_to 'この商品のレビュー一覧', admins_reviews_path(item: @item) %>
+			</li>
+			<li style="float: left;">
+				<%= link_to '編集', edit_admins_item_path(@item) %>
+			</li>
+		</ul>		
 	</div>
 </div>

@@ -33,7 +33,6 @@ module Users::OrdersHelper
 	end
 end
 
-
 # 新規配送先登録
 def new_address_create(address, params)
 	address.recipient = params[:user_name]
