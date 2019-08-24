@@ -4,10 +4,10 @@
       <%= f.label :recipient, '配送先名：'%>
       <%= f.text_field :recipient %><br>
       <%= f.label :postal_code, '〒'%>
-      <%= f.text_field :postal_code %><br>
+      <%= f.number_field :postal_code %><br>
       <%= f.text_area :details %>
       <%= f.label :telephone_number, 'TEL'%>
-      <%= f.text_field :telephone_number %><br>
+      <%= f.number_field :telephone_number %><br>
     </div>
     <div>
       <%= link_to_remove_association "新規住所を削除", f %>
