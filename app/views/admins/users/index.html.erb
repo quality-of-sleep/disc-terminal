@@ -50,8 +50,9 @@
 							</th>
 							<td style="width:10%;"><%= user.is_quit %></td>
 							<td style="width:10%;">
-								<%= link_to user.last_name, admins_user_path(user) %><%= link_to user.first_name, admins_user_path(user) %></td>
-							<td style="width:10%;"><%= link_to user.last_name_kana, admins_user_path(user) %><%= link_to user.first_name_kana, admins_user_path(user) %></td>
+								<a href="/admins/users/<%= user.id %>"><%= user.last_name %><%= user.first_name %></a></td>
+							<td style="width:10%;">
+								<a href="/admins/users/<%= user.id %>"><%= user.last_name_kana %><%= user.first_name_kana %></a></td>
 							<td style="width:10%;"><%= user.telephone_number %></td>
 							<td style="width:10%;"><%= user.email %></td>
 						</tr>

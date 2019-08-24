@@ -34,7 +34,7 @@
 
         <div class="field">
           <h4>電話番号</h4>
-          <%= f.text_field :telephone_number, placeholder: "電話番号：", style: "width: 30%;"%>
+          <%= f.number_field :telephone_number, placeholder: "電話番号：", style: "width: 30%;"%>
         </div>
 
         <div class="field">
@@ -44,7 +44,7 @@
 
         <div class="field">
           <h4>パスワード</h4>
-          <%= f.password_field :password, autocomplete: "current_password", placeholder: "パスワード：6文字以上必須だけど何も入力しなくても他の情報は更新できるっぽいです", style: "width: 100%;"%>
+          <%= f.password_field :password, autocomplete: "current_password", placeholder: "パスワード：8文字以上必須だけど何も入力しなくても他の情報は更新できるっぽいです", style: "width: 100%;"%>
         </div>
 
         <div class="field">
@@ -55,7 +55,7 @@
         <div class="field">
           <h4>現住所</h4>
           <%= f.label "〒" %>
-          <%= f.text_field :postal_code, style: "width: 30%;"%>
+          <%= f.number_field :postal_code, style: "width: 30%;"%>
         </div>
 
         <div class="field">
