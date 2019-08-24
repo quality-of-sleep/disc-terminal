@@ -1,7 +1,7 @@
+
 <h2 style="display: inline-block;">
 	"<%= @item.name %>"へのレビュー
 </h2>
-
 <div class="review-post" style="border: solid 1px;">
 	<% if @review.created_at != @review.updated_at %>
 		<p style="display: inline-block;">このレビューの最近の更新日：<%= @review.updated_at.strftime('%Y/%m/%d') %></p>

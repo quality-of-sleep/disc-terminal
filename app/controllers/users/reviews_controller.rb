@@ -20,9 +20,15 @@ class Users::ReviewsController < ApplicationController
 		review = Review.new(review_params)
 		review.user_id = current_user.id
 		review.item = Item.find(params[:item_id])
-		review.save
-		@item = Item.find(params[:item_id])
-		redirect_to users_item_reviews_path(@item.id)
+		if review.save
+			@item = Item.find(params[:item_id])
+			flash[:notice] ="レビューが投稿されました"
+			redirect_to users_item_reviews_path(@item.id)
+		else
+			@item = Item.find(params[:item_id])
+			flash[:notice] ="レビューが投稿されませんでした　記入欄に空欄があります"
+			redirect_to new_users_item_review_path(@item)
+		end
 	end
 
 	def edit
@@ -35,9 +41,15 @@ class Users::ReviewsController < ApplicationController
 		review = Review.find(params[:id])
 		review.user = current_user
 		review.item = Item.find(params[:item_id])
-		review.update(review_params)
-		@item = Item.find(params[:item_id])
-		render :index
+		if review.update(review_params)
+			@item = Item.find(params[:item_id])
+			flash[:notice] ="レビューが更新されました"
+			render :index
+		else
+			flash[:notice] ="レビューが更新されませんでした　記入欄に空欄があります"
+			@item = Item.find(params[:item_id])
+			redirect_to edit_users_item_review_path(@item, review)
+		end
 	end
 
 	def destroy
