@@ -4,13 +4,24 @@ class Admins::ItemsController < ApplicationController
 	def index
 		@artists = Artist.all
 		@genres = Genre.all
- 		@items = Item.page(params[:page])
+ 		@items ||= Item.page(params[:page])
 
 		@items = @items.search(key: 'name', value: params[:search]) if params[:search].present?
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
+
+		if params[:sales_status?]
+			@item = Item.find_by(id: params[:id])
+			@item.sales_status = params[:sales_status?].to_i
+			@item.save
+			respond_to do |format|
+				format.html { redirect_back(fallback_location: admins_items_url) }
+				format.js
+			end
+		end
+
 	end
 
 	def new
@@ -28,26 +39,21 @@ class Admins::ItemsController < ApplicationController
 			@item.artist = Artist.new(artist_params)
 		end
 		if params[:genre?] && params[:genre][:name].present?
-			@genre = Genre.new(genre_params)
-			@item.genre = @genre
+			@item.genre = Genre.new(genre_params)
 		end
 		if params[:label?] && params[:label][:name].present?
-			@label = Label.new(label_params)
-			@item.label = @label 
+			@item.label = Label.new(label_params)
 		end
 		if @item.save
 			flash[:success] = '商品を追加しました'
 			redirect_to [:admins, @item]
 		else
-			# debugger
 			render 'new'
 		end
 	end
-
 	def show
 		@item = Item.find(params[:id])
 	end
-
 	def edit
 		@artist = Artist.new
 		@genre = Genre.new
@@ -61,16 +67,13 @@ class Admins::ItemsController < ApplicationController
 		@item = Item.find(params[:id])
 		@item.update(item_params)
 		if params[:artist?] && params[:artist][:name].present?
-			@artist = Artist.new(artist_params)
-			@item.artist = @artist
+			@item.artist = Artist.new(artist_params)
 		end
 		if params[:genre?] && params[:genre][:name].present?
-			@genre = Genre.new(genre_params)
-			@item.genre = @genre
+			@item.genre = Genre.new(genre_params)
 		end
 		if params[:label?] && params[:label][:name].present?
-			@label = Label.new(label_params)
-			@item.label = @label 
+			@item.label = Label.new(label_params)
 		end
 		if @item.save
 			flash[:success] = '商品を編集しました'
