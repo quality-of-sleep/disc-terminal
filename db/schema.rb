@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_favorites_on_item_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
-    t.index [nil, nil], name: "index_favorites_on_user_and_item", unique: true
   end
 
   create_table "genres", force: :cascade do |t|

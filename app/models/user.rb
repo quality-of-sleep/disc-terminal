@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
+  validates :email, presence: true
   enum is_quit:{利用中: false, 退会済み: true}
   enum payment:{クレジット支払: 1, 銀行振込: 2, 代金引換: 3}
 
