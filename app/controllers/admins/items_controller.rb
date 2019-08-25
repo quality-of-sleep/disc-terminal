@@ -10,6 +10,17 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
 		@items = @items.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
+
+		if params[:sales_status?]
+			@item = Item.find_by(id: params[:id])
+			@item.sales_status = params[:sales_status?].to_i
+			@item.save
+			respond_to do |format|
+				format.html { redirect_back(fallback_location: admins_items_url) }
+				format.js
+			end
+		end
+
 	end
 
 	def new
@@ -21,27 +32,27 @@ class Admins::ItemsController < ApplicationController
 		@songs = @disc.songs.build
 	end
 	def create
-		@artist = Artist.new(artist_params)
-		@genre = Genre.new(genre_params)
-		@label = Label.new(label_params)
 		@item = Item.new(item_params)
 		# チェックボックスをチェックしフォームを入力した場合のみ代入する
-		@item.artist = @artist if params[:artist?] && params[:artist][:name]
-		@item.genre = @genre if params[:genre?] && params[:genre][:name]
-		@item.label = @label if params[:label?] && params[:label][:name]
+		if params[:artist?] && params[:artist][:name].present?
+			@item.artist = Artist.new(artist_params)
+		end
+		if params[:genre?] && params[:genre][:name].present?
+			@item.genre = Genre.new(genre_params)
+		end
+		if params[:label?] && params[:label][:name].present?
+			@item.label = Label.new(label_params)
+		end
 		if @item.save
 			flash[:success] = '商品を追加しました'
 			redirect_to [:admins, @item]
 		else
-			# debugger
 			render 'new'
 		end
 	end
-
 	def show
 		@item = Item.find(params[:id])
 	end
-
 	def edit
 		@artist = Artist.new
 		@genre = Genre.new
@@ -52,14 +63,17 @@ class Admins::ItemsController < ApplicationController
 		end
 	end
 	def update
-		@artist = Artist.new(artist_params)
-		@genre = Genre.new(genre_params)
-		@label = Label.new(label_params)
 		@item = Item.find(params[:id])
 		@item.update(item_params)
-		@item.artist = @artist if params[:artist?] && params[:artist][:name]
-		@item.genre = @genre if params[:genre?] && params[:genre][:name]
-		@item.label = @label if params[:label?] && params[:label][:name]
+		if params[:artist?] && params[:artist][:name].present?
+			@item.artist = Artist.new(artist_params)
+		end
+		if params[:genre?] && params[:genre][:name].present?
+			@item.genre = Genre.new(genre_params)
+		end
+		if params[:label?] && params[:label][:name].present?
+			@item.label = Label.new(label_params)
+		end
 		if @item.save
 			flash[:success] = '商品を編集しました'
 			redirect_to [:admins, @item]
@@ -84,10 +98,12 @@ class Admins::ItemsController < ApplicationController
 	    params.require(:item).permit(
 	    	:name, :price, :stock, :sales_status, :image,
 	    	:artist_id, :genre_id, :label_id,
-				discs_attributes: [:id, :number, :_destroy,
-	    		songs_attributes: [:id, :name, :number, :_destroy]
+				discs_attributes: [
+					:id, :number, :_destroy,
+	    		songs_attributes: [
+						:id, :name, :number, :_destroy
+					]
 	    	]
-
 	   	)
 	  end
 end

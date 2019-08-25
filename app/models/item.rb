@@ -15,9 +15,13 @@ class Item < ApplicationRecord
   validates :name,
       presence: { message: "商品名を入力してください" },
       uniqueness: { case_sensitive: false, message: "この商品名は登録済みです" }
-  validates :price, presence: { message: "価格を入力してください" }
+  validates :price,
+   presence: { message: "価格を入力してください" },
+   format: { with: /\A[0-9]+\z/ , message: "価格は半角数字を入力してください" }
   validates :sales_status, presence: true
-  validates :stock, presence: { message: "在庫数を入力してください" }
+  validates :stock,
+   presence: { message: "在庫数を入力してください" },
+   format: { with: /\A[0-9]+\z/ , message: "在庫数は半角数字を入力してください" }
 
   has_many :favorites, dependent: :destroy
   #try 8/22 18:13
@@ -28,4 +32,5 @@ class Item < ApplicationRecord
   end
 
 end
+
 

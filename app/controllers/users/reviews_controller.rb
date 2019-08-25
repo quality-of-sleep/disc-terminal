@@ -17,16 +17,14 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def create
-		review = Review.new(review_params)
-		review.user_id = current_user.id
-		review.item = Item.find(params[:item_id])
-		if review.save
-			@item = Item.find(params[:item_id])
-			flash[:notice] ="レビューが投稿されました"
+		@item = Item.find(params[:item_id])
+		@review = @item.reviews.new(review_params)
+		@review.user_id = current_user.id
+		if @review.save
+			flash[:success] = "レビューが投稿されました"
 			redirect_to users_item_reviews_path(@item.id)
 		else
-			@item = Item.find(params[:item_id])
-			flash[:notice] ="レビューが投稿されませんでした　記入欄に空欄があります"
+			flash[:danger] = "レビューの投稿に失敗しました"
 			redirect_to new_users_item_review_path(@item)
 		end
 	end
@@ -72,7 +70,7 @@ class Users::ReviewsController < ApplicationController
 		params.require(:review).permit(
 			:item_id,
 			:user_id,
-			:title, 
+			:title,
 			:body
 			)
 	end
