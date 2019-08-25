@@ -10,7 +10,12 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
-		@items = @items.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
+		if params[:key].present?
+			@items = @items.reorder("#{params[:key]} #{params[:direction]}")
+			@sort = sorted( @items, params[:key],params[:direction] )
+			@items = Kaminari.paginate_array(@sort).page(params[:page]).per(25)
+		end
+	
 
 		if params[:sales_status?]
 			@item = Item.find_by(id: params[:id])

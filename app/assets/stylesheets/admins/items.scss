@@ -26,11 +26,79 @@
   }
 }
 
+// 登録フォーム
+.item-page h2 {
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.half-content .field,
+.set-content .field,
+.dup-content .field {
+  height: 40px;
+}
+
+.half-content .half1 {
+  width: 45%;
+  position: absolute;
+  left: 3%;
+}
+
+.half-content .half2 {
+  width: 45%;
+  position: absolute;
+  right: 3%;
+}
+
+.set-content .subject {
+  width: 25%;
+  position: absolute;
+  left: 3%;
+}
+
+.set-content .content {
+  width: 65%;
+  position: absolute;
+  right: 3%;
+}
+
+.dup-content .dup-top {
+  position: absolute;
+  right: 3%;
+  left: 3%;
+}
+
+.dup-content .dup-bottom {
+  position: absolute;
+  right: 3%;
+  left: 3%;
+}
+
+// 退会ページ
+.alert-form {
+  text-align: center;
+}
+
+.alert-form ul {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.alert-form ul li {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.alert-form span {
+  color: red;
+}
+
 .item-page {
   margin-top: 50px;
   margin-bottom: 30px;
 }
 
+// 共通部
 .item-page h1 {
   margin-bottom: 30px;
   margin-top: -0px;
@@ -59,7 +127,6 @@
 }
 
 //検索部分
-
 .search-area {
   width: 100%;
   height: 3em;

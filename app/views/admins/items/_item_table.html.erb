@@ -10,12 +10,13 @@
 				<th>ステータス</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody>		<%#= sorted(Item.take(7),:id,'ASC')[0][:id] %>
 			<%# if request ==%>
-			<%# sorted(@items,:id,'DESC').each do |item| %>
+			<%# <div><% sorted(@items,@key,@direction).each do |item| %>
 			<% @items.each do |item| %>
+	
 				<tr>
-					<th style="width:7%;">
+					<th style="width:7%;" class="id">
 						<%= link_to item.id, admins_item_path(item) %>
 					</th>
 					<td style="width:40%;">
