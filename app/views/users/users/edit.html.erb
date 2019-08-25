@@ -1,5 +1,5 @@
 <% if @user.errors.any? %>
-<p style="color:red;">配送先編集エラーです</p>
+<p style="color:red;">編集エラーです。空欄を埋めてください。</p>
 <% end %>
 
 <div class="container">
@@ -64,11 +64,11 @@
 
 
 <!----配送先、ここから意味不明だから後で確認したい--->
-  <div id='delivery_addresses'>
-    <h4>配送先</h4>
+<h4>配送先</h4>
+  <div id="delivery_addresses">
     <%= f.fields_for :delivery_addresses do |delivery_address| %>
       <%= render 'delivery_address_fields', :f => delivery_address %>
-    <% end %>
+          <% end %>
     <div class='links'>
       <%= link_to_add_association '住所を追加', f, :delivery_addresses %>
     </div>
@@ -86,7 +86,7 @@
           <li><label><%= f.radio_button :payment, :代金引換, class: "radio_button" %> 代金引換</label></li>
         </ul>
     </div>
-<!---以上、丸パクリでした--->
+<!---以上--->
 
         <span class="actions">
           <%= f.submit "変更を確定",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
