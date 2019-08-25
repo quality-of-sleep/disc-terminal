@@ -4,7 +4,6 @@ class Item < ApplicationRecord
   belongs_to :label
   # 一つの商品は複数のカートに入れられる
   has_many :carts
-  has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :discs, inverse_of: :item
   accepts_nested_attributes_for :discs, allow_destroy: true
@@ -16,11 +15,17 @@ class Item < ApplicationRecord
   validates :name,
       presence: { message: "商品名を入力してください" },
       uniqueness: { case_sensitive: false, message: "この商品名は登録済みです" }
-  validates :price, presence: { message: "価格を入力してください" }
+  validates :price,
+   presence: { message: "価格を入力してください" },
+   format: { with: /\A[0-9]+\z/ , message: "価格は半角数字を入力してください" }
   validates :sales_status, presence: true
-  validates :stock, presence: { message: "在庫数を入力してください" }
+  validates :stock,
+   presence: { message: "在庫数を入力してください" },
+   format: { with: /\A[0-9]+\z/ , message: "在庫数は半角数字を入力してください" }
 
-
+  has_many :favorites, dependent: :destroy
+  #try 8/22 18:13
+  has_many :favorited_users, through: :favorites, source: :user
 
   def favorited_by?(user)
           favorites.where(user_id: user).exists?

@@ -27,7 +27,7 @@
 }
 
 .item-page {
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 
@@ -210,34 +210,23 @@ div > .remove_fields {
   width: 20%;
 }
 
+.select-actions,
 .actions {
   margin: 100px auto;
   position: relative;
   height: fit-content;
 }
 
-.actions .btn {
+.item-page .select-actions .btn {
   width: 40%;
 }
 
-.actions .btn-info {
+.item-page .select-actions .btn-info {
   position: absolute;
   left: 5%;
 }
 
-.actions .btn-danger {
-}
-
-.item-page .actions .btn {
-  width: 40%;
-}
-
-.item-page .actions .btn-info {
-  position: absolute;
-  left: 5%;
-}
-
-.item-page .actions .btn-danger {
+.item-page .select-actions .btn-danger {
   position: absolute;
   right: 5%;
 }

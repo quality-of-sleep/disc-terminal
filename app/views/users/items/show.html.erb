@@ -1,115 +1,112 @@
-<h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
-
+<h1>商品詳細</h1>
 <div class="container">
-	<div class="album" style="width: 90%; border: solid 1px;">
-		<div class="album-left" style="display: inline-block;">
-			<div class="album_image">
+	<div class="item-show clearfix">
+		<div class="show-item-left">
+			<img class="item_image">
 				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
-			</div>
 		</div> 
-		<div class="album-right" style="display: inline-block; padding: 30px;">
-			<h3><%= @item.name %></h3>
-			<p style="display: inline-block;">
-				<%= @item.artist.name %>	
-			</p>
-			<p style="display: inline-block; border: solid 1px;">
-				<%= @item.genre.name %>
-			</p>
-			<p><%= @item.label.name %></p>
-			<div class="status" style="display: inline-block;">
-				<p class="sales_status" style="border:solid 1px; display: inline-block;">
+		<div class="show-item-right">
+			<h2 class="show-item-name"><%= @item.name %></h2>
+			<div>
+				<p class="show-item-artist">
+					<%= @item.artist.name %>	
+				</p>
+				<p class="show-item-genre">
+					<%= @item.genre.name %>
+				</p>
+			</div>
+			<p class="show-item-label"><%= @item.label.name %></p>
+			<div>
+				<p class="stock">残り<%= @item.stock %>点</p>
+				<p class="show-item-sales_status">
 					<%= @item.sales_status %>
 				</p>
-				<p>残り<% @item.stock %>点</p>
 			</div>
-			<p style="display: inline-block;">
-				￥<%= @item.price %>
+			<p class="show-item-price">
+					￥<%= @item.price %>
 			</p>
-			<p style="border: solid 1px;">
-				<% if @item.sales_status == "販売中" %>
-					<% if user_signed_in? %>
-						<p>
-							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
-						</p>
-					<% else %>
-						<p>
-							<%= link_to "カートに入れる", new_user_session_path %>
-						</p>
-					<% end %>
+			<% if @item.sales_status == "販売中" %>
+				<% if user_signed_in? %>
+					<p class="item-cart">
+						<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+					</p>
+				<% else %>
+					<p class="item-cart">
+						<%= button_to "カートに入れる", new_user_session_path %>
+					</p>
 				<% end %>
-			</p>
+			<% else %>
+				<p class="no-item-cart">カートに入れられません</p>
+			<% end %>			
 			<div>
-				<div class="favorites" style="display: inline-block; ">
+				<div class="favorites">
 					<% if user_signed_in? %>
 						<% if @item.favorited_by?(current_user) %>
 							<li>
 								<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
-									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: red;"></span>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
 								<% end %>
-								<p style="display: inline-block;"><%= @item.favorites.count %></p>
+								<p class="opinion-count"><%= @item.favorites.count %></p>
 							</li>
 						<% else %>
 							<li>
 								<%= link_to users_item_favorites_path(@item), method: :post do %>
-									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
 								<% end %>
-								<p style="display: inline-block;"><%= @item.favorites.count %></p>
+								<p class="opinion-count"><%= @item.favorites.count %></p>
 							</li>
 						<% end %>
 					<% else %>
 						<li>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
-							<p style="display: inline-block;"><%= @item.favorites.count %></p>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
+							<p class="opinion-count"><%= @item.favorites.count %></p>
 						</li>
 					<% end %>
 				</div>
-				<div class="reviews" style="display: inline-block;">
+				<div class="reviews">
 						<%= link_to users_item_reviews_path(@item.id) do %>
-							<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 						<% end %>
-						<p style="display: inline-block;"><%= @item.reviews.count %></p>
+						<p class="opinion-count"><%= @item.reviews.count %></p>
 				</div>
 			</div>
 		</div>
-		<div class="item-detail">
-			<h2>収録曲</h2>
-			<% @item.discs.each do |disc| %>
-				<div class="disc" style="display: inline-block;">
-					<p>disc<%= disc.number %></p>
-					<ul class="song-list">
-						<% disc.songs.each do |song| %>
-							<li><%= song.number %>. <%= song.name %></li>
-						<% end %>
-					</ul>
-				</div>
-			<% end %>
-		</div>
 	</div>
-	<div class="album-reviews" style="border: solid 1px; width: 90%;">
-		<div class="review-top">
-			<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
-			<h3 style="display: inline-block;">レビュー</h3>
-			<ul style="display: inline-block;">
-				<li style="float: left;">
-					<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
-				</li>
-
-				<% if user_signed_in? %>
-					<li style="float: left;">
-						<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
-					</li>
-				<% else %>
-					<li style="float: left;">
-						<%= link_to '新規投稿する', new_user_session_path %>
-					</li>
-				<% end %>
-			</ul>
+	<div class="item-detail clearfix">
+		<h2>収録曲</h2>
+		<% @item.discs.each do |disc| %>
+			<div class="disc">
+				<p>disc<%= disc.number %></p>
+				<ul class="song-list">
+					<% disc.songs.each do |song| %>
+						<li><%= song.number %>. <%= song.name %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	</div>	
+	<div class="item-reviews">
+		<div class="review-top clearfix">
+			<span class="glyphicon glyphicon-comment-review-head" aria-hidden="true"></span>
+			<h3><%= @item.name %>のレビュー</h3>
+			<p class="review-head">
+				<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
+			</p>
+			<% if user_signed_in? %>
+				<p class="review-head">
+					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+				</p>
+			<% else %>
+				<p class="review-head">
+					<%= link_to '新規投稿する', new_user_session_path %>
+				</p>
+			<% end %>
 		</div>
 		<div class="review-list">
 			<% @item.reviews.each do |review| %>
 				<div class="review">
-					<h4><%= review.title %></h4>
-					<p><%= review.body %></p>
+					<p>タイトル：　<%= review.title %></p>
+					<p>本文：<br><%= review.body %></p>
 				</div>
 			<% end %>
 		</div>

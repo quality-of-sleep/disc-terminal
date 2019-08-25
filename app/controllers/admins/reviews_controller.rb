@@ -2,7 +2,11 @@ class Admins::ReviewsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@reviews = Review.page(params[:page])
+		if params[:item].present?
+			@reviews = Review.where('item_id=?',params[:item]).page(params[:page])
+		else
+			@reviews = Review.page(params[:page])
+		end
 		if !params[:target].nil?
 			@reviews = @reviews.search(key: params[:target], value: params[:search])
 		elsif !params[:key].nil?
