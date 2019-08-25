@@ -11,7 +11,7 @@ devise_for :users, controllers: {
 
 namespace :users do
   devise_scope :user do
-    get '/logout', to: 'sessions#destroy'
+    get '/logout', to: 'sessions#destroy', as: 'logout'
   end
 end
 
