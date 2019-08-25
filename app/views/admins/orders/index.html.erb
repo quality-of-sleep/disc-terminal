@@ -9,58 +9,14 @@
 		 <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
 		</div>
 	</div>
-	<div class="col">
-		<table class="table">
-			<thead>
-				<tr>
-					<th style="width: 8%;"><%= sortTh('注文日時','created_at') %></th>
-					<th style="width: 8%;"><%= sortTh('注文ID','id') %></th>
-					<th style="width: 20%;">商品</th>
-					<th style="width: 30%;"><%= sortTh('配送先', 'address') %></th>
-					<th style="width: 12%;"><%= sortTh('合計金額(税込)', 'total_price') %></th>
-					<th style="width: 12%;"><%= sortTh('配送状況', 'delivery_status') %></th>
-					<th style="width: 10%;"><%= sortTh('購入者', 'user_name') %></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @orders.each do |order| %>
-					<tr>
-						<td style="padding: 2% 1%;"><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-						<td style="padding: 2% 1%;"><%= link_to order.id, admins_order_path(order) %></td>
-						<td style="padding: 2% 1%;">
-							<% if order.order_details.count == 1 %>
-								<%= order.order_details[0].item_name %>
-							<% else %>
-								<%= order.order_details[0].item_name %>　他<%= order.order_details.count %>点
-							<% end %>
-						</td>
-						<td style="padding: 2% 1%;">
-							<div >
-								<%= order.postal_code.insert(3, '-') %>
-							</div>
-							<div>
-								<%= order.address %>
-							</div>
-						</td>
-						<td style="padding: 2% 1%;">¥ <%= order.total_price.to_s(:delimited) %></td>
-						<td>
-							<%= form_with model: order, url: admins_order_path(order.id), method: :patch, local: true do |f|%>
-							<div style="margin-bottom: 10px;">
-								<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
-							</div>
-							<div>
-								<%= f.submit "変更", class: "btn btn-primary" %>
-							</div>
-						<% end %>
-						</td>
-						<td style="padding: 2% 1%;"><%= full_name(order.user) %></td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+	<div class="col" id="orders">
+		<%= render '/admins/orders/table', orders: @orders %>
+	</div>
+	<div id="next">
+	  <%= link_to_next_page @orders, "次を表示", remote: true %>
 	</div>
 
-	<div class="text-center">
+	<div class="text-center" id="paginator">
 		<%= paginate @orders, class: "paginate" %>
 	</div>
 </div>
