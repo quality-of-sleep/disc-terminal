@@ -13,6 +13,11 @@ class Admins::OrdersController < ApplicationController
 				# 絞り込みパラメータ保持
 				@sort_key = @orders.first.delivery_status
 			end
+
+			respond_to do |format|
+	      format.html
+	      format.js
+	    end
 		else
 			# ページング＋ソート＋デフォルト降順
 			@orders = Order.page.order(params[:sort]).reverse_order
@@ -22,6 +27,11 @@ class Admins::OrdersController < ApplicationController
 				# 絞り込みパラメータ保持
 				@sort_key = @orders.first.delivery_status
 			end
+
+			respond_to do |format|
+	      format.html
+	      format.js
+	    end
 		end
 	end
 
