@@ -24,4 +24,9 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :admin_comments, dependent: :destroy
   accepts_nested_attributes_for :admin_comments, allow_destroy: true
+
+  def self.search(search)
+      return User.all unless search
+      User.where([' last_name || first_name LIKE ? OR last_name_kana || first_name_kana LIKE ?', "%#{search}%",  "%#{search}%"])
+  end
 end

@@ -7,7 +7,8 @@ class Admins::AdminCommentsController < ApplicationController
 		  redirect_to admins_user_path(@user)
 		else
 	       flash[:alert] = "コメントが入力されていません"
-		   render 'admins/users/show'
+		   redirect_to admins_user_path(@user)
+		   #上記何故 render 'admins/users/show'ではダメ？
 		end
 	end
 
