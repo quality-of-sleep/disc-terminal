@@ -15,51 +15,6 @@
 	clear: both;
 }
 
-.jenre-link{
-	text-align: center;
-	border-bottom: solid 1px;
-	font-size: 20px;
-	padding: 8px 0;
-}
-
-//選択したジャンル、全ジャンルを表示
-.genre-sort{
-	font-size: 25px;
-	background-color: orange;
-	text-align: center;
-	display: inline-block;
-}
-
-.genre-all{
-	font-size: 15px;
-	display: inline-block;
-	margin: 5px 15px;
-}
-
-.item-box{
-	float: left;
-	border: solid 3px;
-	border-radius: 5px;
-	margin: 10px;
-	padding: 10px;
-}
-
-.item-genre{
-	border: solid 2px;
-	text-align: center;
-	border-radius: 4px;
-}
-
-.item-sales_status{
-	border:solid 1px;
-	border-radius: 3px;
-	padding: 2px 5px;
-	text-align: center;	
-}
-
-.item-price{
-	margin-left: 20px;	
-}
 
 .glyphicon{
 	display: inline-block;
@@ -67,65 +22,10 @@
 }
 
 //only show
-
-.show-item-left{
-	float: left;
-	padding: 40px;
-	width: 350px;
-}
-
-.show-item-right{
-	float: left;
-	padding: 40px 60px;
-	width: 500px;
-}
-
-.show-item-artist{
-	display: inline-block;
-	margin-right: 20px;
-}
-
-.show-item-genre{
-	display: inline-block;
-	border:solid 1px;
-	border-radius: 3px;
-	padding: 2px 5px;
-}
-
-.show-item-label{
-	border:solid 1px;
-	border-radius: 3px;
-	padding: 2px 5px;
-}
-
-.show-item-sales_status{
-	width: 150px;
-	display: inline-block;
-	border:solid 2px;
-	border-radius: 3px;
-	padding: 2px 5px;
-	text-align: center;	
-}
-
-.stock{
-	display: inline-block;
-	margin: 0 15px;
-}
-
-
 .item-cart{
 	border: solid 2px;
 	padding: 2px 5px;
 	border-radius: 3px;
-	text-align: center;
-	width: 300px;
-}
-
-.no-item-cart{
-	border: solid 2px;
-	padding: 2px 5px;
-	border-radius: 3px;
-	color: red;
 	text-align: center;
 	width: 300px;
 }
@@ -141,12 +41,6 @@ li{
 	list-style: none;
 	font-size: 18px;
 	margin: 10px 10px;
-}
-
-.item-reviews{
-	border-top: solid 3px;
-	width: 80%;
-	padding: 30px;
 }
 
 .review-head{

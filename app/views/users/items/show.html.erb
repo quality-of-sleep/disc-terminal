@@ -1,11 +1,11 @@
 <h1>商品詳細</h1>
 <div class="container">
 	<div class="item-show clearfix" style="width: 80%; border-bottom: dashed 2px;">
-		<div class="show-item-left" >
+		<div class="show-item-left" style="float: left; padding: 40px; width: 350px;">
 			<img class="item_image">
 				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 		</div> 
-		<div class="show-item-right">
+		<div class="show-item-right" style="float: left; padding: 40px 60px; width: 500px;">
 			<h2 style="display: inline-block;">
 				<%= @item.name %>
 			</h2>
@@ -13,14 +13,14 @@
 				<p style="display: inline-block; margin-right: 20px;">
 					<%= @item.artist.name %>	
 				</p>
-				<p class="show-item-genre">
+				<p style="display: inline-block; border:solid 1px; border-radius: 3px; padding: 2px 5px;">
 					<%= @item.genre.name %>
 				</p>
 			</div>
-			<p class="show-item-label"><%= @item.label.name %></p>
+			<p style="border:solid 1px; border-radius: 3px; padding: 2px 5px;"><%= @item.label.name %></p>
 			<div>
 				<p style="display: inline-block; margin: 0 15px;">残り<%= @item.stock %>点</p>
-				<p class="show-item-sales_status">
+				<p style="width: 150px; display: inline-block; border:solid 2px; border-radius: 3px; padding: 2px 5px; text-align: center;">
 					<%= @item.sales_status %>
 				</p>
 			</div>
@@ -36,7 +36,7 @@
 					</p>
 				<% end %>
 			<% else %>
-				<p class="no-item-cart">カートに入れられません</p>
+				<p style="border: solid 2px; padding: 2px 5px; border-radius: 3px; color: red; text-align: center; width: 300px;">カートに入れられません</p>
 			<% end %>			
 			<div class="clearfix">
 				<div class="favorites clearfix" style="margin: 0 30px; float: left;">
@@ -85,7 +85,7 @@
 			</div>
 		<% end %>
 	</div>	
-	<div class="item-reviews">
+	<div class="item-reviews" style="border-top:solid 3px; width: 80%; padding: 30px;">
 		<div class="clearfix">
 			<h3 style="float: left;"><%= @item.name %>のレビュー</h3>
 			<p class="review-head">
