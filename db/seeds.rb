@@ -43,7 +43,7 @@ Item.create!( genre_id: 2,
 							image_id: "0d00591663ac382e9b9445144b53a62f00b4ab61459333b4ab6b8965aebd"
 						  )
 
-25.times do |n|
+27.times do |n|
 	name = "item-#{n+2}"
 	image_id = "1009e3af54e95f69b46cb7f924da6c08395df162eab8c68007644bf13948"
 	Item.create!( genre_id: rand(1..genres.length),
@@ -72,7 +72,7 @@ Disc.all.length.times do |n|
 end
 
 # テストUserを生成
-25.times do |n|
+27.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 東久邇宮 プルースト]
 	first_name = %w[家康 義経 家光 光圀 忠家 義久 阿弖流為 サルヴァドール]
 	last_name_kana = %w[ヤマグチ アベ イトウ タカハシ フジモト プルースト]
@@ -155,7 +155,7 @@ Order.all.length.times do |n|
 end
 
 # テストReviewを生成
-25.times do |n|
+27.times do |n|
 	title = "title-#{n+1}"
 	body = "body-#{(n+1)}"*100
 	Review.create!( item_id: rand(1..Item.all.length),

@@ -26,6 +26,18 @@
   }
 }
 
+.table-responsive {
+  margin-bottom: 100px;
+}
+
+.table-responsive .table {
+  margin-bottom: 100px;
+}
+
+.table .dropdown-menu {
+  min-width: 100px;
+}
+
 // 登録フォーム
 .item-page h2 {
   padding-top: 30px;
@@ -105,7 +117,8 @@
 }
 
 .item-page p {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  margin-top: 30px;
   font-size: 12px;
 }
 

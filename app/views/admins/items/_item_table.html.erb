@@ -10,10 +10,10 @@
 				<th>ステータス</th>
 			</tr>
 		</thead>
-		<tbody>		<%#= sorted(Item.take(7),:id,'ASC')[0][:id] %>
+		<tbody>
 			<%# if request ==%>
 			<%# <div><% sorted(@items,@key,@direction).each do |item| %>
-			<% @items.each do |item| %>
+			<div id="obj"><% @items.each do |item| %></div>
 	
 				<tr>
 					<th style="width:7%;" class="id">
