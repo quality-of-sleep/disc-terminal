@@ -1,16 +1,32 @@
-<h2 style="display: inline-block;">
-	"<%= @item.name %>"へのレビュー
-</h2>
+<div class="col-md-2"></div>
 
-<div class="review-post" style="border: solid 1px;">
+<div class="col-md-8" style="margin-bottom: 100px;">
+	<div class="row" style="margin-bottom: 25px;">
+		<h2 style="display: inline-block;">
+			"<%= @item.name %>"へのレビュー
+		</h2>
+	</div>
+
 	<%= form_for(@review, url: {controller: 'reviews', action: 'create'}) do |f| %>
-			<p>題名</p>
-			<%= f.text_field :title %>
-			<p>本文</p>
-			<%= f.text_area :body %>
-			<%= f.submit '確定' %>
+		<div class="review-post col-md-12" >
+			<div class="field row" style="margin-bottom: 20px;">
+        <%= f.label "レビュータイトル", style: "font-size: 20px;" %>
+        <div>
+        	<%= f.text_field :title, placeholder: "タイトル：", class: "col-md-5", style: "height: 35px;" %>
+        </div>
+      </div>
+      <div class="field row" style="margin-bottom: 20px;">
+        <%= f.label "本文", style: "font-size: 20px;" %>
+        <div>
+        	<%= f.text_area :body, rows: 10, placeholder: "本文：", class: "col-md-10"%>
+        </div>
+      </div>
+		</div>
+		<span>
+			<%= f.submit '投稿', class: "btn btn-info col-md-1", style: "font-size: 16px; margin-right: 15px;" %>
+		</span>
+		<span>
+			<%= link_to '戻る', users_item_reviews_path(@item), class: "btn btn-default col-md-1", style: "font-size: 16px;" %>
+		</span>
 	<% end %>
-	<span class="review-create-cancel" style="display: inline-block; border: solid 1px;">
-		<%= link_to '戻る', users_item_reviews_path(@item) %> 
-	</span>
 </div>

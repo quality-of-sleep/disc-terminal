@@ -1,55 +1,67 @@
-<h1>注文一覧</h1>
-
-
-<%= form_tag admins_orders_path, method: :get do %>
-	<%= select_tag 'delivery_status', options_for_select([["配送準備中",'1'],["配送中",'2'],["配送済",'3'],['キャンセル','4']]), class: "btn btn-default dropdown-toggle" %>
-  <%= submit_tag '絞り込む', class: "btn btn-primary" %>
- <% end %>
-
- <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
-
-<div class="col">
-	<table class="table">
-		<thead>
-			<tr>
-				<th><%= sortTh('注文日時','created_at') %></th>
-				<th><%= sortTh('注文ID','id') %></th>
-				<th>商品</th>
-				<th><%= sortTh('配送先', 'address') %></th>
-				<th><%= sortTh('合計金額(税込)', 'total_price') %></th>
-				<th><%= sortTh('配送状況', 'delivery_status') %></th>
-				<th><%= sortTh('購入者', 'user_name') %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @orders.each do |order| %>
+<h1 style="margin-bottom: 25px; ">注文一覧</h1>
+<div class="col-md-12">
+	<div class="row" style="margin-bottom: 25px;">
+		<div class="col-md-4">
+			<%= form_tag admins_orders_path, method: :get, style: "display: inline-block;" do %>
+			<%= select_tag 'delivery_status', options_for_select([["配送準備中",'1'],["配送中",'2'],["配送済",'3'],['キャンセル','4']]), class: "btn btn-default dropdown-toggle" %>
+		  <%= submit_tag '絞り込む', class: "btn btn-info" %>
+		 <% end %>
+		 <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
+		</div>
+	</div>
+	<div class="col">
+		<table class="table">
+			<thead>
 				<tr>
-					<td><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-					<td><%= link_to order.id, admins_order_path(order) %></td>
-					<td>
-						<% if order.order_details.count == 1 %>
-							<%= order.order_details[0].item_name %>
-						<% else %>
-							<%= order.order_details[0].item_name %>　他<%= order.order_details.count %>点
-						<% end %>
-					</td>
-					<td><%= order.address %></td>
-					<td>¥ <%= order.total_price.to_s(:delimited) %></td>
-					<td>
-						<%= form_with model: order, url: admins_order_path(order.id), method: :patch, local: true do |f|%>
-						<div>
-							<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
-						</div>
-						<div>
-							<%= f.submit "変更", class: "btn btn-primary" %>
-						</div>
-					<% end %>
-					</td>
-					<td><%= full_name(order.user) %></td>
+					<th style="width: 8%;"><%= sortTh('注文日時','created_at') %></th>
+					<th style="width: 8%;"><%= sortTh('注文ID','id') %></th>
+					<th style="width: 20%;">商品</th>
+					<th style="width: 30%;"><%= sortTh('配送先', 'address') %></th>
+					<th style="width: 12%;"><%= sortTh('合計金額(税込)', 'total_price') %></th>
+					<th style="width: 12%;"><%= sortTh('配送状況', 'delivery_status') %></th>
+					<th style="width: 10%;"><%= sortTh('購入者', 'user_name') %></th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<% @orders.each do |order| %>
+					<tr>
+						<td style="padding: 2% 1%;"><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+						<td style="padding: 2% 1%;"><%= link_to order.id, admins_order_path(order) %></td>
+						<td style="padding: 2% 1%;">
+							<% if order.order_details.count == 1 %>
+								<%= order.order_details[0].item_name %>
+							<% else %>
+								<%= order.order_details[0].item_name %>　他<%= order.order_details.count %>点
+							<% end %>
+						</td>
+						<td style="padding: 2% 1%;">
+							<div >
+								<%= order.postal_code.insert(3, '-') %>
+							</div>
+							<div>
+								<%= order.address %>
+							</div>
+						</td>
+						<td style="padding: 2% 1%;">¥ <%= order.total_price.to_s(:delimited) %></td>
+						<td>
+							<%= form_with model: order, url: admins_order_path(order.id), method: :patch, local: true do |f|%>
+							<div style="margin-bottom: 10px;">
+								<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "btn btn-default dropdown-toggle" %>
+							</div>
+							<div>
+								<%= f.submit "変更", class: "btn btn-primary" %>
+							</div>
+						<% end %>
+						</td>
+						<td style="padding: 2% 1%;"><%= full_name(order.user) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="text-center">
+		<%= paginate @orders, class: "paginate" %>
+	</div>
 </div>
 
-<%= paginate @orders, class: "paginate" %>
