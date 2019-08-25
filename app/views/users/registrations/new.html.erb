@@ -1,72 +1,83 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-      <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">アカウントの作成</h2>
-
-
+  <div class="row item-page">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>新規アカウント作成ページ</h1>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <div class="form-box">
+            <%= render "devise/shared/error_messages", resource: resource %>
+             <div class="half-content">
+               <h2>名前</h2>
+               <div class="field">
+                 <div class="half1">
+                    <%= f.label :last_name,"姓" %>
+                    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                 </div>
+                 <div class="half2">
+                    <%= f.label :first_name, "名" %>
+                    <%= f.text_field :first_name, class: "form-control"%>
+                </div>
+              </div>
+              <div class="field">
+                <div class="half1">
+                  <%= f.label :last_name_kana,"セイ"%>
+                  <%= f.text_field :last_name_kana, class: "form-control" %>
+                </div>
+                <div class="half2">
+                  <%= f.label  :first_name_kana,"メイ" %>
+                  <%= f.text_field :first_name_kana, class: "form-control "%>
+                </div>
+              </div>
+            </div>
 
+            <div class="set-content">
+              <h2>住所</h2>
+              <div class="field">
+                <div class="subject">
+                  <%= f.label :postal_code,"郵便番号" %>
+                  <%= f.number_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
+                </div>
+                <div class="content">
+                  <%= f.label :address,"都道府県、市区町村、番地、階数" %>
+                  <%= f.text_area :address, placeholder: "住所：", class: "form-control"%>
+                </div>
+              </div>
+            </div>
 
-        <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
-        <%= render "devise/shared/error_messages", resource: resource %>
-        <div class="field">
-          <h4>名前</h4>
-          <div class="form-inline">
-            <%= f.label "(姓)", class: "col-sm-2 control-label"%>
-            <%= f.text_field :last_name, autofocus: true, class: "col-sm-4" %>
-            <%= f.label  "(名)", class: "col-sm-2 control-label" %>
-            <%= f.text_field :first_name, class: "col-sm-4"%>
-          </div>
+            <div class="set-content">
+              <h2>連絡先</h2>
+              <div class="field">
+                <div class="subject">
+                  <%= f.label :telephone_number,"電話番号" %>
+                  <%= f.telephone_field :telephone_number, placeholder: "電話番号：", class: "form-control"%>
+                </div>
+                <div class="content">
+                  <%= f.label :email,"メールアドレス" %>
+                  <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス：", class: "form-control" %>
+                </div>
+              </div>
+            </div>
 
+            <div class="dup-content">
+              <h2>パスワード</h2>
+              <div class="field">
+                <div class="dup-top">
+                  <%= f.label  :password,"確認のため２回入力してください" %>
+                  <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード：8文字以上必須",class: "form-control"%>
+                </div>
+                </div>
+                <div class="field">
+                  <div class="dup-bottom">
+                    <%= f.label  :password,class: "sr-only"%>
+                    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "パスワード確認：", class: "form-control" %>
+                  </div>
+              　 </div>
+            </div>
 
-          <div class="form-inline">
-            <%= f.label "(セイ)", class: "col-sm-2 control-label"%>
-            <%= f.text_field :last_name_kana, class: "col-sm-4" %>
-            <%= f.label  "(メイ)", class: "col-sm-2 control-label" %>
-            <%= f.text_field :first_name_kana, class: "col-sm-4"%>
-          </div>
-        </div>
-
-        <div class="field">
-          <h4>現住所</h4>
-          <%= f.label "〒" %>
-          <%= f.number_field :postal_code, placeholder: "ハイフン無し：", style: "width: 30%;"%>
-        </div>
-
-        <div class="field">
-          <%= f.text_area :address, placeholder: "住所：", style: "width: 100%;"%>
-        </div>
-
-        <div class="field">
-          <h4>電話番号</h4>
-          <%= f.number_field :telephone_number, placeholder: "電話番号：", style: "width: 30%;"%>
-        </div>
-
-        <div class="field">
-          <h4>メールアドレス</h4>
-          <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス：", style: "width: 100%;"%>
-        </div>
-
-        <div class="field">
-          <h4>パスワード</h4>
-          <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード：8文字以上必須", style: "width: 100%;"%>
-        </div>
-
-        <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "パスワード確認：", style: "width: 100%;" %>
-        </div>
-
-        <div class="actions" align="right">
-          <%= f.submit "登録",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
-          </div>
-        </div>
-        <% end %>
+            <div class="actions">
+              <%= f.submit "登録", data: { confirm: 'この情報で登録します' }, class:"btn btn-info btn-block only-btn" %>
+            </div>
         <%= render "users/shared/links" %>
+        <% end %>
 
-
-
+         </div>
     </div>
-    <div class="col-sm-1"></div>
   </div>
-</div>
