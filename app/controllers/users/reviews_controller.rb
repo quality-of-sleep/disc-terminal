@@ -1,11 +1,12 @@
 class Users::ReviewsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :ensure_correct_user, only: [:edit, :update]
 	def ensure_correct_user
 		review = Review.find(params[:id])
     	if current_user.id != review.user.id
     		@item = Item.find(params[:item_id])
 			redirect_to users_item_reviews_path(@item.id)
-    	end 
+    	end
 	end
 
 	def new
@@ -16,12 +17,16 @@ class Users::ReviewsController < ApplicationController
 	end
 
 	def create
-		review = Review.new(review_params)
-		review.user_id = current_user.id
-		review.item = Item.find(params[:item_id])
-		review.save
 		@item = Item.find(params[:item_id])
-		redirect_to users_item_reviews_path(@item.id)
+		@review = @item.reviews.new(review_params)
+		@review.user_id = current_user.id
+		if @review.save
+			flash[:success] = "レビューが投稿されました"
+			redirect_to users_item_reviews_path(@item.id)
+		else
+			flash[:danger] = "レビューの投稿に失敗しました"
+			redirect_to new_users_item_review_path(@item)
+		end
 	end
 
 	def edit
@@ -34,9 +39,15 @@ class Users::ReviewsController < ApplicationController
 		review = Review.find(params[:id])
 		review.user = current_user
 		review.item = Item.find(params[:item_id])
-		review.update(review_params)
-		@item = Item.find(params[:item_id])
-		render :index
+		if review.update(review_params)
+			@item = Item.find(params[:item_id])
+			flash[:notice] ="レビューが更新されました"
+			render :index
+		else
+			flash[:notice] ="レビューが更新されませんでした　記入欄に空欄があります"
+			@item = Item.find(params[:item_id])
+			redirect_to edit_users_item_review_path(@item, review)
+		end
 	end
 
 	def destroy
@@ -59,7 +70,7 @@ class Users::ReviewsController < ApplicationController
 		params.require(:review).permit(
 			:item_id,
 			:user_id,
-			:title, 
+			:title,
 			:body
 			)
 	end

@@ -26,10 +26,12 @@
 
       	  <li>電話番号：<%= @user.telephone_number %></li>
       	  <li>e-mail：<%= @user.email %></li>
-<!---避難場所参照-->
+
+          <li>支払い方法：<%= @user.payment %></li>
           <% if @user.payment == "クレジット支払" %>
       	  <li>カード番号：XXXX-XXXX-XXXX</li>
           <% end %>
+
       	</ul>
       	<span class="label label-success">
       	<%= link_to "プロフィールを編集する", edit_users_user_path(@user)%>

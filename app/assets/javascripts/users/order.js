@@ -5,18 +5,13 @@ $(document).on('turbolinks:load', function() {
 				$('.cancel_button').show(4000);
 				$('.form_title').show(4000);
     		$('.new_address').addClass('hidden');
-    		$('.confirmation_btn').addClass('hidden');
-    		$('.credit_card_button').addClass('hidden');
-    		$('.address_writing').removeClass('hidden');
     		$('.hero').addClass('z-index');
 		});
     		// キャンセルしたときの処理
     $('.cancel_button').on('click',function() {
     		$('#form-area').fadeToggle(2000);
 				$('.cancel_button').fadeToggle(2000);
-    		$('.address_writing').addClass('hidden');
 		  	$('.new_address').removeClass('hidden');
-		  	$('.confirmation_btn').removeClass('hidden');
 		  	$('.hero').removeClass('z-index');
 	 	 });
 
