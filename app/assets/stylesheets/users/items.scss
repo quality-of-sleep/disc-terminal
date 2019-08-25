@@ -1,3 +1,257 @@
 // Place all the styles related to the users::items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+	margin: 0 auto;
+}
+
+.clearfix::after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+li{
+	list-style: none;
+}
+
+.item-top{
+	padding-left: 30px;
+}
+
+.h1{
+	text-align: center;
+	margin-left: 20px;
+}
+
+.jenre-box{
+	border: solid 2px;
+	border-radius: 5px;
+}
+
+.jenre-link{
+	text-align: center;
+	border-bottom: solid 1px;
+	font-size: 20px;
+	padding: 8px 0;
+}
+
+//選択したジャンル、全ジャンルを表示
+.genre-sort{
+	font-size: 25px;
+	background-color: orange;
+	text-align: center;
+	display: inline-block;
+}
+
+.genre-all{
+	font-size: 15px;
+	display: inline-block;
+	margin: 5px 15px;
+}
+
+.item-box{
+	float: left;
+	border: solid 3px;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.item-left{
+	float: left;
+}
+
+.item-genre{
+	border: solid 2px;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.item-image{
+	margin-top: 5px;
+}
+
+.item-right{
+	float: left;
+	padding: 5px 10px;
+	width: 180px;
+}
+
+.item-name{
+	font-size: 17px;
+}
+
+.item-artist{
+	text-align: center;
+}
+
+.item-sales_status{
+	border:solid 1px;
+	border-radius: 3px;
+	padding: 2px 5px;
+	text-align: center;	
+}
+
+.item-price{
+	margin-left: 20px;	
+}
+
+.item-opinion{
+	margin: 0 auto;
+}
+
+.glyphicon{
+	display: inline-block;
+	font-size: 20px;
+}
+
+.glyphicon-heart{
+	display: inline-block;
+}
+
+.glyphicon-comment{
+	display: inline-block;
+}
+
+.favorites{
+	display: inline-block;
+	margin: 0 30px;
+}
+
+.opinion-count{
+	display: inline-block;
+}
+
+.reviews{
+	display: inline-block;
+}
+
+
+//only show
+.item-show{
+	width: 80%;
+	border-bottom: dashed 2px;
+}
+
+.show-item-left{
+	float: left;
+	padding: 40px;
+	width: 350px;
+}
+
+.show-item-right{
+	float: left;
+	padding: 40px 60px;
+	width: 500px;
+}
+
+.show-item-name{
+	display: inline-block;
+}
+
+.show-item-artist{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.show-item-genre{
+	display: inline-block;
+	border:solid 1px;
+	border-radius: 3px;
+	padding: 2px 5px;
+}
+
+.show-item-label{
+	
+}
+
+.show-item-sales_status{
+	width: 150px;
+	display: inline-block;
+	border:solid 2px;
+	border-radius: 3px;
+	padding: 2px 5px;
+	text-align: center;	
+}
+
+.stock{
+	display: inline-block;
+	margin: 0 15px;
+}
+
+.show-item-price{
+	
+}
+
+.item-cart{
+	border: solid 2px;
+	padding: 2px 5px;
+	border-radius: 3px;
+	text-align: center;
+	width: 300px;
+}
+
+.no-item-cart{
+	border: solid 2px;
+	padding: 2px 5px;
+	border-radius: 3px;
+	color: red;
+	text-align: center;
+	width: 300px;
+}
+
+.item-detail{
+	margin: 50px 0;
+}
+
+.disc{
+	width: 25%;
+	float: left;
+	border-right: dotted 1px;
+	padding: 10px 20px;
+}
+
+li{
+	list-style: none;
+	font-size: 18px;
+	margin: 10px 10px;
+}
+
+.item-reviews{
+	border-top: solid 3px;
+	width: 80%;
+	padding: 30px;
+}
+
+.review-top{
+
+}
+
+h3{
+	float: left;
+}
+
+.review-head{
+	float: right;
+	font-size: 15px;
+	margin-left: 20px;
+}
+
+.review{
+	border-bottom: solid 1px;
+	padding: 10px 3px;
+}
+
+
+p{
+	font-size: 18px;
+}

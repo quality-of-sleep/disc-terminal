@@ -1,4 +1,4 @@
-<h2 style="border: solid 1px; width: 20%;">商品詳細</h2>
+<h2 style="border: solid 1px;">商品詳細</h2>
 <div class="container">
 	<div class="album" style="width: 90%; border: solid 1px;">
 		<div class="album-left" style="display: inline-block;">
@@ -32,48 +32,41 @@
 			</p>
 			<div>
 				<div class="favorites" style="display: inline-block; ">
-						<p>	
-							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
-							<p style="display: inline-block;">
-								<%= @item.favorites.count %>
-							</p>
-						</p>
+					<span class="glyphicon glyphicon-heart" aria-hidden="true" style="display: inline-block; color: gray;"></span>
+					<p style="display: inline-block;">
+						<%= @item.favorites.count %>
+					</p>
 				</div>
 				<div class="reviews" style="display: inline-block;">
-					<%= link_to users_item_reviews_path(@item.id) do %>
-						<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
-					<% end %>
+					<span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline-block;"></span>
 					<p style="display: inline-block;">
 						<%= @item.reviews.count %>
 					</p>
 				</div>
 			</div>
 		</div>
-			<div class="item-detail">
-				<h2>収録曲</h2>
-				<% @item.discs.each do |disc| %> -->
-					<div class="disc-box" style="display: inline-block;">
-						<p>disc<%= disc.number %></p>
-						<ul class="song-list">
-							<% disc.songs.each do |song| %>
-								<li>
-									<%= song.number %>.<%= song.name %>
-								</li>
-							<% end %>
-						</ul>
-					</div>
-				<% end %>
-			</div>
-			<div class="">
-				<ul style="display: inline-block;">
-					<li style="float: left;">
-						<%= link_to 'この商品のレビュー一覧', users_item_reviews_path(@item) %>
-					</li>
-					<li style="float: left;">
-						<%= link_to '編集', edit_admins_item_path(@item) %>
-					</li>
-				</ul>
-			</div>
-		
+		<div class="item-detail">
+			<h2>収録曲</h2>
+			<% @item.discs.each do |disc| %>
+				<div class="disc-box" style="display: inline-block;">
+					<p>disc<%= disc.number %></p>
+					<ul class="song-list">
+						<% disc.songs.each do |song| %>
+							<li>
+								<%= song.number %>.<%= song.name %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+		</div>
+		<ul style=";">
+			<li style="display: inline-block">
+				<%= link_to 'この商品のレビュー一覧', admins_reviews_path(item: @item) %>
+			</li>
+			<li style="display: inline-block">
+				<%= link_to '編集', edit_admins_item_path(@item) %>
+			</li>
+		</ul>		
 	</div>
 </div>

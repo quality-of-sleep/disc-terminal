@@ -4,8 +4,7 @@ class Admins::ItemsController < ApplicationController
 	def index
 		@artists = Artist.all
 		@genres = Genre.all
- 		@items ||= Item.page(params[:page])
-
+ 		@items = Item.page(params[:page])
 		@items = @items.search(key: 'name', value: params[:search]) if params[:search].present?
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
@@ -107,7 +106,4 @@ class Admins::ItemsController < ApplicationController
 	    	]
 	   	)
 	  end
-
 end
-
-
