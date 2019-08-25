@@ -2,6 +2,11 @@ class Admins::UsersController < ApplicationController
 	before_action :authenticate_admin!
 	def index
 		@users = User.all
+		@users = @users.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
+	  	@users = @users.where(["is_quit = ?", "#{params[:is_quit]}"]) if params[:is_quit].present?
+      if params[:search].present?
+		@users = @users.search(params[:search])
+	  end
 	end
 
 	def show

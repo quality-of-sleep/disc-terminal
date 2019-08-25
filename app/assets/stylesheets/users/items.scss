@@ -1,3 +1,54 @@
 // Place all the styles related to the users::items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix::after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+
+.glyphicon{
+	display: inline-block;
+	font-size: 20px;
+}
+
+//only show
+.item-cart{
+	border: solid 2px;
+	padding: 2px 5px;
+	border-radius: 3px;
+	text-align: center;
+	width: 300px;
+}
+
+.disc{
+	width: 25%;
+	float: left;
+	border-right: dotted 1px;
+	padding: 10px 20px;
+}
+
+li{
+	list-style: none;
+	font-size: 18px;
+	margin: 10px 10px;
+}
+
+.review-head{
+	float: right;
+	font-size: 15px;
+	margin-left: 20px;
+}
+
+p{
+	font-size: 18px;
+}

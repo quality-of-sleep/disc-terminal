@@ -1,6 +1,5 @@
  <div class='nested-fields'>
-    <div class="fields">
-      <div class="delivery_address">
+    <div class="field">
       <%= f.label :recipient, '配送先名：'%>
       <%= f.text_field :recipient %><br>
       <%= f.label :postal_code, '〒'%>
@@ -11,6 +10,5 @@
     </div>
     <div>
       <%= link_to_remove_association "新規住所を削除", f %>
-      </div>
     </div>
 </div>

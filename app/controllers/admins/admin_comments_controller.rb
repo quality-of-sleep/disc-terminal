@@ -1,13 +1,14 @@
 class Admins::AdminCommentsController < ApplicationController
 	before_action :authenticate_admin!
 	def create
-		user = User.find(params[:user_id])
-		@admin_comment = user.admin_comments.new(admin_comment_params)
+		@user = User.find(params[:user_id])
+		@admin_comment = @user.admin_comments.new(admin_comment_params)
 		if @admin_comment.save
-		  redirect_to admins_user_path(user)
+		  redirect_to admins_user_path(@user)
 		else
 	       flash[:alert] = "コメントが入力されていません"
-		   redirect_to admins_user_path(user)
+		   redirect_to admins_user_path(@user)
+		   #上記何故 render 'admins/users/show'ではダメ？
 		end
 	end
 
