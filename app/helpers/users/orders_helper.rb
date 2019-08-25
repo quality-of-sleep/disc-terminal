@@ -57,3 +57,35 @@ def sortTh(sort_key,contName)
 		end
 	end
 end
+
+# def sortTh(sort_key,contName)
+# 	if request.fullpath.include?('page')
+# 		if request.fullpath.include?('desc')
+# 			if params[:delivery_status].present?
+# 				link_to sort_key, sort: "#{contName} desc", delivery_status: @sort_key
+# 			else
+# 				link_to sort_key, sort: "#{contName} desc"
+# 			end
+# 		else
+# 			if params[:delivery_status].present?
+# 				link_to sort_key, sort: contName, delivery_status: @sort_key
+# 			else
+# 				link_to sort_key, sort: contName
+# 			end
+# 		end
+# 	else
+# 		if request.fullpath.include?('desc')
+# 			if params[:delivery_status].present?
+# 				link_to sort_key, sort: contName, delivery_status: @sort_key
+# 			else
+# 				link_to sort_key, sort: contName
+# 			end
+# 		else
+# 			if params[:delivery_status].present?
+# 				link_to sort_key, sort: "#{contName} desc", delivery_status: @sort_key
+# 			else
+# 				link_to sort_key, sort: "#{contName} desc"
+# 			end
+# 		end
+# 	end
+# end

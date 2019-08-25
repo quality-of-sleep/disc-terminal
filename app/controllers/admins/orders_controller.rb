@@ -3,10 +3,14 @@ class Admins::OrdersController < ApplicationController
 	include Users::OrdersHelper
 
 	def index
-		# binding.pry
+		# ページネーション使用したら分岐
 		if params[:page].present?
-			# binding.pry
-			@orders = Order.page(params[:page])
+			# ソートしつつページネーションしたら分岐
+			if params[:sort].present?
+				@orders = Order.page(params[:page])
+			else
+				@orders = Order.page(params[:page]).reverse_order
+			end
 			# 絞り込み分岐
 			if params[:delivery_status].present?
 				@orders = @orders.get_by_delivery_status params[:delivery_status]
