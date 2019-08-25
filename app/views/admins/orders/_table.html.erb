@@ -1,0 +1,14 @@
+<table class="table" style="margin-bottom: 0;">
+	<thead>
+		<tr>
+			<th style="width: 8%;"><%= sortTh('注文日時','created_at') %></th>
+			<th style="width: 8%;"><%= sortTh('注文ID','id') %></th>
+			<th style="width: 20%;">商品</th>
+			<th style="width: 30%;"><%= sortTh('配送先', 'address') %></th>
+			<th style="width: 12%;"><%= sortTh('合計金額(税込)', 'total_price') %></th>
+			<th style="width: 12%;"><%= sortTh('配送状況', 'delivery_status') %></th>
+			<th style="width: 10%;"><%= sortTh('購入者', 'user_name') %></th>
+		</tr>
+	</thead>
+	<%= render '/admins/orders/index', orders: @orders %>
+</table>
