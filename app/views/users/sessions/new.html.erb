@@ -12,7 +12,7 @@
           <%= f.label :password, "パスワード" %><br />
           <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワード: 8文字以上', class: 'form-control' %>
 
-          <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: 'パスワード確認', class: 'form-control' %>
+          <%= f.password_field :password_confirmation, placeholder: 'パスワード確認', class: 'form-control' %>
         </div>
 
         <% if devise_mapping.rememberable? %>
