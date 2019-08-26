@@ -93,16 +93,16 @@
 			<p class="text-indent">小計 (<%= @total_amount %>点)　　¥ <%= @order.subtotal_price.to_s(:delimited) %></p>
 		</li>
 		<li class="list-group-item" style="border-top: none; border-bottom: none;">
-			<p class="text-indent">配送料　 　¥ <%= @order.carriage.to_s(:delimited) %></p>
+			<p class="text-indent">配送料 　　　¥ <%= @order.carriage.to_s(:delimited) %></p>
 		</li>
 		<li class="list-group-item" style="border-top: none; border-bottom: none;">
-			<p class="text-indent">割引　 　- ¥ <%= @discount.to_s(:delimited) %></p>
+			<p class="text-indent">割引 　　　 - ¥ <%= @discount.to_s(:delimited) %></p>
 		</li>
 		<li class="list-group-item" style="border-top: none; border-bottom: none;">
-			<p class="text-indent">合計　 　¥ <%= @order.total_price.to_s(:delimited) %></p>
+			<p class="text-indent">合計 　　　　¥ <%= @order.total_price.to_s(:delimited) %></p>
 		</li>
 		<li class="list-group-item" style="border-top: none;">
-			<p class="text-indent">(内消費税　 　¥ <%= @order.tax.to_s(:delimited) %>)</p>
+			<p class="text-indent">(内消費税　　¥ <%= @order.tax.to_s(:delimited) %>)</p>
 		</li>
 		<li class="list-group-item" >
 			<h5><strong>支払方法</strong></h5>

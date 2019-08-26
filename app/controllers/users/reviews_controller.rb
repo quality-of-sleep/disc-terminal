@@ -24,7 +24,7 @@ class Users::ReviewsController < ApplicationController
 			flash[:success] = "レビューが投稿されました"
 			redirect_to users_item_reviews_path(@item.id)
 		else
-			flash[:danger] = "レビューの投稿に失敗しました"
+			flash[:warning] = "投稿内容に入力漏れがあります"
 			redirect_to new_users_item_review_path(@item)
 		end
 	end
@@ -41,10 +41,10 @@ class Users::ReviewsController < ApplicationController
 		review.item = Item.find(params[:item_id])
 		if review.update(review_params)
 			@item = Item.find(params[:item_id])
-			flash[:notice] ="レビューが更新されました"
+			flash[:success] ="レビューが更新されました"
 			render :index
 		else
-			flash[:notice] ="レビューが更新されませんでした　記入欄に空欄があります"
+			flash[:danger] ="レビューが更新されませんでした　記入欄に空欄があります"
 			@item = Item.find(params[:item_id])
 			redirect_to edit_users_item_review_path(@item, review)
 		end
@@ -53,7 +53,7 @@ class Users::ReviewsController < ApplicationController
 	def destroy
 		review = Review.find(params[:id])
 		review.destroy
-		@item = Item.find(params[:item_id]) 
+		@item = Item.find(params[:item_id])
 		redirect_to users_item_reviews_path(@item.id)
 	end
 

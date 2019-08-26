@@ -19,22 +19,10 @@
 	margin: 15px 0;
 }
 
-
-.review-show{
+.review-border:not(:last-child) {
 	border-bottom: solid 1px;
-	padding: 15px 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.review-show{
+	padding: 15px 20px;
+}
