@@ -35,7 +35,12 @@
 }
 
 .table .dropdown-menu {
-  min-width: 100px;
+  min-width: 90px;
+  padding: 0;
+}
+
+.table .dropdown-menu > li > a {
+  padding: 3px 10px;
 }
 
 // 登録フォーム
@@ -309,17 +314,4 @@ div > .remove_fields {
 .item-page .select-actions .btn-danger {
   position: absolute;
   right: 5%;
-}
-
-.disc{
-  width: 25%;
-  float: left;
-  border-right: dotted 1px;
-  padding: 10px 20px;
-}
-
-li{
-  list-style: none;
-  font-size: 18px;
-  margin: 10px 10px;
 }

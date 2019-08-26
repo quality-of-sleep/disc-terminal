@@ -24,7 +24,7 @@ class Admins::ItemsController < ApplicationController
 			@item.save
 			respond_to do |format|
 				format.html { redirect_back(fallback_location: admins_items_url) }
-				format.js
+				format.js{ redirect_back(fallback_location: admins_items_url) }
 			end
 		end
 
