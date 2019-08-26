@@ -1,3 +1,28 @@
 // Place all the styles related to the users::orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.radio_button {
+	width: 20px;
+	height: 20px;
+}
+
+.text-indent {
+	margin-left: 5%;
+}
+
+#form-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #f9f9f9;
+  color: #2f2f2f;
+  width: 100%;
+  min-height: 100%;
+  display: none;
+  z-index: 9;
+}
+
+.z-index {
+	z-index: 10;
+}

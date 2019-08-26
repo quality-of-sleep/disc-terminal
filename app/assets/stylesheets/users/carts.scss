@@ -1,3 +1,15 @@
 // Place all the styles related to the users::carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.price-box {
+	position: absolute;
+}
+
+.price-box.fixed {
+	margin-top: 0;
+	width: 283px;
+	position: fixed;
+	right: 8%;
+	top: 0;
+}

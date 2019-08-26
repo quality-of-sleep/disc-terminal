@@ -1,0 +1,21 @@
+<div class="item-page row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="alert-form">
+     <h1><strong>退会に関して</strong></h1>
+      <p class="alert alert-danger"><strong>*ディスクターミナル会員退会前に、以下注意事項を必ずご確認ください。</strong></p>
+      <h2><strong>退会時の注意点</strong></h2>
+      <ul>
+        <li>退会処理を実行すると、今までに投稿した記事などが<span>すべて削除されます。</span></li>
+        <li>ユーザーの方は、管理者にコンテンツが削除されて良いかをご確認ください。</li>
+        <li>退会後はマイページが閲覧できなくなり、<span>過去の注文履歴などをご確認いただくことができなくなります。</span>ご注意ください。</li>
+        <li>再度会員登録いただいても、前回入会時の注文履歴は<span>参照いただけません。</span></li>
+        <li>ユーザーの方は、管理者にコンテンツが削除されて良いかをご確認ください。</li>
+      </ul>
+
+      <div class="select-actions">
+        <%= link_to "退会する", users_path(@user), method: :patch, data: {confirm: "本当に退会しますか？"}, class:"btn btn-danger" %>
+        <%= link_to "戻る", users_user_path(@user),class:"btn btn-info" %>
+      </div>
+    </div>
+  </div>
+</div>

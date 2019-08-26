@@ -1,0 +1,12 @@
+<% if @item.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+       <%= @item.errors.count %>つのエラーが存在します。
+    </div>
+    <ul>
+    <% @item.errors.each do |attribute, value| %>
+      <li><%= value %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

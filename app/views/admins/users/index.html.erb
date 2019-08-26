@@ -1,0 +1,74 @@
+<div class="row arrange-index">
+	<div class="col-md-2">
+      <h1>ユーザ一覧</h1>
+    </div>
+  <div class="col-md-7 search-area clearfix">
+
+
+
+  	<%= form_tag admins_users_path, method: :get do %>
+
+  		<!--options_from_collection_for_select
+  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
+	  <%= select_tag 'is_quit',
+					options_for_select([["利用中", 0],["退会済み",1]]), include_blank: "ステータス"%>
+   	  <%= text_field_tag :search, params[:search],placeholder: 'ユーザ名で検索' %>
+  	  <%= submit_tag '検索', style:"width: 20%" %>
+  	<% end %>
+</div>
+
+  <div class="col-md-3 sort-area clearfix">
+  	<%= form_tag admins_users_path, method: :get do %>
+
+  		<%= select_tag 'key',
+  		 options_for_select([
+				["ユーザID",'id'],["ユーザ姓カナ",'last_name_kana']
+  		 	]) %>
+  		<%= select_tag 'direction',
+  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+  	<% end %>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="row review-index">
+  <div class="col-md-10 col-md-offset-1 ">
+  	<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ユーザID</th>
+						<th>ステータス</th>
+						<th>ユーザ</th>
+						<th>ユーザ(カナ)</th>
+						<th>電話番号</th>
+						<th>メールアドレス</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @users.each do |user| %>
+						<tr>
+							<th style="width:10%;">
+								<%= link_to user.id, admins_user_path(user) %>
+							</th>
+							<td style="width:10%;"><%= user.is_quit %></td>
+							<td style="width:10%;">
+								<a href="/admins/users/<%= user.id %>"><%= user.last_name %><%= user.first_name %></a></td>
+							<td style="width:10%;">
+								<a href="/admins/users/<%= user.id %>"><%= user.last_name_kana %><%= user.first_name_kana %></a></td>
+							<td style="width:10%;"><%= user.telephone_number %></td>
+							<td style="width:10%;"><%= user.email %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+		</div>
+  </div>
+</div>

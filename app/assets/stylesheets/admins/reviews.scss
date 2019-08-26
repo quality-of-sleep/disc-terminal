@@ -1,3 +1,59 @@
 // Place all the styles related to the admins::reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.arrange-index {
+  text-align: center;
+}
+
+//検索部分
+.review-header {
+  margin-bottom: 150px;
+  margin-top: 40px;
+}
+
+.review-header .search-area select {
+  float: right;
+  width: 100%;
+}
+
+.review-header .search-area input[type="text"] {
+  float: left;
+  width: 70%;
+  line-height: 2;
+}
+
+.review-header .search-area input[type="submit"] {
+  float: left;
+  width: 30%;
+}
+
+.sort-area {
+  width: 100%;
+}
+
+.review-header .sort-area select {
+  float: left;
+  width: 50%;
+}
+
+.review-header .sort-area input[type="submit"] {
+  float: left;
+  width: 100%;
+  margin-top: 5px;
+}
+
+//全文表示
+.show-content {
+  position: relative;
+}
+.full-content {
+  display: none;
+  background-color: #fff;
+  width: 300px;
+  padding: 0.5%;
+  border: 1px solid #000;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
