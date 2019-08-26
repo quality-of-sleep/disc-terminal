@@ -7,7 +7,7 @@ module Admins::ItemsHelper
 
   def key_regex(key)
     str = request.fullpath.match(/(?<=&#{key}=)\d+(?=\&)/)
-    if ( eval("@sorted_#{key} ||= str ") )
+    if ( eval("@sorted_#{key} ||= str ") ) # Ctrlにあれば代入しない
       eval("@sorted_#{key}") # [0]不要
     end
   end
