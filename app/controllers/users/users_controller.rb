@@ -39,7 +39,7 @@ class Users::UsersController < ApplicationController
 
   def ensure_correct_user
     if current_user.id != params[:id].to_i
-      flash[:alert] = "アクセス権がありません"
+      flash[:danger] = "アクセス権がありません"
       redirect_to root_path
     end
   end

@@ -17,6 +17,7 @@
       <%= render "/layouts/users_header" %>
     <% end %>
     <div class="container">
+
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
        <!-- 上記と同義 <div class="alert alert-<%= message_type %>"><%= message %></div> -->
