@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
+<<<<<<< HEAD
     t.string "user_name", null: false
     t.string "postal_code", null: false
     t.text "address", null: false
@@ -133,6 +134,17 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
     t.integer "subtotal_price", null: false
     t.integer "carriage", null: false
     t.integer "tax", null: false
+=======
+    t.string "user_name"
+    t.string "postal_code"
+    t.text "address"
+    t.string "telephone_number"
+    t.integer "payment", default: 3, null: false
+    t.integer "total_price"
+    t.integer "subtotal_price"
+    t.integer "carriage"
+    t.integer "tax"
+>>>>>>> f888095f25eda3d5b6d8c2b631820d6821915214
     t.integer "delivery_status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
