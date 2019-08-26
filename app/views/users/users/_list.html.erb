@@ -1,0 +1,40 @@
+        <div class="each-info">
+          <dt>お名前：</dt>
+          <dd><%= user.last_name %><%= user.first_name %> 様</dd>
+        </div>
+      	<div class="each-info">
+          <dt>カナ名：</dt>
+          <dd><%= user.last_name_kana %><%= user.first_name_kana %></dd>
+        </div>
+    	  <div class="each-info">
+          <dt>お住まい：</dt>
+            <dd><%= user.postal_code.insert(3, '-') %></dd>
+            <dd><%= user.address %></dd>
+        </div>
+        <% user.delivery_addresses.each_with_index do |delivery_address, number|%>
+        <div class="each-info">
+          <dt>お届け先 (<%= number+1 %>)：</dt>
+          <dd><%= delivery_address.recipient %> 様</dd>
+          <dd><%= delivery_address.postal_code.insert(3, '-') %></dd>
+          <dd><%= delivery_address.details %></dd>
+        </div>
+        <% end %>
+        <div class="each-info">
+          <dt>お電話番号：</dt>
+          <dd><%= user.telephone_number %></dd>
+        </div>
+        <div class="each-info">
+    	    <dt>E-mail：</dt>
+          <dd><%= user.email %></dd>
+        </div>
+        <div class="each-info">
+          <dt>お支払い方法：</dt>
+          <dd><%= user.payment %></dd>
+        </div>
+        <% if user.payment == "クレジット支払" %>
+        <div class="each-info card">
+    	    <dt>カード番号：</dt>
+          <dd>XXXX-XXXX-XXXX</dd>
+        </div>
+        <% end %>
+
