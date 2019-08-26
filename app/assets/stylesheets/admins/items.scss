@@ -160,6 +160,10 @@
   margin-bottom: 25px;
 }
 
+.item-detail .half-content {
+  position: relative;
+}
+
 .item-detail .table {
   width: 50%;
 }
@@ -169,10 +173,9 @@
   background: antiquewhite;
 }
 
-.glyphicon {
+.item-detail .glyphicon {
   margin-right: 10px;
 }
-
 .item-page .half-content li .btn-danger {
   width: auto;
   position: static;
@@ -181,7 +184,7 @@
 
 .song-list .table {
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .song-list .table-bordered {

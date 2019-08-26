@@ -1,49 +1,47 @@
 <div class="row item-detail item-page">
-	<div class="col-md-4">
+	<div class="col-sm-4">
 		<div>
-			<%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
+			<%= attachment_image_tag @item, :image, :fill, 250, 250, format: 'jpeg', fallback: "/no_image.jpg", size:'250x250' %>
 		</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-sm-8">
 		<h1><%= @item.name %></h1>
 		<div class="half-content">
-		<table class="table table-bordered table-striped half1">
-			<tbody>
-				<tr>
-					<th>ジャンル</th>
-					<td><%= @item.genre.name %></td>
-				</tr>
-				<tr>
-					<th>アーティスト</th>
-					<td><%= @item.artist.name %></td>
-				</tr>
-				<tr>
-					<th>レーベル</th>
-					<td><%= @item.label.name %></td>
-				</tr>
-				<tr>
-					<th>価格</th>
-					<td>￥<%= @item.price %></td>
-				</tr>
-				<tr>
-					<th>残り</th>
-					<td><%= @item.stock %>点</td>
-				</tr>
-				<tr>
-					<th>販売状況</th>
-					<td><%= @item.sales_status %></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		<div class="half-content">
+			<table class="table table-bordered table-striped half1">
+				<tbody>
+					<tr>
+						<th>ジャンル</th>
+						<td><%= @item.genre.name %></td>
+					</tr>
+					<tr>
+						<th>アーティスト</th>
+						<td><%= @item.artist.name %></td>
+					</tr>
+					<tr>
+						<th>レーベル</th>
+						<td><%= @item.label.name %></td>
+					</tr>
+					<tr>
+						<th>価格</th>
+						<td>￥<%= @item.price %></td>
+					</tr>
+					<tr>
+						<th>残り</th>
+						<td><%= @item.stock %>点</td>
+					</tr>
+					<tr>
+						<th>販売状況</th>
+						<td><%= @item.sales_status %></td>
+					</tr>
+				</tbody>
+			</table>
+
 			<div class="half2">
 				<ul class="list-group">
 					<% if @item.sales_status == "販売中" %>
 						<li class="list-group-item" style="border-bottom: none;">
 						<% if user_signed_in? %>
-							<%= button_to "カートに入れる", users_user_carts_path(current_user.id),
-							 method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
 						<% else %>
 							<%= button_to "カートに入れる(ログインする)", new_user_session_path %>
 						<% end %>
@@ -75,66 +73,60 @@
 						<%= @item.reviews.count %> 件のレビューがあります
 					</li>
 				</ul>
-
-
-					
 			</div>
 		</div>
-</div>
-</div>
 
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-12">
-
-<div class="song-list">
-	<h2>収録曲</h2>
-	<table class="table table-bordered table-striped">
-		<% @item.discs.each do |disc| %>
-			<thead>
-				<tr>
-					<th>Disc<%= disc.number %></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% disc.songs.each do |song| %>
-					<tr>
-						<th><%= song.number %> . </th>
-						<td><%= song.name %></td>
-					</tr>
+		<div class="song-list">
+			<h2>収録曲</h2>
+			<table class="table table-bordered table-striped">
+				<% @item.discs.each do |disc| %>
+					<thead>
+						<tr>
+							<th>Disc<%= disc.number %></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% disc.songs.each do |song| %>
+							<tr>
+								<th><%= song.number %> . </th>
+								<td><%= song.name %></td>
+							</tr>
+						<% end %>
+					</tbody>
 				<% end %>
-			</tbody>
-		<% end %>
-	</table>
+			</table>
+		</div>
+	</div>
 </div>
 
+<div class="item-reviews" style="border-top:solid 3px; width: 80%; padding: 30px;">
+	<div class="clearfix">
+		<h2 style="float: left;">"<%= @item.name %>"へのレビュー</h2>
+		<p class="review-head">
+			<%= link_to '一覧ページへ', users_item_reviews_path(@item), class: "btn btn-default" %>
+		</p>
+		<% if user_signed_in? %>
+			<p class="review-head">
+				<%= link_to '新規投稿する', new_users_item_review_path(@item), class: "btn btn-default" %>
+			</p>
+		<% else %>
+			<p class="review-head">
+				<%= link_to '新規投稿する(ログインする)', new_user_session_path, class: "btn btn-default" %>
+			</p>
+		<% end %>
 	</div>
-		</div>
-
-
-		<div class="item-reviews" style="border-top:solid 3px; width: 80%; padding: 30px;">
-			<div class="clearfix">
-				<h2 style="float: left;"><%= @item.name %>のレビュー</h2>
-				<p class="review-head">
-					<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
-				</p>
-				<% if user_signed_in? %>
-					<p class="review-head">
-						<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
-					</p>
-				<% else %>
-					<p class="review-head">
-						<%= link_to '新規投稿する(ログインページへ)', new_user_session_path %>
-					</p>
-				<% end %>
+	<div class="review-list">
+		<% @item.reviews.each do |review| %>
+			<div style="border-bottom: solid 1px; padding: 10px 3px;">
+				<p>タイトル：<%= review.title %></p>
+				<p>本文：<br><%= review.body %></p>
 			</div>
-			<div class="review-list">
-				<% @item.reviews.each do |review| %>
-					<div style="border-bottom: solid 1px; padding: 10px 3px;">
-						<p>タイトル：<%= review.title %></p>
-						<p>本文：<br><%= review.body %></p>
-					</div>
-				<% end %>
-			</div>
-		</div>
+		<% end %>
 	</div>
+</div>
+
