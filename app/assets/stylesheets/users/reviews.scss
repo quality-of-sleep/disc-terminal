@@ -19,9 +19,11 @@
 	margin: 15px 0;
 }
 
+.review-border:not(:last-child) {
+	border-bottom: solid 1px;
+}
 
 .review-show{
-	border-bottom: solid 1px;
 	padding: 15px 20px;
 }
 
