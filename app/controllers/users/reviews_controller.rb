@@ -24,7 +24,7 @@ class Users::ReviewsController < ApplicationController
 			flash[:success] = "レビューが投稿されました"
 			redirect_to users_item_reviews_path(@item.id)
 		else
-			flash[:danger] = "レビューの投稿に失敗しました"
+			flash[:warning] = "投稿内容に入力漏れがあります"
 			redirect_to new_users_item_review_path(@item)
 		end
 	end
