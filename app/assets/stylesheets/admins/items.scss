@@ -2,12 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .clearfix::after {
   content: "";
   display: block;
@@ -90,6 +84,47 @@
   position: absolute;
   right: 3%;
   left: 3%;
+}
+
+// ログインフォーム
+.admin-session {
+  margin: 40px auto 100px 0;
+}
+
+.admin-session h1 {
+  margin-bottom: 30px;
+  margin-top: 40px;
+}
+
+.admin-session .field {
+  margin-bottom: 30px;
+}
+
+.admin-session input {
+  width: 100%;
+}
+
+.admin-session input[type="checkbox"] {
+  width: auto;
+}
+
+.admin-session .form_body {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.admin-session .form_body .btn-success {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+}
+
+.admin-session .form_body .btn-info {
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 
 // 退会ページ
