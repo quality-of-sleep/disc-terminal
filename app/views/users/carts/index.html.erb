@@ -1,0 +1,109 @@
+<% if @user.carts.count == 0 %>
+	<div class="col-md-9" style="padding-bottom: 300px;">
+		<div class="row" style="margin-bottom: 25px;">
+			<h2>カート内商品</h2>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>商品</th>
+					<th></th>
+					<th>価格(税別)</th>
+					<th>数量</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>カートに商品がありません</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<% else %>
+
+	<div class="col-md-9">
+		<div class="row" style="margin-bottom: 25px;">
+			<h2>カート内商品</h2>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>商品</th>
+					<th></th>
+					<th>価格(税別)</th>
+					<th>数量</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @user.carts.each do |cart| %>
+					<tr>
+						<td style="width: 30%;">
+							<%= link_to users_item_path(cart.item_id) do %>
+								<%= attachment_image_tag cart.item, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'150x150' %>
+							<% end %>
+						</td>
+						<td style="width: 35%;">
+							<div class="text-center" style="margin-bottom: 10%;">
+								<%= link_to users_item_path(cart.item_id) do %>
+									<%= cart.item.name %>
+								<% end %>
+							</div>
+							<div class="text-center" style="margin-bottom: 10%;">
+								<p><%= cart.item.artist.name %></p>
+							</div>
+							<div class="text-center" >
+									<p class="btn btn-default"><%= cart.item.sales_status %></p>
+							</div>
+						</td>
+						<td style="width: 20%;">
+							<div style="margin-bottom: 50%;">
+								<p>¥ <%= cart.item.price.to_s(:delimited) %></p>
+							</div>
+							<div>
+								<%= link_to "取消", users_user_cart_path(@user.id, cart.id), method: :delete, class: "btn btn-default btn-danger" %>
+							</div>
+						</td>
+						<td>
+							<%= form_tag(url_for(users_user_cart_path(@user.id, cart.id)), method: :patch) do %>
+								<div style="margin-bottom: 10%;">
+									<%= select_tag 'amount', options_for_select(stock_array(cart),:selected=>cart.amount), class: "btn btn-default dropdown-toggle" %>
+								</div>
+							<div>
+								<%= submit_tag "数量変更", class: "btn btn-primary" %>
+							</div>
+							<% end %>
+							<% if have_stock?(cart.item.stock, cart.amount) == false %>
+								<div style="margin-top: 10%;">
+									<p class="btn btn-warning">在庫数を超えてます</p>
+								</div>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-md-3 price-box">
+		<ul class="list-group" style="max-width: 400px;">
+			<li class="list-group-item" style="border-bottom: none;">
+				<% if sales_status?(@user.carts) == false %>
+					<p class="btn btn-danger btn-block">購入できない商品があります</p>
+				<% else %>
+					<% if have_stocks?(@user.carts) == false %>
+						<p class="btn btn-danger btn-block">在庫数を上回る注文があります</p>
+					<% else %>
+						<%= link_to "購入へ進む", users_user_orders_new_path(@user), class: "btn btn-warning btn-block" %>
+					<% end %>
+				<% end %>
+			</li>
+			<li class="list-group-item" style="border-top: none; border-bottom: none;">
+				<p>小計 (<%= total_amount(@user.carts) %>点)　　¥ <%= subtotal_price(@price).to_s(:delimited) %></p>
+			</li>
+			<li class="list-group-item" style="border-top: none;">
+				<p>(内消費税　 　¥ <%= tax(@price).to_s(:delimited) %>)</p>
+			</li>
+	</div>
+<% end %>

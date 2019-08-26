@@ -1,0 +1,23 @@
+<h1 style="margin-bottom: 25px; ">注文一覧</h1>
+<div class="col-md-12">
+	<div class="row" style="margin-bottom: 25px;">
+		<div class="col-md-4">
+			<%= form_tag admins_orders_path, method: :get, style: "display: inline-block;" do %>
+			<%= select_tag 'delivery_status', options_for_select([["配送準備中",'1'],["配送中",'2'],["配送済",'3'],['キャンセル','4']]), class: "btn btn-default dropdown-toggle" %>
+		  <%= submit_tag '絞り込む', class: "btn btn-info" %>
+		 <% end %>
+		 <%= link_to 'リセット', admins_orders_path, class: "btn btn-default" %>
+		</div>
+	</div>
+	<div class="col" id="orders">
+		<%= render '/admins/orders/table', orders: @orders %>
+	</div>
+	<div id="next">
+	  <%= link_to_next_page @orders, "次を表示", remote: true %>
+	</div>
+
+	<div class="text-center" id="paginator">
+		<%= paginate @orders, class: "paginate" %>
+	</div>
+</div>
+

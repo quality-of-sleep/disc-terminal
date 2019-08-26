@@ -1,0 +1,30 @@
+ <div class='nested-fields'>
+    <div class="half-content">
+      <div class="field">
+        <div class="half1">
+        <%= f.label :recipient, 'お宛名'%>
+        <%= f.text_field :recipient %>
+        </div>
+        <div class="half2">
+        <%= f.label :telephone_number, 'TEL'%>
+        <%= f.number_field :telephone_number %>
+        </div>
+      </div>
+    </div>
+
+    <div class="set-content">
+      <div class="field">
+        <div class="subject">
+        <%= f.label :postal_code,"郵便番号" %>
+        <%= f.number_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
+        </div>
+        <div class="content">
+          <%= f.label :details,"都道府県、市区町村、番地、階数" %>
+          <%= f.text_area :details, placeholder: "住所：", class: "form-control"%>
+        </div>
+      </div>
+    </div>
+    <div>
+      <%= link_to_remove_association "新規住所を削除", f %>
+    </div>
+</div>

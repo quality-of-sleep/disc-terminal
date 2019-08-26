@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>ユーザー詳細</h1>
+    <div class="form-box">
+      <h3>お客様情報</h3>
+      <dl class="dl-horizontal">
+      <%= render 'users/users/list', user: @user %>
+        <div class="each-info">
+          <dt>※管理者コメント：</dt>
+          <% @user.admin_comments.each_with_index do |admin_comment, number| %>
+          <dd class="admin-comment">
+            <div class="admin-comment-number">(<%= number+1 %>)</div>
+            <div class="admin-comment-body">
+              <em><%= admin_comment.body %></em>
+            </div>
+            <div class="admin-comment-margin"></div>
+            <div class="admin-comment-btn">
+              <%= link_to "削除",  admins_user_admin_comment_path(@user, admin_comment), method: :delete, class: "label label-danger" %>
+            </div>
+          </dd>
+          <% end %>
+        </div>
+        <div class="each-info">
+        <%= form_for [@user, @admin_comment],  url: admins_user_admin_comments_path(@user, @admin_comment) do |f|%>
+          <dt style="margin-top: 50px;">管理者コメント追加：</dt>
+          <dd class="admin-comment new">
+            <div class="admin-comment-number"></div>
+            <div class="admin-comment-body">
+            <%= f.text_area :body %>
+            </div>
+            <div class="admin-comment-margin"></div>
+            <div class="admin-comment-btn">
+              <button class="label label-success">追加</button>
+            </div>
+          </dd>
+        <% end %>
+        </div>
+      </dl>
+    </div>
+    <div class="btn-box">
+      <div class="text-center">
+      <%= link_to "このユーザーを退会させる", admins_user_path(@user), method: :patch, data: {confirm: "このユーザーを退会させますか？"}, class:"btn btn-danger", style: "color: white; "%>
+      </div>
+      <div class="text-right">
+        <u><em><%= link_to "ユーザ一覧ページに戻る", admins_users_path%></em></u>
+      </div>
+    </div>
+  </div>
+</div>

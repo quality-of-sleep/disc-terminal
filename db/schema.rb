@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_050328) do
+ActiveRecord::Schema.define(version: 2019_08_19_093347) do
+
+  create_table "admin_comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admin_comments_on_user_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -80,9 +88,9 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "artist_id"
-    t.integer "genre_id"
-    t.integer "label_id"
+    t.integer "artist_id", default: 1
+    t.integer "genre_id", default: 1
+    t.integer "label_id", default: 1
     t.string "name"
     t.integer "price"
     t.integer "sales_status"
@@ -104,7 +112,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
-    t.string "item"
+    t.string "item_name"
     t.string "artist"
     t.integer "price"
     t.integer "amount"
@@ -120,13 +128,12 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.string "postal_code"
     t.text "address"
     t.string "telephone_number"
-    t.string "string"
-    t.integer "payment"
+    t.integer "payment", default: 3, null: false
     t.integer "total_price"
     t.integer "subtotal_price"
     t.integer "carriage"
     t.integer "tax"
-    t.integer "delivery_status"
+    t.integer "delivery_status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -162,6 +169,15 @@ ActiveRecord::Schema.define(version: 2019_08_11_050328) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "telephone_number", null: false
+    t.string "postal_code", null: false
+    t.text "address", null: false
+    t.integer "payment", default: 3, null: false
+    t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

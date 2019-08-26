@@ -1,0 +1,113 @@
+<h1>商品詳細</h1>
+<div class="container">
+	<div class="item-show clearfix" style="width: 80%; border-bottom: dashed 2px;">
+		<div class="show-item-left" style="float: left; padding: 40px; width: 350px;">
+			<img class="item_image">
+				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
+		</div> 
+		<div class="show-item-right" style="float: left; padding: 40px 60px; width: 500px;">
+			<h2 style="display: inline-block;">
+				<%= @item.name %>
+			</h2>
+			<div>
+				<p style="display: inline-block; margin-right: 20px;">
+					<%= @item.artist.name %>	
+				</p>
+				<p style="display: inline-block; border:solid 1px; border-radius: 3px; padding: 2px 5px;">
+					<%= @item.genre.name %>
+				</p>
+			</div>
+			<p style="border:solid 1px; border-radius: 3px; padding: 2px 5px;"><%= @item.label.name %></p>
+			<div>
+				<p style="display: inline-block; margin: 0 15px;">残り<%= @item.stock %>点</p>
+				<p style="width: 150px; display: inline-block; border:solid 2px; border-radius: 3px; padding: 2px 5px; text-align: center;">
+					<%= @item.sales_status %>
+				</p>
+			</div>
+			<p>￥<%= @item.price %></p>
+			<% if @item.sales_status == "販売中" %>
+				<% if user_signed_in? %>
+					<p class="item-cart">
+						<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+					</p>
+				<% else %>
+					<p class="item-cart">
+						<%= button_to "カートに入れる", new_user_session_path %>
+					</p>
+				<% end %>
+			<% else %>
+				<p style="border: solid 2px; padding: 2px 5px; border-radius: 3px; color: red; text-align: center; width: 300px;">カートに入れられません</p>
+			<% end %>			
+			<div class="clearfix">
+				<div class="favorites clearfix" style="margin: 0 30px; float: left;">
+					<% if user_signed_in? %>
+						<% if @item.favorited_by?(current_user) %>
+							<li>
+								<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+								<% end %>
+								<p style="float: left;"><%= @item.favorites.count %></p>
+							</li>
+						<% else %>
+							<li>
+								<%= link_to users_item_favorites_path(@item), method: :post do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
+								<% end %>
+								<p style="float: left;"><%= @item.favorites.count %></p>
+							</li>
+						<% end %>
+					<% else %>
+						<li>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
+							<p style="float: left;"><%= @item.favorites.count %></p>
+						</li>
+					<% end %>
+				</div>
+				<div class="reviews clearfix" style="float: left;">
+					<%= link_to users_item_reviews_path(@item.id) do %>
+						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+						<% end %>
+					<p style="float: left;"><%= @item.reviews.count %></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="item-detail clearfix" style="margin: 50px 0;">
+		<h2>収録曲</h2>
+		<% @item.discs.each do |disc| %>
+			<div class="disc">
+				<p>disc<%= disc.number %></p>
+				<ul>
+					<% disc.songs.each do |song| %>
+						<li><%= song.number %>. <%= song.name %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	</div>	
+	<div class="item-reviews" style="border-top:solid 3px; width: 80%; padding: 30px;">
+		<div class="clearfix">
+			<h3 style="float: left;"><%= @item.name %>のレビュー</h3>
+			<p class="review-head">
+				<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
+			</p>
+			<% if user_signed_in? %>
+				<p class="review-head">
+					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+				</p>
+			<% else %>
+				<p class="review-head">
+					<%= link_to '新規投稿する', new_user_session_path %>
+				</p>
+			<% end %>
+		</div>
+		<div class="review-list">
+			<% @item.reviews.each do |review| %>
+				<div style="border-bottom: solid 1px; padding: 10px 3px;">
+					<p>タイトル：　<%= review.title %></p>
+					<p>本文：<br><%= review.body %></p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
