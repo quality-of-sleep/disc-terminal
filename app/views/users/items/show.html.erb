@@ -38,12 +38,12 @@
 
 			<div class="half2">
 				<ul class="list-group">
+					<li class="list-group-item" style="border-bottom: none;">
 					<% if @item.sales_status == "販売中" %>
-						<li class="list-group-item" style="border-bottom: none;">
 						<% if user_signed_in? %>
-							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id},class: "btn btn-warning btn-block" %>
 						<% else %>
-							<%= link_to "カートに入れる(ログインする)", new_user_session_path %>
+							<%= link_to "カートに入れる(ログインする)", new_user_session_path,class: "btn btn-warning btn-block" %>
 						<% end %>
 					<% else %>
 						<p class="btn btn-danger btn-block">現在購入できません</p>

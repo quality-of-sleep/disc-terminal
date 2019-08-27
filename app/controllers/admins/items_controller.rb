@@ -9,7 +9,7 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
-		@sorted_artist ||= params[:artist] #key_regexにより生成
+		@sorted_artist ||= params[:artist] #save_keyにより生成
 		@sorted_genre = params[:genre]
 		@sorted_sales_status = params[:sales_status]
 		if params[:key].present?
