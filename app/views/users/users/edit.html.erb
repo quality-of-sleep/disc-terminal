@@ -61,24 +61,26 @@
             </div>
 
 <!----配送先、ここから意味不明だから後で確認したい--->
-<div class="content">
+<div>
+<div>
 <h2>お届け先</h2>
   <div id="delivery_addresses" class="field">
     <%= f.fields_for :delivery_addresses do |delivery_address| %>
       <%= render 'delivery_address_fields', :f => delivery_address %>
           <% end %>
-    <div class='links'>
-      <%= link_to_add_association 'お届け先を追加', f, :delivery_addresses %>
+    <div>
+      <%= link_to_add_association '新しいお届け先を追加', f, :delivery_addresses, style: "color: white ;width: 100%; margin: 3px 3% 0 3%;", class:'btn btn-success'%>
     </div>
   </div>
+</div>
 </div>
 <!---ここまで意味不明--->
 
 
 
 <!-- orders/new.html.erbのリストVERを丸パクリ -->
-    <div class="set-content">
-      <h2>お支払い方法</h2>
+    <div>
+      <h2 style="padding-top: 0;">お支払い方法</h2>
                      <div class="field" style="margin-left: 10px;">
 
 
