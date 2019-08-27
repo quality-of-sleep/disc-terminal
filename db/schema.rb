@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   end
 
   create_table "artists", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   create_table "carts", force: :cascade do |t|
     t.integer "item_id"
     t.integer "user_id"
-    t.integer "amount", null: false
+    t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_carts_on_item_id"
@@ -56,18 +56,18 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
 
   create_table "delivery_addresses", force: :cascade do |t|
     t.integer "user_id"
-    t.text "recipient", null: false
-    t.string "postal_code", null: false
-    t.text "details", null: false
-    t.string "telephone_number", null: false
+    t.text "recipient"
+    t.string "postal_code"
+    t.text "details"
+    t.string "telephone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_delivery_addresses_on_user_id"
   end
 
   create_table "discs", force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "number", null: false
+    t.integer "item_id"
+    t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,19 +82,19 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "artist_id", default: 1, null: false
-    t.integer "genre_id", default: 1, null: false
-    t.integer "label_id", default: 1, null: false
-    t.string "name", null: false
-    t.integer "price", null: false
-    t.integer "sales_status", null: false
-    t.integer "stock", null: false
+    t.integer "artist_id", default: 1
+    t.integer "genre_id", default: 1
+    t.integer "label_id", default: 1
+    t.string "name"
+    t.integer "price"
+    t.integer "sales_status"
+    t.integer "stock"
     t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   end
 
   create_table "labels", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
-<<<<<<< HEAD
     t.string "user_name", null: false
     t.string "postal_code", null: false
     t.text "address", null: false
@@ -134,17 +133,10 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
     t.integer "subtotal_price", null: false
     t.integer "carriage", null: false
     t.integer "tax", null: false
-=======
-    t.string "user_name"
-    t.string "postal_code"
-    t.text "address"
-    t.string "telephone_number"
-    t.integer "payment", default: 3, null: false
     t.integer "total_price"
     t.integer "subtotal_price"
     t.integer "carriage"
     t.integer "tax"
->>>>>>> f888095f25eda3d5b6d8c2b631820d6821915214
     t.integer "delivery_status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,8 +146,8 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   create_table "reviews", force: :cascade do |t|
     t.integer "item_id"
     t.integer "user_id"
-    t.string "title", null: false
-    t.text "body", null: false
+    t.string "title"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_reviews_on_item_id"
@@ -163,9 +155,9 @@ ActiveRecord::Schema.define(version: 2019_08_19_093347) do
   end
 
   create_table "songs", force: :cascade do |t|
-    t.integer "disc_id", null: false
-    t.integer "number", null: false
-    t.string "name", null: false
+    t.integer "disc_id"
+    t.integer "number"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
