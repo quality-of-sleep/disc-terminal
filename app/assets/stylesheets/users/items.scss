@@ -14,11 +14,40 @@
   clear: both;
 }
 
-.glyphicon {
+.table-stop{
+  position: absolute;
+  width: 180px;
+}
 
+.table-stop.fixed{
+  margin-top: 0;
+  width: 180px;
+  position: fixed;
+  top: 0;
+
+}
+
+.item-right td{
+  margin: 5px;
+  text-align: center;
+}
+
+.box-border{
+  border :solid 1px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: #ddd;
+}
+
+.opinion p,span{
+  float: left;
+  margin-right: 20px;
+}
+
+.glyphicon {
   float: left;
   font-size: 20px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 //only show
@@ -29,9 +58,3 @@
   border-right: dotted 1px;
   padding: 10px 20px;
 }
-
-// li {
-//   list-style: none;
-//   font-size: 18px;
-//   margin: 10px 10px;
-// }
