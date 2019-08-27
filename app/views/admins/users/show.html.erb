@@ -1,64 +1,49 @@
-<!--aminのusers#showページ-->
-<div class="container">
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-      <h2 style="border: solid 1px; border-radius: 3px; padding: 10px; display:inline-block; margin-top: 20px; margin-bottom: 20px;">ユーザー詳細情報</h2>
-      <div class="form-box" style="border: solid 1px; padding: 30px 100px; margin-bottom: 40px;">
-
-      	<ul>
-          <li>ユーザID：<%= @user.id %></li>
-          <li>ステータス：<%= @user.is_quit %></li>
-      	  <li>名前：<%= @user.last_name %><%= @user.first_name %></li>
-      	  <li>カナ：<%= @user.last_name_kana %><%= @user.first_name_kana %></li>
-      	  <li>現住所：<%= @user.postal_code %><br><%= @user.address %></li>
-
-
-<!---配送先--->
-         <% @user.delivery_addresses.each do |delivery_address|%>
-          <li>配送先名：
-            <%= delivery_address.recipient %><br>
-            <%= delivery_address.postal_code %><br>
-            <%= delivery_address.details %><br>
-          </li>
-         <% end %>
-<!---以上--->
-
-
-
-      	  <li>電話番号：<%= @user.telephone_number %></li>
-      	  <li>e-mail：<%= @user.email %></li>
-      	  <li>支払い方法：<%= @user.payment %></li>
-      	  <li>カード番号：</li><!---ここは一旦スルーする〜--->
-
-<!--以下、管理者コメント表示、削除-->
-          <li>管理者コメント：
-            <% @user.admin_comments.each do |admin_comment| %>
-             <%= admin_comment.body %>
-            <%= link_to "コメントを削除",  admins_user_admin_comment_path(@user, admin_comment), method: :delete %><br>
-            <% end %>
-          </li>
-<!--以上、管理者コメント表示、削除-->
-          <li>
-            <%= form_for [@user, @admin_comment],  url: admins_user_admin_comments_path(@user, @admin_comment) do |f|%>
-            <%= f.label :body, '管理者コメント追加：'%>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>ユーザー詳細</h1>
+    <div class="form-box">
+      <h3>お客様情報</h3>
+      <dl class="dl-horizontal">
+      <%= render 'users/users/list', user: @user %>
+        <div class="each-info">
+          <dt>※管理者コメント：</dt>
+          <% @user.admin_comments.each_with_index do |admin_comment, number| %>
+          <dd class="admin-comment">
+            <div class="admin-comment-number">(<%= number+1 %>)</div>
+            <div class="admin-comment-body">
+              <em><%= admin_comment.body %></em>
+            </div>
+            <div class="admin-comment-margin"></div>
+            <div class="admin-comment-btn">
+              <%= link_to "削除",  admins_user_admin_comment_path(@user, admin_comment), method: :delete, class: "label label-danger" %>
+            </div>
+          </dd>
+          <% end %>
+        </div>
+        <div class="each-info">
+        <%= form_for [@user, @admin_comment],  url: admins_user_admin_comments_path(@user, @admin_comment) do |f|%>
+          <dt style="margin-top: 50px;">管理者コメント追加：</dt>
+          <dd class="admin-comment new">
+            <div class="admin-comment-number"></div>
+            <div class="admin-comment-body">
             <%= f.text_area :body %>
-            <%= f.submit "コメントを追加"%>
-            <% end %>
-          </li>
-      	</ul>
-      </div>
-
-
-
-      	<span class="label label-danger">
-      	<%= link_to "退会させる", admins_user_path(@user), method: :patch, data: {confirm: "このユーザを退会させますか？"}%>
-      	</span>
-
-        <span class="label label-success">
-        <%= link_to "ユーザ一覧", admins_users_path %>
-        </span>
+            </div>
+            <div class="admin-comment-margin"></div>
+            <div class="admin-comment-btn">
+              <button class="label label-success">追加</button>
+            </div>
+          </dd>
+        <% end %>
+        </div>
+      </dl>
     </div>
-    <div class="col-sm-1"></div>
+    <div class="btn-box">
+      <div class="text-center">
+      <%= link_to "このユーザーを退会させる", admins_user_path(@user), method: :patch, data: {confirm: "このユーザーを退会させますか？"}, class:"btn btn-danger", style: "color: white; "%>
+      </div>
+      <div class="text-right">
+        <u><em><%= link_to "ユーザ一覧ページに戻る", admins_users_path%></em></u>
+      </div>
+    </div>
   </div>
 </div>

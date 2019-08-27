@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
+  validates :email, presence: true
   enum is_quit:{利用中: false, 退会済み: true}
   enum payment:{クレジット支払: 1, 銀行振込: 2, 代金引換: 3}
 
@@ -28,4 +29,17 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :admin_comments, dependent: :destroy
   accepts_nested_attributes_for :admin_comments, allow_destroy: true
+
+
+
+
+  #validates :password, confirmation: true
+  #or
+  #validates_confirmation_of :password
+  #attr_accessor :password_confirmation
+
+  def self.search(search)
+      return User.all unless search
+      User.where([' last_name || first_name LIKE ? OR last_name_kana || first_name_kana LIKE ?', "%#{search}%",  "%#{search}%"])
+  end
 end

@@ -31,6 +31,11 @@ class Users::OrdersController < ApplicationController
 			elsif @user.payment == "クレジット支払"
 				@card = true
 			end
+
+			respond_to do |format|
+	      format.html
+	      format.js
+	    end
 		end
 	end
 

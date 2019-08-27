@@ -30,6 +30,9 @@
 		  		 	]) %>
 		  		<%= select_tag 'direction',
 		  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+					<%= hidden_field_tag :artist, key_regex("artist"),class: "artist" %>
+					<%= hidden_field_tag :genre, key_regex("genre") %>
+					<%= hidden_field_tag :sales_status, key_regex("sales_status") %>
 		  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
 		  	<% end %>
 		  </div>

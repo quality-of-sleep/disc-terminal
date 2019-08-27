@@ -3,13 +3,39 @@ class Admins::OrdersController < ApplicationController
 	include Users::OrdersHelper
 
 	def index
-		# ページング＋ソート＋デフォルト降順
-		@orders = Order.page.order(params[:sort]).reverse_order
-		# 絞り込み分岐
-		if params[:delivery_status].present?
-			@orders = @orders.get_by_delivery_status params[:delivery_status]
-			# 絞り込みパラメータ保持
-			@sort_key = @orders.first.delivery_status
+		# ページネーション使用したら分岐
+		if params[:page].present?
+			# ソートしつつページネーションしたら分岐
+			if params[:sort].present?
+				@orders = Order.page(params[:page])
+			else
+				@orders = Order.page(params[:page]).reverse_order
+			end
+			# 絞り込み分岐
+			if params[:delivery_status].present?
+				@orders = @orders.get_by_delivery_status params[:delivery_status]
+				# 絞り込みパラメータ保持
+				@sort_key = @orders.first.delivery_status
+			end
+
+			respond_to do |format|
+	      format.html
+	      format.js
+	    end
+		else
+			# ページング＋ソート＋デフォルト降順
+			@orders = Order.page.order(params[:sort]).reverse_order
+			# 絞り込み分岐
+			if params[:delivery_status].present?
+				@orders = @orders.get_by_delivery_status params[:delivery_status]
+				# 絞り込みパラメータ保持
+				@sort_key = @orders.first.delivery_status
+			end
+
+			respond_to do |format|
+	      format.html
+	      format.js
+	    end
 		end
 	end
 

@@ -1,15 +1,15 @@
-<h1 style="border: solid 1px;">商品詳細</h1>
+<h1>商品詳細</h1>
 <div class="container">
 	<div class="item-show clearfix" style="width: 90%; border-bottom: solid 1px;">
 		<div class="item-left" style="float: left;  padding: 40px; width: 350px;">
 			<img class="item_image">
 				<%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
 		</div>
-		<div class="item-right" style="float: left; padding: 40px 60px; width: 500px;">
+		<div class="item-right" style="float: left; padding: 40px 60px; width: 450px;">
 			<p>
 				<%= @item.name %>	
 			</p>
-			<p style="display: inline-block;  margin-right: 20px;">
+			<p style="display: inline-block;  margin-right: 30px;">
 				<%= @item.artist.name %>
 			</p>
 			<p style="display: inline-block; border:solid 1px; border-radius: 3px; padding: 2px 5px;">
@@ -26,9 +26,7 @@
 					<%= @item.stock %>点
 				</p>
 			</div>
-			<p style="display: inline-block;">
-				￥<%= @item.price %>
-			</p>
+			<p>￥<%= @item.price %></p>
 			<div class="clearfix">
 				<div class="favorites" style="float: left; margin-right: 15px;">
 					<span class="glyphicon glyphicon-heart" aria-hidden="true" style="float: left; margin-right: 15px;"></span>

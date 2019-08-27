@@ -8,7 +8,6 @@ class Users::UsersController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
-    @delivery_addresses = @user.delivery_addresses.build
   end
 
   def update

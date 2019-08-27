@@ -9,7 +9,14 @@ class Admins::ItemsController < ApplicationController
 		@items = @items.where(["artist_id = ?","#{params[:artist]}"]) if params[:artist].present?
 		@items = @items.where(["genre_id = ?", "#{params[:genre]}"]) if params[:genre].present?
 		@items = @items.where(["sales_status = ?", "#{params[:sales_status]}"]) if params[:sales_status].present?
-		@items = @items.reorder("#{params[:key]} #{params[:direction]}")if params[:key].present?
+		@sorted_artist ||= params[:artist] #key_regexにより生成
+		@sorted_genre = params[:genre]
+		@sorted_sales_status = params[:sales_status]
+		if params[:key].present?
+			@items ||= @items.reorder("#{params[:key]} #{params[:direction]}")
+			@sort = sorted( @items, params[:key],params[:direction] )
+			@items = Kaminari.paginate_array(@sort).page(params[:page]).per(25)
+		end
 
 		if params[:sales_status?]
 			@item = Item.find_by(id: params[:id])
@@ -17,7 +24,7 @@ class Admins::ItemsController < ApplicationController
 			@item.save
 			respond_to do |format|
 				format.html { redirect_back(fallback_location: admins_items_url) }
-				format.js
+				format.js{ redirect_back(fallback_location: admins_items_url) }
 			end
 		end
 
