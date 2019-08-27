@@ -40,7 +40,6 @@
 				<ul class="list-group">
 					<li class="list-group-item" style="border-bottom: none;">
 					<% if @item.sales_status == "販売中" %>
-						<li class="list-group-item" style="border-bottom: none;">
 						<% if user_signed_in? %>
 							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id},class: "btn btn-warning btn-block" %>
 						<% else %>
