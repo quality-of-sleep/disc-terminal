@@ -1,72 +1,103 @@
-<h1 style="border: solid 1px;">商品詳細</h1>
-<div class="container">
-	<div class="item-show clearfix" style="width: 90%; border-bottom: solid 1px;">
-		<div class="item-left" style="float: left;  padding: 40px; width: 350px;">
-			<img class="item_image">
-				<%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
-		</div>
-		<div class="item-right" style="float: left; padding: 40px 60px; width: 500px;">
-			<p>
-				<%= @item.name %>	
-			</p>
-			<p style="display: inline-block;  margin-right: 20px;">
-				<%= @item.artist.name %>
-			</p>
-			<p style="display: inline-block; border:solid 1px; border-radius: 3px; padding: 2px 5px;">
-				<%= @item.genre.name %>
-			</p>
-			<p style="border:solid 1px; border-radius: 3px; padding: 2px 5px; width: 200px; text-align: center;">
-				<%= @item.label.name %>
-			</p>
-			<div style="display: inline-block;">
-				<p style="width: 150px; display: inline-block; border:solid 2px; border-radius: 3px; padding: 2px 5px; text-align: center;">
-					<%= @item.sales_status %>
-				</p>
-				<p style="display: inline-block; margin: 0 15px;">残り
-					<%= @item.stock %>点
-				</p>
-			</div>
-			<p style="display: inline-block;">
-				￥<%= @item.price %>
-			</p>
-			<div class="clearfix">
-				<div class="favorites" style="float: left; margin-right: 15px;">
-					<span class="glyphicon glyphicon-heart" aria-hidden="true" style="float: left; margin-right: 15px;"></span>
-					<p style="float: left; margin-right: 15px;">
-						<%= @item.favorites.count %>
-					</p>
-				</div>
-				<div class="reviews" style="float: left; margin-right: 15px;">
-					<span class="glyphicon glyphicon-comment" aria-hidden="true" style="float: left; margin-right: 15px;"></span>
-					<p style="float: left; margin-right: 15px;">
-						<%= @item.reviews.count %>
-					</p>
-				</div>
-			</div>
+<div class="row item-detail item-page">
+	<div class="col-sm-4">
+		<div>
+			<%= attachment_image_tag @item, :image, :fill, 250, 250, format: 'jpeg', fallback: "/no_image.jpg", size:'250x250' %>
 		</div>
 	</div>
-		<div class="item-detail clearfix" style="margin: 50px 0;">
-			<h2>収録曲</h2>
-			<% @item.discs.each do |disc| %>
-				<div class="disc">
-					<p>disc<%= disc.number %></p>
-					<ul class="song-list">
-						<% disc.songs.each do |song| %>
-							<li>
-								<%= song.number %>.<%= song.name %>
-							</li>
+	<div class="col-sm-8">
+		<h1><%= @item.name %></h1>
+		<div class="half-content">
+			<table class="table table-bordered table-striped half1">
+				<tbody>
+					<tr>
+						<th>ジャンル</th>
+						<td><%= @item.genre.name %></td>
+					</tr>
+					<tr>
+						<th>アーティスト</th>
+						<td><%= @item.artist.name %></td>
+					</tr>
+					<tr>
+						<th>レーベル</th>
+						<td><%= @item.label.name %></td>
+					</tr>
+					<tr>
+						<th>価格</th>
+						<td>￥<%= @item.price %></td>
+					</tr>
+					<tr>
+						<th>残り</th>
+						<td><%= @item.stock %>点</td>
+					</tr>
+					<tr>
+						<th>販売状況</th>
+						<td><%= @item.sales_status %></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="half2">
+				<ul class="list-group">
+					<li class="list-group-item" style="border-bottom: none;">
+						<%= link_to 'この商品を編集する', edit_admins_item_path(@item), class: "btn btn-info btn-block" %>
+					</li>
+					<li class="list-group-item">送料は ￥500 (税込) に設定してあります</li>
+					<li class="list-group-item">
+						<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+						<%= @item.favorites.count %> 件のいいねがあります
+					</li>
+					<li class="list-group-item">
+						<%= link_to admins_reviews_path(item: @item) do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+							<%= @item.reviews.count %> 件のレビューがあります
 						<% end %>
-					</ul>
-				</div>
-			<% end %>
+					</li>
+				</ul>
+
+			</div>
 		</div>
-		<ul style="margin-top: 40px">
-			<li style="display: inline-block; margin-right: 20px">
-				<%= link_to 'この商品のレビュー一覧', admins_reviews_path(item: @item) %>
-			</li>
-			<li style="display: inline-block">
-				<%= link_to '編集', edit_admins_item_path(@item) %>
-			</li>
-		</ul>		
-	
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="song-list">
+			<h2>収録曲</h2>
+			<table class="table table-bordered table-striped">
+				<% @item.discs.each do |disc| %>
+					<thead>
+						<tr>
+							<th>Disc<%= disc.number %></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% disc.songs.each do |song| %>
+							<tr>
+								<th><%= song.number %> . </th>
+								<td><%= song.name %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="item-reviews" style="border-top:solid 1px; width: 80%; padding: 30px;">
+	<div class="clearfix">
+		<h2 style="float: left;">"<%= @item.name %>"へのレビュー</h2>
+		<p class="review-head">
+			<%= link_to '一覧ページへ', admins_reviews_path(item: @item), class: "btn btn-default" %>
+		</p>
+	</div>
+	<div class="review-list">
+		<% @item.reviews.each do |review| %>
+			<div style="border-bottom: solid 1px; padding: 10px 3px;">
+				<p>タイトル：<%= review.title %></p>
+				<p>本文：<br><%= review.body %></p>
+			</div>
+		<% end %>
+	</div>
 </div>

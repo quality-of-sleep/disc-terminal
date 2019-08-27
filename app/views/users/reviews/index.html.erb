@@ -2,35 +2,62 @@
 <div class="col-md-8">
 	<div class="clearfix">
 		<h1 style="float: left;">
-			"<%= @item.name %>"へのレビュー
+			"<%= link_to @item.name, users_item_path(@item) %>"へのレビュー
 		</h1>
 		<% if user_signed_in? %>
 			<p class="review-create">
-				<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
+				<%= link_to '新規投稿する', new_users_item_review_path(@item), class: "btn btn-default" %>
 			</p>
 		<% else %>
 			<p class="review-create">
-				<%= link_to '新規投稿する', new_user_session_path %>
+				<%= link_to '新規投稿する', new_user_session_path, class: "btn btn-default" %>
 			</p>
 		<% end %>
+		<p class="review-create" style="margin-right: 10px;">
+			<%= link_to '商品詳細へ戻る', users_item_path(@item), class: "btn btn-default" %>
+		</p>
 	</div>
-	<div class="reviews">
-		<% @item.reviews.each do |review| %>
-			<div class="review-show">
-				<p>タイトル:<%= review.title %></p>
-				<p>本文：<br><%= review.body %></p>
-				<% if current_user == review.user %>
-					<div class="clearfix">
-						<span>
-							<%= link_to '編集', edit_users_item_review_path(@item, review), class: "btn btn-default col-md-1", style: "font-size: 16px; margin-right: 15px; float: left;" %> 
-						</span>
-						<span>
-							<%= link_to '削除', users_item_review_path(@item, review), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger col-md-1", style: "font-size: 16px; margin-right: 15px; float: left;" %>
-						</span>
-						<p style="float: right">投稿日：<%= review.updated_at.strftime('%Y/%m/%d') %></p>
-					</div>
-				<% end %>
+	<% if @item.reviews.count == 0 %>
+		<div class="col-md-12" style="height: 500px;">
+			<div class="row">
+				<div class="balloon">
+					<p style="font-size: 20px;">この商品にはまだレビューがありません。<br>
+						<br>
+						<strong>最初のレビュー投稿者</strong>になってみませんか？
+					</p>
+				</div>
 			</div>
-		<% end %>
-	</div>
+			<div class="row">
+				<div class="col-md-5"></div>
+				<div>
+					<img src="/uncle.PNG" alt="" style="height: 300px;">
+				</div>
+			</div>
+		</div>
+	<% else %>
+		<div class="reviews">
+			<% @item.reviews.each do |review| %>
+				<div class="review-show review-border">
+					<p>タイトル:<%= review.title %></p>
+					<p>本文：<br><%= review.body %></p>
+					<% if current_user == review.user %>
+						<div class="clearfix">
+							<span>
+								<%= link_to '編集', edit_users_item_review_path(@item, review), class: "btn btn-success col-md-1", style: "font-size: 16px; margin-right: 15px; float: left;" %>
+							</span>
+							<span>
+								<%= link_to '削除', users_item_review_path(@item, review), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger col-md-1", style: "font-size: 16px; margin-right: 15px; float: left;" %>
+							</span>
+							<% if review.created_at != review.updated_at %>
+								<p style="display: inline-block; float: right;">投稿日：<%= review.updated_at.strftime('%Y/%m/%d') %></p>
+								<p style="display: inline-block; float: right; margin-right: 15px;">最終更新日：<%= review.updated_at.strftime('%Y/%m/%d') %></p>
+							<% else %>
+								<p style="display: inline-block; float: right;">投稿日：<%= review.created_at.strftime('%Y/%m/%d') %></p>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
 </div>

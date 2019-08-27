@@ -12,7 +12,7 @@
   		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
 	  <%= select_tag 'is_quit',
 					options_for_select([["利用中", 0],["退会済み",1]]), include_blank: "ステータス", class:"btn btn-default dropdown-toggle", style: "width: 20%; height: 34px;margin-top: 5px;"%>
-   	  <%= text_field_tag :search, params[:search],placeholder: 'ユーザ名で検索', style: "width: 50%; height: 34px; border: 1px solid #ddd; border-radius: 4px 4px 4px 4px; margin-right:3px; margin-left:3px;"%>
+   	  <%= text_field_tag :search, params[:search],placeholder: ' ユーザ名で検索', style: "width: 50%; height: 34px; border: 1px solid #ddd; border-radius: 4px 4px 4px 4px; margin-right:3px; margin-left:3px;"%>
   	  <%= submit_tag '検索', style:"width: 20%;height: 34px;", class: "btn btn-info" %>
   	<% end %>
 </div>
