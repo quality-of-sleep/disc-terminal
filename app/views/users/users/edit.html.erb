@@ -79,7 +79,7 @@
 <!-- orders/new.html.erbのリストVERを丸パクリ -->
     <div class="set-content">
       <h2>お支払い方法</h2>
-                     <div class="field">
+                     <div class="field" style="margin-left: 10px;">
 
 
         <label>
@@ -100,12 +100,12 @@
 
 <!---以上--->
 
-        <span class="actions">
-          <%= f.submit "変更を確定",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
-        </span>
-        <span class="label label-default">
+        <div class="actions">
+          <%= f.submit "変更を確定", class: "btn btn-primary" %>
+        </div>
+        <div class="label label-default">
           <%= link_to "戻る", users_user_path(@user) %>
-        </span>
+        </div>
         </div>
 
         <% end %>

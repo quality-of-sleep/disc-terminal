@@ -7,7 +7,7 @@
       <%= render 'users/users/list', user: @user %>
       <% if @user.admin_comments.present? %>
         <div class="each-info">
-          <dt>※ 管理者コメント　：</dt>
+          <dt>※ 管理者コメント：</dt>
           <% @user.admin_comments.each_with_index do |admin_comment, number| %>
           <dd class="admin-comment">
             <div class="admin-comment-number">(<%= number+1 %>)</div>
@@ -24,7 +24,7 @@
       <% end %>
         <div class="each-info">
         <%= form_for [@user, @admin_comment],  url: admins_user_admin_comments_path(@user, @admin_comment) do |f|%>
-          <dt style="margin-top: 50px;">  管理者コメント追加　：</dt>
+          <dt style="margin-top: 50px;">管理者コメント追加：</dt>
           <dd class="admin-comment new">
             <div class="admin-comment-number"></div>
             <div class="admin-comment-body">
