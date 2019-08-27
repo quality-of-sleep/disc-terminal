@@ -15,7 +15,7 @@ class Users::OrdersController < ApplicationController
 
 	def new
 		@user = User.find(params[:user_id])
-		if have_stocks?(@user.carts) == false
+		if have_stocks?(@user.carts) == false || @user.carts.count == 0 || sales_status?(@user.carts) == false
 			redirect_to users_user_carts_path(@user)
 		else
 			@order = Order.new
