@@ -1,110 +1,134 @@
-<div class="col-md-2"></div>
-<div class="col-md-8" style="margin-bottom: 100px;">
-	<h1>商品詳細</h1>
-	<div class="clearfix">
-		<div class="" style="float: left; padding: 40px;">
-			<img>
-				 <%= attachment_image_tag @item, :image, :fill, 350, 350, format: 'jpeg' %>
-		</div> 
-		<div style="float: left; padding: 60px;">
-			<h2 style="display: inline-block;">
-				<%= @item.name %>
-			</h2>
-			<div class="clearfix">
-				<p style="float: left; margin-right: 20px;">
-					<%= @item.artist.name %>	
-				</p>
-				<p style="float: left; border:solid 1px; border-radius: 3px; padding: 2px 5px;">
-					<%= @item.genre.name %>
-				</p>
-			</div>
-			<p style="border:solid 1px; border-radius: 3px;"><%= @item.label.name %></p>
-			<div class="clearfix">
-				<p style="float: left; margin: 0 15px;">残り<%= @item.stock %>点</p>
-				<p style="width: 150px; float: left; border:solid 1px; border-radius: 3px; text-align: center;">
-					<%= @item.sales_status %>
-				</p>
-			</div>
-			<p>￥<%= @item.price %></p>
-			<% if @item.sales_status == "販売中" %>
-				<% if user_signed_in? %>
-					<button type="button" class="btn btn-primary">
-						<%= link_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
-					</button>
-				<% else %>
-					<button type="button" class="btn btn-primary">
-						<%= link_to "カートに入れる", new_user_session_path %>
-					</button>
-				<% end %>
-			<% else %>
-				<p class="btn btn-danger col-md-9">カートに入れられません</p>	
-			<% end %>			
-			<div class="clearfix">
-				<div class="clearfix" style="margin: 0 30px; float: left;">
-					<% if user_signed_in? %>
-						<% if @item.favorited_by?(current_user) %>
-							<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;  float: left;"></span>
-							<% end %>
-							<p style="float: left;"><%= @item.favorites.count %></p>
-						<% else %>			
-							<%= link_to users_item_favorites_path(@item), method: :post do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray; float: left;"></span>
-							<% end %>
-							<p style="float: left;"><%= @item.favorites.count %></p>
-						<% end %>
-					<% else %>
-						<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray; float: left;"></span>
-						<p style="float: left;"><%= @item.favorites.count %></p>
-					<% end %>
-				</div>
-				<div class="clearfix" style="float: left;">
-					<%= link_to users_item_reviews_path(@item.id) do %>
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-						<% end %>
-					<p style="float: left;"><%= @item.reviews.count %></p>
-				</div>
-			</div>
+<div class="row item-detail item-page">
+	<div class="col-sm-4">
+		<div>
+			<%= attachment_image_tag @item, :image, :fill, 250, 250, format: 'jpeg', fallback: "/no_image.jpg", size:'250x250' %>
 		</div>
 	</div>
-	<div class="item-detail clearfix" style="margin: 50px 0;">
-		<h2>収録曲</h2>
-		<% @item.discs.each do |disc| %>
-			<div class="disc">
-				<h3>disc<%= disc.number %></h3>
-				<table>
-					<% disc.songs.each do |song| %>
-						<tr><td><%= song.number %>. <%= song.name %></tr></td>
+	<div class="col-sm-8">
+		<h1><%= @item.name %></h1>
+		<div class="half-content">
+			<table class="table table-bordered table-striped half1">
+				<tbody>
+					<tr>
+						<th>ジャンル</th>
+						<td><%= @item.genre.name %></td>
+					</tr>
+					<tr>
+						<th>アーティスト</th>
+						<td><%= @item.artist.name %></td>
+					</tr>
+					<tr>
+						<th>レーベル</th>
+						<td><%= @item.label.name %></td>
+					</tr>
+					<tr>
+						<th>価格</th>
+						<td>￥<%= @item.price %></td>
+					</tr>
+					<tr>
+						<th>残り</th>
+						<td><%= @item.stock %>点</td>
+					</tr>
+					<tr>
+						<th>販売状況</th>
+						<td><%= @item.sales_status %></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="half2">
+				<ul class="list-group">
+					<% if @item.sales_status == "販売中" %>
+						<li class="list-group-item" style="border-bottom: none;">
+						<% if user_signed_in? %>
+							<%= button_to "カートに入れる", users_user_carts_path(current_user.id), method: :post, params: {user_id: current_user.id, item_id: @item.id} %>
+						<% else %>
+							<%= link_to "カートに入れる(ログインする)", new_user_session_path %>
+						<% end %>
+					<% else %>
+						<p class="btn btn-danger btn-block">現在購入できません</p>
+					</li>
 					<% end %>
-				</table>
+					<li class="list-group-item">送料 ￥500 (税込)</li>
+					<li class="list-group-item">
+						<% if user_signed_in? %>
+							<% if @item.favorited_by?(current_user) %>
+
+								<%= link_to users_item_favorite_path(@item, @item.favorites), method: :delete do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+								<% end %>
+							<% else %>
+								<%= link_to users_item_favorites_path(@item), method: :post do %>
+									<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
+								<% end %>
+							<% end %>
+						<% else %>
+							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
+						<% end %>
+						<%= @item.favorites.count %> 件のいいねがあります
+					</li>
+					<li class="list-group-item">
+						<%= link_to users_item_reviews_path(@item.id) do %>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+						<% end %>
+						<%= @item.reviews.count %> 件のレビューがあります
+					</li>
+				</ul>
 			</div>
-		<% end %>
-	</div>	
-	<div class="" style="border-top:solid 1px; padding: 30px;">
-		<div class="clearfix">
-			<h3 style="float: left;"><%= @item.name %>のレビュー</h3>
-			<p style="float: right;">
-				<%= link_to '一覧ページへ', users_item_reviews_path(@item) %>
-			</p>
-			<% if user_signed_in? %>
-				<p style="float: right; margin-right: 20px">
-					<%= link_to '新規投稿する', new_users_item_review_path(@item) %>
-				</p>
-			<% else %>
-				<p style="float: right; margin-right: 20px">
-					<%= link_to '新規投稿する', new_user_session_path %>
-				</p>
-			<% end %>
 		</div>
-		<div class="">
-			<% @item.reviews.each do |review| %>
-				<div style="border-bottom: solid 1px; padding: 10px;">
-					<h3>タイトル：</h3>
-					<p><%= review.title %></p>
-					<h3>本文：</h3>
-					<p><%= review.body %></p>
-				</div>
-			<% end %>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="song-list">
+			<h2>収録曲</h2>
+			<table class="table table-bordered table-striped">
+				<% @item.discs.each do |disc| %>
+					<thead>
+						<tr>
+							<th>Disc<%= disc.number %></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% disc.songs.each do |song| %>
+							<tr>
+								<th><%= song.number %> . </th>
+								<td><%= song.name %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				<% end %>
+			</table>
 		</div>
 	</div>
 </div>
+
+<div class="item-reviews" style="border-top:solid 3px; width: 80%; padding: 30px;">
+	<div class="clearfix">
+		<h2 style="float: left;">"<%= @item.name %>"へのレビュー</h2>
+		<p class="review-head">
+			<%= link_to '一覧ページへ', users_item_reviews_path(@item), class: "btn btn-default" %>
+		</p>
+		<% if user_signed_in? %>
+			<p class="review-head">
+				<%= link_to '新規投稿する', new_users_item_review_path(@item), class: "btn btn-default" %>
+			</p>
+		<% else %>
+			<p class="review-head">
+				<%= link_to '新規投稿する(ログインする)', new_user_session_path, class: "btn btn-default" %>
+			</p>
+		<% end %>
+	</div>
+	<div class="review-list">
+		<% @item.reviews.each do |review| %>
+			<div style="border-bottom: solid 1px; padding: 10px 3px;">
+				<p>タイトル：<%= review.title %></p>
+				<p>本文：<br><%= review.body %></p>
+			</div>
+		<% end %>
+	</div>
+</div>
+

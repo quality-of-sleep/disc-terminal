@@ -3,7 +3,7 @@
 <div class="col-md-8 col-md-offset-2 form-group">
   <h1>ご登録情報の変更</h1>
   <% if @user.errors.any? %>
-  <p class=alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
+  <p class="alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
   <% end %>
   <%= form_for @user, url: users_user_path(@user) do |f| %>
   <div class="form-box-user-edit">
