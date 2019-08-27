@@ -1,6 +1,8 @@
 class Users::ItemsController < ApplicationController
 	PER = 20
 	def index	
+	
+		@items = Item.page(params[:page]).per(PER)
 		@items = @items.search(key: 'name', value: params[:q]) if params[:q].present?
 		@user = current_user
 		@genres = Genre.all
@@ -13,8 +15,7 @@ class Users::ItemsController < ApplicationController
 		end
 		if params[:genre].present?
 			@items = Item.where('genre_id=?',params[:genre]).page(params[:page]).per(PER)
-		else
-			@items = Item.page(params[:page]).per(PER)
+
 		end
 	end
 

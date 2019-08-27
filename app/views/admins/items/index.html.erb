@@ -30,6 +30,7 @@
 		  		 	]) %>
 		  		<%= select_tag 'direction',
 		  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+					 <%= text_field_tag :sort,@sort, class: "a" %>
 					<%= hidden_field_tag :artist, save_key("artist"),class: "artist" %>
 					<%= hidden_field_tag :genre, save_key("genre") %>
 					<%= hidden_field_tag :sales_status, save_key("sales_status") %>

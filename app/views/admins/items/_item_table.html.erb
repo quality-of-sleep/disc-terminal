@@ -13,10 +13,10 @@
 		<tbody>
 			<%# if request ==%>
 			<%# <div><% sorted(@items,@key,@direction).each do |item| %>
-			<div id="obj"><% @items.each do |item| %></div>
+			<% @items.each do |item| %>
 	
 				<tr>
-					<th style="width:7%;" class="id">
+					<th style="width:7%;">
 						<%= link_to item.id, admins_item_path(item) %>
 					</th>
 					<td style="width:40%;">
@@ -32,7 +32,7 @@
 					<td style="width:10%;">
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-								<span id="status"><%= item.sales_status %></span>
+								<%= item.sales_status %>
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
