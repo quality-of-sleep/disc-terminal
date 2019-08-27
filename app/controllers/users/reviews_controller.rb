@@ -1,5 +1,5 @@
 class Users::ReviewsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: :index
 	before_action :ensure_correct_user, only: [:edit, :update]
 	def ensure_correct_user
 		review = Review.find(params[:id])
