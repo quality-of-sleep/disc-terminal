@@ -11,8 +11,9 @@ class Users::FavoritesController < ApplicationController
 
 	def destroy
 		item = Item.find(params[:item_id])
-		favorite = current_user.favorites.find_by(item_id: item.id)
-		favorite.destroy
+		if favorite = current_user.favorites.find_by(item_id: item.id)
+			favorite.destroy
+		end
 		redirect_back(fallback_location: root_url)
 	end
 end
