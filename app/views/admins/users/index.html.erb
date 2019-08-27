@@ -1,8 +1,8 @@
 <div class="row arrange-index">
-	<div class="col-md-2">
+	<div class="col-md-3">
       <h1>ユーザ一覧</h1>
     </div>
-  <div class="col-md-7 search-area clearfix">
+  <div class="col-md-6 search-area clearfix">
 
 
 
@@ -11,9 +11,9 @@
   		<!--options_from_collection_for_select
   		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
 	  <%= select_tag 'is_quit',
-					options_for_select([["利用中", 0],["退会済み",1]]), include_blank: "ステータス"%>
-   	  <%= text_field_tag :search, params[:search],placeholder: 'ユーザ名で検索' %>
-  	  <%= submit_tag '検索', style:"width: 20%" %>
+					options_for_select([["利用中", 0],["退会済み",1]]), include_blank: "ステータス", class:"btn btn-default dropdown-toggle", style: "width: 20%; height: 34px;margin-top: 5px;"%>
+   	  <%= text_field_tag :search, params[:search],placeholder: 'ユーザ名で検索', style: "width: 60%; height: 34px; border-radius: 4px;"%>
+  	  <%= submit_tag '検索', style:"width: 20%;height: 34px;", class: "btn btn-info" %>
   	<% end %>
 </div>
 
@@ -23,9 +23,9 @@
   		<%= select_tag 'key',
   		 options_for_select([
 				["ユーザID",'id'],["ユーザ姓カナ",'last_name_kana']
-  		 	]) %>
+  		 	]), class:"btn btn-default dropdown-toggle"%>
   		<%= select_tag 'direction',
-  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+  		 options_for_select([["昇順",'ASC'],['降順','DESC']]),class:"btn btn-default dropdown-toggle" %>
   		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
   	<% end %>
   </div>
