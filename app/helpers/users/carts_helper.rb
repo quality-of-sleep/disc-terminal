@@ -54,7 +54,7 @@ module Users::CartsHelper
 
 	def have_stocks?(carts)
 		carts.each do |cart|
-			if cart.item.stock < cart.amount
+			if cart.item.stock < cart.amount || cart.amount == 0
 				return false
 			end
 		end
