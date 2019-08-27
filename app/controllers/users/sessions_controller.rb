@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
    def create
     user = User.find_by(email: params[:user][:email])
     if user.is_quit == "退会済み"
-      flash[:alert] = "退会済みアカウントです"
+      flash[:danger] = "退会済みアカウントです"
       redirect_to root_path and return
     end
     super
@@ -28,7 +28,7 @@ class Users::SessionsController < Devise::SessionsController
   #現ログインユーザの退会ステータスが"退会済み"であれば、
   #セッション(現ログインユーザを特定するために一時的に保持している情報)をリセットする
   #その後下記のメッセージを表示する
-      flash[:alert] = "退会手続きが完了しました"
+      flash[:info] = "退会手続きが完了しました"
       redirect_to root_path and return
     else
      super

@@ -60,26 +60,24 @@
               </div>
             </div>
 
-<!----配送先、ここから意味不明だから後で確認したい--->
-<div class="set-content">
+
+<div>
+<div>
 <h2>お届け先</h2>
   <div id="delivery_addresses" class="field">
     <%= f.fields_for :delivery_addresses do |delivery_address| %>
       <%= render 'delivery_address_fields', :f => delivery_address %>
           <% end %>
-    <div class='links'>
-      <%= link_to_add_association 'お届け先を追加', f, :delivery_addresses %>
+    <div>
+      <%= link_to_add_association '新しいお届け先を追加', f, :delivery_addresses, style: "color: white ;width: 100%; margin: 3px 3% 0 3%;", class:'btn btn-success'%>
     </div>
   </div>
 </div>
-<!---ここまで意味不明--->
+</div>
 
-
-
-<!-- orders/new.html.erbのリストVERを丸パクリ -->
-    <div class="set-content">
-      <h2>お支払い方法</h2>
-                     <div class="field">
+    <div>
+      <h2 style="padding-top: 0;">お支払い方法</h2>
+                     <div class="field" style="margin-left: 10px;">
 
 
         <label>
@@ -97,25 +95,13 @@
 </div>
 </div>
 
+<div>
+          <%= f.submit "変更を確定", class: "btn btn-info", style: "margin-left:25%; width:20%; margin-right:10%;"%>
+          <%= link_to "戻る", users_user_path(@user), class: "btn btn-default", style: "width: 20%;" %>
 
-<!---以上--->
-
-        <span class="actions">
-          <%= f.submit "変更を確定",  style: "color: white; background-color: #3399FF; border-radius: 3px; padding: 5px;"%>
-        </span>
-        <span class="label label-default">
-          <%= link_to "戻る", users_user_path(@user) %>
-        </span>
         </div>
 
         <% end %>
-
-
-
-
-
-
-
     </div>
     <div class="col-sm-1"></div>
   </div>
