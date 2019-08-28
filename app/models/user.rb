@@ -30,10 +30,7 @@ class User < ApplicationRecord
   has_many :admin_comments, dependent: :destroy
   accepts_nested_attributes_for :admin_comments, allow_destroy: true
 
-  has_many :active_relationships,
-    class_name: "Relationship",
-    foreign_key: "follower_id",
-    dependent: :destroy
+
 
 
 
