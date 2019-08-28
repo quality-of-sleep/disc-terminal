@@ -1,15 +1,17 @@
+
 <div class="container min-height">
 <div class="row">
 	<% if @genre.present? %>
 		<div class="col-md-offset-3" style="margin-bottom: 30px;">
-		<h3 style="display: inline-block; margin: 0 70px;"><%= @genre.name %>のみ表示中</h3>
-		<h4 style="display: inline-block;"><%= link_to '全ジャンルを表示', root_path() %></h4>
+			<h3 style="display: inline-block; margin: 0 70px;"><%= @genre.name %>のみ表示中</h3>
+			<h4 style="display: inline-block;"><%= link_to '全ジャンルを表示', root_path() %></h4>
+		</div>
 		<% else %>
-		<div style="margin-bottom: 61px;">
+		<!-- cssのためだけにクラスを使うのは、基本NG -->
+		<div style="margin-bottom: 61px;"></div>
 	<% end %>
-	</div>
-<div class="col-sm-1"></div>
 <div class="col-sm-2">
+
 	<div class="genre-table genre-table-stop">
 		<% @genres.each do |genre| %>
 			<% if genre.name != "未定" %>
@@ -19,8 +21,7 @@
 		<% end %>
 	</div>
 </div>
-<div class="col-sm-9 ">
-
+<div class="col-sm-9 col-sm-offset-1">
 	<div class="clearfix">
   <% if @items.count != 0 %>
 　	<% @items.each do |item| %>
@@ -33,35 +34,39 @@
 						<%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "/no_image.jpg", size: '150x150' %>
 						<% end %>
 				</div>
-				<table class="item-right" style="float: left; margin: 15px 5px;">
-					<tr><td><p><%= link_to item.name[0..15], users_item_path(item.id) %></p>
-					</td></tr>
-					<tr><td><p><%= item.artist.name[0..15] %></p>
-					</td></tr>
-					<tr><td><p class="box-border"><%= item.sales_status %></p></td></tr>
-					<tr>
-						<th style="padding-left: 5px;">価格：</th>
-						<td>￥<%= item.price %></td>
-					</tr>
-				</table>
-
-				<div class="opinion clearfix">
-					<% if user_signed_in? %>
+				<div class="item-right" style="float: left; margin: 15px 5px; padding-left: 10px;">
+					<p style="font-size: 15px;"><%= link_to item.name[0..12], users_item_path(item.id) %></p>
+					<p><%= item.artist.name[0..12] %></p>
+					<p class="item-sales-status"><%= item.sales_status %></p>
+				
+					<div class="clearfix" style="margin-bottom: 8px;">
+						<p style="padding-left: 5px; float: left;">価格：</p>
+						<p style="float: left;">￥<%= item.price %></p>
+					</div>
+					<div class="opinion clearfix">
+						<% if user_signed_in? %>
 						<% if item.favorited_by?(current_user) %>
 							<%= link_to users_item_favorite_path(item, item.favorites), method: :delete do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red; margin-left: 15px;"></span>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
 							<% end %>
 							<p><%= item.favorites.count %></p>
 						<% else %>
 							<%= link_to users_item_favorites_path(item,), method: :post do %>
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray; margin-left: 15px;"></span>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
 							<% end %>
-							<div class="clearfix">
-								<%= link_to users_item_reviews_path(item) do %>
-										<span class="glyphicon glyphicon-comment" aria-hidden="true" style=""></span>
-								<% end %>
-								<p><%= item.reviews.count %></p>
-							</div>
+
+							<p><%= item.favorites.count %></p>
+						<% end %>
+						<% else %>
+						<!--　ログインしないといいねできない -->
+						<span class="glyphicon glyphicon-heart" aria-hidden="true" style=" color: gray;"></span>
+						<p><%= item.favorites.count %></p>
+						<% end %>
+						<div class="clearfix" style="float: left;">
+							<%= link_to users_item_reviews_path(item) do %>
+								<span class="glyphicon glyphicon-comment" aria-hidden="true" style=""></span>
+							<% end %>
+							<p><%= item.reviews.count %></p>
 						</div>
 					</div>
 				<% end %>　<!-- if -->
@@ -86,6 +91,5 @@
 	<% end %>
 	</div>
 	<div class="col-md-offset-4"><%= paginate @items, class: "pagenate" %></div>
-</div>
 </div>
 </div>
