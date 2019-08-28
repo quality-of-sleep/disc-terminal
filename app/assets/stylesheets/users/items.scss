@@ -24,31 +24,34 @@
   width: 180px;
   position: fixed;
   top: 0;
-
-}
-
-.item-right td{
-  margin: 5px;
-  text-align: center;
 }
 
 .box-border{
   border :solid 1px;
   border-radius: 5px;
   text-align: center;
-  border-color: #ddd;
+  border-color: #ddd; 
 }
 
-.opinion p,span{
+.item-sales-status{
+  border :solid 1px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: #ddd;
+  padding: 1px 5px;
+}
+
+.opinion p{
   float: left;
-  margin-right: 20px;
+  margin-right: 13px;
 }
 
 .glyphicon {
   float: left;
   font-size: 20px;
-  margin-right: 10px;
+  margin: 0 8px;
 }
+
 
 //only show
 
