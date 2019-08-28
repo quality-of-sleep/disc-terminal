@@ -1,0 +1,12 @@
+CDPATH="${ZSH_VERSION+.}:" && cd . && /bin/bash /vagrant/quality-of-sleep/disc-terminal/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.4/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/missing autoconf
+/vagrant/quality-of-sleep/disc-terminal/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.4/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/missing: line 81: autoconf: command not found
+WARNING: 'autoconf' is missing on your system.
+         You should only need it if you modified 'configure.ac',
+         or m4 files included by it.
+         The 'autoconf' program is part of the GNU Autoconf package:
+         <http://www.gnu.org/software/autoconf/>
+         It also requires GNU m4 and Perl in order to run:
+         <http://www.gnu.org/software/m4/>
+         <http://www.perl.org/>
+Makefile:894: recipe for target 'configure' failed
+make: *** [configure] Error 127
