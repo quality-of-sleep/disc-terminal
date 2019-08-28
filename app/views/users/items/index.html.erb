@@ -10,13 +10,14 @@
 	</div>
 <div class="col-sm-1"></div>
 <div class="col-sm-2">
-	<table class="table-bordered table-stop ">
+	<div class="genre-table genre-table-stop">
 		<% @genres.each do |genre| %>
 			<% if genre.name != "未定" %>
-				<tr><td style="font-size: 16px; padding: 10px 0; text-align: center;"><%= link_to genre.name, root_path(genre: genre.id) %></td></tr>
+					<div class="each-genre"><%= link_to genre.name, root_path(genre: genre.id) %>
+					</div>
 			<% end %>
 		<% end %>
-	</table>
+	</div>
 </div>
 <div class="col-sm-9 ">
 
@@ -42,7 +43,7 @@
 						<td>￥<%= item.price %></td>
 					</tr>
 				</table>
-				
+
 				<div class="opinion clearfix">
 					<% if user_signed_in? %>
 						<% if item.favorited_by?(current_user) %>

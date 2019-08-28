@@ -14,18 +14,32 @@
   clear: both;
 }
 
-.table-stop{
+.genre-table{
+  border: solid 1px #ddd;
+  border-radius: 4px;
+}
+
+.each-genre{
+  font-size: 16px;
+  padding: 10px 0;
+  text-align: center;
+  border-right: solid 1px #ddd;
+  border-bottom:solid 1px #ddd;
+}
+
+.genre-table-stop{
   position: absolute;
   width: 180px;
 }
 
-.table-stop.fixed{
+.genre-table-stop.fixed{
   margin-top: 0;
   width: 180px;
   position: fixed;
   top: 0;
 
 }
+
 
 .item-right td{
   margin: 5px;
@@ -34,7 +48,7 @@
 
 .box-border{
   border :solid 1px;
-  border-radius: 5px;
+  border-radius: 4px;
   text-align: center;
   border-color: #ddd;
 }

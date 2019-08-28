@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
 	var _window = $(window),
-	    _praiceBox = $('.table-bordered'),
+	    _praiceBox = $('.genre-table'),
 	    heroBottom;
 
 	_window.on('scroll',function(){
