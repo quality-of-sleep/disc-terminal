@@ -10,57 +10,51 @@
 	</div>
 <div class="col-sm-1"></div>
 <div class="col-sm-2">
-	<table class="table-bordered table-stop ">
+	<div class="genre-table genre-table-stop">
 		<% @genres.each do |genre| %>
 			<% if genre.name != "未定" %>
-				<tr><td style="font-size: 16px; padding: 10px 0; text-align: center;"><%= link_to genre.name, root_path(genre: genre.id) %></td></tr>
+					<div class="each-genre"><%= link_to genre.name, root_path(genre: genre.id) %>
+					</div>
 			<% end %>
 		<% end %>
-	</table>
+	</div>
 </div>
 <div class="col-sm-9 ">
 
 	<div class="clearfix">
-		<% if @items.count != 0 %>
-			<% @items.each do |item| %>
-				<% if item.sales_status != "編集中" %>
-					<div class="box-border clearfix" style="float: left; padding: 15px; margin:0 30px 30px 0; width: 330px">
-						<div class="left" style="float: left;">
-							<p class="box-border"><%= item.genre.name %></p>
-							<img class="item-image">
-								<%= link_to users_item_path(item.id) do %> 
-								<%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "/no_image.jpg", size: '150x150' %>
-								<% end %>
-						</div>
-						<table class="item-right" style="float: left; margin: 15px 5px;">
-							<tr><td><p><%= link_to item.name[0..15], users_item_path(item.id) %></p>
-							</td></tr>
-							<tr><td><p><%= item.artist.name[0..15] %></p>
-							</td></tr>
-							<tr><td><p class="box-border"><%= item.sales_status %></p></td></tr>
-							<tr>
-								<th style="padding-left: 5px;">価格：</th>
-								<td>￥<%= item.price %></td>
-							</tr>
-						</table>
-						
-						<div class="opinion clearfix">
-							<% if user_signed_in? %>
-								<% if item.favorited_by?(current_user) %>
-									<%= link_to users_item_favorite_path(item, item.favorites), method: :delete do %>
-										<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red; margin-left: 15px;"></span>
-									<% end %>
-									<p><%= item.favorites.count %></p>
-								<% else %>
-									<%= link_to users_item_favorites_path(item,), method: :post do %>
-										<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray; margin-left: 15px;"></span>
-									<% end %>
-									<p><%= item.favorites.count %></p>
-								<% end %>
-							<% else %>
-							<!--　ログインしないといいねできない -->
-								<span class="glyphicon glyphicon-heart" aria-hidden="true" style=" color: gray; margin-left: 15px;"></span>
-								<p><%= item.favorites.count %></p>
+  <% if @items.count != 0 %>
+　	<% @items.each do |item| %>
+		<% if item.sales_status != "編集中" %>
+			<div class="box-border clearfix" style="float: left; padding: 15px; margin:0 30px 30px 0; width: 330px">
+				<div class="left" style="float: left;">
+					<p class="box-border"><%= item.genre.name %></p>
+					<img class="item-image">
+						<%= link_to users_item_path(item.id) do %> 
+						<%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "/no_image.jpg", size: '150x150' %>
+						<% end %>
+				</div>
+				<table class="item-right" style="float: left; margin: 15px 5px;">
+					<tr><td><p><%= link_to item.name[0..15], users_item_path(item.id) %></p>
+					</td></tr>
+					<tr><td><p><%= item.artist.name[0..15] %></p>
+					</td></tr>
+					<tr><td><p class="box-border"><%= item.sales_status %></p></td></tr>
+					<tr>
+						<th style="padding-left: 5px;">価格：</th>
+						<td>￥<%= item.price %></td>
+					</tr>
+				</table>
+
+				<div class="opinion clearfix">
+					<% if user_signed_in? %>
+						<% if item.favorited_by?(current_user) %>
+							<%= link_to users_item_favorite_path(item, item.favorites), method: :delete do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red; margin-left: 15px;"></span>
+							<% end %>
+							<p><%= item.favorites.count %></p>
+						<% else %>
+							<%= link_to users_item_favorites_path(item,), method: :post do %>
+								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray; margin-left: 15px;"></span>
 							<% end %>
 							<div class="clearfix">
 								<%= link_to users_item_reviews_path(item) do %>
