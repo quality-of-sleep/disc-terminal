@@ -1,6 +1,7 @@
 class Users::ItemsController < ApplicationController
 	PER = 20
 	def index	
+		# @items = Item.all
 		@items = @items.search(key: 'name', value: params[:q]) if params[:q].present?
 		@user = current_user
 		@genres = Genre.all
