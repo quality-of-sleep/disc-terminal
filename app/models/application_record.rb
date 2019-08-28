@@ -5,8 +5,8 @@ class ApplicationRecord < ActiveRecord::Base
   def self.search(key: "id", value: "0")
   	if ( result = self.where(["#{key} LIKE ?", "%#{value}%"]) ).any?
   		result
-		else
-			self.all
+	else
+		self.all
   	end
   end
 
