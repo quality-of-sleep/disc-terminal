@@ -45,7 +45,7 @@ Item.create!( genre_id: 2,
 
 27.times do |n|
 	name = "item-#{n+2}"
-	image_id = "1009e3af54e95f69b46cb7f924da6c08395df162eab8c68007644bf13948"
+	image_id = "0940a025bb93acb4117f8d505eeca15723063cd491ffdcf6ae2c5c868448"
 	Item.create!( genre_id: rand(1..genres.length),
 								artist_id: rand(1..artists.length),
 								label_id: rand(1..labels.length),

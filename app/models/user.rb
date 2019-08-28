@@ -33,6 +33,8 @@ class User < ApplicationRecord
 
 
 
+
+
   #validates :password, confirmation: true
   #or
   #validates_confirmation_of :password

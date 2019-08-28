@@ -14,26 +14,25 @@
   clear: both;
 }
 
-.table-stop{
+.table-stop {
   position: absolute;
   width: 180px;
 }
 
-.table-stop.fixed{
+.table-stop.fixed {
   margin-top: 0;
   width: 180px;
   position: fixed;
   top: 0;
-
 }
 
-.item-right td{
+.item-right td {
   margin: 5px;
   text-align: center;
 }
 
-.box-border{
-  border :solid 1px;
+.box-border {
+  border: solid 1px;
   border-radius: 5px;
   text-align: center;
   border-color: #ddd;
@@ -63,3 +62,4 @@
   min-height: 580px;
   height: auto !important;
 }
+
