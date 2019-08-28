@@ -1,3 +1,5 @@
+
+<div class="container min-height">
 <div class="row">
 	<% if @genre.present? %>
 		<div class="col-md-offset-3" style="margin-bottom: 30px;">
@@ -9,17 +11,20 @@
 		<div style="margin-bottom: 61px;"></div>
 	<% end %>
 <div class="col-sm-2">
-	<table class="table-bordered table-stop">
+
+	<div class="genre-table genre-table-stop">
 		<% @genres.each do |genre| %>
 			<% if genre.name != "未定" %>
-				<tr><td style="font-size: 16px; padding: 10px 0; text-align: center;"><%= link_to genre.name, root_path(genre: genre.id) %></td></tr>
+					<div class="each-genre"><%= link_to genre.name, root_path(genre: genre.id) %>
+					</div>
 			<% end %>
 		<% end %>
-	</table>
+	</div>
 </div>
 <div class="col-sm-9 col-sm-offset-1">
 	<div class="clearfix">
-	<% @items.each do |item| %>
+  <% if @items.count != 0 %>
+　	<% @items.each do |item| %>
 		<% if item.sales_status != "編集中" %>
 			<div class="box-border clearfix" style="float: left; padding: 15px; margin:0 30px 30px 0; width: 330px">
 				<div class="left" style="float: left;">
@@ -49,6 +54,7 @@
 							<%= link_to users_item_favorites_path(item,), method: :post do %>
 								<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: gray;"></span>
 							<% end %>
+
 							<p><%= item.favorites.count %></p>
 						<% end %>
 						<% else %>
@@ -63,10 +69,26 @@
 							<p><%= item.reviews.count %></p>
 						</div>
 					</div>
+				<% end %>　<!-- if -->
+			<% end %> <!-- each -->
+	<% else %>
+		<div class="col-md-12" style="height: 500px;">
+			<div class="row">
+				<div class="balloon">
+					<p style="font-size: 20px;">このジャンルにはまだ商品が登録されていません。<br>
+						<br>
+						商品の追加をお待ち下さい。
+					</p>
 				</div>
 			</div>
-		<% end %>　<!-- if -->
-	<% end %> <!-- each -->
+			<div class="row">
+				<div class="col-md-5"></div>
+				<div>
+					<img src="/uncle.PNG" alt="" style="height: 300px;">
+				</div>
+			</div>
+		</div>
+	<% end %>
 	</div>
 	<div class="col-md-offset-4"><%= paginate @items, class: "pagenate" %></div>
 </div>
