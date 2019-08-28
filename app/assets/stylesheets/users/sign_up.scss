@@ -1,38 +1,10 @@
-// Place all the styles related to the users::users controller here.
+// Place all the styles related to the admins::items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
-.clearfix::after{
-    content: "";
-    display: block;
-	clear: both;
-}
-
-.form-box{
-	width: 90%;
-	margin: 0 auto;
-}
-.each-info{
-	border-top: 1px solid #ddd;
-	margin: 12px;
-	padding-top: 12px;
-}
-
-.btn-box{
-	margin: 30px;
-}
-
-
-.form-box-user-edit{
-	position: relative;
-}
-
-
-.delivery_address_link{
-  position: absolute;
-}
+// .half-field input[type="text"] {
+//   width: 40%;
+// }
 
 .item-page h2 {
   padding-top: 30px;
@@ -96,5 +68,3 @@
 .alert-form span {
   color: red;
 }
-
-

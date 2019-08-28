@@ -5,11 +5,11 @@ module Admins::ItemsHelper
     result
   end
 
-  def key_regex(key)
+  def save_key(key)
+    white_list = %w[artist genre sales_status]
     str = request.fullpath.match(/(?<=&#{key}=)\d+(?=\&)/)
-    if ( eval("@sorted_#{key} ||= str ") ) # Ctrlにあれば代入しない
-
-      eval("@sorted_#{key}") # [0]不要
+    if white_list.include?(key)
+      eval("@sorted_#{key} ||= str ") # Ctrlにあれば代入しない
     end
   end
 

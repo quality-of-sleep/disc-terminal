@@ -1,12 +1,10 @@
-$(document).ready(function () {
-
-  $('.show-content').on('mouseover',function() {
+$(document).on("turbolinks:load", function() {
+  $(".show-content").on("mouseover", function() {
     $($(this).children()).show();
-      return false;
-   });
-  $('.show-content').on('mouseout',function() {
+    return false;
+  });
+  $(".show-content").on("mouseout", function() {
     $($(this).children()).hide();
-        return false;
-     });
-
+    return false;
+  });
 });
