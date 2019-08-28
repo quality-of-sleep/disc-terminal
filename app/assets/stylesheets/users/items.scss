@@ -39,7 +39,7 @@
   border-color: #ddd;
 }
 
-.opinion p,span{
+.opinion p,.opinion span{
   float: left;
   margin-right: 20px;
 }
@@ -57,4 +57,9 @@
   float: left;
   border-right: dotted 1px;
   padding: 10px 20px;
+}
+
+.min-height {
+  min-height: 580px;
+  height: auto !important;
 }
