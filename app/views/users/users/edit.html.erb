@@ -1,0 +1,108 @@
+
+<div class="row item-page">
+<div class="col-md-8 col-md-offset-2 form-group">
+  <h1>ご登録情報の変更</h1>
+  <% if @user.errors.any? %>
+  <p class="alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
+  <% end %>
+  <%= form_for @user, url: users_user_path(@user) do |f| %>
+  <div class="form-box-user-edit">
+
+             <div class="half-content">
+               <h2>お名前</h2>
+               <div class="field">
+                 <div class="half1">
+                    <%= f.label :last_name,"姓" %>
+                    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                 </div>
+                 <div class="half2">
+                    <%= f.label :first_name, "名" %>
+                    <%= f.text_field :first_name, class: "form-control"%>
+                </div>
+              </div>
+              <div class="field">
+                <div class="half1">
+                  <%= f.label :last_name_kana,"セイ"%>
+                  <%= f.text_field :last_name_kana, class: "form-control" %>
+                </div>
+                <div class="half2">
+                  <%= f.label  :first_name_kana,"メイ" %>
+                  <%= f.text_field :first_name_kana, class: "form-control "%>
+                </div>
+              </div>
+            </div>
+
+            <div class="set-content">
+              <h2>お住まい</h2>
+              <div class="field">
+                <div class="subject">
+                  <%= f.label :postal_code,"郵便番号" %>
+                  <%= f.number_field :postal_code, placeholder: "ハイフン無し：", class: "form-control" %>
+                </div>
+                <div class="content">
+                  <%= f.label :address,"都道府県、市区町村、番地、階数" %>
+                  <%= f.text_area :address, placeholder: "住所：", class: "form-control"%>
+                </div>
+              </div>
+            </div>
+
+            <div class="set-content">
+              <h2>ご連絡先</h2>
+              <div class="field">
+                <div class="subject">
+                  <%= f.label :telephone_number,"お電話番号" %>
+                  <%= f.telephone_field :telephone_number, placeholder: "電話番号：", class: "form-control"%>
+                </div>
+                <div class="content">
+                  <%= f.label :email,"メールアドレス" %>
+                  <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス：", class: "form-control" %>
+                </div>
+              </div>
+            </div>
+
+
+<div>
+<div>
+<h2>お届け先</h2>
+  <div id="delivery_addresses" class="field">
+    <%= f.fields_for :delivery_addresses do |delivery_address| %>
+      <%= render 'delivery_address_fields', :f => delivery_address %>
+          <% end %>
+    <div>
+      <%= link_to_add_association '新しいお届け先を追加', f, :delivery_addresses, style: "color: white ;width: 100%; margin: 3px 3% 0 3%;", class:'btn btn-success'%>
+    </div>
+  </div>
+</div>
+</div>
+
+    <div>
+      <h2 style="padding-top: 0;">お支払い方法</h2>
+                     <div class="field" style="margin-left: 10px;">
+
+
+        <label>
+          <%= f.radio_button :payment, :クレジット支払, class: "radio_button" %> クレジット支払
+        </label>
+
+        <label style="margin: 0 40px; ">
+          <%= f.radio_button :payment, :銀行振込, class: "radio_button" %> 銀行振込
+        </label>
+
+        <label>
+          <%= f.radio_button :payment, :代金引換, class: "radio_button"%> 代金引換
+        </label>
+
+</div>
+</div>
+
+<div>
+          <%= f.submit "変更を確定", class: "btn btn-info", style: "margin-left:25%; width:20%; margin-right:10%;"%>
+          <%= link_to "戻る", users_user_path(@user), class: "btn btn-default", style: "width: 20%;" %>
+
+        </div>
+
+        <% end %>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>

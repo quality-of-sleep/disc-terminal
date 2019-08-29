@@ -1,3 +1,86 @@
 // Place all the styles related to the users::items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+
+.genre-table{
+  border: solid 1px #ddd;
+  border-radius: 4px;
+}
+
+.each-genre{
+  font-size: 16px;
+  padding: 10px 0;
+  text-align: center;
+  border-right: solid 1px #ddd;
+  border-bottom:solid 1px #ddd;
+}
+
+.genre-table-stop{
+  position: absolute;
+  width: 180px;
+}
+
+
+.genre-table-stop.fixed{
+  margin-top: 0;
+  width: 180px;
+  position: fixed;
+  top: 0;
+}
+
+.box-border{
+  border :solid 1px;
+  border-radius: 5px;
+  text-align: center;
+  border-color: #ddd; 
+}
+
+
+.item-sales-status{
+  border :solid 1px;
+  border-radius: 4px;
+  text-align: center;
+  border-color: #ddd;
+  padding: 1px 5px;
+}
+
+
+.opinion p{
+  float: left;
+  margin-right: 13px;
+}
+
+.glyphicon {
+  float: left;
+  font-size: 20px;
+  margin: 0 8px;
+}
+
+
+//only show
+
+.item-detail .disc {
+  width: 25%;
+  float: left;
+  border-right: dotted 1px;
+  padding: 10px 20px;
+}
+
+.min-height {
+  min-height: 580px;
+  height: auto !important;
+}
+

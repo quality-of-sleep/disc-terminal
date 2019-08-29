@@ -1,0 +1,46 @@
+<div class="row arrange-index item-page">
+	<div class="item-header">
+		<div class="col-md-2">
+			<h1 class="page-title">商品一覧</h1>
+			<%= link_to '新規商品の追加', new_admins_item_path, class:"btn btn-success "%>
+	  </div>
+	  <div class="col-md-6 search-area clearfix">
+	  	<%= form_tag admins_items_path, method: :get do %>
+	  		<!--options_from_collection_for_select
+	  		 第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
+				<%= select_tag 'artist',
+					options_from_collection_for_select(@artists, :id, :name), include_blank: "アーティスト" %>
+			 	<%= select_tag 'genre',
+					options_from_collection_for_select(@genres, :id, :name), include_blank: "ジャンル" %>
+				<%= select_tag 'sales_status',
+					options_for_select([
+						["編集中",'0'],["在庫なし",'1'],['販売停止中','2'],["販売中",'3']
+		  		 	]),include_blank: "ステータス"%>
+
+	  		<%= text_field_tag :search,"",placeholder: '商品名で検索' %>
+	  		<%= submit_tag '検索', name: nil, class:"btn btn-info" %>
+	  	<% end %>
+	  </div>
+	  <div class="col-md-4">
+	  	<div  class="sort-area clearfix">
+		  	<%= form_tag admins_items_path, method: :get do %>
+		  		<%= select_tag 'key',
+		  		 options_for_select([
+						["商品ID",'id'],['在庫数','stock']
+		  		 	]) %>
+		  		<%= select_tag 'direction',
+		  		 options_for_select([["昇順",'ASC'],['降順','DESC']]) %>
+					<%= hidden_field_tag :artist, save_key("artist"),class: "artist" %>
+					<%= hidden_field_tag :genre, save_key("genre") %>
+					<%= hidden_field_tag :sales_status, save_key("sales_status") %>
+		  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+		  	<% end %>
+		  </div>
+	  </div>
+  </div>
+</div>
+<div class="row item-index">
+  <div class="col-md-12">
+		<div id="item-table"><%= render 'item_table' %></div>
+  </div>
+</div>

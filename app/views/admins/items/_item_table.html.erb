@@ -1,0 +1,52 @@
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>商品ID</th>
+				<th>商品名</th>
+				<th>アーティスト</th>
+				<th>ジャンル</th>
+				<th>在庫数</th>
+				<th>ステータス</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%# if request ==%>
+			<%# <div><% sorted(@items,@key,@direction).each do |item| %>
+			<% @items.each do |item| %>
+	
+				<tr>
+					<th style="width:7%;">
+						<%= link_to item.id, admins_item_path(item) %>
+					</th>
+					<td style="width:40%;">
+						<% if item.sales_status == '編集中' %>
+							<%= link_to item.name, admins_item_path(item),style: 'color: red;' %>
+						<% else %>
+							<%= link_to item.name, admins_item_path(item) %>
+						<%end%>
+					</td>
+					<td style="width:18%;"><%= item.artist.name %></td>
+					<td style="width:18%;"><%= item.genre.name%></td>
+					<td style="width:7%;"><%= item.stock %></td>
+					<td style="width:10%;">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+								<%= item.sales_status %>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<% Item.sales_statuses.each do |status,index| %>
+									<li><%= link_to status, admins_items_path(id: item.id, sales_status?: index), remote: true %></li>
+								<%end%>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+	<div class="text-center">
+		<%= paginate @items, class: "paginate" %>
+	</div>
+</div>

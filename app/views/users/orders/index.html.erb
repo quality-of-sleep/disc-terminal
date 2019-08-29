@@ -1,0 +1,44 @@
+<h2 style="margin-bottom: 30px;">注文履歴</h2>
+
+<div class="col">
+	<% if @orders.count == 0 %>
+		<div class="col-md-12" style="height: 500px;">
+			<p style="font-size: 20px;">まだ注文履歴はありません</p>
+		</div>
+	<% else %>
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width: 15%;">配送状況</th>
+					<th style="width: 35%;">商品</th>
+					<th style="width: 20%;">合計金額</th>
+					<th style="width: 15%;">注文日</th>
+					<th style="width: 15%;">注文ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @orders.each do |order| %>
+					<tr>
+						<td style="padding: 2% 1%;"><%= order.delivery_status %></td>
+						<td style="padding: 2% 1%;">
+							<% if order.order_details.count == 1 %>
+								<%= order.order_details[0].item_name %>
+							<% else %>
+								<%= order.order_details[0].item_name %>　他<%= order.order_details.count %>点
+							<% end %>
+						</td>
+						<td style="padding: 2% 1%;">¥ <%= order.total_price.to_s(:delimited) %></td>
+						<td style="padding: 2% 1%;"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+						<td style="padding: 2% 1%;"><%= link_to order.id, users_user_order_path(@user, order) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+</div>
+
+<div class="text-center">
+	<%= paginate @orders, class: "paginate" %>
+</div>
+
+

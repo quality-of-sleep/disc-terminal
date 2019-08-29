@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>マイページ</h1>
+    <div class="form-box">
+      <h3>お客様情報</h3>
+      <dl class="dl-horizontal">
+
+    <%= render 'users/users/list', user: @user %>
+
+      </dl>
+    </div>
+    <div class="btn-box">
+      <div class="text-center">
+      <%= link_to "プロフィールを編集する", edit_users_user_path(@user), class:"btn btn-success", style: "color: white; "%>
+      </div><br>
+      <div class="text-right">
+        <u><em><%= link_to "ディスクターミナルを退会する", users_path(@user)%></em></u>
+      </div>
+    </div>
+  </div>
+</div>
